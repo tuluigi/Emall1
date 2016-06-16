@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A2426F51D12C4670078240C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F41D12C4670078240C /* main.m */; };
+		2A2426F81D12C4670078240C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F71D12C4670078240C /* AppDelegate.m */; };
+		2A2426FB1D12C4670078240C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426FA1D12C4670078240C /* ViewController.m */; };
+		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
+		2A2427001D12C4670078240C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FF1D12C4670078240C /* Assets.xcassets */; };
+		2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2427011D12C4670078240C /* LaunchScreen.storyboard */; };
+		2A24270E1D12C4670078240C /* EMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24270D1D12C4670078240C /* EMallTests.m */; };
+		2A2427191D12C4670078240C /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427181D12C4670078240C /* EMallUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2A24270A1D12C4670078240C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A2426E81D12C4670078240C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A2426EF1D12C4670078240C;
+			remoteInfo = EMall;
+		};
+		2A2427151D12C4670078240C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A2426E81D12C4670078240C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A2426EF1D12C4670078240C;
+			remoteInfo = EMall;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2A2426F01D12C4670078240C /* EMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A2426F41D12C4670078240C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2A2426F61D12C4670078240C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2A2426F71D12C4670078240C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2A2426F91D12C4670078240C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2A2426FA1D12C4670078240C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2A2426FD1D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2A2426FF1D12C4670078240C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A2427021D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2A2427041D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A2427091D12C4670078240C /* EMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A24270D1D12C4670078240C /* EMallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallTests.m; sourceTree = "<group>"; };
+		2A24270F1D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A2427141D12C4670078240C /* EMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A2427181D12C4670078240C /* EMallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallUITests.m; sourceTree = "<group>"; };
+		2A24271A1D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A2426ED1D12C4670078240C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427061D12C4670078240C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427111D12C4670078240C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A2426E71D12C4670078240C = {
+			isa = PBXGroup;
+			children = (
+				2A2426F21D12C4670078240C /* EMall */,
+				2A24270C1D12C4670078240C /* EMallTests */,
+				2A2427171D12C4670078240C /* EMallUITests */,
+				2A2426F11D12C4670078240C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2A2426F11D12C4670078240C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A2426F01D12C4670078240C /* EMall.app */,
+				2A2427091D12C4670078240C /* EMallTests.xctest */,
+				2A2427141D12C4670078240C /* EMallUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A2426F21D12C4670078240C /* EMall */ = {
+			isa = PBXGroup;
+			children = (
+				2A2426F61D12C4670078240C /* AppDelegate.h */,
+				2A2426F71D12C4670078240C /* AppDelegate.m */,
+				2A2426F91D12C4670078240C /* ViewController.h */,
+				2A2426FA1D12C4670078240C /* ViewController.m */,
+				2A2426FC1D12C4670078240C /* Main.storyboard */,
+				2A2426FF1D12C4670078240C /* Assets.xcassets */,
+				2A2427011D12C4670078240C /* LaunchScreen.storyboard */,
+				2A2427041D12C4670078240C /* Info.plist */,
+				2A2426F31D12C4670078240C /* Supporting Files */,
+			);
+			path = EMall;
+			sourceTree = "<group>";
+		};
+		2A2426F31D12C4670078240C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2A2426F41D12C4670078240C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2A24270C1D12C4670078240C /* EMallTests */ = {
+			isa = PBXGroup;
+			children = (
+				2A24270D1D12C4670078240C /* EMallTests.m */,
+				2A24270F1D12C4670078240C /* Info.plist */,
+			);
+			path = EMallTests;
+			sourceTree = "<group>";
+		};
+		2A2427171D12C4670078240C /* EMallUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2A2427181D12C4670078240C /* EMallUITests.m */,
+				2A24271A1D12C4670078240C /* Info.plist */,
+			);
+			path = EMallUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A2426EF1D12C4670078240C /* EMall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A24271D1D12C4670078240C /* Build configuration list for PBXNativeTarget "EMall" */;
+			buildPhases = (
+				2A2426EC1D12C4670078240C /* Sources */,
+				2A2426ED1D12C4670078240C /* Frameworks */,
+				2A2426EE1D12C4670078240C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EMall;
+			productName = EMall;
+			productReference = 2A2426F01D12C4670078240C /* EMall.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2A2427081D12C4670078240C /* EMallTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A2427201D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallTests" */;
+			buildPhases = (
+				2A2427051D12C4670078240C /* Sources */,
+				2A2427061D12C4670078240C /* Frameworks */,
+				2A2427071D12C4670078240C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A24270B1D12C4670078240C /* PBXTargetDependency */,
+			);
+			name = EMallTests;
+			productName = EMallTests;
+			productReference = 2A2427091D12C4670078240C /* EMallTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2A2427131D12C4670078240C /* EMallUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A2427231D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallUITests" */;
+			buildPhases = (
+				2A2427101D12C4670078240C /* Sources */,
+				2A2427111D12C4670078240C /* Frameworks */,
+				2A2427121D12C4670078240C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A2427161D12C4670078240C /* PBXTargetDependency */,
+			);
+			name = EMallUITests;
+			productName = EMallUITests;
+			productReference = 2A2427141D12C4670078240C /* EMallUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A2426E81D12C4670078240C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Luigi;
+				TargetAttributes = {
+					2A2426EF1D12C4670078240C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					2A2427081D12C4670078240C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2A2426EF1D12C4670078240C;
+					};
+					2A2427131D12C4670078240C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2A2426EF1D12C4670078240C;
+					};
+				};
+			};
+			buildConfigurationList = 2A2426EB1D12C4670078240C /* Build configuration list for PBXProject "EMall" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2A2426E71D12C4670078240C;
+			productRefGroup = 2A2426F11D12C4670078240C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A2426EF1D12C4670078240C /* EMall */,
+				2A2427081D12C4670078240C /* EMallTests */,
+				2A2427131D12C4670078240C /* EMallUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A2426EE1D12C4670078240C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */,
+				2A2427001D12C4670078240C /* Assets.xcassets in Resources */,
+				2A2426FE1D12C4670078240C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427071D12C4670078240C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427121D12C4670078240C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A2426EC1D12C4670078240C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A2426FB1D12C4670078240C /* ViewController.m in Sources */,
+				2A2426F81D12C4670078240C /* AppDelegate.m in Sources */,
+				2A2426F51D12C4670078240C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427051D12C4670078240C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A24270E1D12C4670078240C /* EMallTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A2427101D12C4670078240C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A2427191D12C4670078240C /* EMallUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A24270B1D12C4670078240C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A2426EF1D12C4670078240C /* EMall */;
+			targetProxy = 2A24270A1D12C4670078240C /* PBXContainerItemProxy */;
+		};
+		2A2427161D12C4670078240C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A2426EF1D12C4670078240C /* EMall */;
+			targetProxy = 2A2427151D12C4670078240C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2A2426FC1D12C4670078240C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A2426FD1D12C4670078240C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2A2427011D12C4670078240C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A2427021D12C4670078240C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2A24271B1D12C4670078240C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2A24271C1D12C4670078240C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2A24271E1D12C4670078240C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = EMall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2A24271F1D12C4670078240C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = EMall/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2A2427211D12C4670078240C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EMallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EMall.app/EMall";
+			};
+			name = Debug;
+		};
+		2A2427221D12C4670078240C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EMallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EMall.app/EMall";
+			};
+			name = Release;
+		};
+		2A2427241D12C4670078240C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EMallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EMall;
+			};
+			name = Debug;
+		};
+		2A2427251D12C4670078240C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EMallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EMall;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A2426EB1D12C4670078240C /* Build configuration list for PBXProject "EMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A24271B1D12C4670078240C /* Debug */,
+				2A24271C1D12C4670078240C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A24271D1D12C4670078240C /* Build configuration list for PBXNativeTarget "EMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A24271E1D12C4670078240C /* Debug */,
+				2A24271F1D12C4670078240C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2A2427201D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A2427211D12C4670078240C /* Debug */,
+				2A2427221D12C4670078240C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2A2427231D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A2427241D12C4670078240C /* Debug */,
+				2A2427251D12C4670078240C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A2426E81D12C4670078240C /* Project object */;
+}
