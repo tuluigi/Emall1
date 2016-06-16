@@ -10,12 +10,9 @@
 #if ( ( defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090) || \
 ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 ) )
 #import "OCNetSessionManager.h"
-#import "OCDownloadService.h"
-#import "SafeStringPersister.h"
 #import "AFHTTPSessionManager.h"
-#import "OCNetWorkConfig.h"
-static OCNetSessionManager *sharedSessionManager;
 
+static OCNetSessionManager *sharedSessionManager;
 
 @interface OCNetSessionManager ()
 @property(nonatomic,strong)AFHTTPSessionManager *afSessionManager;
@@ -24,26 +21,6 @@ static OCNetSessionManager *sharedSessionManager;
 @implementation OCNetSessionManager
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-+(void)addDeviceInfo{
-    NSString *udid=[[DATracker sharedTracker] getDeviceId];
-    
-    if (nil==udid) {
-        udid=@"";
-    }
-    NSString *appVersion=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    NSString *device=@"";
-    NSString *deviceModel=[UIDevice currentDevice].model;
-    if ([deviceModel isEqualToString:@"iPhone"]||[deviceModel isEqualToString:@"iPhone Simulator"]) {
-        device=@"iphone";
-    }else if([deviceModel isEqualToString:@"iPod touch"]){
-        device=@"touch";
-    }else{
-        device=@"ipad";
-    }
-    NSString *cookieStr=[NSString stringWithFormat:@"ntes_open_client_i=%@#%@#%@",device,appVersion,udid];
-    [[OCNetSessionManager sharedSessionManager].afSessionManager.requestSerializer setValue:cookieStr forHTTPHeaderField:HTTP_HF_COOKIE];
-    [[OCNetSessionManager sharedSessionManager].afSessionManager.requestSerializer  setValue:[OCNetWorkConfig generateXUserAgent] forHTTPHeaderField:@"User-Agent"];
 }
 
 -(AFHTTPSessionManager *)afSessionManager{
@@ -64,7 +41,6 @@ static OCNetSessionManager *sharedSessionManager;
     @synchronized(self){
         if (nil==sharedSessionManager) {
             sharedSessionManager=[[OCNetSessionManager alloc] init];
-            [self addDeviceInfo];
         }
     }
     return sharedSessionManager;
@@ -75,8 +51,6 @@ static OCNetSessionManager *sharedSessionManager;
                              method:(NSString *)method
                  onCompletionHander:(OCResponseObjectBlock)completionBlock{
     NSAssert(url, @"Request url can not be nil");
-    NSString * token = [[SafeStringPersister sharedInstance] stringForKey:kKeyOfUserToken];
-    [[self.afSessionManager requestSerializer]  setValue:stringNotNil(token) forHTTPHeaderField:OCMobile_Token];
     NSURLSessionTask *sessionTask=nil;
     __weak OCNetSessionManager *weakSelf=sharedSessionManager;
     if ([method isEqualToString:@"GET"]) {
@@ -125,9 +99,9 @@ static OCNetSessionManager *sharedSessionManager;
                 resultValue=responseObject;
             }
             if ([task.currentRequest.HTTPMethod isEqualToString:@"POST"]) {
-                DDLogCDebug(@"\n 网络请求接口地址:\n%@\n参数\n%@\n返回值\n%@",url,[[NSString alloc]  initWithData:task.originalRequest.HTTPBody encoding:4],resultValue);
+                NSLog(@"\n 网络请求接口地址:\n%@\n参数\n%@\n返回值\n%@",url,[[NSString alloc]  initWithData:task.originalRequest.HTTPBody encoding:4],resultValue);
             }else{
-                DDLogCDebug(@"\n网络请求接口地址:\n%@\n返回值\n%@",url,resultValue);
+                NSLog(@"\n网络请求接口地址:\n%@\n返回值\n%@",url,resultValue);
             }
             }
         });
@@ -141,9 +115,7 @@ static OCNetSessionManager *sharedSessionManager;
                                  onCompletionBlock:(OCResponseObjectBlock)completionBlock{
     NSAssert(url, @"Request url can not be nil");
     WEAKSELF
-    NSString * token = [[SafeStringPersister sharedInstance] stringForKey:kKeyOfUserToken];
-    [[self.afSessionManager requestSerializer]  setValue:stringNotNil(token) forHTTPHeaderField:OCMobile_Token];
-   __block NSURLSessionUploadTask *uploadTask=[self.afSessionManager uploadTaskWithRequest:request fromFile:url progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    __block NSURLSessionUploadTask *uploadTask=[self.afSessionManager uploadTaskWithRequest:request fromFile:url progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         [weakSelf handleSessionResponseWithTask:nil responseObject:error error:error onCompletionBlock:completionBlock];
     }];
     [self.afSessionManager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
@@ -160,8 +132,6 @@ static OCNetSessionManager *sharedSessionManager;
                             onCompletionBlock:(OCResponseObjectBlock)completionBlock{
 //    NSAssert(data, @"upload data can not be nil");
     WEAKSELF
-    NSString * token = [[SafeStringPersister sharedInstance] stringForKey:kKeyOfUserToken];
-    [[self.afSessionManager requestSerializer]  setValue:stringNotNil(token) forHTTPHeaderField:OCMobile_Token];
     __block NSURLSessionUploadTask *uploadTask=[self.afSessionManager uploadTaskWithRequest:request fromData:data progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         [weakSelf handleSessionResponseWithTask:nil responseObject:responseObject error:error onCompletionBlock:completionBlock];
     }];
@@ -193,7 +163,7 @@ static OCNetSessionManager *sharedSessionManager;
             if (![str hasPrefix:@"/"]) {
                 str=[@"/" stringByAppendingString:str];
             }
-            str=[NSString stringWithFormat:@"%@%@%@",PROTOCOL_HTTP,COURSERA_ZONE_HOST,str];
+            str=[NSString stringWithFormat:@"%@%@%@",@"xxx",@"xxx",str];
         }
     }
     return str;

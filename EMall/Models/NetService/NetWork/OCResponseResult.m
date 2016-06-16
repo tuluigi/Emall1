@@ -14,7 +14,6 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
 @implementation OCResponseResult
 +(OCResponseResult *)responseResultWithOCResponseObject:(id)responseObject error:(NSError *)aError{
     OCResponseResult *responeResult=[[OCResponseResult alloc]  init];
-    NetworkStatus networkStatus = [OCSystem sharedInstance].reachablity.currentReachabilityStatus;
 
     if (responseObject != nil && responseObject != [NSNull null]&&nil==aError ) {
         if ([responseObject isKindOfClass:[NSDictionary class]]){
@@ -25,14 +24,8 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
             if (dic&&nil==jsonError) {
                [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
             }else{
-                if (networkStatus != NotReachable) {
-                    responeResult.responseCode=OCCodeStateFailed;
-                    responeResult.responseMessage = OCFailureMessage;
-                }else
-                {
                     responeResult.responseCode = OCCodeStateNetworkFailure;
                     responeResult.responseMessage=OCNetWorkErrorMessage;
-                }
 
             }
         }else if ([responseObject isKindOfClass:[NSString class]]){
@@ -42,36 +35,16 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
             if (dic&&nil==jsonError) {
                [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
             }else{
-                if (networkStatus != NotReachable) {
-                    responeResult.responseCode=OCCodeStateFailed;
-                    responeResult.responseMessage = OCFailureMessage;
-                }else
-                {
-                    responeResult.responseCode = OCCodeStateNetworkFailure;
-                    responeResult.responseMessage=OCNetWorkErrorMessage;
-                }
-
+                responeResult.responseCode = OCCodeStateNetworkFailure;
+            responeResult.responseMessage=OCNetWorkErrorMessage;
             }
         }else{
-            if (networkStatus != NotReachable) {
-                responeResult.responseCode=OCCodeStateFailed;
-                responeResult.responseMessage = OCFailureMessage;
-            }else
-            {
                 responeResult.responseCode = OCCodeStateNetworkFailure;
                 responeResult.responseMessage=OCNetWorkErrorMessage;
-            }
-
         }
     }else{
-        if (networkStatus != NotReachable) {
-            responeResult.responseCode=OCCodeStateFailed;
-            responeResult.responseMessage = OCFailureMessage;
-        }else
-        {
             responeResult.responseCode = OCCodeStateNetworkFailure;
             responeResult.responseMessage=OCNetWorkErrorMessage;
-        }
     }
     return responeResult;
 }

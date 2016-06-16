@@ -15,6 +15,12 @@
 		2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2427011D12C4670078240C /* LaunchScreen.storyboard */; };
 		2A24270E1D12C4670078240C /* EMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24270D1D12C4670078240C /* EMallTests.m */; };
 		2A2427191D12C4670078240C /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427181D12C4670078240C /* EMallUITests.m */; };
+		2A2427271D12C6990078240C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 2A2427261D12C6990078240C /* Podfile */; };
+		2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24272E1D12C81E0078240C /* OCBaseModel.m */; };
+		2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427311D12C8510078240C /* OCBaseNetService.m */; };
+		2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427351D12C8C50078240C /* OCResponseResult.m */; };
+		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
+		BD36AD30D78027A886266EEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C43B072F24654A451413ABA /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C43B072F24654A451413ABA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2426F01D12C4670078240C /* EMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2426F41D12C4670078240C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A2426F61D12C4670078240C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +58,18 @@
 		2A2427141D12C4670078240C /* EMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2427181D12C4670078240C /* EMallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallUITests.m; sourceTree = "<group>"; };
 		2A24271A1D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A2427261D12C6990078240C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2A24272D1D12C81E0078240C /* OCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseModel.h; sourceTree = "<group>"; };
+		2A24272E1D12C81E0078240C /* OCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseModel.m; sourceTree = "<group>"; };
+		2A2427301D12C8510078240C /* OCBaseNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseNetService.h; sourceTree = "<group>"; };
+		2A2427311D12C8510078240C /* OCBaseNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseNetService.m; sourceTree = "<group>"; };
+		2A2427341D12C8C50078240C /* OCResponseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCResponseResult.h; sourceTree = "<group>"; };
+		2A2427351D12C8C50078240C /* OCResponseResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCResponseResult.m; sourceTree = "<group>"; };
+		2A2427371D12C8D90078240C /* OCNetSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCNetSessionManager.h; sourceTree = "<group>"; };
+		2A2427381D12C8D90078240C /* OCNetSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCNetSessionManager.m; sourceTree = "<group>"; };
+		2A24273A1D12C9410078240C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD36AD30D78027A886266EEE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +101,13 @@
 		2A2426E71D12C4670078240C = {
 			isa = PBXGroup;
 			children = (
+				2A2427261D12C6990078240C /* Podfile */,
 				2A2426F21D12C4670078240C /* EMall */,
 				2A24270C1D12C4670078240C /* EMallTests */,
 				2A2427171D12C4670078240C /* EMallUITests */,
 				2A2426F11D12C4670078240C /* Products */,
+				EF6805A071330350DA9828B6 /* Pods */,
+				B54517F7DCA11DA62DBFC265 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +124,7 @@
 		2A2426F21D12C4670078240C /* EMall */ = {
 			isa = PBXGroup;
 			children = (
+				2A2427291D12C80B0078240C /* Models */,
 				2A2426F61D12C4670078240C /* AppDelegate.h */,
 				2A2426F71D12C4670078240C /* AppDelegate.m */,
 				2A2426F91D12C4670078240C /* ViewController.h */,
@@ -110,6 +134,7 @@
 				2A2427011D12C4670078240C /* LaunchScreen.storyboard */,
 				2A2427041D12C4670078240C /* Info.plist */,
 				2A2426F31D12C4670078240C /* Supporting Files */,
+				2A24273A1D12C9410078240C /* PrefixHeader.pch */,
 			);
 			path = EMall;
 			sourceTree = "<group>";
@@ -140,6 +165,70 @@
 			path = EMallUITests;
 			sourceTree = "<group>";
 		};
+		2A2427291D12C80B0078240C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A24272A1D12C80B0078240C /* DBService */,
+				2A24272B1D12C80B0078240C /* Modes */,
+				2A24272C1D12C80B0078240C /* NetService */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2A24272A1D12C80B0078240C /* DBService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DBService;
+			sourceTree = "<group>";
+		};
+		2A24272B1D12C80B0078240C /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				2A24272D1D12C81E0078240C /* OCBaseModel.h */,
+				2A24272E1D12C81E0078240C /* OCBaseModel.m */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
+		2A24272C1D12C80B0078240C /* NetService */ = {
+			isa = PBXGroup;
+			children = (
+				2A2427331D12C8B30078240C /* NetWork */,
+				2A2427301D12C8510078240C /* OCBaseNetService.h */,
+				2A2427311D12C8510078240C /* OCBaseNetService.m */,
+			);
+			path = NetService;
+			sourceTree = "<group>";
+		};
+		2A2427331D12C8B30078240C /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				2A2427371D12C8D90078240C /* OCNetSessionManager.h */,
+				2A2427381D12C8D90078240C /* OCNetSessionManager.m */,
+				2A2427341D12C8C50078240C /* OCResponseResult.h */,
+				2A2427351D12C8C50078240C /* OCResponseResult.m */,
+			);
+			path = NetWork;
+			sourceTree = "<group>";
+		};
+		B54517F7DCA11DA62DBFC265 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C43B072F24654A451413ABA /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF6805A071330350DA9828B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */,
+				49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +236,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A24271D1D12C4670078240C /* Build configuration list for PBXNativeTarget "EMall" */;
 			buildPhases = (
+				F6FCDF7C1C7723793BAB0B18 /* Check Pods Manifest.lock */,
 				2A2426EC1D12C4670078240C /* Sources */,
 				2A2426ED1D12C4670078240C /* Frameworks */,
 				2A2426EE1D12C4670078240C /* Resources */,
+				F3B1D815ADECF6B8ABDB3CB5 /* Embed Pods Frameworks */,
+				E35F727B11202A8D3026ADF5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,6 +337,7 @@
 			files = (
 				2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */,
 				2A2427001D12C4670078240C /* Assets.xcassets in Resources */,
+				2A2427271D12C6990078240C /* Podfile in Resources */,
 				2A2426FE1D12C4670078240C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,13 +358,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E35F727B11202A8D3026ADF5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3B1D815ADECF6B8ABDB3CB5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6FCDF7C1C7723793BAB0B18 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2A2426EC1D12C4670078240C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
 				2A2426FB1D12C4670078240C /* ViewController.m in Sources */,
 				2A2426F81D12C4670078240C /* AppDelegate.m in Sources */,
+				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
+				2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */,
+				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,9 +556,12 @@
 		};
 		2A24271E1D12C4670078240C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,9 +570,12 @@
 		};
 		2A24271F1D12C4670078240C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -496,6 +647,7 @@
 				2A24271F1D12C4670078240C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A2427201D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +656,7 @@
 				2A2427221D12C4670078240C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A2427231D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +665,7 @@
 				2A2427251D12C4670078240C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
