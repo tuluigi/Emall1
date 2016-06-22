@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "OCRootTabbarController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    OCRootTabbarController *rootTarbarController=[[OCRootTabbarController alloc]  init];
+    self.window.rootViewController=rootTarbarController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

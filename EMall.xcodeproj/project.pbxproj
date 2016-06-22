@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351F81D1A3E2B002BE7B7 /* OCBaseTableViewController.m */; };
+		2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351FA1D1A3E2B002BE7B7 /* OCBaseViewController.m */; };
+		2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351FE1D1A3E2B002BE7B7 /* OCRootTabbarController.m */; };
+		2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352001D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m */; };
+		2A0352081D1A3FAE002BE7B7 /* EMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352071D1A3FAE002BE7B7 /* EMHomeViewController.m */; };
+		2A03520B1D1A3FBA002BE7B7 /* EMMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */; };
+		2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */; };
+		2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */; };
 		2A2426F51D12C4670078240C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F41D12C4670078240C /* main.m */; };
 		2A2426F81D12C4670078240C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F71D12C4670078240C /* AppDelegate.m */; };
-		2A2426FB1D12C4670078240C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426FA1D12C4670078240C /* ViewController.m */; };
 		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
 		2A2427001D12C4670078240C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FF1D12C4670078240C /* Assets.xcassets */; };
 		2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2427011D12C4670078240C /* LaunchScreen.storyboard */; };
@@ -42,12 +49,26 @@
 
 /* Begin PBXFileReference section */
 		0C43B072F24654A451413ABA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A0351F71D1A3E2B002BE7B7 /* OCBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseTableViewController.h; sourceTree = "<group>"; };
+		2A0351F81D1A3E2B002BE7B7 /* OCBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseTableViewController.m; sourceTree = "<group>"; };
+		2A0351F91D1A3E2B002BE7B7 /* OCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseViewController.h; sourceTree = "<group>"; };
+		2A0351FA1D1A3E2B002BE7B7 /* OCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseViewController.m; sourceTree = "<group>"; };
+		2A0351FD1D1A3E2B002BE7B7 /* OCRootTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRootTabbarController.h; sourceTree = "<group>"; };
+		2A0351FE1D1A3E2B002BE7B7 /* OCRootTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRootTabbarController.m; sourceTree = "<group>"; };
+		2A0351FF1D1A3E2B002BE7B7 /* UIViewController+OpenCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OpenCourse.h"; sourceTree = "<group>"; };
+		2A0352001D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OpenCourse.m"; sourceTree = "<group>"; };
+		2A0352061D1A3FAE002BE7B7 /* EMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeViewController.h; sourceTree = "<group>"; };
+		2A0352071D1A3FAE002BE7B7 /* EMHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeViewController.m; sourceTree = "<group>"; };
+		2A0352091D1A3FBA002BE7B7 /* EMMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMeViewController.h; sourceTree = "<group>"; };
+		2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMeViewController.m; sourceTree = "<group>"; };
+		2A03520C1D1A3FC9002BE7B7 /* EMCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartViewController.h; sourceTree = "<group>"; };
+		2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartViewController.m; sourceTree = "<group>"; };
+		2A03520F1D1A3FDA002BE7B7 /* EMDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMDiscoveryViewController.h; sourceTree = "<group>"; };
+		2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMDiscoveryViewController.m; sourceTree = "<group>"; };
 		2A2426F01D12C4670078240C /* EMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2426F41D12C4670078240C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A2426F61D12C4670078240C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2A2426F71D12C4670078240C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2A2426F91D12C4670078240C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2A2426FA1D12C4670078240C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2A2426FD1D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2A2426FF1D12C4670078240C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A2427021D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,6 +119,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A0351EF1D1A3322002BE7B7 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				2A0351F51D1A3DC1002BE7B7 /* Base */,
+				2A0351F11D1A3DA6002BE7B7 /* Cart */,
+				2A0351F21D1A3DA6002BE7B7 /* Discovery */,
+				2A0351F31D1A3DA6002BE7B7 /* Home */,
+				2A0351F41D1A3DA6002BE7B7 /* Me */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		2A0351F11D1A3DA6002BE7B7 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				2A03520C1D1A3FC9002BE7B7 /* EMCartViewController.h */,
+				2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		2A0351F21D1A3DA6002BE7B7 /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				2A03520F1D1A3FDA002BE7B7 /* EMDiscoveryViewController.h */,
+				2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */,
+			);
+			path = Discovery;
+			sourceTree = "<group>";
+		};
+		2A0351F31D1A3DA6002BE7B7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2A0352061D1A3FAE002BE7B7 /* EMHomeViewController.h */,
+				2A0352071D1A3FAE002BE7B7 /* EMHomeViewController.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2A0351F41D1A3DA6002BE7B7 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				2A0352091D1A3FBA002BE7B7 /* EMMeViewController.h */,
+				2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		2A0351F51D1A3DC1002BE7B7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2A0351F71D1A3E2B002BE7B7 /* OCBaseTableViewController.h */,
+				2A0351F81D1A3E2B002BE7B7 /* OCBaseTableViewController.m */,
+				2A0351F91D1A3E2B002BE7B7 /* OCBaseViewController.h */,
+				2A0351FA1D1A3E2B002BE7B7 /* OCBaseViewController.m */,
+				2A0351FD1D1A3E2B002BE7B7 /* OCRootTabbarController.h */,
+				2A0351FE1D1A3E2B002BE7B7 /* OCRootTabbarController.m */,
+				2A0351FF1D1A3E2B002BE7B7 /* UIViewController+OpenCourse.h */,
+				2A0352001D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		2A0351F61D1A3DCF002BE7B7 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		2A2426E71D12C4670078240C = {
 			isa = PBXGroup;
 			children = (
@@ -124,11 +215,11 @@
 		2A2426F21D12C4670078240C /* EMall */ = {
 			isa = PBXGroup;
 			children = (
+				2A0351F61D1A3DCF002BE7B7 /* Util */,
+				2A0351EF1D1A3322002BE7B7 /* Business */,
 				2A2427291D12C80B0078240C /* Models */,
 				2A2426F61D12C4670078240C /* AppDelegate.h */,
 				2A2426F71D12C4670078240C /* AppDelegate.m */,
-				2A2426F91D12C4670078240C /* ViewController.h */,
-				2A2426FA1D12C4670078240C /* ViewController.m */,
 				2A2426FC1D12C4670078240C /* Main.storyboard */,
 				2A2426FF1D12C4670078240C /* Assets.xcassets */,
 				2A2427011D12C4670078240C /* LaunchScreen.storyboard */,
@@ -412,12 +503,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
-				2A2426FB1D12C4670078240C /* ViewController.m in Sources */,
+				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
+				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
 				2A2426F81D12C4670078240C /* AppDelegate.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
+				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
+				2A0352081D1A3FAE002BE7B7 /* EMHomeViewController.m in Sources */,
+				2A03520B1D1A3FBA002BE7B7 /* EMMeViewController.m in Sources */,
 				2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
+				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
+				2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */,
+				2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
