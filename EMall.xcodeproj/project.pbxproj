@@ -49,6 +49,8 @@
 		2ADF605D1D27C72400DF757B /* OCTopWarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF605C1D27C72400DF757B /* OCTopWarningView.m */; };
 		2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF605F1D27CCC500DF757B /* UIImageView+EduUtils.m */; };
 		2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60621D27CD2E00DF757B /* NSString+Utility.m */; };
+		2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60671D27D9AE00DF757B /* EMInfiniteView.m */; };
+		2ADF606B1D27DA5A00DF757B /* EMInfiniteViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF606A1D27DA5A00DF757B /* EMInfiniteViewCell.m */; };
 		BD36AD30D78027A886266EEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C43B072F24654A451413ABA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,10 @@
 		2ADF605F1D27CCC500DF757B /* UIImageView+EduUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+EduUtils.m"; sourceTree = "<group>"; };
 		2ADF60611D27CD2E00DF757B /* NSString+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utility.h"; sourceTree = "<group>"; };
 		2ADF60621D27CD2E00DF757B /* NSString+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utility.m"; sourceTree = "<group>"; };
+		2ADF60661D27D9AE00DF757B /* EMInfiniteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMInfiniteView.h; sourceTree = "<group>"; };
+		2ADF60671D27D9AE00DF757B /* EMInfiniteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMInfiniteView.m; sourceTree = "<group>"; };
+		2ADF60691D27DA5A00DF757B /* EMInfiniteViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMInfiniteViewCell.h; sourceTree = "<group>"; };
+		2ADF606A1D27DA5A00DF757B /* EMInfiniteViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMInfiniteViewCell.m; sourceTree = "<group>"; };
 		49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -277,6 +283,7 @@
 		2A2426F21D12C4670078240C /* EMall */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF60641D27D95600DF757B /* View */,
 				2ADF60571D27C68700DF757B /* Global */,
 				2ADF60031D27C4CC00DF757B /* Util */,
 				2A0351EF1D1A3322002BE7B7 /* Business */,
@@ -525,6 +532,25 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
+		2ADF60641D27D95600DF757B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60651D27D98900DF757B /* InfiniteView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2ADF60651D27D98900DF757B /* InfiniteView */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60661D27D9AE00DF757B /* EMInfiniteView.h */,
+				2ADF60671D27D9AE00DF757B /* EMInfiniteView.m */,
+				2ADF60691D27DA5A00DF757B /* EMInfiniteViewCell.h */,
+				2ADF606A1D27DA5A00DF757B /* EMInfiniteViewCell.m */,
+			);
+			path = InfiniteView;
+			sourceTree = "<group>";
+		};
 		B54517F7DCA11DA62DBFC265 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,6 +763,7 @@
 				2ADF60541D27C59C00DF757B /* OCNRefresheFootView.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
+				2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */,
 				2ADF60561D27C59C00DF757B /* UIScrollView+OCRefresh.m in Sources */,
 				2ADF60521D27C59C00DF757B /* OCPageLoadView.m in Sources */,
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
@@ -758,6 +785,7 @@
 				2ADF60491D27C59C00DF757B /* UIColor+ILHexStringColor.m in Sources */,
 				2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */,
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,
+				2ADF606B1D27DA5A00DF757B /* EMInfiniteViewCell.m in Sources */,
 				2ADF60511D27C59C00DF757B /* OCPageLoadAnimationView.m in Sources */,
 				2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */,
 			);
