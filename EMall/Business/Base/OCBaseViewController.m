@@ -33,7 +33,7 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0) {
         self.modalPresentationCapturesStatusBarAppearance = NO;        // Load resources for iOS 7 or later
         self.navigationController.navigationBar.translucent=YES;
-        [self.navigationController.navigationBar setBarTintColor:[UIColor greenColor]];//377d46//2c6748
+        [self.navigationController.navigationBar setBarTintColor:RGB(229, 26, 30)];//377d46//2c6748
         self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
         self.navigationController.navigationBar.opaque=YES;
         

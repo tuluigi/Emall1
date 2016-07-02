@@ -16,7 +16,9 @@
 #import <Foundation/Foundation.h>
 
 #import <Reachability/Reachability.h>
+#import "EMallHeader.h"
 
-#define WEAKSELF typeof(self) __weak weakSelf = self;
+
+
 
 #endif /* PrefixHeader_pch */

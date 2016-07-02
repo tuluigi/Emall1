@@ -14,10 +14,21 @@
 
 @implementation AppDelegate
 
+- (void)customeApperance{
+    NSDictionary *titleAttibutes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                    [UIFont oc_boldSystemFontOfSize:18],NSFontAttributeName,
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIColor clearColor],UITextAttributeTextShadowColor,
+                                    nil];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:titleAttibutes];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];  
 
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [self customeApperance];
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     OCRootTabbarController *rootTarbarController=[[OCRootTabbarController alloc]  init];
     self.window.rootViewController=rootTarbarController;

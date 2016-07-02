@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FXBlurView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,7 +67,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01069E5C47089092D45D285E5570D0AE</key>
+		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>17392667E38E4938ACA525E988BB433B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,22 +82,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3BD89FB3F36E3BD77D150ECEC84F6656</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>426BC4549A625B5E1E4200D5261A98BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CAAB3D8D5F14EAF98648309F4C0491B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>61A4AB68514289B790EA3DC0B7BE6F84</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>766C2E97D976D4C2A076D41682612068</key>
+		<key>60F90DE3352A204891513DA4B8A6A727</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,6 +103,21 @@
 			<true/>
 		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A046F131BE276E7746BC1BDC10F811B5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B9EFE8E5D4C2941D07B52CC0A7975424</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE9A9297969F2AF9DAF8722DDD164AD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

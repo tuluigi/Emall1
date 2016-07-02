@@ -23,8 +23,8 @@
     if (self) {
         
         // Custom initializatio
-        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:11],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:11],NSFontAttributeName,[UIColor greenColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:OCUISCALE(10)],NSFontAttributeName,UIColorHex(@"#5d5c5c"),NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:OCUISCALE(10)],NSFontAttributeName,RGB(229, 26, 30),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
         [self setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     }
@@ -63,27 +63,27 @@
    
     EMHomeViewController *homeViewController=[[EMHomeViewController alloc] init];
     UINavigationController *homeNavController=[[UINavigationController alloc] initWithRootViewController:homeViewController];
-    OCTbabarItem *homeTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"首页" image:[UIImage imageNamed:@"tabbar_home"] selectedImage:[UIImage   imageNamed:@"tabbar_home_HL"]];
+    OCTbabarItem *homeTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"首页" image:[UIImage imageNamed:@"tabbar_home"] selectedImage:[UIImage   imageNamed:@"tabbar_home_select"]];
     homeNavController.tabBarItem=homeTabbarItem;
     
     EMDiscoveryViewController *catViewController=[[EMDiscoveryViewController alloc] init];
     UINavigationController *catNavController=[[UINavigationController alloc] initWithRootViewController:catViewController];
-    OCTbabarItem *catTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_category"] selectedImage:[UIImage   imageNamed:@"tabbar_category_HL"]];
+    OCTbabarItem *catTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_discover"] selectedImage:[UIImage   imageNamed:@"tabbar_discover_select"]];
     catNavController.tabBarItem=catTabbarItem;
     
     EMCartViewController *lessonViewController=[[EMCartViewController alloc] init];
     UINavigationController *lessonNavController=[[UINavigationController alloc] initWithRootViewController:lessonViewController];
-    OCTbabarItem *lessonTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"购物车" image:[UIImage imageNamed:@"tabbar_lesson"] selectedImage:[UIImage   imageNamed:@"tabbar_lesson_HL"]];
+    OCTbabarItem *lessonTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"购物车" image:[UIImage imageNamed:@"tabbar_shop"] selectedImage:[UIImage   imageNamed:@"tabbar_shop_select"]];
     lessonNavController.tabBarItem=lessonTabbarItem;
     
     
     EMMeViewController *meViewController=[[EMMeViewController alloc]  initWithStyle:UITableViewStyleGrouped];
     UINavigationController *meNavController=[[UINavigationController alloc] initWithRootViewController:meViewController];
-    OCTbabarItem *meTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"我" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage   imageNamed:@"tabbar_me_HL"]];
+    OCTbabarItem *meTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"我" image:[UIImage imageNamed:@"tabbar_me"] selectedImage:[UIImage   imageNamed:@"tabbar_me_select"]];
     meNavController.tabBarItem=meTabbarItem;
     
     
-    UIColor *bgColor=[UIColor colorWithRed:29/255.0 green:29/255.0 blue:29/255.0 alpha:1];
+    UIColor *bgColor=[UIColor whiteColor];
     
     [self.tabBar setBarTintColor:bgColor];
     self.tabBar.opaque=NO;
