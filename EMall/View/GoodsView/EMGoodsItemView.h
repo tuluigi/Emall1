@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class  EMGoodsModel;
 @interface EMGoodsItemView : UIView
-
+@property (nonatomic,strong)EMGoodsModel *goodsModel;
 @end

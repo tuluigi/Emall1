@@ -58,6 +58,11 @@
 		2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF607C1D28ACE400DF757B /* EMShopCartModel.m */; };
 		2ADF60831D28B2CB00DF757B /* EMShopAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60821D28B2CB00DF757B /* EMShopAddressModel.m */; };
 		2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60851D28B3FC00DF757B /* EMOrderModel.m */; };
+		2ADF60891D28BE0A00DF757B /* EMHomeCatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60881D28BE0A00DF757B /* EMHomeCatCell.m */; };
+		2ADF608D1D28BE3B00DF757B /* EMCatItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF608C1D28BE3B00DF757B /* EMCatItemView.m */; };
+		2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF608F1D292E0D00DF757B /* EMHomeModel.m */; };
+		2ADF60931D292F2F00DF757B /* EMHomeGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60921D292F2F00DF757B /* EMHomeGoodsCell.m */; };
+		2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60971D292FDA00DF757B /* EMGoodsItemView.m */; };
 		BD36AD30D78027A886266EEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C43B072F24654A451413ABA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +191,16 @@
 		2ADF60821D28B2CB00DF757B /* EMShopAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopAddressModel.m; sourceTree = "<group>"; };
 		2ADF60841D28B3FC00DF757B /* EMOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderModel.h; sourceTree = "<group>"; };
 		2ADF60851D28B3FC00DF757B /* EMOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderModel.m; sourceTree = "<group>"; };
+		2ADF60871D28BE0A00DF757B /* EMHomeCatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeCatCell.h; sourceTree = "<group>"; };
+		2ADF60881D28BE0A00DF757B /* EMHomeCatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeCatCell.m; sourceTree = "<group>"; };
+		2ADF608B1D28BE3B00DF757B /* EMCatItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCatItemView.h; sourceTree = "<group>"; };
+		2ADF608C1D28BE3B00DF757B /* EMCatItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCatItemView.m; sourceTree = "<group>"; };
+		2ADF608E1D292E0D00DF757B /* EMHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeModel.h; sourceTree = "<group>"; };
+		2ADF608F1D292E0D00DF757B /* EMHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeModel.m; sourceTree = "<group>"; };
+		2ADF60911D292F2F00DF757B /* EMHomeGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeGoodsCell.h; sourceTree = "<group>"; };
+		2ADF60921D292F2F00DF757B /* EMHomeGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeGoodsCell.m; sourceTree = "<group>"; };
+		2ADF60961D292FDA00DF757B /* EMGoodsItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsItemView.h; sourceTree = "<group>"; };
+		2ADF60971D292FDA00DF757B /* EMGoodsItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsItemView.m; sourceTree = "<group>"; };
 		49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -251,6 +266,10 @@
 			children = (
 				2A0352061D1A3FAE002BE7B7 /* EMHomeViewController.h */,
 				2A0352071D1A3FAE002BE7B7 /* EMHomeViewController.m */,
+				2ADF60871D28BE0A00DF757B /* EMHomeCatCell.h */,
+				2ADF60881D28BE0A00DF757B /* EMHomeCatCell.m */,
+				2ADF60911D292F2F00DF757B /* EMHomeGoodsCell.h */,
+				2ADF60921D292F2F00DF757B /* EMHomeGoodsCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -383,6 +402,8 @@
 				2ADF60821D28B2CB00DF757B /* EMShopAddressModel.m */,
 				2ADF60841D28B3FC00DF757B /* EMOrderModel.h */,
 				2ADF60851D28B3FC00DF757B /* EMOrderModel.m */,
+				2ADF608E1D292E0D00DF757B /* EMHomeModel.h */,
+				2ADF608F1D292E0D00DF757B /* EMHomeModel.m */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -570,6 +591,8 @@
 		2ADF60641D27D95600DF757B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF60951D292FCA00DF757B /* GoodsView */,
+				2ADF608A1D28BE2200DF757B /* CatView */,
 				2ADF60651D27D98900DF757B /* InfiniteView */,
 			);
 			path = View;
@@ -584,6 +607,24 @@
 				2ADF606A1D27DA5A00DF757B /* EMInfiniteViewCell.m */,
 			);
 			path = InfiniteView;
+			sourceTree = "<group>";
+		};
+		2ADF608A1D28BE2200DF757B /* CatView */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF608B1D28BE3B00DF757B /* EMCatItemView.h */,
+				2ADF608C1D28BE3B00DF757B /* EMCatItemView.m */,
+			);
+			path = CatView;
+			sourceTree = "<group>";
+		};
+		2ADF60951D292FCA00DF757B /* GoodsView */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60961D292FDA00DF757B /* EMGoodsItemView.h */,
+				2ADF60971D292FDA00DF757B /* EMGoodsItemView.m */,
+			);
+			path = GoodsView;
 			sourceTree = "<group>";
 		};
 		B54517F7DCA11DA62DBFC265 /* Frameworks */ = {
@@ -798,11 +839,16 @@
 				2ADF60541D27C59C00DF757B /* OCNRefresheFootView.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
+				2ADF608D1D28BE3B00DF757B /* EMCatItemView.m in Sources */,
+				2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */,
 				2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */,
 				2ADF607A1D28ABEE00DF757B /* ENUserModel.m in Sources */,
 				2ADF60561D27C59C00DF757B /* UIScrollView+OCRefresh.m in Sources */,
+				2ADF60891D28BE0A00DF757B /* EMHomeCatCell.m in Sources */,
+				2ADF60931D292F2F00DF757B /* EMHomeGoodsCell.m in Sources */,
 				2ADF60521D27C59C00DF757B /* OCPageLoadView.m in Sources */,
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
+				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
 				2ADF60431D27C59C00DF757B /* NSDate+Category.m in Sources */,
 				2ADF60471D27C59C00DF757B /* NSString+VideoDuration.m in Sources */,

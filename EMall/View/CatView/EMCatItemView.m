@@ -8,6 +8,11 @@
 
 #import "EMCatItemView.h"
 
+@interface EMCatItemView ()
+@property (nonatomic,strong)UIImageView *logoImageView;
+@property (nonatomic,strong)UILabel *titleLabel;
+@end
+
 @implementation EMCatItemView
 
 @end

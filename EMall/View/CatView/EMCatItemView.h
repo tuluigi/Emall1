@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class EMCatModel;
 
 @interface EMCatItemView : UIView
-
+@property (nonatomic,strong) EMCatModel *catModel;
 @end

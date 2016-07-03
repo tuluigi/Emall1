@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EMHomeCatCell : UITableViewCell
-
+@property (nonatomic,strong)NSArray *catModelArray;
 @end
