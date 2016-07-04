@@ -15,6 +15,7 @@
 		2A03520B1D1A3FBA002BE7B7 /* EMMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */; };
 		2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */; };
 		2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */; };
+		2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */; };
 		2A2426F51D12C4670078240C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F41D12C4670078240C /* main.m */; };
 		2A2426F81D12C4670078240C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F71D12C4670078240C /* AppDelegate.m */; };
 		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
@@ -101,6 +102,8 @@
 		2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartViewController.m; sourceTree = "<group>"; };
 		2A03520F1D1A3FDA002BE7B7 /* EMDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMDiscoveryViewController.h; sourceTree = "<group>"; };
 		2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMDiscoveryViewController.m; sourceTree = "<group>"; };
+		2A0352121D1A4464002BE7B7 /* EMMEHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMEHeadView.h; sourceTree = "<group>"; };
+		2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMEHeadView.m; sourceTree = "<group>"; };
 		2A2426F01D12C4670078240C /* EMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2426F41D12C4670078240C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A2426F61D12C4670078240C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 			children = (
 				2A0352091D1A3FBA002BE7B7 /* EMMeViewController.h */,
 				2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */,
+				2A0352121D1A4464002BE7B7 /* EMMEHeadView.h */,
+				2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -829,6 +834,7 @@
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
 				2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
+				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
 				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
