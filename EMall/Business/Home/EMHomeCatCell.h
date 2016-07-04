@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EMHomeCatCell : UITableViewCell
+@interface EMHomeCatCell : UICollectionViewCell
 @property (nonatomic,strong)NSArray *catModelArray;
 @end

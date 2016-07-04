@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Luigi. All rights reserved.
 //
 
-#import "OCBaseTableViewController.h"
+#import "OCBaseViewController.h"
 
-@interface EMHomeViewController : OCBaseTableViewController
+@interface EMHomeViewController : OCBaseViewController
 
 @end

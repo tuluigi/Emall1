@@ -54,29 +54,48 @@
 
 @interface EMHomeCatCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong)UICollectionView *collectionView;
+@property (nonatomic,strong)UIScrollView *myScorllView;
 @end
 
 @implementation EMHomeCatCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)init{
+    self=[super init];
     if (self) {
         [self onInitContentView];
     }
     return self;
 }
 - (void)onInitContentView{
-    [self.contentView addSubview:self.collectionView];
     WEAKSELF
+    [self.contentView addSubview:self.myScorllView];
+    [self.myScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.bottom.mas_equalTo(weakSelf.contentView);
+    }];
+    /*
+    [self.contentView addSubview:self.collectionView];
+    
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.bottom.mas_equalTo(weakSelf);
     }];
+     */
 }
 #pragma mark - getter  settter
 - (void)setCatModelArray:(NSArray *)catModelArray{
     _catModelArray=catModelArray;
     [self.collectionView reloadData];
 }
-
+- (void)reloadData{
+    CGFloat padding=OCUISCALE(9.5);
+    CGFloat offX=OCUISCALE(OCUISCALE(12));
+    CGFloat x=0;
+    for (NSInteger i=0; i<self.catModelArray.count; i++) {
+        EMHomeCatItemView *itemView=[[EMHomeCatItemView alloc]  init];
+        [self.myScorllView addSubview:itemView];
+        [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo();
+        }];
+    }
+}
 #pragma mark -delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -121,7 +140,15 @@
     }
     return _collectionView;
 }
-
+- (UIScrollView *)myScorllView{
+    if (nil==_myScorllView) {
+        _myScorllView=[[UIScrollView alloc]  init];
+        _myScorllView.delegate=self;
+        _myScorllView.showsVerticalScrollIndicator=NO;
+        _myScorllView.showsHorizontalScrollIndicator=NO;
+    }
+    return _myScorllView;
+}
 
 
 

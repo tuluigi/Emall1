@@ -16,6 +16,7 @@
 		2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */; };
 		2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */; };
 		2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */; };
+		2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */; };
 		2A2426F51D12C4670078240C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F41D12C4670078240C /* main.m */; };
 		2A2426F81D12C4670078240C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F71D12C4670078240C /* AppDelegate.m */; };
 		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
@@ -104,6 +105,8 @@
 		2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMDiscoveryViewController.m; sourceTree = "<group>"; };
 		2A0352121D1A4464002BE7B7 /* EMMEHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMEHeadView.h; sourceTree = "<group>"; };
 		2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMEHeadView.m; sourceTree = "<group>"; };
+		2A0940261D2A8515005BB84D /* EMHomeHeadReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeHeadReusableView.h; sourceTree = "<group>"; };
+		2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeHeadReusableView.m; sourceTree = "<group>"; };
 		2A2426F01D12C4670078240C /* EMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2426F41D12C4670078240C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A2426F61D12C4670078240C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -273,6 +276,8 @@
 				2ADF60881D28BE0A00DF757B /* EMHomeCatCell.m */,
 				2ADF60911D292F2F00DF757B /* EMHomeGoodsCell.h */,
 				2ADF60921D292F2F00DF757B /* EMHomeGoodsCell.m */,
+				2A0940261D2A8515005BB84D /* EMHomeHeadReusableView.h */,
+				2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -880,6 +885,7 @@
 				2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */,
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,
 				2ADF606B1D27DA5A00DF757B /* EMInfiniteViewCell.m in Sources */,
+				2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */,
 				2ADF60511D27C59C00DF757B /* OCPageLoadAnimationView.m in Sources */,
 				2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */,
 			);
