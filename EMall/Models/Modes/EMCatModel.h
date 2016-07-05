@@ -9,7 +9,7 @@
 #import "OCBaseModel.h"
 
 @interface EMCatModel : OCBaseModel
-@property (nonatomic,copy)NSString *catID;
+@property (nonatomic,assign)NSInteger catID;
 @property (nonatomic,copy)NSString *catName;
 @property (nonatomic,copy)NSString *catImageUrl;
 @end

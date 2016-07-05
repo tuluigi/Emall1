@@ -99,7 +99,7 @@
         itemView.catModel=[self.catModelArray objectAtIndex:i];
         [self.myScorllView addSubview:itemView];
         [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (lastCatView) {//第一个
+            if(i==0) {//第一个
                 contentWidth+=offx;
                 make.left.mas_equalTo(weakSelf.mas_left).offset(offx);
             }else{

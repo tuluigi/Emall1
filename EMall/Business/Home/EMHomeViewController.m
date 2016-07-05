@@ -36,6 +36,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"海吃GO";
+    [self.view addSubview:self.myCollectionView];
+    WEAKSELF
+    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero );
+    }];
 //    self.tableView.tableHeaderView=self.infiniteView;
 //    [self.tableView registerClass:[EMHomeCatCell class] forCellReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
 }
@@ -61,6 +66,7 @@
     NSURLSessionTask *task=[EMHomeNetService getHomeDataOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.homeModel=responseResult.responseData;
+            [weakSelf.myCollectionView reloadData];
         }
     }];
      [self addSessionTask:task];
@@ -72,9 +78,9 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=0;
     if (section==0) {
-        if (self.adArray.count>0) {
-            count=1;
-        }
+//        if (self.adArray.count>0) {
+//            count=1;
+//        }
     }else if (section==1){
         count=self.homeModel.hotGoodsArray.count;
     }else if (section==2){
@@ -108,11 +114,11 @@
     }else{
         size=[EMHomeGoodsCell homeGoodsCellSize];
     }
-    return CGSizeZero;
+    return size;
 }
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsZero;
-}
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+//    return UIEdgeInsetsZero;
+//}
 /*
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     return CGSizeZero;
@@ -187,18 +193,18 @@
     if (nil==_myCollectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
-        UICollectionView *mainView = [[UICollectionView alloc] init];
-        mainView.collectionViewLayout=flowLayout;
+        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = YES;
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
-        [mainView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
-         [mainView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
-        mainView.dataSource = self;
+               mainView.dataSource = self;
         mainView.delegate = self;
         mainView.scrollsToTop = NO;
         _myCollectionView=mainView;
+        [_myCollectionView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
+        [_myCollectionView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
+
     }
     return _myCollectionView;
 }

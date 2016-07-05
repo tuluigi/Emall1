@@ -38,6 +38,7 @@
         self.navigationController.navigationBar.opaque=YES;
         
     }
+    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,7 +9,7 @@
 #import "OCBaseModel.h"
 
 @interface EMGoodsModel : OCBaseModel
-@property(nonatomic,copy)NSString *goodsID;
+@property(nonatomic,assign)NSInteger goodsID;
 @property(nonatomic,copy)NSString *goodsName;
 @property(nonatomic,copy)NSString *goodsImageUrl;
 @property(nonatomic,assign)NSInteger saleCount;

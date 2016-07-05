@@ -9,7 +9,7 @@
 #import "OCBaseModel.h"
 
 @interface EMAdModel : OCBaseModel
-@property (nonatomic,copy)NSString *adID;
+@property (nonatomic,assign)NSInteger adID;
 @property (nonatomic,copy)NSString *adTitle;
 @property (nonatomic,copy)NSString *adImageUrl;
 @property (nonatomic,copy)NSString *adUrl;

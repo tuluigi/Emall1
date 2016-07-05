@@ -14,7 +14,7 @@
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"homeSpread"];
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAdModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }
@@ -33,7 +33,7 @@
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock{
     NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"home"];
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAdModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (completionBlock) {
                 completionBlock(responseResult);
             }
