@@ -12,6 +12,8 @@
 #import "OCNetSessionManager.h"
 #import "AFHTTPSessionManager.h"
 
+static NSString const *DomainHost  = @"http://static.duapp.com/app/shopping/api/";
+
 static OCNetSessionManager *sharedSessionManager;
 
 @interface OCNetSessionManager ()

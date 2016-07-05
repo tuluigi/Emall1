@@ -10,4 +10,5 @@
 @class  EMGoodsModel;
 @interface EMGoodsItemView : UIView
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
++ (CGSize)goodsItemViewSize;
 @end

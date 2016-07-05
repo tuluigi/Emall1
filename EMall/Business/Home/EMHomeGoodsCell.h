@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class EMGoodsModel;
+@interface EMHomeGoodsCell : UICollectionViewCell
 
-@interface EMHomeGoodsCell : UITableViewCell
-
+@property (nonatomic,strong) EMGoodsModel *goodsModel;
++ (CGSize)homeGoodsCellSize;
 @end

@@ -9,5 +9,9 @@
 #import "EMAdModel.h"
 
 @implementation EMAdModel
-
++(NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"adID":@"id",
+             @"adImageUrl":@"image",
+             @"adUrl":@"url"};
+}
 @end

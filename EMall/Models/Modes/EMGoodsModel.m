@@ -9,5 +9,11 @@
 #import "EMGoodsModel.h"
 
 @implementation EMGoodsModel
-
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"goodsID":@"id",
+             @"goodsName":@"name",
+             @"goodsPrice":@"price",
+             @"saleCount":@"sales",
+             @"goodsImageUrl":@"image",};
+}
 @end

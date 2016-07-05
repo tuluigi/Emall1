@@ -26,14 +26,14 @@
     _iconImageView=[[UIImageView alloc] init];
     [self addSubview:_iconImageView];
     
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(8)] textColor:UIColorHex(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(10)] textColor:UIColorHex(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
     _nameLabel.numberOfLines=2;
     [self addSubview:_nameLabel];
     
     
     _priceLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(10)] textColor:UIColorHex(@"#fd4747") textAlignment:NSTextAlignmentLeft];
     [self addSubview:_priceLabel];
-    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(8)] textColor:UIColorHex(@"#5d5c5c") textAlignment:NSTextAlignmentRight];
+    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(9)] textColor:UIColorHex(@"#5d5c5c") textAlignment:NSTextAlignmentRight];
     [self addSubview:_saleCountLabel];
     
     WEAKSELF
@@ -44,7 +44,7 @@
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
         make.left.right.mas_equalTo(_iconImageView);
-        make.height.mas_equalTo(OCUISCALE(16));
+        make.height.mas_equalTo(OCUISCALE(20));
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.iconImageView);
@@ -66,6 +66,8 @@
     self.priceLabel.text=[NSString stringWithFormat:@"￥%.1f",_goodsModel.goodsPrice];
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%@",[NSString tenThousandUnitString:_goodsModel.saleCount]];
 }
-
++ (CGSize)goodsItemViewSize{
+    return CGSizeMake(OCUISCALE(170), OCUISCALE(89+5+20+5+10));
+}
 
 @end

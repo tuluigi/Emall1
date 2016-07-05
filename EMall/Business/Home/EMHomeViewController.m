@@ -10,7 +10,7 @@
 #import "EMInfiniteView.h"
 #import "EMHomeCatCell.h"
 #import "EMHomeModel.h"
-#import "EMGoodsItemView.h"
+#import "EMHomeGoodsCell.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
 @property (nonatomic,strong)NSMutableArray *adArray;
@@ -53,9 +53,13 @@
         EMHomeCatCell *cell=(EMHomeCatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
         cell.catModelArray=self.homeModel.catArray;
     }else if(indexPath.section==1){
-    
+        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
+        cell.goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+        aCell=cell;
     }else if (indexPath.section==2){
-    
+        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
+        cell.goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
+        aCell=cell;
     }else{
         aCell=[[UICollectionViewCell alloc]  init];
     }
@@ -63,11 +67,18 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGSize size=CGSizeZero;
+    if (indexPath.section==0) {
+        size=CGSizeMake(OCWidth, [EMHomeCatCell homeCatCellHeight]);
+    }else{
+        size=[EMHomeGoodsCell homeGoodsCellSize];
+    }
     return CGSizeZero;
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     return UIEdgeInsetsZero;
 }
+/*
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     return CGSizeZero;
 }
@@ -79,6 +90,7 @@
     
     return reusableView;
 }
+ */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
 }
@@ -108,9 +120,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * aCell;
     if (indexPath.row==0) {
-        EMHomeCatCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
-        cell.catModelArray=self.homeModel.catArray;
-        aCell=cell;
     }else{
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
         if (nil==cell) {
@@ -150,7 +159,7 @@
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
         [mainView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
-         [mainView registerClass:[EMGoodsItemView class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsItemView class])];
+         [mainView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
         mainView.dataSource = self;
         mainView.delegate = self;
         mainView.scrollsToTop = NO;

@@ -10,4 +10,5 @@
 
 @interface EMHomeCatCell : UICollectionViewCell
 @property (nonatomic,strong)NSArray *catModelArray;
++ (CGFloat)homeCatCellHeight;
 @end

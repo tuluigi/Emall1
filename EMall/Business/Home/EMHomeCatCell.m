@@ -8,7 +8,7 @@
 
 #import "EMHomeCatCell.h"
 #import "EMCatModel.h"
-@interface EMHomeCatItemView : UICollectionViewCell
+@interface EMHomeCatItemView : UIView
 @property (nonatomic,strong)EMCatModel *catModel;
 + (CGSize)homeCatItemViewSize;
 @end
@@ -52,8 +52,8 @@
 @end
 
 
-@interface EMHomeCatCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property (nonatomic,strong)UICollectionView *collectionView;
+@interface EMHomeCatCell ()
+//@property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)UIScrollView *myScorllView;
 @end
 
@@ -82,20 +82,51 @@
 #pragma mark - getter  settter
 - (void)setCatModelArray:(NSArray *)catModelArray{
     _catModelArray=catModelArray;
-    [self.collectionView reloadData];
+    [self reloadData];
 }
 - (void)reloadData{
-    CGFloat padding=OCUISCALE(9.5);
-    CGFloat offX=OCUISCALE(OCUISCALE(12));
-    CGFloat x=0;
+    NSArray *subViewArray=[self.myScorllView subviews];
+    for (UIView *aView in subViewArray) {
+        [aView removeFromSuperview];
+    }
+    CGFloat padding=OCUISCALE(19);
+    CGFloat offx    =OCUISCALE(12);
+   __block CGFloat contentWidth=0;
+    WEAKSELF
+    EMHomeCatItemView *lastCatView;
     for (NSInteger i=0; i<self.catModelArray.count; i++) {
         EMHomeCatItemView *itemView=[[EMHomeCatItemView alloc]  init];
+        itemView.catModel=[self.catModelArray objectAtIndex:i];
         [self.myScorllView addSubview:itemView];
         [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo();
+            if (lastCatView) {//第一个
+                contentWidth+=offx;
+                make.left.mas_equalTo(weakSelf.mas_left).offset(offx);
+            }else{
+                make.left.mas_equalTo(lastCatView.mas_right).offset(padding);
+                make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(7.5));
+                make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-7.5));
+                CGSize size=[EMHomeCatItemView homeCatItemViewSize];
+                make.width.mas_equalTo(size.width);
+                contentWidth +=padding;
+                contentWidth +=size.width;
+            }
+            if (i==(weakSelf.catModelArray.count-1)) {
+                make.right.mas_greaterThanOrEqualTo(weakSelf.mas_right).offset(-offx).priorityHigh();
+                contentWidth+=offx;
+            }
         }];
+        lastCatView=itemView;
+        if (contentWidth<OCWidth) {
+            contentWidth=OCWidth;
+        }
+        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMHomeCatCell homeCatCellHeight]);
     }
 }
++ (CGFloat)homeCatCellHeight{
+    return OCUISCALE(70);
+}
+/*
 #pragma mark -delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -140,6 +171,7 @@
     }
     return _collectionView;
 }
+ */
 - (UIScrollView *)myScorllView{
     if (nil==_myScorllView) {
         _myScorllView=[[UIScrollView alloc]  init];
