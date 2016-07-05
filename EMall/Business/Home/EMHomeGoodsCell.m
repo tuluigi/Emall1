@@ -15,8 +15,8 @@
 
 @implementation EMHomeGoodsCell
 
-- (instancetype)init{
-    self=[super init];
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
     if (self) {
         [self onInitContentView];
     }
