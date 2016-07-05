@@ -9,5 +9,9 @@
 #import "EMHomeModel.h"
 
 @implementation EMHomeModel
-
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"catArray":@"",
+             @"greatGoodsArray":@"",
+             @"greatGoodsArray":@"",};
+}
 @end

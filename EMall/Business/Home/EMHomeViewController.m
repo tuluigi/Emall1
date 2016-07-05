@@ -11,10 +11,11 @@
 #import "EMHomeCatCell.h"
 #import "EMHomeModel.h"
 #import "EMHomeGoodsCell.h"
+#import "EMHomeNetService.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
-@property (nonatomic,strong)NSMutableArray *adArray;
-@property (nonatomic,strong)EMHomeModel *homeModel;
+@property (nonatomic,strong)__block NSMutableArray *adArray;
+@property (nonatomic,strong)__block EMHomeModel *homeModel;
 
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 
@@ -22,6 +23,15 @@
 
 @implementation EMHomeViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (nil==self.homeModel) {
+        [self getHomeData];
+    }
+    if (self.adArray.count==0) {
+        [self getHomeADList];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,6 +44,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -Net
+- (void)getHomeADList{
+    WEAKSELF
+    NSURLSessionTask *task=[EMHomeNetService getHomeAdListOnCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            weakSelf.adArray=responseResult.responseData;
+            [weakSelf.myCollectionView reloadData];
+        }
+    }];
+    [self addSessionTask:task];
+}
+- (void)getHomeData{
+    WEAKSELF
+    NSURLSessionTask *task=[EMHomeNetService getHomeDataOnCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            weakSelf.homeModel=responseResult.responseData;
+        }
+    }];
+     [self addSessionTask:task];
+}
 #pragma mark - UICollectionView Delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 3;
@@ -41,9 +72,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=0;
     if (section==0) {
-        count=1;
-    }else if (section==1||section==2){
-        count=2;
+        if (self.adArray.count>0) {
+            count=1;
+        }
+    }else if (section==1){
+        count=self.homeModel.hotGoodsArray.count;
+    }else if (section==2){
+        count=self.homeModel.greatGoodsArray.count;
     }
     return count;
 }

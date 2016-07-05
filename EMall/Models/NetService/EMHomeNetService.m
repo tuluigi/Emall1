@@ -12,7 +12,7 @@
 #import "EMHomeModel.h"
 @implementation EMHomeNetService
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=@"homeSpread";
+    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"homeSpread"];
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
@@ -31,7 +31,7 @@
  *  @return
  */
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock{
-    NSString *apiPath=@"home";
+    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"home"];
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAdModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (completionBlock) {

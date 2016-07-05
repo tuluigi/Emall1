@@ -29,6 +29,8 @@ static OCNetSessionManager *sharedSessionManager;
     if (nil==_afSessionManager) {
         _afSessionManager=[AFHTTPSessionManager manager];
         [[_afSessionManager requestSerializer] setTimeoutInterval:20];
+//        _afSessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
+         _afSessionManager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil ];
     }
     return _afSessionManager;
 }
@@ -90,7 +92,6 @@ static OCNetSessionManager *sharedSessionManager;
 }
 -(void)handleDebugMessageWithTask:(NSURLSessionDataTask * )task responseObject:(id)responseObject error:(NSError *)error{
 #ifdef DEBUG
-    if (self.enableLog) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             if (task) {
             NSString *url= task.currentRequest.URL.absoluteString;
@@ -98,7 +99,14 @@ static OCNetSessionManager *sharedSessionManager;
             if (error) {
                 resultValue=error;
             }else{
-                resultValue=responseObject;
+                 resultValue=[NSString stringWithFormat:@"%@",responseObject];
+                /*
+                if ([resultValue isKindOfClass:[NSData class]]) {
+                   resultValue=[NSString stringWithFormat:@"%@",responseObject];
+                }else{
+                    resultValue=responseObject;
+                }
+                 */
             }
             if ([task.currentRequest.HTTPMethod isEqualToString:@"POST"]) {
                 NSLog(@"\n 网络请求接口地址:\n%@\n参数\n%@\n返回值\n%@",url,[[NSString alloc]  initWithData:task.originalRequest.HTTPBody encoding:4],resultValue);
@@ -107,8 +115,6 @@ static OCNetSessionManager *sharedSessionManager;
             }
             }
         });
-        
-    }
 #endif
 }
 - (NSURLSessionUploadTask *)uploadWithRequest:(NSURLRequest *)request
@@ -162,10 +168,7 @@ static OCNetSessionManager *sharedSessionManager;
         if ([str hasPrefix:@"http://"]||[str hasPrefix:@"https://"]||[str hasPrefix:@"www."]) {
             
         }else{
-            if (![str hasPrefix:@"/"]) {
-                str=[@"/" stringByAppendingString:str];
-            }
-            str=[NSString stringWithFormat:@"%@%@%@",@"xxx",@"xxx",str];
+            str=[NSString stringWithFormat:@"%@%@",DomainHost,str];
         }
     }
     return str;
