@@ -44,7 +44,7 @@
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
         make.left.right.mas_equalTo(_iconImageView);
-        make.height.mas_equalTo(OCUISCALE(20));
+//        make.height.mas_equalTo(OCUISCALE(20));
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.iconImageView);
