@@ -9,5 +9,12 @@
 #import "EMCatModel.h"
 
 @implementation EMCatModel
-
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"catID":@"id",
+             @"catName":@"name",
+             @"catImageUrl":@"logo",};
+}
+- (NSString *)catImageUrl{
+    return    @"http://pic24.nipic.com/20121015/9095554_135805004000_2.jpg";
+}
 @end

@@ -66,6 +66,10 @@
     NSURLSessionTask *task=[EMHomeNetService getHomeDataOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.homeModel=responseResult.responseData;
+            for (NSInteger i=0; i<5; i++) {
+                        [weakSelf.homeModel.catArray addObjectsFromArray:weakSelf.homeModel.catArray];
+            }
+
             [weakSelf.myCollectionView reloadData];
         }
     }];
@@ -81,6 +85,9 @@
 //        if (self.adArray.count>0) {
 //            count=1;
 //        }
+        if (self.homeModel.catArray.count) {
+            count=1;
+        }
     }else if (section==1){
         count=self.homeModel.hotGoodsArray.count;
     }else if (section==2){
@@ -93,6 +100,7 @@
     if (indexPath.section==0) {
         EMHomeCatCell *cell=(EMHomeCatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
         cell.catModelArray=self.homeModel.catArray;
+        aCell=cell;
     }else if(indexPath.section==1){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
 //        cell.goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
@@ -197,12 +205,11 @@
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
-        mainView.pagingEnabled = YES;
+        mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
-               mainView.dataSource = self;
+        mainView.dataSource = self;
         mainView.delegate = self;
-        mainView.scrollsToTop = NO;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
         [_myCollectionView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];

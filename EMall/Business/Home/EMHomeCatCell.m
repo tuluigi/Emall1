@@ -8,7 +8,7 @@
 
 #import "EMHomeCatCell.h"
 #import "EMCatModel.h"
-@interface EMHomeCatItemView : UIView
+@interface EMHomeCatItemView : UICollectionViewCell
 @property (nonatomic,strong)EMCatModel *catModel;
 + (CGSize)homeCatItemViewSize;
 @end
@@ -17,8 +17,8 @@
 @property (nonatomic,strong)  UILabel *nameLabel;
 @end
 @implementation EMHomeCatItemView
-- (instancetype)init{
-    self=[super init];
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
     if (self) {
         [self onInitContentView];
     }
@@ -26,19 +26,24 @@
 }
 - (void)onInitContentView{
     _iconImageView=[[UIImageView alloc] init];
-    [self addSubview:_iconImageView];
-    
+    [self.contentView addSubview:_iconImageView];
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
-    [self addSubview:_nameLabel];
+    _nameLabel.backgroundColor=[UIColor redColor];
+    _nameLabel.numberOfLines=1;
+    [self.contentView addSubview:_nameLabel];
     
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(weakSelf);
+        make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(7.5));
+//        make.left.mas_equalTo(weakSelf.contentView).offset(OCUISCALE(9.5));
+//        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-9.5));
+        make.centerX.mas_equalTo(weakSelf.contentView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(40), OCUISCALE(40)));
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
         make.left.right.mas_equalTo(_iconImageView);
+        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-7.5));
     }];
 }
 - (void)setCatModel:(EMCatModel *)catModel{
@@ -47,19 +52,26 @@
     self.nameLabel.text=_catModel.catName;
 }
 + (CGSize)homeCatItemViewSize{
-    return CGSizeMake(OCUISCALE(40), OCUISCALE(40+5+12));
+    return CGSizeMake(OCUISCALE(59), OCUISCALE(80));
+}
+-(UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    CGSize size=[EMHomeCatItemView homeCatItemViewSize];
+    attributes.size=size;
+    return attributes;
 }
 @end
 
 
-@interface EMHomeCatCell ()
-//@property (nonatomic,strong)UICollectionView *collectionView;
+@interface EMHomeCatCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)UIScrollView *myScorllView;
+
 @end
 
 @implementation EMHomeCatCell
-- (instancetype)init{
-    self=[super init];
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
     if (self) {
         [self onInitContentView];
     }
@@ -71,18 +83,24 @@
     [self.myScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.bottom.mas_equalTo(weakSelf.contentView);
     }];
+    
     /*
     [self.contentView addSubview:self.collectionView];
-    
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.bottom.mas_equalTo(weakSelf);
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
      */
+}
+-(UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+   CGSize size=CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
+    attributes.size=size;
+    return attributes;
 }
 #pragma mark - getter  settter
 - (void)setCatModelArray:(NSArray *)catModelArray{
     _catModelArray=catModelArray;
-    [self reloadData];
+    [self.collectionView reloadData];
 }
 - (void)reloadData{
     NSArray *subViewArray=[self.myScorllView subviews];
@@ -91,13 +109,16 @@
     }
     CGFloat padding=OCUISCALE(19);
     CGFloat offx    =OCUISCALE(12);
-   __block CGFloat contentWidth=0;
+    __block CGFloat contentWidth=0;
     WEAKSELF
     EMHomeCatItemView *lastCatView;
     for (NSInteger i=0; i<self.catModelArray.count; i++) {
         EMHomeCatItemView *itemView=[[EMHomeCatItemView alloc]  init];
         itemView.catModel=[self.catModelArray objectAtIndex:i];
         [self.myScorllView addSubview:itemView];
+        
+        
+        
         [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
             if(i==0) {//第一个
                 contentWidth+=offx;
@@ -120,13 +141,20 @@
         if (contentWidth<OCWidth) {
             contentWidth=OCWidth;
         }
-        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMHomeCatCell homeCatCellHeight]);
+        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMHomeCatItemView homeCatItemViewSize].height);
     }
 }
-+ (CGFloat)homeCatCellHeight{
-    return OCUISCALE(70);
+- (UIScrollView *)myScorllView{
+    if (nil==_myScorllView) {
+        _myScorllView=[[UIScrollView alloc]  init];
+        _myScorllView.delegate=self;
+        _myScorllView.showsVerticalScrollIndicator=NO;
+        _myScorllView.showsHorizontalScrollIndicator=NO;
+    }
+    return _myScorllView;
 }
-/*
+
+
 #pragma mark -delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -135,9 +163,6 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     EMHomeCatItemView *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatItemView class]) forIndexPath:indexPath];
-    if (nil==cell) {
-        cell=[[EMHomeCatItemView alloc]  init];
-    }
     [cell setCatModel:[self.catModelArray objectAtIndex:indexPath.row]];
     return cell;
 }
@@ -146,21 +171,21 @@
 
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return [EMHomeCatItemView homeCatItemViewSize];
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(OCUISCALE(7.5), OCUISCALE(12), OCUISCALE(7.5), OCUISCALE(12));
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    CGSize size = flowLayout.itemSize;
+    return size;
 }
 #pragma mark -getter
 -(UICollectionView *)collectionView{
     if (nil==_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing=0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        UICollectionView *mainView = [[UICollectionView alloc] init];
+        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:flowLayout];
         mainView.collectionViewLayout=flowLayout;
         mainView.backgroundColor = [UIColor clearColor];
-        mainView.pagingEnabled = YES;
+        mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
         [mainView registerClass:[EMHomeCatItemView class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatItemView class])];
@@ -171,16 +196,7 @@
     }
     return _collectionView;
 }
- */
-- (UIScrollView *)myScorllView{
-    if (nil==_myScorllView) {
-        _myScorllView=[[UIScrollView alloc]  init];
-        _myScorllView.delegate=self;
-        _myScorllView.showsVerticalScrollIndicator=NO;
-        _myScorllView.showsHorizontalScrollIndicator=NO;
-    }
-    return _myScorllView;
-}
+
 
 
 
