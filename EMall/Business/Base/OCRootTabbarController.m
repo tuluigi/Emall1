@@ -23,7 +23,7 @@
     if (self) {
         
         // Custom initializatio
-        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:OCUISCALE(10)],NSFontAttributeName,UIColorHex(@"#5d5c5c"),NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:OCUISCALE(10)],NSFontAttributeName,ColorHexString(@"#5d5c5c"),NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
         [self setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:OCUISCALE(10)],NSFontAttributeName,RGB(229, 26, 30),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
         [self setTitlePositionAdjustment:UIOffsetMake(0, -3)];

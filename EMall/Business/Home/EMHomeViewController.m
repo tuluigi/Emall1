@@ -95,11 +95,13 @@
         cell.catModelArray=self.homeModel.catArray;
     }else if(indexPath.section==1){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        cell.goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+//        cell.goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
         aCell=cell;
     }else if (indexPath.section==2){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        cell.goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
+//        cell.goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
+        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
         aCell=cell;
     }else{
         aCell=[[UICollectionViewCell alloc]  init];
@@ -112,18 +114,7 @@
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     
     CGSize size = flowLayout.itemSize;
-    
-    size.height = size.height ;
     return size;
-    /*
-    CGSize size=CGSizeZero;
-    if (indexPath.section==0) {
-        size=CGSizeMake(OCWidth, [EMHomeCatCell homeCatCellHeight]);
-    }else{
-        size=[EMHomeGoodsCell homeGoodsCellSize];
-    }
-    return size;
-     */
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsZero;
@@ -202,6 +193,8 @@
     if (nil==_myCollectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing=0;
+        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = YES;

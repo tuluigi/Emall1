@@ -10,7 +10,6 @@
 
 @interface NSString (Utility)
 
-- (UIColor *)colorWithHexString;
 - (NSUInteger)numberOfMatchesNonChineseCharacterSet;
 
 /**

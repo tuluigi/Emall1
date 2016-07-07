@@ -11,6 +11,7 @@
 #import "EMGoodsItemView.h"
 @interface EMHomeGoodsCell ()
 @property (nonatomic,strong)EMGoodsItemView *goodsItemView;
+@property (nonatomic,strong) EMGoodsModel *goodsModel;
 @end
 
 @implementation EMHomeGoodsCell
@@ -35,8 +36,29 @@
     _goodsModel=goodsModel;
     self.goodsItemView.goodsModel=goodsModel;
 }
-+ (CGSize)homeGoodsCellSize{
-    CGSize size=[EMGoodsItemView goodsItemViewSize];
-    return CGSizeMake(size.width+OCUISCALE(10), size.height+OCUISCALE(10));
+- (void)setGoodsModel:(EMGoodsModel *)goodsModel dataSource:(NSArray *)dataSource{
+    [self setGoodsModel:goodsModel];
+    NSInteger index=[dataSource indexOfObject:goodsModel];
+    CGFloat padding=OCUISCALE(5);
+    CGFloat width=[EMGoodsItemView goodsItemViewSize].width;
+    CGFloat offx=OCWidth/2.0-padding-width;
+    if (index%2) {
+        [self.goodsItemView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.removeExisting=YES;
+            make.edges.mas_equalTo(UIEdgeInsetsMake(padding,padding , padding, offx));
+        }];
+    }else{
+        [self.goodsItemView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.removeExisting=YES;
+            make.edges.mas_equalTo(UIEdgeInsetsMake(padding, offx, padding, padding));
+        }];
+    }
+}
+-(UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    CGSize size=[self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    size.width=OCWidth/2.0;
+    attributes.size=size;
+    return attributes;
 }
 @end

@@ -10,6 +10,6 @@
 @class EMGoodsModel;
 @interface EMHomeGoodsCell : UICollectionViewCell
 
-@property (nonatomic,strong) EMGoodsModel *goodsModel;
-+ (CGSize)homeGoodsCellSize;
+
+- (void)setGoodsModel:(EMGoodsModel *)goodsModel dataSource:(NSArray *)dataSource;
 @end

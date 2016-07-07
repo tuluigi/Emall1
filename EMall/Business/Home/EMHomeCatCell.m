@@ -28,7 +28,7 @@
     _iconImageView=[[UIImageView alloc] init];
     [self addSubview:_iconImageView];
     
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:UIColorHex(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
     [self addSubview:_nameLabel];
     
     WEAKSELF
