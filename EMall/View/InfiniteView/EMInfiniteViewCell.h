@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class EMAdModel;
 @interface EMInfiniteViewCell : UICollectionViewCell
-
+@property (nonatomic,strong)EMAdModel *adModel;
 @end

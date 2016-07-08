@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,EMHomeHeadReusableViewType) {
+    EMHomeHeadReusableViewTypeGreat     ,//精品
+    EMHomeHeadReusableViewTypeHot       ,//热品
+};
+
+@protocol EMHomeHeadReusableViewDelegate <NSObject>
+
+- (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type;
+
+@end
+
+
 @interface EMHomeHeadReusableView : UICollectionReusableView
-@property (nonatomic,copy)NSString *headTitle;
+@property (nonatomic,assign)EMHomeHeadReusableViewType type;
++ (CGFloat)homeHeadReusableViewHeight;
+@property (nonatomic,weak)id <EMHomeHeadReusableViewDelegate> delegate;
 @end

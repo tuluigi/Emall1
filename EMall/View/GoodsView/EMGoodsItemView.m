@@ -26,6 +26,8 @@
 }
 - (void)onInitContentView{
     _iconImageView=[[UIImageView alloc] init];
+    _iconImageView.contentMode=UIViewContentModeScaleAspectFill;
+    _iconImageView.clipsToBounds=YES;
     [self addSubview:_iconImageView];
     
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentLeft];

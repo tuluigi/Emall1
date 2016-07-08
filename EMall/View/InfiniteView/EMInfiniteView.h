@@ -19,7 +19,10 @@
 @end
 
 
-@interface EMInfiniteView : UIView
+@interface EMInfiniteView : UICollectionReusableView
 @property (nonatomic,strong,readonly) UICollectionView *collectionView;
+@property (nonatomic,assign,readwrite)NSInteger totalNumber;
 @property (nonatomic,weak)id <EMInfiniteViewDelegate> delegate;
+- (UICollectionViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index;
+- (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 @end

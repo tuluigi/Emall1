@@ -30,6 +30,8 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 }
 - (void)onInitContentView{
     _iconImageView=[[UIImageView alloc] init];
+    _iconImageView.contentMode=UIViewContentModeScaleAspectFill;
+    _iconImageView.clipsToBounds=YES;
     [self.contentView addSubview:_iconImageView];
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
@@ -49,7 +51,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
         make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-7.5));
     }];
     self.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(homeCatItemViewDidSelectBlock:)];
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
     [self addGestureRecognizer:tapGesture];
 }
 - (void)setCatModel:(EMCatModel *)catModel{
@@ -84,17 +86,23 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     return self;
 }
 - (void)onInitContentView{
-    WEAKSELF
     [self.contentView addSubview:self.myScorllView];
     [self.myScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.bottom.mas_equalTo(weakSelf.contentView);
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
 }
-
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    
+    attributes.size=CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
+    return attributes;
+}
 #pragma mark - getter  settter
 - (void)setCatModelArray:(NSArray *)catModelArray{
-    _catModelArray=catModelArray;
-    [self reloadData];
+    if (catModelArray.count!=_catModelArray.count) {
+        _catModelArray=catModelArray;
+        [self reloadData];
+    }
 }
 - (void)reloadData{
     NSArray *subViewArray=[self.myScorllView subviews];
@@ -132,7 +140,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 - (UIScrollView *)myScorllView{
     if (nil==_myScorllView) {
         _myScorllView=[[UIScrollView alloc]  init];
-        _myScorllView.delegate=self;
+//        _myScorllView.delegate=self;
         _myScorllView.showsVerticalScrollIndicator=NO;
         _myScorllView.showsHorizontalScrollIndicator=NO;
     }
