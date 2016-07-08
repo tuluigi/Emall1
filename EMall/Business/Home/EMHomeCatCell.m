@@ -33,7 +33,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     _iconImageView.contentMode=UIViewContentModeScaleAspectFill;
     _iconImageView.clipsToBounds=YES;
     [self.contentView addSubview:_iconImageView];
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(12)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
     _nameLabel.backgroundColor=[UIColor clearColor];
     _nameLabel.numberOfLines=1;

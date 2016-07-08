@@ -13,6 +13,8 @@
 @property (nonatomic,strong)UIPageControl *pageControl;
 @property (nonatomic,assign)NSInteger currentIndex;
 
+@property (nonatomic,strong)NSTimer *myTimer;
+
 @end
 
 @implementation EMInfiniteView
@@ -50,6 +52,26 @@
 - (void)setTotalNumber:(NSInteger)totalNumber{
     _totalNumber=totalNumber;
     self.pageControl.numberOfPages=_totalNumber;
+    [self addTimer];
+}
+- (void)setCurrentIndex:(NSInteger)currentIndex{
+    _currentIndex=currentIndex;
+    self.pageControl.currentPage=_currentIndex;
+}
+- (void)addTimer{
+    if (nil==self.myTimer) {
+        NSTimer *timer=[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(autoLoadNextPage) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        self.myTimer=timer;
+    }
+}
+
+- (void)autoLoadNextPage{
+    NSInteger nextIndex=(self.currentIndex+1);
+    if (nextIndex>self.totalNumber) {
+        nextIndex=0;
+    }
+     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
 }
 #pragma mark -private
@@ -72,7 +94,7 @@
     }else{
         cell=[[UICollectionViewCell alloc]  init];
     }
-    self.pageControl.currentPage=_currentIndex;
+    
     return cell;
 }
 
@@ -85,21 +107,32 @@
     return collectionView.bounds.size;
 }
 #pragma mark - scrollview delegate
-
-///MARK:----/实现无限左右滚动/--------
-//--/此代理方法在每一帧图片结束滚动调用/-----
+//定时器自动滑动
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self scrollViewDidEndDecelerating:scrollView];
+}
+//手动滑动
 -(void)scrollViewDidEndDecelerating:(nonnull UIScrollView *)scrollView
 {
     NSInteger offsetX = scrollView.contentOffset.x;
     NSInteger viewW = scrollView.bounds.size.width;
     NSInteger offset = offsetX/viewW - 1;
+    NSInteger currentPage=0;
     if (offset != 0)
     {
-        _currentIndex = (_currentIndex + offset + self.totalNumber) % self.totalNumber;
+        currentPage = (_currentIndex + offset + self.totalNumber) % self.totalNumber;
         NSIndexPath *indexpath = [NSIndexPath indexPathForItem:1 inSection:0];
         [self.collectionView scrollToItemAtIndexPath:indexpath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-
+        
     }
+    self.currentIndex=currentPage;
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.myTimer invalidate];
+    self.myTimer=nil;
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self addTimer];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
