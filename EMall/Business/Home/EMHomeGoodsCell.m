@@ -31,6 +31,8 @@
     [_goodsItemView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(padding, padding, padding, padding));
     }];
+    self.contentView.layer.borderColor=ColorHexString(@"#e2e1e1").CGColor;
+    self.contentView.layer.borderWidth=0.3;
 }
 - (void)setGoodsModel:(EMGoodsModel *)goodsModel{
     _goodsModel=goodsModel;

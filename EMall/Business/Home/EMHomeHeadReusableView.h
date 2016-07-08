@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EMHomeHeadReusableView : UICollectionReusableView
-
+@property (nonatomic,copy)NSString *headTitle;
 @end

@@ -12,7 +12,11 @@
 #import "EMHomeModel.h"
 #import "EMHomeGoodsCell.h"
 #import "EMHomeNetService.h"
-@interface EMHomeViewController ()<EMInfiniteViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "EMCatModel.h"
+@interface EMHomeViewController ()<EMInfiniteViewDelegate,
+                                UICollectionViewDelegate,
+                                UICollectionViewDataSource,
+                                UICollectionViewDelegateFlowLayout,EMHomeCatCellDelegate>
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
 @property (nonatomic,strong)__block NSMutableArray *adArray;
 @property (nonatomic,strong)__block EMHomeModel *homeModel;
@@ -41,8 +45,6 @@
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
-//    self.tableView.tableHeaderView=self.infiniteView;
-//    [self.tableView registerClass:[EMHomeCatCell class] forCellReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,9 +84,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=0;
     if (section==0) {
-//        if (self.adArray.count>0) {
-//            count=1;
-//        }
         if (self.homeModel.catArray.count) {
             count=1;
         }
@@ -100,15 +99,14 @@
     if (indexPath.section==0) {
         EMHomeCatCell *cell=(EMHomeCatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
         cell.catModelArray=self.homeModel.catArray;
+        cell.delegate=self;
         aCell=cell;
     }else if(indexPath.section==1){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-//        cell.goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
         [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
         aCell=cell;
     }else if (indexPath.section==2){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-//        cell.goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
         [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
         aCell=cell;
     }else{
@@ -143,6 +141,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
 }
+#pragma mark - EMHomeCatCell Delegate
+- (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel{
+    //
+}
+
 #pragma mark -EMInfiniteVieDelegate
 - (NSInteger)numberOfInfiniteViewCellsInInfiniteView:(EMInfiniteView *)infiniteView{
     return self.adArray.count;

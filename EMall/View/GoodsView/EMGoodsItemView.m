@@ -28,7 +28,7 @@
     _iconImageView=[[UIImageView alloc] init];
     [self addSubview:_iconImageView];
     
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(10)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentLeft];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentLeft];
     _nameLabel.numberOfLines=2;
     [self addSubview:_nameLabel];
     
@@ -47,7 +47,7 @@
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
         make.left.right.mas_equalTo(_iconImageView);
-        make.height.mas_equalTo(OCUISCALE(25));
+//        make.height.mas_equalTo(OCUISCALE(25));
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.iconImageView);
