@@ -32,8 +32,9 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     _iconImageView=[[UIImageView alloc] init];
     _iconImageView.contentMode=UIViewContentModeScaleAspectFill;
     _iconImageView.clipsToBounds=YES;
+    
     [self.contentView addSubview:_iconImageView];
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(12)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentLeft];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(12)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
     _nameLabel.backgroundColor=[UIColor clearColor];
     _nameLabel.numberOfLines=1;
@@ -41,14 +42,17 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(7.5));
+        make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(10));
         make.centerX.mas_equalTo(weakSelf.contentView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(40), OCUISCALE(40)));
     }];
+    _iconImageView.layer.cornerRadius=OCUISCALE(40/2.0);
+    _iconImageView.layer.masksToBounds=YES;
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
-        make.left.right.mas_equalTo(_iconImageView);
-        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-7.5));
+        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(9));
+        make.width.mas_equalTo([EMHomeCatItemView homeCatItemViewSize].width);
+        make.centerX.mas_equalTo(weakSelf.iconImageView);
+        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-10));
     }];
     self.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
@@ -56,7 +60,8 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 }
 - (void)setCatModel:(EMCatModel *)catModel{
     _catModel=catModel;
-    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
+//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
+    _iconImageView.image=[UIImage imageNamed:@"cat_05"];
     self.nameLabel.text=_catModel.catName;
 }
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture{
@@ -66,7 +71,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 }
 
 + (CGSize)homeCatItemViewSize{
-    return CGSizeMake(OCUISCALE(59), OCUISCALE(80));
+    return CGSizeMake(OCUISCALE(47+15), OCUISCALE(84));
 }
 
 @end
@@ -109,7 +114,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     for (UIView *aView in subViewArray) {
         [aView removeFromSuperview];
     }
-    CGFloat offx    =OCUISCALE(2.5);
+    CGFloat offx    =OCUISCALE(4.5);
     __block CGFloat contentWidth=0;
     WEAKSELF
     CGSize itemViewSize =[EMHomeCatItemView homeCatItemViewSize];

@@ -35,16 +35,16 @@
     [self addSubview:_nameLabel];
     
     
-    _priceLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(10)] textColor:[UIColor colorWithHexString:@"#fd4747"] textAlignment:NSTextAlignmentLeft];
+    _priceLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#fd4747"] textAlignment:NSTextAlignmentLeft];
     [self addSubview:_priceLabel];
-    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(9)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentRight];
+    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentRight];
     [self addSubview:_saleCountLabel];
     
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(weakSelf);
         make.right.mas_equalTo(weakSelf);
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(170), OCUISCALE(89)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(170), OCUISCALE(120)));
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
@@ -53,7 +53,7 @@
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.iconImageView);
-        make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(OCUISCALE(5));
+        make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(OCUISCALE(10));
         make.right.mas_equalTo(weakSelf.iconImageView.mas_centerX);
         make.bottom.mas_equalTo(weakSelf.mas_bottom);
     }];
@@ -72,7 +72,7 @@
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%@",[NSString tenThousandUnitString:_goodsModel.saleCount]];
 }
 + (CGSize)goodsItemViewSize{
-    return CGSizeMake(OCUISCALE(170), OCUISCALE(89+5+20+5+10));
+    return CGSizeMake(OCUISCALE(170), OCUISCALE(120+5+20+5+10));
 }
 
 @end
