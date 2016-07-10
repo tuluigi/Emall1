@@ -32,6 +32,7 @@
 #import "UIColor+ILHexStringColor.h"
 
 #import "UIViewController+OpenCourse.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 
 #pragma mark --Maroc
 #define WEAKSELF typeof(self) __weak weakSelf = self;
@@ -48,5 +49,12 @@
 #ifndef stringNotNil
 #define stringNotNil(str) ((str)==nil?@"":str)
 #endif
+
+
+
+#pragma mark - Notification
+static NSString * const OCLogoutNofication = @"com.EMMall.logout.success";
+static NSString * const OCLoginSuccessNofication = @"com.EMMall.login.success";
+
 
 #endif /* EMallHeader_h */

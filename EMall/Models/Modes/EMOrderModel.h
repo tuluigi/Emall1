@@ -26,3 +26,12 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 @property(nonatomic,assign)CGFloat totalPrice;
 
 @end
+
+//个人中心的每个状态的订单Model
+@interface EMOrderStateModel : NSObject
+@property (nonatomic,assign)EMOrderState state;
+@property (nonatomic,copy)NSString *stateName;
+@property (nonatomic,copy)NSString *icomName;
+@property (nonatomic,assign)NSInteger badgeNumber;
++ (EMOrderStateModel *)orderStateModelWithState:(NSInteger)state name:(NSString *)name iconName:(NSString *)iconName;
+@end

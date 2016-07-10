@@ -10,4 +10,5 @@
 
 @interface EMMEHeadView : UIView
 - (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level;
++ (EMMEHeadView *)meHeadView;
 @end

@@ -33,10 +33,10 @@
 
 - (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType{
     if (accessoryType==UITableViewCellAccessoryDisclosureIndicator) {
-        if (!self.accessoryView) {
-            UIImageView *checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_Checkmark"]];
-            self.accessoryView = checkmark;
-        }
+//        if (!self.accessoryView) {
+//            UIImageView *checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_Checkmark"]];
+//            self.accessoryView = checkmark;
+//        }
     }else{
         self.accessoryView=nil;
     }

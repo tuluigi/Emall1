@@ -79,6 +79,7 @@
 		2ADF60E61D31DBB600DF757B /* OCUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D71D31DBB600DF757B /* OCUTableViewCell.m */; };
 		2ADF60E71D31DBB600DF757B /* OCUTableViewDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */; };
 		2ADF60E81D31DBB600DF757B /* OCUTableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */; };
+		2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */; };
 		BD36AD30D78027A886266EEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C43B072F24654A451413ABA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -251,6 +252,8 @@
 		2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewDetailTextCell.m; sourceTree = "<group>"; };
 		2ADF60DA1D31DBB600DF757B /* OCUTableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewSwitchCell.h; sourceTree = "<group>"; };
 		2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewSwitchCell.m; sourceTree = "<group>"; };
+		2ADF60EA1D3200AF00DF757B /* EMMeOrderStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMeOrderStateCell.h; sourceTree = "<group>"; };
+		2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMeOrderStateCell.m; sourceTree = "<group>"; };
 		49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -334,6 +337,8 @@
 				2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */,
 				2A0352121D1A4464002BE7B7 /* EMMEHeadView.h */,
 				2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */,
+				2ADF60EA1D3200AF00DF757B /* EMMeOrderStateCell.h */,
+				2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -929,6 +934,7 @@
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
 				2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
+				2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */,
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,

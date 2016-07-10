@@ -1,26 +1,27 @@
 //
-//  EMHomeCatCell.m
+//  EMMeOrderStateCell.m
 //  EMall
 //
-//  Created by Luigi on 16/7/3.
+//  Created by Luigi on 16/7/10.
 //  Copyright © 2016年 Luigi. All rights reserved.
 //
 
-#import "EMHomeCatCell.h"
-#import "EMCatModel.h"
+#import "EMMeOrderStateCell.h"
+#import <JSBadgeView/JSBadgeView.h>
+#import "EMOrderModel.h"
+typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
 
-typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
-
-@interface EMHomeCatItemView : UIView
-@property (nonatomic,strong)EMCatModel *catModel;
-@property (nonatomic,copy)EMHomeCatItemViewSelectBlock selectBlock;
+@interface EMOrderStatetItemView : UIView
+@property (nonatomic,strong)EMOrderStateModel *stateModel;
+@property (nonatomic,copy)EMOrderItemViewSelectBlock selectBlock;
 + (CGSize)homeCatItemViewSize;
 @end
-@interface EMHomeCatItemView ()
+@interface EMOrderStatetItemView ()
 @property (nonatomic,strong) UIImageView *iconImageView;
 @property (nonatomic,strong)  UILabel *nameLabel;
+@property (nonatomic,strong) JSBadgeView *badgeView;
 @end
-@implementation EMHomeCatItemView
+@implementation EMOrderStatetItemView
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
@@ -34,55 +35,69 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     _iconImageView.clipsToBounds=YES;
     
     [self addSubview:_iconImageView];
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(12)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
     _nameLabel.backgroundColor=[UIColor clearColor];
     _nameLabel.numberOfLines=1;
     [self addSubview:_nameLabel];
     
+    _badgeView=[[JSBadgeView alloc]  init];
+    _badgeView.badgeTextColor=[UIColor whiteColor];
+    _badgeView.badgeBackgroundColor=[UIColor yellowColor];
+    _badgeView.badgeTextFont=[UIFont oc_systemFontOfSize:10];
+    [self addSubview:_badgeView];
+    
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(10));
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(40), OCUISCALE(40)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(20), OCUISCALE(20)));
     }];
-    _iconImageView.layer.cornerRadius=OCUISCALE(40/2.0);
-    _iconImageView.layer.masksToBounds=YES;
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(9));
-        make.width.mas_equalTo([EMHomeCatItemView homeCatItemViewSize].width);
+        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
+        make.width.mas_equalTo([EMOrderStatetItemView homeCatItemViewSize].width);
         make.centerX.mas_equalTo(weakSelf.iconImageView);
         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
+    }];
+    [_badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.iconImageView.mas_right).offset(OCUISCALE(-5));
+        make.centerY.mas_equalTo(weakSelf.iconImageView.mas_top);
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(8), OCUISCALE(8)));
     }];
     self.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
     [self addGestureRecognizer:tapGesture];
 }
-- (void)setCatModel:(EMCatModel *)catModel{
-    _catModel=catModel;
-//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
-    _iconImageView.image=[UIImage imageNamed:@"cat_05"];
-    self.nameLabel.text=_catModel.catName;
+- (void)setStateModel:(EMOrderStateModel *)stateModel{
+    _stateModel=stateModel;
+    _iconImageView.image=[UIImage imageNamed:_stateModel.icomName];
+    self.nameLabel.text=_stateModel.stateName;
+    if (_stateModel.badgeNumber) {
+        self.badgeView.hidden=NO;
+        self.badgeView.badgeText=[NSString stringWithFormat:@"%ld",_stateModel.badgeNumber];
+    }else{
+        self.badgeView.hidden=YES;
+        self.badgeView.badgeText=@"";
+    }
 }
+
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture{
     if (self.selectBlock) {
-        self.selectBlock(self.catModel);
+        self.selectBlock(self.stateModel);
     }
 }
 
 + (CGSize)homeCatItemViewSize{
-    return CGSizeMake(OCUISCALE(47+15), OCUISCALE(84));
+    return CGSizeMake(OCUISCALE(50), OCUISCALE(50));
 }
 
 @end
 
-
-@interface EMHomeCatCell ()
+@interface EMMeOrderStateCell ()
 @property (nonatomic,strong)UIScrollView *myScorllView;
-
 @end
 
-@implementation EMHomeCatCell
+@implementation EMMeOrderStateCell
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
@@ -96,18 +111,10 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
 }
-- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
-    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+- (void)setOrderStateArry:(NSArray *)orderStateArry{
+    _orderStateArry=orderStateArry;
+    [self reloadData];
     
-    attributes.size=CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
-    return attributes;
-}
-#pragma mark - getter  settter
-- (void)setCatModelArray:(NSArray *)catModelArray{
-    if (catModelArray.count!=_catModelArray.count) {
-        _catModelArray=catModelArray;
-        [self reloadData];
-    }
 }
 - (void)reloadData{
     NSArray *subViewArray=[self.myScorllView subviews];
@@ -117,13 +124,13 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     CGFloat offx    =OCUISCALE(4.5);
     __block CGFloat contentWidth=0;
     WEAKSELF
-    CGSize itemViewSize =[EMHomeCatItemView homeCatItemViewSize];
-    for (NSInteger i=0; i<self.catModelArray.count; i++) {
-        EMHomeCatItemView *itemView=[[EMHomeCatItemView alloc]  init];
-        itemView.catModel=[self.catModelArray objectAtIndex:i];
-        itemView.selectBlock= ^(EMCatModel *catModel){
-            if (_delegate &&[_delegate respondsToSelector:@selector(homeCatCell:didSelectItem:)]) {
-                [_delegate homeCatCell:weakSelf didSelectItem:catModel];
+    CGSize itemViewSize =[EMOrderStatetItemView homeCatItemViewSize];
+    for (NSInteger i=0; i<self.orderStateArry.count; i++) {
+        EMOrderStatetItemView *itemView=[[EMOrderStatetItemView alloc]  init];
+        itemView.stateModel=[self.orderStateArry objectAtIndex:i];
+        itemView.selectBlock= ^(EMOrderStateModel *stateModel){
+            if (_delegate &&[_delegate respondsToSelector:@selector(orderStateCellDidSelectItem:)]) {
+                [_delegate orderStateCellDidSelectItem:stateModel];
             }
         };
         [self.myScorllView addSubview:itemView];
@@ -134,25 +141,21 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
         }else{
             x+=itemViewSize.width*i;
             contentWidth=x+itemViewSize.width;
-            if (i==self.catModelArray.count) {
+            if (i==self.orderStateArry.count) {
                 contentWidth+=offx;
             }
         }
         itemView.frame=CGRectMake(x, 0, itemViewSize.width, itemViewSize.height);
-        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMHomeCatItemView homeCatItemViewSize].height);
+        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMOrderStatetItemView homeCatItemViewSize].height);
     }
 }
 - (UIScrollView *)myScorllView{
     if (nil==_myScorllView) {
         _myScorllView=[[UIScrollView alloc]  init];
-//        _myScorllView.delegate=self;
+        //        _myScorllView.delegate=self;
         _myScorllView.showsVerticalScrollIndicator=NO;
         _myScorllView.showsHorizontalScrollIndicator=NO;
     }
     return _myScorllView;
 }
-
-
-
-
 @end

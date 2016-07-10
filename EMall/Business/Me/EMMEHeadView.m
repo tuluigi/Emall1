@@ -22,27 +22,38 @@
     return self;
 }
 - (void)onInitContentView{
-    self.backgroundColor=RGB(220, 29, 29);
+    self.backgroundColor=RGB(229, 26, 30);
     _headImageView=[[UIImageView alloc]  init];
     [self addSubview:_headImageView];
     
     _nameLable =[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _nameLable.textColor=[UIColor whiteColor];
     [self addSubview:_nameLable];
     WEAKSELF
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
-        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-12));
-        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(200));
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
+        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(100));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(80), OCUISCALE(80)));
     }];
+    _headImageView.layer.cornerRadius=OCUISCALE(80/2.0);
+    _headImageView.layer.masksToBounds=YES;
     [_nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.headImageView.mas_left).offset(OCUISCALE(10));
-        make.centerX.mas_equalTo(weakSelf.headImageView.mas_centerX);
+        make.left.mas_equalTo(weakSelf.headImageView.mas_right).offset(OCUISCALE(10));
+        make.centerY.mas_equalTo(weakSelf.headImageView.mas_centerY);
     }];
 }
 - (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level{
     [_headImageView sd_setImageWithURL:[NSURL URLWithString:headImageUrl] placeholderImage:EMDefaultImage];
     _nameLable.text=userName;
+}
++ (CGFloat)headViewHeight{
+    return OCUISCALE(100+80+10);
+}
++ (EMMEHeadView *)meHeadView{
+    EMMEHeadView *headView=[[EMMEHeadView alloc]  init];
+//    headView.frame=CGRectMake(0, 0, OCWidth, [EMMEHeadView headViewHeight]);
+    return headView;
 }
 /*
 // Only override drawRect: if you perform custom drawing.
