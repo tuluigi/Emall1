@@ -10,6 +10,30 @@
 
 @implementation EMOrderModel
 
+- (NSString *)orderStateString{
+    NSString *stateString=@"";
+    switch (_orderState) {
+        case EMOrderStateUnPaid:
+            stateString=@"未付款";
+            break;
+        case EMOrderStateCanceled:
+            stateString=@"已取消";
+            break;
+        case EMOrderStateUnDelivered:{
+            stateString=@"已发送";
+        }break;
+        case EMOrderStateUnSigned:{
+            stateString=@"已签收";
+        }break;
+        case EMOrderStateUnComment:{
+            stateString=@"已评论";
+        }break;
+            
+        default:
+            break;
+    }
+    return stateString;
+}
 @end
 
 @implementation EMOrderStateModel

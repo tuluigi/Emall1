@@ -19,7 +19,6 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle   =UITableViewCellSelectionStyleGray;
-        self.separatorInset   = UIEdgeInsetsMake(0, 13, 0, 0);
         [self onInitContentView];
     }
     return self;

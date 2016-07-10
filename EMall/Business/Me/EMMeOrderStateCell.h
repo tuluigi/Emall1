@@ -17,4 +17,5 @@
 @interface EMMeOrderStateCell : OCUTableViewCell
 @property (nonatomic,strong)NSArray *orderStateArry;
 @property (nonatomic,weak)id <EMMeOrderStateCellDelegate>delegate;
++ (CGFloat)orderStateCellHeight;
 @end

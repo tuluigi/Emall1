@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
     EMOrderStateUnDelivered    ,//未发货
     EMOrderStateUnSigned        ,//未签收
     EMOrderStateCanceled        ,//已取消
+    EMOrderStateUnComment       ,//待评论
 };
 
 @interface EMOrderModel : OCBaseModel

@@ -11,6 +11,7 @@
 @interface EMLoginHeadView :UIView
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UILabel *label;
++ (EMLoginHeadView *)loginHeadView;
 @end
 
 @implementation EMLoginHeadView
@@ -42,6 +43,12 @@
         make.bottom.mas_equalTo(weakSelf.mas_bottom).mas_equalTo(OCUISCALE(-12.5));
     }];
 }
++ (EMLoginHeadView *)loginHeadView{
+    EMLoginHeadView *headView=[[EMLoginHeadView alloc]  init];
+    CGSize size=[headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    headView.frame=CGRectMake(0, 0, size.width, size.height);
+    return headView;
+}
 @end
 
 typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
@@ -49,7 +56,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     EMLoginViewControllerTypeRegister   ,
 };
 
-@interface EMLoginViewController ()
+@interface EMLoginViewController ()<UITextFieldDelegate>
 @property (nonatomic,copy)NSString *userName,*userPwd;
 @property (nonatomic,copy)EMLoginCompletionBlock loginCompletionBlock;
 @property  (nonatomic,copy)EMRegisterCompletionBlock registerCompletionBloc;
@@ -61,7 +68,23 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title=@"登录";
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(gotoRegisterController)];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backToPreviousController)];
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+
+    self.tableView.tableHeaderView=[EMLoginHeadView loginHeadView];
     // Do any additional setup after loading the view.
+}
+- (void)gotoRegisterController{
+    
+}
+- (void)backToPreviousController{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 + (EMLoginViewController *)loginViewControllerOnCompletionBlock:(EMLoginCompletionBlock)competionBlock{
     EMLoginViewController *loginController=[[EMLoginViewController alloc]  init];
@@ -91,7 +114,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     UITableViewCell *cell;
     if (indexPath.row==0||indexPath.row==1) {
         NSString *identifer=@"LoginUserNamePwdCell";
-        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifer];
+        cell=[tableView dequeueReusableCellWithIdentifier:identifer];
         if (nil==cell) {
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifer];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -99,9 +122,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
             textField.delegate=self;
             textField.textAlignment=NSTextAlignmentLeft;
             textField.tag=1000;
+            textField.font=[UIFont oc_systemFontOfSize:13];
             [cell.contentView addSubview:textField];
             [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(-25)));
+                make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(25)));
             }];
             textField.layer.cornerRadius=10;
             textField.layer.masksToBounds=YES;
@@ -110,9 +134,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
         }
         UITextField *textField=(UITextField *)[cell viewWithTag:1000];
         if (indexPath.row==0) {
-            textField.placeholder=@"用户名";
+            textField.placeholder=@"  用户名";
         }else if (indexPath.row==1){
-            textField.placeholder=@"密码";
+            textField.placeholder=@"  密码";
+            textField.secureTextEntry=YES;
         }
 
     }else if (indexPath.row==2){
@@ -123,13 +148,15 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             UIFont *font=[UIFont oc_systemFontOfSize:17];
             UILabel *titleLable=[UILabel labelWithText:@"登录" font:font textAlignment:NSTextAlignmentCenter];
-            titleLable.backgroundColor=ColorHexString(@"#ffffff");
+            titleLable.backgroundColor=ColorHexString(@"#e51e0e");
+            titleLable.textColor=[UIColor whiteColor];
+            titleLable.font=[UIFont oc_systemFontOfSize:17];
             titleLable.tag=2000;
             [cell.contentView addSubview:titleLable];
             [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(-25)));
+                make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(25)));
             }];
-            titleLable.layer.cornerRadius=30;
+            titleLable.layer.cornerRadius=15;
             titleLable.layer.masksToBounds=YES;
         }
     }else if (indexPath.row==3){
@@ -139,12 +166,13 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             cell.textLabel.textAlignment=NSTextAlignmentCenter;
-            cell.textLabel.text=@"忘记密码";
+            cell.textLabel.text=@"忘记密码?";
             cell.textLabel.font=[UIFont oc_systemFontOfSize:13];
             cell.textLabel.textColor=ColorHexString(@"#5d5d5d");
         }
 
     }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

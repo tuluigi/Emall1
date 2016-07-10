@@ -25,7 +25,10 @@
     self.tableCellStyle=UITableViewCellStyleDefault;
 }
 - (NSString *)reusedCellIdentifer{
-    return @"OCTableCellModelIdentifier";
+    if (nil==_reusedCellIdentifer) {
+        _reusedCellIdentifer=@"OCTableCellModelIdentifier";
+    }
+    return _reusedCellIdentifer;
 }
 - (id)cellWithReuseIdentifer:(NSString *)identifer{
     if (nil==self.cellClassName||[self.cellClassName isEqualToString:@""]) {

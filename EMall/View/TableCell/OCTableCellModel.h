@@ -21,6 +21,7 @@
 @property(nonatomic, assign) UITableViewCellStyle tableCellStyle;
 @property(nonatomic, copy)  NSString *cellClassName;
 
+@property(nonatomic,copy)NSString *reusedCellIdentifer;
 
 - (instancetype)initWithTitle:(NSString *)title  imageName:(NSString *)imageName accessoryType:(UITableViewCellAccessoryType)accessType type:(NSInteger)type;
 /**

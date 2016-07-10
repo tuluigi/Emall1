@@ -9,7 +9,9 @@
 #import "EMMeViewController.h"
 #import "OCUTableCellHeader.h"
 #import "EMMEHeadView.h"
-
+#import "EMMeOrderStateCell.h"
+#import "EMOrderModel.h"
+#import "EMLoginViewController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -19,8 +21,9 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     
 };
 
-@interface EMMeViewController ()
+@interface EMMeViewController ()<EMMeOrderStateCellDelegate>
 @property (nonatomic,strong)EMMEHeadView *headView;
+@property (nonatomic,strong)NSMutableArray *orderStateArray;
 @end
 
 @implementation EMMeViewController
@@ -59,7 +62,13 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     NSArray *groupArray0,*groupArray1,*groupArray2,*groupArray3;
     OCTableCellDetialTextModel *userInfoModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"全部订单" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrder];
     userInfoModel.tableCellStyle=UITableViewCellStyleSubtitle;
-    groupArray0=@[userInfoModel];
+   
+    
+    OCTableCellModel *orderModel=[[OCTableCellModel alloc]  initWithTitle:@"" imageName:@"" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrderState];
+    orderModel.tableCellStyle=UITableViewCellStyleSubtitle;
+    orderModel.reusedCellIdentifer=@"OCTableCellOrderResuableCellIdentifer";
+    orderModel.cellClassName=NSStringFromClass([EMMeOrderStateCell class]);
+    groupArray0=@[userInfoModel,orderModel];
     
     OCTableCellDetialTextModel *addressModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"地址管理" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeShoppingAddress];
     addressModel.tableCellStyle=UITableViewCellStyleSubtitle;
@@ -82,6 +91,19 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
      self.tableView.tableHeaderView=self.headView;
     UIEdgeInsets edgeInset=self.tableView.contentInset;
     self.tableView.contentInset=UIEdgeInsetsMake(edgeInset.top-20, edgeInset.left, edgeInset.bottom, edgeInset.right);
+    
+    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"icon_me_collect"];
+    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"icon_me_collect"];
+    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"icon_me_collect"];
+    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"icon_me_collect"];
+    
+    self.orderStateArray=[NSMutableArray arrayWithObjects:stateModel0,stateModel1,stateModel2,stateModel3, nil];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
     [self.tableView reloadData];
     
 
@@ -106,12 +128,22 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:[cellModel reusedCellIdentifer]];
     if (nil==cell) {
         cell= [cellModel cellWithReuseIdentifer:[cellModel reusedCellIdentifer]];
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
     }
     [(OCUTableViewCell *)cell setCellModel:cellModel];
     switch (cellModel.type) {
         case EMUserTableCellModelTypeOrderState:
         {
+            cell.separatorInset=UIEdgeInsetsZero;
             cell.accessoryType=UITableViewCellAccessoryNone;
+            [(EMMeOrderStateCell *)cell setDelegate:self];
+            [(EMMeOrderStateCell *)cell setOrderStateArry:self.orderStateArray];
         }
             break;
             case EMUserTableCellModelTypeOrder:
@@ -121,11 +153,20 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
             break;
+        
         default:
             break;
     }
     
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  OCTableCellModel *cellModel=[[self.dataSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    CGFloat height= OCUISCALE(44);
+    if (cellModel.type==EMUserTableCellModelTypeOrderState) {
+        height=[EMMeOrderStateCell orderStateCellHeight];
+    }
+    return height;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return OCUISCALE(20);
@@ -133,8 +174,20 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
 }
-#pragma  mark - getter
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    EMLoginViewController *loginController=[EMLoginViewController loginViewControllerOnCompletionBlock:^(EMUserModel *userModel) {
+        
+    }];
+    UINavigationController *navController=[[UINavigationController alloc]  initWithRootViewController:loginController];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+#pragma mark - EMMeOrderCellDelegate
+- (void)orderStateCellDidSelectItem:(EMOrderStateModel *)stateModel{
+    
+}
 
+#pragma  mark - getter
 - (EMMEHeadView *)headView{
     if (nil==_headView) {
         _headView=[EMMEHeadView meHeadView];

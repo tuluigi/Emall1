@@ -9,12 +9,10 @@
 #import "EMMeOrderStateCell.h"
 #import <JSBadgeView/JSBadgeView.h>
 #import "EMOrderModel.h"
-typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
 
-@interface EMOrderStatetItemView : UIView
+@interface EMOrderStatetItemView : UICollectionViewCell
 @property (nonatomic,strong)EMOrderStateModel *stateModel;
-@property (nonatomic,copy)EMOrderItemViewSelectBlock selectBlock;
-+ (CGSize)homeCatItemViewSize;
++ (CGSize)orderStateItemViewSize;
 @end
 @interface EMOrderStatetItemView ()
 @property (nonatomic,strong) UIImageView *iconImageView;
@@ -31,8 +29,6 @@ typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
 }
 - (void)onInitContentView{
     _iconImageView=[[UIImageView alloc] init];
-    _iconImageView.contentMode=UIViewContentModeScaleAspectFill;
-    _iconImageView.clipsToBounds=YES;
     
     [self addSubview:_iconImageView];
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
@@ -55,7 +51,7 @@ typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
-        make.width.mas_equalTo([EMOrderStatetItemView homeCatItemViewSize].width);
+        make.width.mas_equalTo([EMOrderStatetItemView orderStateItemViewSize].width);
         make.centerX.mas_equalTo(weakSelf.iconImageView);
         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
     }];
@@ -64,9 +60,6 @@ typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
         make.centerY.mas_equalTo(weakSelf.iconImageView.mas_top);
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(8), OCUISCALE(8)));
     }];
-    self.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
-    [self addGestureRecognizer:tapGesture];
 }
 - (void)setStateModel:(EMOrderStateModel *)stateModel{
     _stateModel=stateModel;
@@ -80,82 +73,85 @@ typedef void(^EMOrderItemViewSelectBlock)(EMOrderStateModel *stateModel);
         self.badgeView.badgeText=@"";
     }
 }
-
-- (void)handleTapGesture:(UITapGestureRecognizer *)gesture{
-    if (self.selectBlock) {
-        self.selectBlock(self.stateModel);
-    }
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    attributes.size=[EMOrderStatetItemView orderStateItemViewSize];
+    return attributes;
 }
 
-+ (CGSize)homeCatItemViewSize{
-    return CGSizeMake(OCUISCALE(50), OCUISCALE(50));
+
++ (CGSize)orderStateItemViewSize{
+    return CGSizeMake(OCUISCALE(60), OCUISCALE(60));
 }
 
 @end
 
-@interface EMMeOrderStateCell ()
-@property (nonatomic,strong)UIScrollView *myScorllView;
+#define EMMeOrderStateCellIdentifer @"EMMeOrderStateCellIdentifer"
+
+@interface EMMeOrderStateCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@property (nonatomic,strong)UICollectionView *myCollectionView;
 @end
 
 @implementation EMMeOrderStateCell
-- (instancetype)initWithFrame:(CGRect)frame{
-    self=[super initWithFrame:frame];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self onInitContentView];
     }
     return self;
 }
+
 - (void)onInitContentView{
-    [self.contentView addSubview:self.myScorllView];
-    [self.myScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
+    [self.contentView addSubview:self.myCollectionView];
 }
 - (void)setOrderStateArry:(NSArray *)orderStateArry{
     _orderStateArry=orderStateArry;
-    [self reloadData];
+    [self.myCollectionView reloadData];
     
 }
-- (void)reloadData{
-    NSArray *subViewArray=[self.myScorllView subviews];
-    for (UIView *aView in subViewArray) {
-        [aView removeFromSuperview];
-    }
-    CGFloat offx    =OCUISCALE(4.5);
-    __block CGFloat contentWidth=0;
-    WEAKSELF
-    CGSize itemViewSize =[EMOrderStatetItemView homeCatItemViewSize];
-    for (NSInteger i=0; i<self.orderStateArry.count; i++) {
-        EMOrderStatetItemView *itemView=[[EMOrderStatetItemView alloc]  init];
-        itemView.stateModel=[self.orderStateArry objectAtIndex:i];
-        itemView.selectBlock= ^(EMOrderStateModel *stateModel){
-            if (_delegate &&[_delegate respondsToSelector:@selector(orderStateCellDidSelectItem:)]) {
-                [_delegate orderStateCellDidSelectItem:stateModel];
-            }
-        };
-        [self.myScorllView addSubview:itemView];
-        CGFloat x=offx;
-        if (i==0) {
-            x=offx;
-            contentWidth=offx;
-        }else{
-            x+=itemViewSize.width*i;
-            contentWidth=x+itemViewSize.width;
-            if (i==self.orderStateArry.count) {
-                contentWidth+=offx;
-            }
-        }
-        itemView.frame=CGRectMake(x, 0, itemViewSize.width, itemViewSize.height);
-        self.myScorllView.contentSize=CGSizeMake(contentWidth, [EMOrderStatetItemView homeCatItemViewSize].height);
+#pragma mark- collectionView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.orderStateArry.count;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    EMOrderStatetItemView *cell=[collectionView dequeueReusableCellWithReuseIdentifier:EMMeOrderStateCellIdentifer forIndexPath:indexPath];
+    cell.stateModel=[self.orderStateArry objectAtIndex:indexPath.row];
+    return cell;
+}
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGSize size = [EMOrderStatetItemView orderStateItemViewSize];
+    return size;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    EMOrderStateModel *stateModel=[self.orderStateArry objectAtIndex:indexPath.row];
+    if (_delegate&&[_delegate respondsToSelector:@selector(orderStateCellDidSelectItem:)]) {
+        [_delegate orderStateCellDidSelectItem:stateModel];
     }
 }
-- (UIScrollView *)myScorllView{
-    if (nil==_myScorllView) {
-        _myScorllView=[[UIScrollView alloc]  init];
-        //        _myScorllView.delegate=self;
-        _myScorllView.showsVerticalScrollIndicator=NO;
-        _myScorllView.showsHorizontalScrollIndicator=NO;
++ (CGFloat)orderStateCellHeight{
+    return [EMOrderStatetItemView orderStateItemViewSize].height;
+}
+- (UICollectionView *)myCollectionView{
+    if (nil==_myCollectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing=0;
+        flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
+        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, OCWidth, [EMMeOrderStateCell orderStateCellHeight]) collectionViewLayout:flowLayout];
+        mainView.backgroundColor = [UIColor clearColor];
+        mainView.pagingEnabled = NO;
+        mainView.showsHorizontalScrollIndicator = NO;
+        mainView.showsVerticalScrollIndicator = NO;
+        mainView.dataSource = self;
+        mainView.delegate = self;
+        mainView.collectionViewLayout=flowLayout;
+        _myCollectionView=mainView;
+        [_myCollectionView registerClass:[EMOrderStatetItemView class] forCellWithReuseIdentifier:EMMeOrderStateCellIdentifer];
     }
-    return _myScorllView;
+    return _myCollectionView;
 }
 @end
