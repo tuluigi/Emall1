@@ -11,7 +11,7 @@
 @interface OCBaseTableViewController : OCBaseViewController
 <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 /**
  *  分页的页码，default = @""
  */
@@ -27,5 +27,4 @@
 
 
 - (instancetype)initWithStyle:(UITableViewStyle)style;
-
 @end

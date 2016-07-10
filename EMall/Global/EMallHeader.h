@@ -32,8 +32,10 @@
 #import "UIColor+ILHexStringColor.h"
 
 #import "UIViewController+OpenCourse.h"
+#import "UIViewController+Login.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
-
+#import "UIView+OCPageLoad.h"
+#import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 #pragma mark --Maroc
 #define WEAKSELF typeof(self) __weak weakSelf = self;
 #define OCWidth ([UIScreen mainScreen].bounds.size.width)

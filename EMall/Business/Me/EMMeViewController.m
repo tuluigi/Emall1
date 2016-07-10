@@ -12,6 +12,8 @@
 #import "EMMeOrderStateCell.h"
 #import "EMOrderModel.h"
 #import "EMLoginViewController.h"
+#import "EMServiceController.h"
+#import "EMShoppingAddressListController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -176,11 +178,22 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    EMLoginViewController *loginController=[EMLoginViewController loginViewControllerOnCompletionBlock:^(EMUserModel *userModel) {
-        
-    }];
-    UINavigationController *navController=[[UINavigationController alloc]  initWithRootViewController:loginController];
-    [self presentViewController:navController animated:YES completion:nil];
+     OCTableCellModel *cellModel=[[self.dataSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (cellModel.type==EMUserTableCellModelTypeServices) {
+        EMServiceController *serviceController=[[EMServiceController alloc]  initWithStyle:UITableViewStyleGrouped];
+        serviceController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:serviceController animated:YES];
+    }else if (cellModel.type==EMUserTableCellModelTypeShoppingAddress){
+        EMShoppingAddressListController *shoppingAddressListController=[[EMShoppingAddressListController alloc]  init];
+        shoppingAddressListController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:shoppingAddressListController animated:YES];
+    } else if (cellModel.type==EMUserTableCellModelTypeLogout){
+        [self loginOnController:self onCompletionBlock:^(BOOL isSucceed) {
+            
+        }];
+    }
+
+
 }
 #pragma mark - EMMeOrderCellDelegate
 - (void)orderStateCellDidSelectItem:(EMOrderStateModel *)stateModel{

@@ -22,12 +22,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cursor = @"";
-    _tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
+}
+- (UITableView *)tableView{
+    if (nil==_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

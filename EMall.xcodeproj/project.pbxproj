@@ -80,6 +80,12 @@
 		2ADF60E71D31DBB600DF757B /* OCUTableViewDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */; };
 		2ADF60E81D31DBB600DF757B /* OCUTableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */; };
 		2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */; };
+		2ADF60EF1D32755800DF757B /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60EE1D32755800DF757B /* UIViewController+Login.m */; };
+		2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60F31D3286CD00DF757B /* UITextField+IndexPath.m */; };
+		2ADF60F81D328B8B00DF757B /* EMShoppingAddressListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60F71D328B8B00DF757B /* EMShoppingAddressListController.m */; };
+		2ADF60FB1D328BA100DF757B /* EMShoppingAddressAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60FA1D328BA100DF757B /* EMShoppingAddressAddController.m */; };
+		2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60FE1D328BFA00DF757B /* EMServiceController.m */; };
+		2ADF61021D3292C700DF757B /* EMShopAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */; };
 		BD36AD30D78027A886266EEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C43B072F24654A451413ABA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -254,6 +260,18 @@
 		2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewSwitchCell.m; sourceTree = "<group>"; };
 		2ADF60EA1D3200AF00DF757B /* EMMeOrderStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMeOrderStateCell.h; sourceTree = "<group>"; };
 		2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMeOrderStateCell.m; sourceTree = "<group>"; };
+		2ADF60ED1D32755800DF757B /* UIViewController+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Login.h"; sourceTree = "<group>"; };
+		2ADF60EE1D32755800DF757B /* UIViewController+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Login.m"; sourceTree = "<group>"; };
+		2ADF60F21D3286CD00DF757B /* UITextField+IndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+IndexPath.h"; sourceTree = "<group>"; };
+		2ADF60F31D3286CD00DF757B /* UITextField+IndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+IndexPath.m"; sourceTree = "<group>"; };
+		2ADF60F61D328B8B00DF757B /* EMShoppingAddressListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShoppingAddressListController.h; sourceTree = "<group>"; };
+		2ADF60F71D328B8B00DF757B /* EMShoppingAddressListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShoppingAddressListController.m; sourceTree = "<group>"; };
+		2ADF60F91D328BA100DF757B /* EMShoppingAddressAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShoppingAddressAddController.h; sourceTree = "<group>"; };
+		2ADF60FA1D328BA100DF757B /* EMShoppingAddressAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShoppingAddressAddController.m; sourceTree = "<group>"; };
+		2ADF60FD1D328BFA00DF757B /* EMServiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMServiceController.h; sourceTree = "<group>"; };
+		2ADF60FE1D328BFA00DF757B /* EMServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMServiceController.m; sourceTree = "<group>"; };
+		2ADF61001D3292C700DF757B /* EMShopAddressListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShopAddressListCell.h; sourceTree = "<group>"; };
+		2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopAddressListCell.m; sourceTree = "<group>"; };
 		49D39B160C376A176EB9BCEF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B83B0852199F6A36CE9F3AC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,6 +350,8 @@
 		2A0351F41D1A3DA6002BE7B7 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF60FC1D328BEA00DF757B /* Service */,
+				2ADF60F51D328B6600DF757B /* ShoppingAddress */,
 				2A6ABB741D2FBA8E00DE47B0 /* Login */,
 				2A0352091D1A3FBA002BE7B7 /* EMMeViewController.h */,
 				2A03520A1D1A3FBA002BE7B7 /* EMMeViewController.m */,
@@ -527,6 +547,7 @@
 		2ADF600B1D27C59C00DF757B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2ADF60F11D3286BD00DF757B /* UITextField */,
 				2ADF600C1D27C59C00DF757B /* Navigation */,
 				2ADF600F1D27C59C00DF757B /* NSDate */,
 				2ADF60121D27C59C00DF757B /* NSString */,
@@ -621,6 +642,8 @@
 				2ADF602D1D27C59C00DF757B /* UIViewController+OCImagePickerAuthorization.m */,
 				2ADF602E1D27C59C00DF757B /* UIViewController+OCTopBarMessage.h */,
 				2ADF602F1D27C59C00DF757B /* UIViewController+OCTopBarMessage.m */,
+				2ADF60ED1D32755800DF757B /* UIViewController+Login.h */,
+				2ADF60EE1D32755800DF757B /* UIViewController+Login.m */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -730,6 +753,37 @@
 				2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */,
 			);
 			path = TableCell;
+			sourceTree = "<group>";
+		};
+		2ADF60F11D3286BD00DF757B /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60F21D3286CD00DF757B /* UITextField+IndexPath.h */,
+				2ADF60F31D3286CD00DF757B /* UITextField+IndexPath.m */,
+			);
+			path = UITextField;
+			sourceTree = "<group>";
+		};
+		2ADF60F51D328B6600DF757B /* ShoppingAddress */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60F61D328B8B00DF757B /* EMShoppingAddressListController.h */,
+				2ADF60F71D328B8B00DF757B /* EMShoppingAddressListController.m */,
+				2ADF60F91D328BA100DF757B /* EMShoppingAddressAddController.h */,
+				2ADF60FA1D328BA100DF757B /* EMShoppingAddressAddController.m */,
+				2ADF61001D3292C700DF757B /* EMShopAddressListCell.h */,
+				2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */,
+			);
+			path = ShoppingAddress;
+			sourceTree = "<group>";
+		};
+		2ADF60FC1D328BEA00DF757B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2ADF60FD1D328BFA00DF757B /* EMServiceController.h */,
+				2ADF60FE1D328BFA00DF757B /* EMServiceController.m */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		B54517F7DCA11DA62DBFC265 /* Frameworks */ = {
@@ -931,6 +985,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ADF604A1D27C59C00DF757B /* UIImage+OCColorImage.m in Sources */,
+				2ADF60F81D328B8B00DF757B /* EMShoppingAddressListController.m in Sources */,
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
 				2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
@@ -973,22 +1028,27 @@
 				2ADF60E81D31DBB600DF757B /* OCUTableViewSwitchCell.m in Sources */,
 				2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */,
 				2ADF605D1D27C72400DF757B /* OCTopWarningView.m in Sources */,
+				2ADF60EF1D32755800DF757B /* UIViewController+Login.m in Sources */,
 				2ADF60E11D31DBB600DF757B /* OCTableCellDetialTextModel.m in Sources */,
 				2ADF60551D27C59C00DF757B /* OCNRefreshHeadView.m in Sources */,
 				2ADF60771D28AAC200DF757B /* EMCatModel.m in Sources */,
+				2ADF60FB1D328BA100DF757B /* EMShoppingAddressAddController.m in Sources */,
 				2ADF60DE1D31DBB600DF757B /* OCNTableCellUserInfoModel.m in Sources */,
 				2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */,
 				2ADF60E61D31DBB600DF757B /* OCUTableViewCell.m in Sources */,
 				2ADF60E31D31DBB600DF757B /* OCTableCellSwitchModel.m in Sources */,
 				2ADF60831D28B2CB00DF757B /* EMShopAddressModel.m in Sources */,
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
+				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
+				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,
 				2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */,
 				2ADF604D1D27C59C00DF757B /* UIViewController+DATracker.m in Sources */,
+				2ADF61021D3292C700DF757B /* EMShopAddressListCell.m in Sources */,
 				2ADF60491D27C59C00DF757B /* UIColor+ILHexStringColor.m in Sources */,
 				2ADF60E41D31DBB600DF757B /* OCUTableViewBadgeCell.m in Sources */,
 				2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */,
