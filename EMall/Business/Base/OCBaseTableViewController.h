@@ -7,11 +7,11 @@
 //
 
 #import "OCBaseViewController.h"
-
+#import <TPKeyboardAvoidingTableView.h>
 @interface OCBaseTableViewController : OCBaseViewController
 <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 /**
  *  分页的页码，default = @""
  */

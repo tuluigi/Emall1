@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSBadgeView-JSBadgeView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSBadgeView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -59,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TPKeyboardAvoiding.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,17 +97,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3BD89FB3F36E3BD77D150ECEC84F6656</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>426BC4549A625B5E1E4200D5261A98BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60F90DE3352A204891513DA4B8A6A727</key>
+		<key>58EB6D16065A8D9A7216D8A42DDB94CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6CFABB37534106E1F79264B2EA202466</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80D92D89236D8973F108DE929351A544</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E5A92A64E6D2996D7086E3F3FF0848E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,17 +132,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A046F131BE276E7746BC1BDC10F811B5</key>
+		<key>ABFD81E451C75193DD69457B6486BC1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B9EFE8E5D4C2941D07B52CC0A7975424</key>
+		<key>AD21D55884047B71A8C4932A18710CC1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE9A9297969F2AF9DAF8722DDD164AD6</key>
+		<key>BCCC0F4081C473B2448DD2FB829E748C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E63EA3FC3E0A88A11341641DBAC04F9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -23,6 +23,7 @@ PODS:
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
   - FXBlurView (1.6.4)
+  - JSBadgeView (1.4.1)
   - Mantle (2.0.7):
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
@@ -34,12 +35,14 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - SVProgressHUD (1.1.3)
+  - TPKeyboardAvoiding (1.3)
   - UITableView+FDTemplateLayoutCell (1.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - CocoaLumberjack (~> 2.3.0)
   - FXBlurView (~> 1.6.4)
+  - JSBadgeView (~> 1.4.1)
   - Mantle (~> 2.0.2)
   - Masonry (~> 0.5.3)
   - MBProgressHUD (~> 0.9)
@@ -47,12 +50,14 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.1)
   - SVProgressHUD (~> 1.1.3)
+  - TPKeyboardAvoiding (~> 1.3)
   - UITableView+FDTemplateLayoutCell (~> 1.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
   Masonry: 9f515466afe48632562342a40a1c224071a1a022
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -60,6 +65,7 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
 COCOAPODS: 0.39.0

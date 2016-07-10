@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cursor = @"";
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
+    _tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [UIView new];

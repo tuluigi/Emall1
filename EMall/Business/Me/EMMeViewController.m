@@ -7,7 +7,7 @@
 //
 
 #import "EMMeViewController.h"
-
+#import "OCUTableCellHeader.h"
 @interface EMMeViewController ()
 
 @end
@@ -22,6 +22,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger count=0;
+    if (section==0) {
+        count=1;
+    }
+    return count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell;
+    
+    return cell;
 }
 
 /*

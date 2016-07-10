@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EMMEHeadView : UIView
-- (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl;
+- (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level;
 @end

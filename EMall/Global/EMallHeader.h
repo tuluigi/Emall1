@@ -45,4 +45,8 @@
 #define EMDefaultImageName  @"emdefault"
 #define EMDefaultImage  [UIImage imageNamed:EMDefaultImageName]
 
+#ifndef stringNotNil
+#define stringNotNil(str) ((str)==nil?@"":str)
+#endif
+
 #endif /* EMallHeader_h */
