@@ -24,7 +24,10 @@
     [self getShoppingAddrsssModelWithUserID:nil];
 }
 - (void)addShoppingAddress{
-    EMShoppingAddressAddController *addShopingAddressController=[EMShoppingAddressAddController shoppingAddrssControllerWithAddressModel:nil];
+    [self goToAddShopAddressControllerWithAddressModel:nil];
+}
+- (void)goToAddShopAddressControllerWithAddressModel:(EMShopAddressModel *)addressModel{
+    EMShoppingAddressAddController *addShopingAddressController=[EMShoppingAddressAddController shoppingAddrssControllerWithAddressModel:addressModel];
     addShopingAddressController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:addShopingAddressController animated:YES];
 }
@@ -33,6 +36,7 @@
         EMShopAddressModel *addressModel=[[EMShopAddressModel alloc]  init];
         addressModel.userName=@"小名";
         addressModel.userTel=@"13523576349";
+        addressModel.wechatID=@"weixin_xxxID";
         addressModel.userAddress=@"北京市，海淀区，中关村";
         [self.dataSourceArray addObject:addressModel];
     }
@@ -62,6 +66,12 @@
         [(EMShopAddressListCell *)cell setAddresssModel:addressModel];
     }];
     return height;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    EMShopAddressModel *shopAddressModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    [self goToAddShopAddressControllerWithAddressModel:shopAddressModel];
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;

@@ -11,7 +11,7 @@
 
 @interface EMShopAddressListCell ()
 @property (nonatomic,strong)UIView *bgView;
-@property (nonatomic,strong)UILabel *nameLabel,*telLabel,*addressLable;
+@property (nonatomic,strong)UILabel *nameLabel,*telLabel,*addressLable,*wechatLabel;
 @property (nonatomic,strong)UIButton *editButton,*defaultButton;
 
 @end
@@ -36,6 +36,9 @@
     
     _telLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textAlignment:NSTextAlignmentLeft];
     [_bgView addSubview:_telLabel];
+    
+    _wechatLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textAlignment:NSTextAlignmentLeft];
+    [_bgView addSubview:_wechatLabel];
     
     _addressLable=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textAlignment:NSTextAlignmentLeft];
     _addressLable.numberOfLines=2;
@@ -73,10 +76,15 @@
         make.top.mas_equalTo(weakSelf.nameLabel);
         make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-12));
     }];
-    [_addressLable mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_wechatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.nameLabel.mas_left);
         make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-10));
         make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(OCUISCALE(5));
+    }];
+    [_addressLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.nameLabel.mas_left);
+        make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-10));
+        make.top.mas_equalTo(weakSelf.wechatLabel.mas_bottom).offset(OCUISCALE(5));
 //        make.bottom.mas_equalTo(lineView.mas_top).offset(OCUISCALE(-10));
     }];
     
@@ -93,9 +101,11 @@
     
 }
 - (void)setAddresssModel:(EMShopAddressModel *)addresssModel{
+    _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
     self.telLabel.text=addresssModel.userTel;
     self.addressLable.text=addresssModel.userAddress;
     self.defaultButton.hidden=!addresssModel.isDefault;
+    self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",addresssModel.wechatID];
 }
 @end
