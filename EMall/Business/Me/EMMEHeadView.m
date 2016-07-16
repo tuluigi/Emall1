@@ -8,6 +8,9 @@
 
 #import "EMMEHeadView.h"
 
+static CGFloat const EMMeHeaderViewIconWidth    =  73;
+static CGFloat const EMMeHeaderViewIconTop      =  61;
+static CGFloat const EMMeHeaderViewIconBottom   =  10;
 @interface EMMEHeadView ()
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UILabel *nameLable;
@@ -32,9 +35,9 @@
     WEAKSELF
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
-        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
-        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(100));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(80), OCUISCALE(80)));
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-EMMeHeaderViewIconBottom));
+        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(EMMeHeaderViewIconTop));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(EMMeHeaderViewIconWidth), OCUISCALE(EMMeHeaderViewIconWidth)));
     }];
     _headImageView.layer.cornerRadius=OCUISCALE(80/2.0);
     _headImageView.layer.masksToBounds=YES;
@@ -48,7 +51,7 @@
     _nameLable.text=userName;
 }
 + (CGFloat)headViewHeight{
-    return OCUISCALE(100+80+10);
+    return OCUISCALE(OCUISCALE(EMMeHeaderViewIconTop+EMMeHeaderViewIconWidth+EMMeHeaderViewIconBottom));
 }
 + (EMMEHeadView *)meHeadView{
     EMMEHeadView *headView=[[EMMEHeadView alloc]  init];

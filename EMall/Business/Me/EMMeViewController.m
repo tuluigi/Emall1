@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         }
     }];
     NSArray *groupArray0,*groupArray1,*groupArray2,*groupArray3;
-    OCTableCellDetialTextModel *userInfoModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"全部订单" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrder];
+    OCTableCellDetialTextModel *userInfoModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"全部订单" imageName:@"me_order" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrder];
     userInfoModel.tableCellStyle=UITableViewCellStyleSubtitle;
    
     
@@ -72,15 +72,15 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     orderModel.cellClassName=NSStringFromClass([EMMeOrderStateCell class]);
     groupArray0=@[userInfoModel,orderModel];
     
-    OCTableCellDetialTextModel *addressModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"地址管理" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeShoppingAddress];
+    OCTableCellDetialTextModel *addressModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"地址管理" imageName:@"me_address" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeShoppingAddress];
     addressModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray1=@[addressModel];
     
-    OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
+    OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
     serviceModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray2=@[serviceModel];
 
-    OCTableCellDetialTextModel *quitModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"退出登录" imageName:@"icon_me_collect" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeLogout];
+    OCTableCellDetialTextModel *quitModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"退出登录" imageName:@"me_logout" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeLogout];
     quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray3=@[quitModel];
     
@@ -94,10 +94,10 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     UIEdgeInsets edgeInset=self.tableView.contentInset;
     self.tableView.contentInset=UIEdgeInsetsMake(edgeInset.top-20, edgeInset.left, edgeInset.bottom, edgeInset.right);
     
-    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"icon_me_collect"];
-    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"icon_me_collect"];
-    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"icon_me_collect"];
-    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"icon_me_collect"];
+    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"order_unpaied"];
+    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"order_delivered"];
+    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"order_sign"];
+    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"order_comment"];
     
     self.orderStateArray=[NSMutableArray arrayWithObjects:stateModel0,stateModel1,stateModel2,stateModel3, nil];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -192,9 +192,8 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
             
         }];
     }
-
-
 }
+
 #pragma mark - EMMeOrderCellDelegate
 - (void)orderStateCellDidSelectItem:(EMOrderStateModel *)stateModel{
     

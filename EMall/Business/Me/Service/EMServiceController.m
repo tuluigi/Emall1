@@ -21,15 +21,15 @@
     return self;
 }
 - (void)onInitContentView{
-//    self.backgroundColor=RGB(229, 26, 30);
+    self.backgroundColor=[UIColor whiteColor];
     _headImageView=[[UIImageView alloc]  init];
     _headImageView.backgroundColor=[UIColor redColor];
     [self addSubview:_headImageView];
     WEAKSELF
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-65));
         make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(20));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(60), OCUISCALE(60)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(80), OCUISCALE(80)));
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
     }];
 }
@@ -71,11 +71,11 @@
         cell.detailTextLabel.font=[UIFont oc_systemFontOfSize:13];
         cell.textLabel.text=@"全国客服电话";
         cell.detailTextLabel.text=@"4005-864-455";
-        cell.imageView.image=[UIImage imageNamed:@"icon_me_collect"];
+        cell.imageView.image=[UIImage imageNamed:@"service_tel"];
     }else if (indexPath.row==1){
         cell.textLabel.text=@"扫描二维码，关注海吃微信公众号";
         cell.detailTextLabel.text=@"";
-        cell.imageView.image=[UIImage imageNamed:@"icon_me_collect"];
+        cell.imageView.image=[UIImage imageNamed:@"service_wechat"];
     }
     return cell;
 }
@@ -83,5 +83,8 @@
     if (indexPath.row==0) {
         
     }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
 }
 @end
