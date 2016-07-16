@@ -37,7 +37,7 @@
         addressModel.userName=@"小名";
         addressModel.userTel=@"13523576349";
         addressModel.wechatID=@"weixin_xxxID";
-        addressModel.userAddress=@"北京市，海淀区，中关村";
+        addressModel.userAddress=@"北京市，海淀区，中关村，巴拉巴拉巴拉巴安拔萝卜";
         [self.dataSourceArray addObject:addressModel];
     }
     [self.tableView reloadData];

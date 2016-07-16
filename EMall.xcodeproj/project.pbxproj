@@ -31,6 +31,8 @@
 		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
+		2A99EB111D3A4FA70024E924 /* OCTableCellTextFiledModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */; };
+		2A99EB141D3A54F50024E924 /* OCUTableViewTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -157,6 +159,10 @@
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
+		2A99EB0F1D3A4FA70024E924 /* OCTableCellTextFiledModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellTextFiledModel.h; sourceTree = "<group>"; };
+		2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellTextFiledModel.m; sourceTree = "<group>"; };
+		2A99EB121D3A54F50024E924 /* OCUTableViewTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewTextFieldCell.h; sourceTree = "<group>"; };
+		2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewTextFieldCell.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -751,6 +757,10 @@
 				2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */,
 				2ADF60DA1D31DBB600DF757B /* OCUTableViewSwitchCell.h */,
 				2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */,
+				2A99EB0F1D3A4FA70024E924 /* OCTableCellTextFiledModel.h */,
+				2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */,
+				2A99EB121D3A54F50024E924 /* OCUTableViewTextFieldCell.h */,
+				2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -1014,10 +1024,12 @@
 				2ADF60E21D31DBB600DF757B /* OCTableCellModel.m in Sources */,
 				2ADF60E51D31DBB600DF757B /* OCUTableViewButtonCell.m in Sources */,
 				2ADF60521D27C59C00DF757B /* OCPageLoadView.m in Sources */,
+				2A99EB141D3A54F50024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
+				2A99EB111D3A4FA70024E924 /* OCTableCellTextFiledModel.m in Sources */,
 				2ADF609B1D31D60B00DF757B /* EMUserModel.m in Sources */,
 				2ADF60431D27C59C00DF757B /* NSDate+Category.m in Sources */,
 				2ADF60471D27C59C00DF757B /* NSString+VideoDuration.m in Sources */,

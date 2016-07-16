@@ -13,13 +13,15 @@
 #import "OCTableCellDetialTextModel.h"
 #import "OCTableCellBadgeModel.h"
 #import "OCTableCellButtonModel.h"
-
+#import "OCTableCellTextFiledModel.h"
 
 #import "OCUTableViewCell.h"
 #import "OCUTableViewBadgeCell.h"
 #import "OCUTableViewDetailTextCell.h"
 #import "OCUTableViewSwitchCell.h"
 #import "OCUTableViewButtonCell.h"
+#import "OCUTableViewTextFieldCell.h"
+
 
 #import "OCUTableCellDelegate.h"
 
