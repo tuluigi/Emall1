@@ -13,6 +13,7 @@
 @end
 
 @implementation OCBaseTableViewController
+@synthesize tableView  =_tableView;
 -(id)initWithStyle:(UITableViewStyle)style{
     if (self=[super init]) {
         _tableViewStyle = style;

@@ -31,8 +31,21 @@
 		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
-		2A99EB111D3A4FA70024E924 /* OCTableCellTextFiledModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */; };
-		2A99EB141D3A54F50024E924 /* OCUTableViewTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */; };
+		2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */; };
+		2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1F1D3A6C860024E924 /* OCUTableViewButtonCell.m */; };
+		2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB211D3A6C860024E924 /* OCUTableViewCell.m */; };
+		2A99EB401D3A6C860024E924 /* OCUTableViewDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB231D3A6C860024E924 /* OCUTableViewDetailTextCell.m */; };
+		2A99EB411D3A6C860024E924 /* OCUTableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB251D3A6C860024E924 /* OCUTableViewSwitchCell.m */; };
+		2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB271D3A6C860024E924 /* OCUTableViewTextFieldCell.m */; };
+		2A99EB431D3A6C860024E924 /* OCUTableViewTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB291D3A6C860024E924 /* OCUTableViewTextViewCell.m */; };
+		2A99EB451D3A6C860024E924 /* OCTableCellBadgeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB2E1D3A6C860024E924 /* OCTableCellBadgeModel.m */; };
+		2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB301D3A6C860024E924 /* OCTableCellButtonModel.m */; };
+		2A99EB471D3A6C860024E924 /* OCTableCellDetialTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB321D3A6C860024E924 /* OCTableCellDetialTextModel.m */; };
+		2A99EB481D3A6C860024E924 /* OCTableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB341D3A6C860024E924 /* OCTableCellModel.m */; };
+		2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB361D3A6C860024E924 /* OCTableCellSwitchModel.m */; };
+		2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB381D3A6C860024E924 /* OCTableCellTextFiledModel.m */; };
+		2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB3A1D3A6C860024E924 /* OCTableCellTextViewModel.m */; };
+		2A99EB4E1D3A7FFD0024E924 /* EMShopProvienceCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -70,17 +83,6 @@
 		2ADF60931D292F2F00DF757B /* EMHomeGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60921D292F2F00DF757B /* EMHomeGoodsCell.m */; };
 		2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60971D292FDA00DF757B /* EMGoodsItemView.m */; };
 		2ADF609B1D31D60B00DF757B /* EMUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF609A1D31D60B00DF757B /* EMUserModel.m */; };
-		2ADF60DE1D31DBB600DF757B /* OCNTableCellUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60C51D31DBB600DF757B /* OCNTableCellUserInfoModel.m */; };
-		2ADF60DF1D31DBB600DF757B /* OCTableCellBadgeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60C71D31DBB600DF757B /* OCTableCellBadgeModel.m */; };
-		2ADF60E01D31DBB600DF757B /* OCTableCellButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60C91D31DBB600DF757B /* OCTableCellButtonModel.m */; };
-		2ADF60E11D31DBB600DF757B /* OCTableCellDetialTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60CB1D31DBB600DF757B /* OCTableCellDetialTextModel.m */; };
-		2ADF60E21D31DBB600DF757B /* OCTableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60CD1D31DBB600DF757B /* OCTableCellModel.m */; };
-		2ADF60E31D31DBB600DF757B /* OCTableCellSwitchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60CF1D31DBB600DF757B /* OCTableCellSwitchModel.m */; };
-		2ADF60E41D31DBB600DF757B /* OCUTableViewBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D31D31DBB600DF757B /* OCUTableViewBadgeCell.m */; };
-		2ADF60E51D31DBB600DF757B /* OCUTableViewButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D51D31DBB600DF757B /* OCUTableViewButtonCell.m */; };
-		2ADF60E61D31DBB600DF757B /* OCUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D71D31DBB600DF757B /* OCUTableViewCell.m */; };
-		2ADF60E71D31DBB600DF757B /* OCUTableViewDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */; };
-		2ADF60E81D31DBB600DF757B /* OCUTableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */; };
 		2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */; };
 		2ADF60EF1D32755800DF757B /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60EE1D32755800DF757B /* UIViewController+Login.m */; };
 		2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60F31D3286CD00DF757B /* UITextField+IndexPath.m */; };
@@ -159,10 +161,38 @@
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
-		2A99EB0F1D3A4FA70024E924 /* OCTableCellTextFiledModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellTextFiledModel.h; sourceTree = "<group>"; };
-		2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellTextFiledModel.m; sourceTree = "<group>"; };
-		2A99EB121D3A54F50024E924 /* OCUTableViewTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewTextFieldCell.h; sourceTree = "<group>"; };
-		2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewTextFieldCell.m; sourceTree = "<group>"; };
+		2A99EB1C1D3A6C860024E924 /* OCUTableViewBadgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewBadgeCell.h; sourceTree = "<group>"; };
+		2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewBadgeCell.m; sourceTree = "<group>"; };
+		2A99EB1E1D3A6C860024E924 /* OCUTableViewButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewButtonCell.h; sourceTree = "<group>"; };
+		2A99EB1F1D3A6C860024E924 /* OCUTableViewButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewButtonCell.m; sourceTree = "<group>"; };
+		2A99EB201D3A6C860024E924 /* OCUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewCell.h; sourceTree = "<group>"; };
+		2A99EB211D3A6C860024E924 /* OCUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewCell.m; sourceTree = "<group>"; };
+		2A99EB221D3A6C860024E924 /* OCUTableViewDetailTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewDetailTextCell.h; sourceTree = "<group>"; };
+		2A99EB231D3A6C860024E924 /* OCUTableViewDetailTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewDetailTextCell.m; sourceTree = "<group>"; };
+		2A99EB241D3A6C860024E924 /* OCUTableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewSwitchCell.h; sourceTree = "<group>"; };
+		2A99EB251D3A6C860024E924 /* OCUTableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewSwitchCell.m; sourceTree = "<group>"; };
+		2A99EB261D3A6C860024E924 /* OCUTableViewTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewTextFieldCell.h; sourceTree = "<group>"; };
+		2A99EB271D3A6C860024E924 /* OCUTableViewTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewTextFieldCell.m; sourceTree = "<group>"; };
+		2A99EB281D3A6C860024E924 /* OCUTableViewTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewTextViewCell.h; sourceTree = "<group>"; };
+		2A99EB291D3A6C860024E924 /* OCUTableViewTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewTextViewCell.m; sourceTree = "<group>"; };
+		2A99EB2D1D3A6C860024E924 /* OCTableCellBadgeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellBadgeModel.h; sourceTree = "<group>"; };
+		2A99EB2E1D3A6C860024E924 /* OCTableCellBadgeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellBadgeModel.m; sourceTree = "<group>"; };
+		2A99EB2F1D3A6C860024E924 /* OCTableCellButtonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellButtonModel.h; sourceTree = "<group>"; };
+		2A99EB301D3A6C860024E924 /* OCTableCellButtonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellButtonModel.m; sourceTree = "<group>"; };
+		2A99EB311D3A6C860024E924 /* OCTableCellDetialTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellDetialTextModel.h; sourceTree = "<group>"; };
+		2A99EB321D3A6C860024E924 /* OCTableCellDetialTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellDetialTextModel.m; sourceTree = "<group>"; };
+		2A99EB331D3A6C860024E924 /* OCTableCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellModel.h; sourceTree = "<group>"; };
+		2A99EB341D3A6C860024E924 /* OCTableCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellModel.m; sourceTree = "<group>"; };
+		2A99EB351D3A6C860024E924 /* OCTableCellSwitchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellSwitchModel.h; sourceTree = "<group>"; };
+		2A99EB361D3A6C860024E924 /* OCTableCellSwitchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellSwitchModel.m; sourceTree = "<group>"; };
+		2A99EB371D3A6C860024E924 /* OCTableCellTextFiledModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellTextFiledModel.h; sourceTree = "<group>"; };
+		2A99EB381D3A6C860024E924 /* OCTableCellTextFiledModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellTextFiledModel.m; sourceTree = "<group>"; };
+		2A99EB391D3A6C860024E924 /* OCTableCellTextViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellTextViewModel.h; sourceTree = "<group>"; };
+		2A99EB3A1D3A6C860024E924 /* OCTableCellTextViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellTextViewModel.m; sourceTree = "<group>"; };
+		2A99EB3B1D3A6C860024E924 /* OCUTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableCellDelegate.h; sourceTree = "<group>"; };
+		2A99EB3C1D3A6C860024E924 /* OCUTableCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableCellHeader.h; sourceTree = "<group>"; };
+		2A99EB4C1D3A7FFD0024E924 /* EMShopProvienceCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShopProvienceCityController.h; sourceTree = "<group>"; };
+		2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopProvienceCityController.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -240,30 +270,6 @@
 		2ADF60971D292FDA00DF757B /* EMGoodsItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsItemView.m; sourceTree = "<group>"; };
 		2ADF60991D31D60B00DF757B /* EMUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMUserModel.h; sourceTree = "<group>"; };
 		2ADF609A1D31D60B00DF757B /* EMUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMUserModel.m; sourceTree = "<group>"; };
-		2ADF60C41D31DBB600DF757B /* OCNTableCellUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCNTableCellUserInfoModel.h; sourceTree = "<group>"; };
-		2ADF60C51D31DBB600DF757B /* OCNTableCellUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCNTableCellUserInfoModel.m; sourceTree = "<group>"; };
-		2ADF60C61D31DBB600DF757B /* OCTableCellBadgeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellBadgeModel.h; sourceTree = "<group>"; };
-		2ADF60C71D31DBB600DF757B /* OCTableCellBadgeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellBadgeModel.m; sourceTree = "<group>"; };
-		2ADF60C81D31DBB600DF757B /* OCTableCellButtonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellButtonModel.h; sourceTree = "<group>"; };
-		2ADF60C91D31DBB600DF757B /* OCTableCellButtonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellButtonModel.m; sourceTree = "<group>"; };
-		2ADF60CA1D31DBB600DF757B /* OCTableCellDetialTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellDetialTextModel.h; sourceTree = "<group>"; };
-		2ADF60CB1D31DBB600DF757B /* OCTableCellDetialTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellDetialTextModel.m; sourceTree = "<group>"; };
-		2ADF60CC1D31DBB600DF757B /* OCTableCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellModel.h; sourceTree = "<group>"; };
-		2ADF60CD1D31DBB600DF757B /* OCTableCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellModel.m; sourceTree = "<group>"; };
-		2ADF60CE1D31DBB600DF757B /* OCTableCellSwitchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellSwitchModel.h; sourceTree = "<group>"; };
-		2ADF60CF1D31DBB600DF757B /* OCTableCellSwitchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellSwitchModel.m; sourceTree = "<group>"; };
-		2ADF60D01D31DBB600DF757B /* OCUTableCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableCellDelegate.h; sourceTree = "<group>"; };
-		2ADF60D11D31DBB600DF757B /* OCUTableCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableCellHeader.h; sourceTree = "<group>"; };
-		2ADF60D21D31DBB600DF757B /* OCUTableViewBadgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewBadgeCell.h; sourceTree = "<group>"; };
-		2ADF60D31D31DBB600DF757B /* OCUTableViewBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewBadgeCell.m; sourceTree = "<group>"; };
-		2ADF60D41D31DBB600DF757B /* OCUTableViewButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewButtonCell.h; sourceTree = "<group>"; };
-		2ADF60D51D31DBB600DF757B /* OCUTableViewButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewButtonCell.m; sourceTree = "<group>"; };
-		2ADF60D61D31DBB600DF757B /* OCUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewCell.h; sourceTree = "<group>"; };
-		2ADF60D71D31DBB600DF757B /* OCUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewCell.m; sourceTree = "<group>"; };
-		2ADF60D81D31DBB600DF757B /* OCUTableViewDetailTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewDetailTextCell.h; sourceTree = "<group>"; };
-		2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewDetailTextCell.m; sourceTree = "<group>"; };
-		2ADF60DA1D31DBB600DF757B /* OCUTableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewSwitchCell.h; sourceTree = "<group>"; };
-		2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewSwitchCell.m; sourceTree = "<group>"; };
 		2ADF60EA1D3200AF00DF757B /* EMMeOrderStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMeOrderStateCell.h; sourceTree = "<group>"; };
 		2ADF60EB1D3200AF00DF757B /* EMMeOrderStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMeOrderStateCell.m; sourceTree = "<group>"; };
 		2ADF60ED1D32755800DF757B /* UIViewController+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Login.h"; sourceTree = "<group>"; };
@@ -528,6 +534,48 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		2A99EB1B1D3A6C860024E924 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2A99EB1C1D3A6C860024E924 /* OCUTableViewBadgeCell.h */,
+				2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */,
+				2A99EB1E1D3A6C860024E924 /* OCUTableViewButtonCell.h */,
+				2A99EB1F1D3A6C860024E924 /* OCUTableViewButtonCell.m */,
+				2A99EB201D3A6C860024E924 /* OCUTableViewCell.h */,
+				2A99EB211D3A6C860024E924 /* OCUTableViewCell.m */,
+				2A99EB221D3A6C860024E924 /* OCUTableViewDetailTextCell.h */,
+				2A99EB231D3A6C860024E924 /* OCUTableViewDetailTextCell.m */,
+				2A99EB241D3A6C860024E924 /* OCUTableViewSwitchCell.h */,
+				2A99EB251D3A6C860024E924 /* OCUTableViewSwitchCell.m */,
+				2A99EB261D3A6C860024E924 /* OCUTableViewTextFieldCell.h */,
+				2A99EB271D3A6C860024E924 /* OCUTableViewTextFieldCell.m */,
+				2A99EB281D3A6C860024E924 /* OCUTableViewTextViewCell.h */,
+				2A99EB291D3A6C860024E924 /* OCUTableViewTextViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2A99EB2A1D3A6C860024E924 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2A99EB331D3A6C860024E924 /* OCTableCellModel.h */,
+				2A99EB341D3A6C860024E924 /* OCTableCellModel.m */,
+				2A99EB2D1D3A6C860024E924 /* OCTableCellBadgeModel.h */,
+				2A99EB2E1D3A6C860024E924 /* OCTableCellBadgeModel.m */,
+				2A99EB2F1D3A6C860024E924 /* OCTableCellButtonModel.h */,
+				2A99EB301D3A6C860024E924 /* OCTableCellButtonModel.m */,
+				2A99EB311D3A6C860024E924 /* OCTableCellDetialTextModel.h */,
+				2A99EB321D3A6C860024E924 /* OCTableCellDetialTextModel.m */,
+				2A99EB351D3A6C860024E924 /* OCTableCellSwitchModel.h */,
+				2A99EB361D3A6C860024E924 /* OCTableCellSwitchModel.m */,
+				2A99EB371D3A6C860024E924 /* OCTableCellTextFiledModel.h */,
+				2A99EB381D3A6C860024E924 /* OCTableCellTextFiledModel.m */,
+				2A99EB391D3A6C860024E924 /* OCTableCellTextViewModel.h */,
+				2A99EB3A1D3A6C860024E924 /* OCTableCellTextViewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,34 +781,10 @@
 		2ADF60C31D31DBB600DF757B /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
-				2ADF60C41D31DBB600DF757B /* OCNTableCellUserInfoModel.h */,
-				2ADF60C51D31DBB600DF757B /* OCNTableCellUserInfoModel.m */,
-				2ADF60C61D31DBB600DF757B /* OCTableCellBadgeModel.h */,
-				2ADF60C71D31DBB600DF757B /* OCTableCellBadgeModel.m */,
-				2ADF60C81D31DBB600DF757B /* OCTableCellButtonModel.h */,
-				2ADF60C91D31DBB600DF757B /* OCTableCellButtonModel.m */,
-				2ADF60CA1D31DBB600DF757B /* OCTableCellDetialTextModel.h */,
-				2ADF60CB1D31DBB600DF757B /* OCTableCellDetialTextModel.m */,
-				2ADF60CC1D31DBB600DF757B /* OCTableCellModel.h */,
-				2ADF60CD1D31DBB600DF757B /* OCTableCellModel.m */,
-				2ADF60CE1D31DBB600DF757B /* OCTableCellSwitchModel.h */,
-				2ADF60CF1D31DBB600DF757B /* OCTableCellSwitchModel.m */,
-				2ADF60D01D31DBB600DF757B /* OCUTableCellDelegate.h */,
-				2ADF60D11D31DBB600DF757B /* OCUTableCellHeader.h */,
-				2ADF60D21D31DBB600DF757B /* OCUTableViewBadgeCell.h */,
-				2ADF60D31D31DBB600DF757B /* OCUTableViewBadgeCell.m */,
-				2ADF60D41D31DBB600DF757B /* OCUTableViewButtonCell.h */,
-				2ADF60D51D31DBB600DF757B /* OCUTableViewButtonCell.m */,
-				2ADF60D61D31DBB600DF757B /* OCUTableViewCell.h */,
-				2ADF60D71D31DBB600DF757B /* OCUTableViewCell.m */,
-				2ADF60D81D31DBB600DF757B /* OCUTableViewDetailTextCell.h */,
-				2ADF60D91D31DBB600DF757B /* OCUTableViewDetailTextCell.m */,
-				2ADF60DA1D31DBB600DF757B /* OCUTableViewSwitchCell.h */,
-				2ADF60DB1D31DBB600DF757B /* OCUTableViewSwitchCell.m */,
-				2A99EB0F1D3A4FA70024E924 /* OCTableCellTextFiledModel.h */,
-				2A99EB101D3A4FA70024E924 /* OCTableCellTextFiledModel.m */,
-				2A99EB121D3A54F50024E924 /* OCUTableViewTextFieldCell.h */,
-				2A99EB131D3A54F50024E924 /* OCUTableViewTextFieldCell.m */,
+				2A99EB1B1D3A6C860024E924 /* Cell */,
+				2A99EB2A1D3A6C860024E924 /* Model */,
+				2A99EB3B1D3A6C860024E924 /* OCUTableCellDelegate.h */,
+				2A99EB3C1D3A6C860024E924 /* OCUTableCellHeader.h */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -783,6 +807,8 @@
 				2ADF60FA1D328BA100DF757B /* EMShoppingAddressAddController.m */,
 				2ADF61001D3292C700DF757B /* EMShopAddressListCell.h */,
 				2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */,
+				2A99EB4C1D3A7FFD0024E924 /* EMShopProvienceCityController.h */,
+				2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */,
 			);
 			path = ShoppingAddress;
 			sourceTree = "<group>";
@@ -1004,57 +1030,58 @@
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
+				2A99EB401D3A6C860024E924 /* OCUTableViewDetailTextCell.m in Sources */,
 				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
-				2ADF60E71D31DBB600DF757B /* OCUTableViewDetailTextCell.m in Sources */,
 				2ADF604C1D27C59C00DF757B /* UILabel+Category.m in Sources */,
 				2ADF604F1D27C59C00DF757B /* UIViewController+OCTopBarMessage.m in Sources */,
 				2ADF60441D27C59C00DF757B /* NSString+Addition.m in Sources */,
-				2ADF60DF1D31DBB600DF757B /* OCTableCellBadgeModel.m in Sources */,
 				2A2426F81D12C4670078240C /* AppDelegate.m in Sources */,
 				2ADF60541D27C59C00DF757B /* OCNRefresheFootView.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
+				2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */,
 				2ADF608D1D28BE3B00DF757B /* EMCatItemView.m in Sources */,
 				2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */,
 				2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */,
 				2ADF60561D27C59C00DF757B /* UIScrollView+OCRefresh.m in Sources */,
-				2ADF60E01D31DBB600DF757B /* OCTableCellButtonModel.m in Sources */,
+				2A99EB451D3A6C860024E924 /* OCTableCellBadgeModel.m in Sources */,
 				2ADF60891D28BE0A00DF757B /* EMHomeCatCell.m in Sources */,
+				2A99EB4E1D3A7FFD0024E924 /* EMShopProvienceCityController.m in Sources */,
 				2ADF60931D292F2F00DF757B /* EMHomeGoodsCell.m in Sources */,
-				2ADF60E21D31DBB600DF757B /* OCTableCellModel.m in Sources */,
-				2ADF60E51D31DBB600DF757B /* OCUTableViewButtonCell.m in Sources */,
 				2ADF60521D27C59C00DF757B /* OCPageLoadView.m in Sources */,
-				2A99EB141D3A54F50024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
+				2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
+				2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
-				2A99EB111D3A4FA70024E924 /* OCTableCellTextFiledModel.m in Sources */,
 				2ADF609B1D31D60B00DF757B /* EMUserModel.m in Sources */,
 				2ADF60431D27C59C00DF757B /* NSDate+Category.m in Sources */,
 				2ADF60471D27C59C00DF757B /* NSString+VideoDuration.m in Sources */,
 				2ADF604E1D27C59C00DF757B /* UIViewController+OCImagePickerAuthorization.m in Sources */,
 				2A0352081D1A3FAE002BE7B7 /* EMHomeViewController.m in Sources */,
 				2ADF60531D27C59C00DF757B /* UIView+OCPageLoad.m in Sources */,
+				2A99EB431D3A6C860024E924 /* OCUTableViewTextViewCell.m in Sources */,
 				2A03520B1D1A3FBA002BE7B7 /* EMMeViewController.m in Sources */,
-				2ADF60E81D31DBB600DF757B /* OCUTableViewSwitchCell.m in Sources */,
 				2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */,
 				2ADF605D1D27C72400DF757B /* OCTopWarningView.m in Sources */,
 				2ADF60EF1D32755800DF757B /* UIViewController+Login.m in Sources */,
-				2ADF60E11D31DBB600DF757B /* OCTableCellDetialTextModel.m in Sources */,
 				2ADF60551D27C59C00DF757B /* OCNRefreshHeadView.m in Sources */,
 				2ADF60771D28AAC200DF757B /* EMCatModel.m in Sources */,
 				2ADF60FB1D328BA100DF757B /* EMShoppingAddressAddController.m in Sources */,
-				2ADF60DE1D31DBB600DF757B /* OCNTableCellUserInfoModel.m in Sources */,
 				2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */,
-				2ADF60E61D31DBB600DF757B /* OCUTableViewCell.m in Sources */,
-				2ADF60E31D31DBB600DF757B /* OCTableCellSwitchModel.m in Sources */,
 				2ADF60831D28B2CB00DF757B /* EMShopAddressModel.m in Sources */,
+				2A99EB471D3A6C860024E924 /* OCTableCellDetialTextModel.m in Sources */,
+				2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */,
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
+				2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
+				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
+				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
+				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
 				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,
@@ -1062,7 +1089,6 @@
 				2ADF604D1D27C59C00DF757B /* UIViewController+DATracker.m in Sources */,
 				2ADF61021D3292C700DF757B /* EMShopAddressListCell.m in Sources */,
 				2ADF60491D27C59C00DF757B /* UIColor+ILHexStringColor.m in Sources */,
-				2ADF60E41D31DBB600DF757B /* OCUTableViewBadgeCell.m in Sources */,
 				2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */,
 				2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */,
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,
@@ -1070,6 +1096,8 @@
 				2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */,
 				2ADF60511D27C59C00DF757B /* OCPageLoadAnimationView.m in Sources */,
 				2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */,
+				2A99EB481D3A6C860024E924 /* OCTableCellModel.m in Sources */,
+				2A99EB411D3A6C860024E924 /* OCUTableViewSwitchCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

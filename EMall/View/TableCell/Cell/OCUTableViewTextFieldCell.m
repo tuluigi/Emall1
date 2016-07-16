@@ -32,11 +32,13 @@
     [super setCellModel:cellModel];
     OCTableCellTextFiledModel *textFileModel = (OCTableCellTextFiledModel *)cellModel;
     self.textField.placeholder=textFileModel.placeHoleder;
+    self.textField.text=textFileModel.inputText;
 }
 - (UITextField *)textField{
     if (nil==_textField) {
         _textField=[[UITextField alloc] init];
         _textField.font=[UIFont oc_systemFontOfSize:13];
+        _textField.textAlignment=NSTextAlignmentRight;
         _textField.delegate=self;
     }
     return _textField;

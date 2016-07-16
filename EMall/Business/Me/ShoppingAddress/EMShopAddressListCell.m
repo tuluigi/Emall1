@@ -110,7 +110,7 @@
     _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
     self.telLabel.text=addresssModel.userTel;
-    self.addressLable.text=addresssModel.userAddress;
+    self.addressLable.text=addresssModel.detailAddresss;
     self.defaultButton.hidden=!addresssModel.isDefault;
     self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",addresssModel.wechatID];
 }

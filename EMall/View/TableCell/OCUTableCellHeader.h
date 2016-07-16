@@ -14,6 +14,9 @@
 #import "OCTableCellBadgeModel.h"
 #import "OCTableCellButtonModel.h"
 #import "OCTableCellTextFiledModel.h"
+#import "OCTableCellTextViewModel.h"
+
+
 
 #import "OCUTableViewCell.h"
 #import "OCUTableViewBadgeCell.h"
@@ -21,7 +24,7 @@
 #import "OCUTableViewSwitchCell.h"
 #import "OCUTableViewButtonCell.h"
 #import "OCUTableViewTextFieldCell.h"
-
+#import "OCUTableViewTextViewCell.h"
 
 #import "OCUTableCellDelegate.h"
 

@@ -21,7 +21,7 @@
 
 - (id)cellWithReuseIdentifer:(NSString *)identifer{
     if (nil==self.cellClassName||[self.cellClassName isEqualToString:@""]) {
-        self.cellClassName= @"UITableViewTextFieldCell";
+        self.cellClassName= @"OCUTableViewTextFieldCell";
     }
     return [[NSClassFromString(self.cellClassName) alloc] initWithStyle:self.tableCellStyle reuseIdentifier:identifer];
 }

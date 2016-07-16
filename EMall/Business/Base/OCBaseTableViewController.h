@@ -11,7 +11,7 @@
 @interface OCBaseTableViewController : OCBaseViewController
 <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong,getter=tableView) UITableView *tableView;
 /**
  *  分页的页码，default = @""
  */
@@ -25,6 +25,7 @@
  */
 @property (nonatomic, assign) UITableViewStyle tableViewStyle;
 
-
+- (UITableView *)tableView;
 - (instancetype)initWithStyle:(UITableViewStyle)style;
+
 @end
