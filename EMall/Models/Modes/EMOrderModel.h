@@ -9,6 +9,7 @@
 #import "OCBaseModel.h"
 
 typedef NS_ENUM(NSInteger,EMOrderState) {
+    EMOrderStateNone            ,
     EMOrderStateUnPaid          ,//未付款
     EMOrderStateUnDelivered    ,//未发货
     EMOrderStateUnSigned        ,//未签收
@@ -35,4 +36,6 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 @property (nonatomic,copy)NSString *icomName;
 @property (nonatomic,assign)NSInteger badgeNumber;
 + (EMOrderStateModel *)orderStateModelWithState:(NSInteger)state name:(NSString *)name iconName:(NSString *)iconName;
+
++ (NSArray *)orderStateModelArray;
 @end

@@ -46,5 +46,14 @@
     stateModel.badgeNumber=0;
     return stateModel;
 }
++ (NSArray *)orderStateModelArray{
+    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"order_unpaied"];
+    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"order_delivered"];
+    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"order_sign"];
+    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"order_comment"];
+    
+   NSArray *orderStateArry=[NSArray arrayWithObjects:stateModel0,stateModel1,stateModel2,stateModel3, nil];
+    return orderStateArry;
 
+}
 @end

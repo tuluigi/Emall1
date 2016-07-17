@@ -14,6 +14,7 @@
 #import "EMLoginViewController.h"
 #import "EMServiceController.h"
 #import "EMShoppingAddressListController.h"
+#import "EMOrderHomeListController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -94,12 +95,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     UIEdgeInsets edgeInset=self.tableView.contentInset;
     self.tableView.contentInset=UIEdgeInsetsMake(edgeInset.top-20, edgeInset.left, edgeInset.bottom, edgeInset.right);
     
-    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"order_unpaied"];
-    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"order_delivered"];
-    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"order_sign"];
-    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"order_comment"];
-    
-    self.orderStateArray=[NSMutableArray arrayWithObjects:stateModel0,stateModel1,stateModel2,stateModel3, nil];
+    self.orderStateArray=[NSMutableArray arrayWithArray:[EMOrderStateModel orderStateModelArray]];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -191,6 +187,10 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         [self loginOnController:self onCompletionBlock:^(BOOL isSucceed) {
             
         }];
+    }else if (cellModel.type==EMUserTableCellModelTypeOrder){
+        EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:EMOrderStateNone];
+        orderHomeListController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:orderHomeListController animated:YES];
     }
 }
 

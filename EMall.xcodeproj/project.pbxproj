@@ -46,6 +46,16 @@
 		2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB381D3A6C860024E924 /* OCTableCellTextFiledModel.m */; };
 		2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB3A1D3A6C860024E924 /* OCTableCellTextViewModel.m */; };
 		2A99EB4E1D3A7FFD0024E924 /* EMShopProvienceCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */; };
+		2A99EB601D3B1D8E0024E924 /* UIView+ZJFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB521D3B1D8E0024E924 /* UIView+ZJFrame.m */; };
+		2A99EB611D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB541D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.m */; };
+		2A99EB621D3B1D8E0024E924 /* ZJContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB561D3B1D8E0024E924 /* ZJContentView.m */; };
+		2A99EB631D3B1D8E0024E924 /* ZJCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB581D3B1D8E0024E924 /* ZJCustomLabel.m */; };
+		2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB5A1D3B1D8E0024E924 /* ZJScrollPageView.m */; };
+		2A99EB651D3B1D8E0024E924 /* ZJScrollSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB5D1D3B1D8E0024E924 /* ZJScrollSegmentView.m */; };
+		2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB5F1D3B1D8E0024E924 /* ZJSegmentStyle.m */; };
+		2A99EB6A1D3B2AA90024E924 /* EMOrderHomeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB691D3B2AA90024E924 /* EMOrderHomeListController.m */; };
+		2A99EB6D1D3B2ABB0024E924 /* EMOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */; };
+		2A99EB701D3B3C200024E924 /* EMOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -193,6 +203,27 @@
 		2A99EB3C1D3A6C860024E924 /* OCUTableCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableCellHeader.h; sourceTree = "<group>"; };
 		2A99EB4C1D3A7FFD0024E924 /* EMShopProvienceCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShopProvienceCityController.h; sourceTree = "<group>"; };
 		2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopProvienceCityController.m; sourceTree = "<group>"; };
+		2A99EB511D3B1D8E0024E924 /* UIView+ZJFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZJFrame.h"; sourceTree = "<group>"; };
+		2A99EB521D3B1D8E0024E924 /* UIView+ZJFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZJFrame.m"; sourceTree = "<group>"; };
+		2A99EB531D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZJScrollPageController.h"; sourceTree = "<group>"; };
+		2A99EB541D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZJScrollPageController.m"; sourceTree = "<group>"; };
+		2A99EB551D3B1D8E0024E924 /* ZJContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJContentView.h; sourceTree = "<group>"; };
+		2A99EB561D3B1D8E0024E924 /* ZJContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJContentView.m; sourceTree = "<group>"; };
+		2A99EB571D3B1D8E0024E924 /* ZJCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJCustomLabel.h; sourceTree = "<group>"; };
+		2A99EB581D3B1D8E0024E924 /* ZJCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJCustomLabel.m; sourceTree = "<group>"; };
+		2A99EB591D3B1D8E0024E924 /* ZJScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageView.h; sourceTree = "<group>"; };
+		2A99EB5A1D3B1D8E0024E924 /* ZJScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollPageView.m; sourceTree = "<group>"; };
+		2A99EB5B1D3B1D8E0024E924 /* ZJScrollPageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageViewDelegate.h; sourceTree = "<group>"; };
+		2A99EB5C1D3B1D8E0024E924 /* ZJScrollSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollSegmentView.h; sourceTree = "<group>"; };
+		2A99EB5D1D3B1D8E0024E924 /* ZJScrollSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollSegmentView.m; sourceTree = "<group>"; };
+		2A99EB5E1D3B1D8E0024E924 /* ZJSegmentStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSegmentStyle.h; sourceTree = "<group>"; };
+		2A99EB5F1D3B1D8E0024E924 /* ZJSegmentStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSegmentStyle.m; sourceTree = "<group>"; };
+		2A99EB681D3B2AA90024E924 /* EMOrderHomeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderHomeListController.h; sourceTree = "<group>"; };
+		2A99EB691D3B2AA90024E924 /* EMOrderHomeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderHomeListController.m; sourceTree = "<group>"; };
+		2A99EB6B1D3B2ABB0024E924 /* EMOrderListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderListController.h; sourceTree = "<group>"; };
+		2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderListController.m; sourceTree = "<group>"; };
+		2A99EB6E1D3B3C200024E924 /* EMOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderListCell.h; sourceTree = "<group>"; };
+		2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderListCell.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -362,6 +393,7 @@
 		2A0351F41D1A3DA6002BE7B7 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				2A99EB671D3B2A820024E924 /* Order */,
 				2ADF60FC1D328BEA00DF757B /* Service */,
 				2ADF60F51D328B6600DF757B /* ShoppingAddress */,
 				2A6ABB741D2FBA8E00DE47B0 /* Login */,
@@ -576,9 +608,53 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2A99EB4F1D3B1D850024E924 /* ThirdLib */ = {
+			isa = PBXGroup;
+			children = (
+				2A99EB501D3B1D8E0024E924 /* ZJScrollPageView */,
+			);
+			path = ThirdLib;
+			sourceTree = "<group>";
+		};
+		2A99EB501D3B1D8E0024E924 /* ZJScrollPageView */ = {
+			isa = PBXGroup;
+			children = (
+				2A99EB511D3B1D8E0024E924 /* UIView+ZJFrame.h */,
+				2A99EB521D3B1D8E0024E924 /* UIView+ZJFrame.m */,
+				2A99EB531D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.h */,
+				2A99EB541D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.m */,
+				2A99EB551D3B1D8E0024E924 /* ZJContentView.h */,
+				2A99EB561D3B1D8E0024E924 /* ZJContentView.m */,
+				2A99EB571D3B1D8E0024E924 /* ZJCustomLabel.h */,
+				2A99EB581D3B1D8E0024E924 /* ZJCustomLabel.m */,
+				2A99EB591D3B1D8E0024E924 /* ZJScrollPageView.h */,
+				2A99EB5A1D3B1D8E0024E924 /* ZJScrollPageView.m */,
+				2A99EB5B1D3B1D8E0024E924 /* ZJScrollPageViewDelegate.h */,
+				2A99EB5C1D3B1D8E0024E924 /* ZJScrollSegmentView.h */,
+				2A99EB5D1D3B1D8E0024E924 /* ZJScrollSegmentView.m */,
+				2A99EB5E1D3B1D8E0024E924 /* ZJSegmentStyle.h */,
+				2A99EB5F1D3B1D8E0024E924 /* ZJSegmentStyle.m */,
+			);
+			path = ZJScrollPageView;
+			sourceTree = "<group>";
+		};
+		2A99EB671D3B2A820024E924 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				2A99EB681D3B2AA90024E924 /* EMOrderHomeListController.h */,
+				2A99EB691D3B2AA90024E924 /* EMOrderHomeListController.m */,
+				2A99EB6B1D3B2ABB0024E924 /* EMOrderListController.h */,
+				2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */,
+				2A99EB6E1D3B3C200024E924 /* EMOrderListCell.h */,
+				2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				2A99EB4F1D3B1D850024E924 /* ThirdLib */,
 				2ADF600B1D27C59C00DF757B /* Category */,
 				2ADF60321D27C59C00DF757B /* LoadingView */,
 				2ADF603A1D27C59C00DF757B /* RefreshView */,
@@ -1024,18 +1100,24 @@
 				2ADF60F81D328B8B00DF757B /* EMShoppingAddressListController.m in Sources */,
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
 				2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				2A99EB6D1D3B2ABB0024E924 /* EMOrderListController.m in Sources */,
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
 				2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */,
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
+				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
+				2A99EB651D3B1D8E0024E924 /* ZJScrollSegmentView.m in Sources */,
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
 				2A99EB401D3A6C860024E924 /* OCUTableViewDetailTextCell.m in Sources */,
+				2A99EB701D3B3C200024E924 /* EMOrderListCell.m in Sources */,
 				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
 				2ADF604C1D27C59C00DF757B /* UILabel+Category.m in Sources */,
 				2ADF604F1D27C59C00DF757B /* UIViewController+OCTopBarMessage.m in Sources */,
 				2ADF60441D27C59C00DF757B /* NSString+Addition.m in Sources */,
+				2A99EB6A1D3B2AA90024E924 /* EMOrderHomeListController.m in Sources */,
 				2A2426F81D12C4670078240C /* AppDelegate.m in Sources */,
+				2A99EB611D3B1D8E0024E924 /* UIViewController+ZJScrollPageController.m in Sources */,
 				2ADF60541D27C59C00DF757B /* OCNRefresheFootView.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
@@ -1081,12 +1163,16 @@
 				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
+				2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */,
 				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
 				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,
 				2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */,
+				2A99EB601D3B1D8E0024E924 /* UIView+ZJFrame.m in Sources */,
 				2ADF604D1D27C59C00DF757B /* UIViewController+DATracker.m in Sources */,
+				2A99EB631D3B1D8E0024E924 /* ZJCustomLabel.m in Sources */,
+				2A99EB621D3B1D8E0024E924 /* ZJContentView.m in Sources */,
 				2ADF61021D3292C700DF757B /* EMShopAddressListCell.m in Sources */,
 				2ADF60491D27C59C00DF757B /* UIColor+ILHexStringColor.m in Sources */,
 				2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */,
