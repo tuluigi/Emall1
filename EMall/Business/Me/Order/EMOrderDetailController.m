@@ -10,7 +10,7 @@
 #import "EMOrderModel.h"
 @interface EMOrderDetailController ()
 @property (nonatomic,copy)NSString *orderID;
-@property (nonatomic,strong)EMOrderModel *orderModel;
+@property (nonatomic,strong)EMOrderDetialModel *orderDetailModel;
 @end
 
 @implementation EMOrderDetailController

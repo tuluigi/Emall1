@@ -75,3 +75,11 @@
     return state;
 }
 @end
+
+@implementation EMOrderDetialModel
+
+//+ (NSDictionary *)JSONKeyPathsByPropertyKey{
+//    return {@"":@""};
+//}
+
+@end

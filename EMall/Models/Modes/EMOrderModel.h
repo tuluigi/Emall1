@@ -7,7 +7,7 @@
 //
 
 #import "OCBaseModel.h"
-
+#import "EMShopAddressModel.m"
 typedef NS_ENUM(NSInteger,EMOrderState) {
     EMOrderStateNone            ,
     EMOrderStateUnPaid          ,//未付款
@@ -41,4 +41,9 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 
 + (NSArray *)orderStateModelArray;
 + (EMOrderState)orderStateWithStateName:(NSString *)stateName;
+@end
+
+@interface EMOrderDetialModel :OCBaseModel
+@property (nonatomic,strong)EMOrderModel *orderModel;
+@property (nonatomic,strong)EMShopAddressModel *addressModel;
 @end
