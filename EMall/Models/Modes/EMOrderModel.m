@@ -7,26 +7,30 @@
 //
 
 #import "EMOrderModel.h"
-
+#define EMOrderStateUnPaiedString           @"待付款"
+#define EMOrderStateUnDeliveredString       @"待发货"
+#define EMOrderStateUnSignedString           @"待签收"
+#define EMOrderStateUnCommentString         @"待评论"
+#define EMOrderStateCanceledString         @"已取消"
 @implementation EMOrderModel
 
 - (NSString *)orderStateString{
     NSString *stateString=@"";
     switch (_orderState) {
         case EMOrderStateUnPaid:
-            stateString=@"未付款";
+            stateString=EMOrderStateUnPaiedString;
             break;
         case EMOrderStateCanceled:
-            stateString=@"已取消";
+            stateString=EMOrderStateCanceledString;
             break;
         case EMOrderStateUnDelivered:{
-            stateString=@"已发送";
+            stateString=EMOrderStateUnDeliveredString;
         }break;
         case EMOrderStateUnSigned:{
-            stateString=@"已签收";
+            stateString=EMOrderStateUnSignedString;
         }break;
         case EMOrderStateUnComment:{
-            stateString=@"已评论";
+            stateString=EMOrderStateUnCommentString;
         }break;
             
         default:
@@ -47,13 +51,27 @@
     return stateModel;
 }
 + (NSArray *)orderStateModelArray{
-    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:@"待付款" iconName:@"order_unpaied"];
-    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:@"待发货" iconName:@"order_delivered"];
-    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:@"待签收" iconName:@"order_sign"];
-    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:@"待评论" iconName:@"order_comment"];
+    EMOrderStateModel *stateModel0=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnPaid name:EMOrderStateUnPaiedString iconName:@"order_unpaied"];
+    EMOrderStateModel *stateModel1=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnDelivered name:EMOrderStateUnDeliveredString iconName:@"order_delivered"];
+    EMOrderStateModel *stateModel2=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnSigned name:EMOrderStateUnSignedString iconName:@"order_sign"];
+    EMOrderStateModel *stateModel3=[EMOrderStateModel orderStateModelWithState:EMOrderStateUnComment name:EMOrderStateUnCommentString iconName:@"order_comment"];
     
    NSArray *orderStateArry=[NSArray arrayWithObjects:stateModel0,stateModel1,stateModel2,stateModel3, nil];
     return orderStateArry;
-
+}
++ (EMOrderState)orderStateWithStateName:(NSString *)stateName{
+    EMOrderState state=EMOrderStateNone;
+    if ([stateName isEqualToString:EMOrderStateUnPaiedString]) {
+        state=EMOrderStateUnPaid;
+    }else if ([stateName isEqualToString:EMOrderStateUnSignedString]){
+        state=EMOrderStateUnSigned;
+    }else if ([stateName isEqualToString:EMOrderStateUnDeliveredString]){
+        state=EMOrderStateUnDelivered;
+    }else if ([stateName isEqualToString:EMOrderStateUnCommentString]){
+        state=EMOrderStateUnComment;
+    }else if ([stateName isEqualToString:EMOrderStateCanceledString]){
+        state=EMOrderStateCanceled;
+    }
+    return state;
 }
 @end

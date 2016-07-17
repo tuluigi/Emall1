@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 @property(nonatomic,copy)NSString *goodsID;
 @property(nonatomic,copy)NSString *goodsName;
 @property(nonatomic,copy)NSString *goodsImageUrl;
-@property(nonatomic,assign)CGFloat totalPrice;
+@property(nonatomic,assign)CGFloat totalPrice , goodsPrice;
+@property (nonatomic,copy)NSString *spec;//规格说明
+@property (nonatomic,assign)NSInteger buyCount;//购买数量
 
 @end
 
@@ -38,4 +40,5 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 + (EMOrderStateModel *)orderStateModelWithState:(NSInteger)state name:(NSString *)name iconName:(NSString *)iconName;
 
 + (NSArray *)orderStateModelArray;
++ (EMOrderState)orderStateWithStateName:(NSString *)stateName;
 @end

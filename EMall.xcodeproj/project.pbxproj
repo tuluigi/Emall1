@@ -56,6 +56,7 @@
 		2A99EB6A1D3B2AA90024E924 /* EMOrderHomeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB691D3B2AA90024E924 /* EMOrderHomeListController.m */; };
 		2A99EB6D1D3B2ABB0024E924 /* EMOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */; };
 		2A99EB701D3B3C200024E924 /* EMOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */; };
+		2A99EB731D3B64D20024E924 /* EMOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB721D3B64D20024E924 /* EMOrderDetailController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -224,6 +225,8 @@
 		2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderListController.m; sourceTree = "<group>"; };
 		2A99EB6E1D3B3C200024E924 /* EMOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderListCell.h; sourceTree = "<group>"; };
 		2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderListCell.m; sourceTree = "<group>"; };
+		2A99EB711D3B64D20024E924 /* EMOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderDetailController.h; sourceTree = "<group>"; };
+		2A99EB721D3B64D20024E924 /* EMOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderDetailController.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				2A99EB6C1D3B2ABB0024E924 /* EMOrderListController.m */,
 				2A99EB6E1D3B3C200024E924 /* EMOrderListCell.h */,
 				2A99EB6F1D3B3C200024E924 /* EMOrderListCell.m */,
+				2A99EB711D3B64D20024E924 /* EMOrderDetailController.h */,
+				2A99EB721D3B64D20024E924 /* EMOrderDetailController.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1107,6 +1112,7 @@
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
+				2A99EB731D3B64D20024E924 /* EMOrderDetailController.m in Sources */,
 				2A99EB651D3B1D8E0024E924 /* ZJScrollSegmentView.m in Sources */,
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
 				2A99EB401D3A6C860024E924 /* OCUTableViewDetailTextCell.m in Sources */,

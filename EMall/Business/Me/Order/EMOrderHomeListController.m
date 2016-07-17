@@ -72,7 +72,7 @@
         segmentStyle.selectedTitleColor=color;
         segmentStyle.scrollLineColor=RGB(229, 24, 31);
         NSArray *titleArray=[self titleArrayWithOrderStates:self.orderStateArray];
-        _pageScrolView=[[ZJScrollPageView alloc]  initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchBar.frame), CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds)) segmentStyle:segmentStyle titles:titleArray parentViewController:self delegate:self];
+        _pageScrolView=[[ZJScrollPageView alloc]  initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchBar.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-CGRectGetMaxY(self.searchBar.frame)) segmentStyle:segmentStyle titles:titleArray parentViewController:self delegate:self];
     }
     return _pageScrolView;
 }

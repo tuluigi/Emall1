@@ -8,6 +8,7 @@
 
 #import "OCBaseTableViewController.h"
 #import "ZJScrollPageViewDelegate.h"
+#import "EMOrderModel.h"
 @interface EMOrderListController : OCBaseTableViewController <ZJScrollPageViewChildVcDelegate>
-
+@property (nonatomic,assign)EMOrderState orderState;
 @end

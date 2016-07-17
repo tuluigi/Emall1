@@ -51,12 +51,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/View/TableCell/Cell/OCUTableViewCell.m"
-            timestampString = "490370858.811296"
+            filePath = "EMall/View/TableCell/Cell/OCUTableViewTextFieldCell.m"
+            timestampString = "490370882.124844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "-setCellModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/View/TableCell/Cell/OCUTableViewTextFieldCell.m"
-            timestampString = "490370882.124844"
+            filePath = "EMall/Business/Me/Order/EMOrderListController.m"
+            timestampString = "490430889.807305"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "-setCellModel:"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-setUpWhenViewWillAppearForTitle:forIndex:firstTimeAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
