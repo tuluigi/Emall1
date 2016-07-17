@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     EMShopAddressItemTypeIsDefault      ,//是否默认
 };
 
-@interface EMShoppingAddressAddController ()
+@interface EMShoppingAddressAddController ()<EMShopProvienceCityControllerDelegate>
 @property (nonatomic,strong)EMShopAddressModel *addressModel;
 
 @end
@@ -95,6 +95,18 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
         }
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    switch (cellModel.type) {
+        case EMShopAddressItemTypeProvience:
+        {
+            [(OCTableCellDetialTextModel *)cellModel setDetailText:[self.addressModel.province stringByAppendingString:self.addressModel.city]];
+        }break;
+        case EMShopAddressItemTypeCity:
+        {
+            
+        }break;
+        default:
+            break;
+    }
     cell.cellModel=cellModel;
     return cell;
 }
@@ -102,9 +114,22 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     OCTableCellModel *cellModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     if (cellModel.type==EMShopAddressItemTypeProvience) {
         EMShopProvienceCityController *provienceViewController=[[EMShopProvienceCityController alloc] init];
+        provienceViewController.delegate=self;
         provienceViewController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:provienceViewController animated:YES];
     }
     
+}
+
+
+
+#pragma mark -address delegate
+- (void)shopProvicenceCityControllerDidSelectProvienceID:(NSString *)provienceID
+                                           provienceName:(NSString *)provienceName
+                                                  cityID:(NSString *)cityID
+                                                cityName:(NSString *)cityName{
+    self.addressModel.province=provienceName;
+    self.addressModel.city=cityName;
+    [self.tableView reloadData];
 }
 @end

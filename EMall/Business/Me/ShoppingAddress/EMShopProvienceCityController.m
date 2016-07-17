@@ -9,20 +9,21 @@
 #import "EMShopProvienceCityController.h"
 
 @interface EMShopProvienceCityController ()
-@property (nonatomic,copy)NSString *provience;
+@property (nonatomic,copy)NSString *provienceID,*provienceName;
 @end
 
 @implementation EMShopProvienceCityController
-- (instancetype)initWithProvience:(NSString *)provience{
+- (instancetype)initWithProvienceID:(NSString *)provienceID provienceName:(NSString *)provienceName;{
     if (self=[super init]) {
-        self.provience=provience;
+        self.provienceID=provienceID;
+        self.provienceName=provienceName;
     }
     return self;
 }
 -(void)viewDidLoad{
     [super viewDidLoad];
-    if (self.provience) {
-        self.navigationItem.title=self.provience;
+    if (self.provienceID) {
+        self.navigationItem.title=self.provienceID;
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didSaveButtonPressed)];
 
     }else{
@@ -50,7 +51,7 @@ NSString *identifer=@"EMShopProvicenCityCellIdenfier";
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifer];
         
     }
-    if ([NSString isNilOrEmptyForString:self.provience]) {
+    if ([NSString isNilOrEmptyForString:self.provienceID]) {
         cell.accessoryType=UITableViewCellAccessoryNone;
     }else{
          cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -59,13 +60,25 @@ NSString *identifer=@"EMShopProvicenCityCellIdenfier";
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.provience) {
+    if (self.provienceID) {
         
     }else{
         NSString *provience=[self.dataSourceArray objectAtIndex:indexPath.row];
-        EMShopProvienceCityController *citysViewController=[[EMShopProvienceCityController alloc] initWithProvience:provience];
+        EMShopProvienceCityController *citysViewController=[[EMShopProvienceCityController alloc] initWithProvienceID:provience provienceName:nil];
+        citysViewController.delegate=self;
         citysViewController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:citysViewController animated:YES];
     }
 }
+
+#pragma mark delegate
+- (void)shopProvicenceCityControllerDidSelectProvienceID:(NSString *)provienceID
+                                           provienceName:(NSString *)provienceName
+                                                  cityID:(NSString *)cityID
+                                                cityName:(NSString *)cityName{
+    if (_delegate&&[_delegate respondsToSelector:@selector(shopProvicenceCityControllerDidSelectProvienceID:provienceName:cityID:cityName:)]) {
+        [_delegate shopProvicenceCityControllerDidSelectProvienceID:provienceID provienceName:provienceName cityID:cityID cityName:cityName ];
+    }
+}
+
 @end
