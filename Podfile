@@ -1,5 +1,6 @@
 platform :ios, '7.0'
 
+target "EMall"  do
 pod 'AFNetworking', '~> 3.1.0'
 pod 'Mantle', '~> 2.0.2’
 pod 'Masonry', '~> 0.5.3'
@@ -13,3 +14,4 @@ pod 'SVProgressHUD', '~> 1.1.3'
 pod 'CocoaLumberjack', '~> 2.3.0'
 pod 'TPKeyboardAvoiding', '~> 1.3'
 pod 'JSBadgeView', '~> 1.4.1'
+end

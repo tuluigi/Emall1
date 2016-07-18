@@ -7,7 +7,7 @@
 //
 
 #import "OCBaseModel.h"
-#import "EMShopAddressModel.m"
+#import "EMShopAddressModel.h"
 typedef NS_ENUM(NSInteger,EMOrderState) {
     EMOrderStateNone            ,
     EMOrderStateUnPaid          ,//未付款
