@@ -114,18 +114,20 @@
 //手动滑动
 -(void)scrollViewDidEndDecelerating:(nonnull UIScrollView *)scrollView
 {
-    NSInteger offsetX = scrollView.contentOffset.x;
-    NSInteger viewW = scrollView.bounds.size.width;
-    NSInteger offset = offsetX/viewW - 1;
-    NSInteger currentPage=0;
-    if (offset != 0)
-    {
-        currentPage = (_currentIndex + offset + self.totalNumber) % self.totalNumber;
-        NSIndexPath *indexpath = [NSIndexPath indexPathForItem:1 inSection:0];
-        [self.collectionView scrollToItemAtIndexPath:indexpath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-        
+    if (self.totalNumber) {
+        NSInteger offsetX = scrollView.contentOffset.x;
+        NSInteger viewW = scrollView.bounds.size.width;
+        NSInteger offset = offsetX/viewW - 1;
+        NSInteger currentPage=0;
+        if (offset != 0)
+        {
+            currentPage = (_currentIndex + offset + self.totalNumber) % self.totalNumber;
+            NSIndexPath *indexpath = [NSIndexPath indexPathForItem:1 inSection:0];
+            [self.collectionView scrollToItemAtIndexPath:indexpath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+            
+        }
+        self.currentIndex=currentPage;
     }
-    self.currentIndex=currentPage;
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.myTimer invalidate];

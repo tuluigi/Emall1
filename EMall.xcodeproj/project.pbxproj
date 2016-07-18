@@ -32,6 +32,7 @@
 		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
+		2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */; };
 		2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */; };
 		2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1F1D3A6C860024E924 /* OCUTableViewButtonCell.m */; };
 		2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB211D3A6C860024E924 /* OCUTableViewCell.m */; };
@@ -175,6 +176,8 @@
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
+		2A87D5691D3CDD2900D7DBEA /* OCMutableSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMutableSelectionCell.h; sourceTree = "<group>"; };
+		2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCMutableSelectionCell.m; sourceTree = "<group>"; };
 		2A99EB1C1D3A6C860024E924 /* OCUTableViewBadgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewBadgeCell.h; sourceTree = "<group>"; };
 		2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewBadgeCell.m; sourceTree = "<group>"; };
 		2A99EB1E1D3A6C860024E924 /* OCUTableViewButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewButtonCell.h; sourceTree = "<group>"; };
@@ -589,6 +592,23 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		2A87D5671D3CDD2200D7DBEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A87D5681D3CDD2900D7DBEA /* MutableSelectCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2A87D5681D3CDD2900D7DBEA /* MutableSelectCell */ = {
+			isa = PBXGroup;
+			children = (
+				2A87D5691D3CDD2900D7DBEA /* OCMutableSelectionCell.h */,
+				2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */,
+			);
+			path = MutableSelectCell;
+			sourceTree = "<group>";
+		};
 		2A99EB1B1D3A6C860024E924 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +703,7 @@
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				2A87D5671D3CDD2200D7DBEA /* View */,
 				2A99EB4F1D3B1D850024E924 /* ThirdLib */,
 				2ADF600B1D27C59C00DF757B /* Category */,
 				2ADF60321D27C59C00DF757B /* LoadingView */,
@@ -1124,6 +1145,7 @@
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
 				2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */,
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
+				2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
