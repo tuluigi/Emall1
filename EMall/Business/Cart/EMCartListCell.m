@@ -45,7 +45,7 @@
     _countTextField=[[UITextField alloc]  init];
     _countTextField.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     _countTextField.layer.borderWidth=0.8;
-    
+       [self.bgView addSubview:_countTextField];
     UIButton *minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [minusButton setTitle:@"-" forState:UIControlStateNormal];
     [minusButton setTitleColor:color forState:UIControlStateNormal];
@@ -63,7 +63,7 @@
     _countTextField.rightViewMode=UITextFieldViewModeAlways;
     
     
-    [self.bgView addSubview:_countTextField];
+ 
     
     _descLabel=[UILabel labelWithText:@"" font:font textColor:[UIColor colorWithHexString:@"#949090"] textAlignment:NSTextAlignmentLeft];
     [_bgView addSubview:_descLabel];
