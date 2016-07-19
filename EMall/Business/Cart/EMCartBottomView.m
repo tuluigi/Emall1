@@ -10,9 +10,26 @@
 
 @interface EMCartBottomView ()
 @property (nonatomic,strong)UIButton *checkMarkButton;
+@property (nonatomic,strong)UILabel *priceLabel;
+@property (nonatomic,strong)UIButton *submitButton;
 @end
 
 @implementation EMCartBottomView
+-(instancetype)init{
+    self=[super init];
+    if (self) {
+        
+    }
+    return self;
+}
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)updateCartBottomWithSelectItemCount:(NSInteger)count totalItems:(NSInteger)totalItems totalPrice:(CGFloat)totalPrice{
     
 }
