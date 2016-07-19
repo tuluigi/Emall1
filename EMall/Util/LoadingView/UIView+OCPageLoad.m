@@ -146,13 +146,19 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     if (nil==hud) {
         hud =  [[MBProgressHUD alloc]  initWithView:self];
         hud.removeFromSuperViewOnHide = YES;
+        hud.mode=MBProgressHUDModeText;
+        hud.margin=10;
+        hud.opaque=0.6;
         [self addSubview:hud];
     }
     return hud;
 }
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset{
-    [[self hudView] setLabelText:message];
-     [[self hudView] show:YES];
+    MBProgressHUD *hudView=[self hudView];
+    [hudView setLabelText:message];
+    hudView.yOffset=yOffset;
+     [hudView show:YES];
+    [hudView hide:YES afterDelay:1.5];
 }
 -(void)showHUDMessage:(NSString *)message{
     [self showHUDMessage:message yOffset:0];

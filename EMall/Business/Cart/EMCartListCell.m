@@ -8,6 +8,9 @@
 
 #import "EMCartListCell.h"
 #import "EMShopCartModel.h"
+#import "UITextField+HiddenKeyBoardButton.h"
+#define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
+
 @interface EMCartListCell ()
 @property (nonatomic,strong)UIView *bgView;
 @property (nonatomic,strong)UIImageView *goodsImageView;
@@ -45,20 +48,27 @@
     _countTextField=[[UITextField alloc]  init];
     _countTextField.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     _countTextField.layer.borderWidth=0.8;
+    _countTextField.font=[UIFont oc_systemFontOfSize:11];
+    _countTextField.adjustsFontSizeToFitWidth=YES;
+    [_countTextField addHiddenKeyBoardInputAccessView];
        [self.bgView addSubview:_countTextField];
     UIButton *minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    minusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
     [minusButton setTitle:@"-" forState:UIControlStateNormal];
     [minusButton setTitleColor:color forState:UIControlStateNormal];
+    [minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     minusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     minusButton.layer.borderWidth=0.5;
     _countTextField.leftView=minusButton;
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    plusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
     [plusButton setTitle:@"+" forState:UIControlStateNormal];
     [plusButton setTitleColor:color forState:UIControlStateNormal];
     plusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     plusButton.layer.borderWidth=0.8;
+    [plusButton addTarget:self action:@selector(didPlusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _countTextField.rightView=plusButton;
     _countTextField.rightViewMode=UITextFieldViewModeAlways;
     
@@ -115,5 +125,26 @@
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
     
     self.priceLabel.text=[NSString stringWithFormat:@"￥%.2f",_shopCartModel.goodsPrice];
+    [self updateBuyCount:_shopCartModel.buyCount];
+}
+- (void)updateBuyCount:(NSInteger)buyCount{
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
+}
+- (void)didPlusButtonPressed:(UIButton *)sender{
+    if (self.shopCartModel.buyCount>=EMGoodsMaxBuyCount) {
+        [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(OCHeight/2.0-80)];
+        return ;
+    }
+    self.shopCartModel.buyCount++;
+    [self updateBuyCount:_shopCartModel.buyCount];
+}
+- (void)didMinuseButtonPressed:(UIButton *)sender{
+    self.shopCartModel.buyCount--;
+    if (self.shopCartModel.buyCount<=1) {
+        sender.enabled=NO;
+    }else{
+        sender.enabled=YES;
+    }
+     [self updateBuyCount:_shopCartModel.buyCount];
 }
 @end
