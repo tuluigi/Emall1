@@ -9,9 +9,11 @@
 #import "OCBaseViewController.h"
 #import <TPKeyboardAvoidingTableView.h>
 @interface OCBaseTableViewController : OCBaseViewController
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate>{
+    UITableView *_tableView;
+}
 
-@property (nonatomic, strong,getter=tableView) UITableView *tableView;
+@property (nonatomic, strong,readonly,getter=tableView) UITableView *tableView;
 /**
  *  分页的页码，default = @""
  */
@@ -25,7 +27,7 @@
  */
 @property (nonatomic, assign) UITableViewStyle tableViewStyle;
 
-- (UITableView *)tableView;
+
 - (instancetype)initWithStyle:(UITableViewStyle)style;
 
 @end

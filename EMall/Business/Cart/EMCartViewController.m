@@ -14,7 +14,17 @@
 @end
 
 @implementation EMCartViewController
-
+- (UITableView *)tableView{
+    if (nil==_tableView) {
+        _tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate=self;
+        _tableView.dataSource=self;
+        _tableView.showsVerticalScrollIndicator=NO;
+        _tableView.showsHorizontalScrollIndicator=NO;
+        _tableView.tableFooterView=[UIView new];
+    }
+    return _tableView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

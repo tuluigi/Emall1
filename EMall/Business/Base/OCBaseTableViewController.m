@@ -9,11 +9,9 @@
 #import "OCBaseTableViewController.h"
 
 @interface OCBaseTableViewController ()
-
 @end
 
 @implementation OCBaseTableViewController
-@synthesize tableView  =_tableView;
 -(id)initWithStyle:(UITableViewStyle)style{
     if (self=[super init]) {
         _tableViewStyle = style;
@@ -24,6 +22,7 @@
     [super viewDidLoad];
     self.cursor = @"";
     [self.view addSubview:self.tableView];
+    self.automaticallyAdjustsScrollViewInsets=YES;
     // Do any additional setup after loading the view.
 }
 - (UITableView *)tableView{

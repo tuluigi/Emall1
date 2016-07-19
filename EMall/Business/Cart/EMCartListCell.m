@@ -8,10 +8,11 @@
 
 #import "EMCartListCell.h"
 #import "EMShopCartModel.h"
+#import "UIDisablePastTextField.h"
 #import "UITextField+HiddenKeyBoardButton.h"
 #define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
 
-@interface EMCartListCell ()
+@interface EMCartListCell ()<UITextFieldDelegate>
 @property (nonatomic,strong)UIView *bgView;
 @property (nonatomic,strong)UIImageView *goodsImageView;
 @property (nonatomic,strong)UILabel *goodsNameLabel;
@@ -46,12 +47,15 @@
     
     
     _countTextField=[[UITextField alloc]  init];
+    _countTextField.delegate=self;
     _countTextField.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     _countTextField.layer.borderWidth=0.8;
     _countTextField.font=[UIFont oc_systemFontOfSize:11];
     _countTextField.adjustsFontSizeToFitWidth=YES;
+    _countTextField.multipleTouchEnabled=YES;
+    _countTextField.keyboardType=UIKeyboardTypeNumberPad;
     [_countTextField addHiddenKeyBoardInputAccessView];
-       [self.bgView addSubview:_countTextField];
+    [self.bgView addSubview:_countTextField];
     UIButton *minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
     minusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
     [minusButton setTitle:@"-" forState:UIControlStateNormal];
@@ -109,13 +113,11 @@
     [_descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.goodsNameLabel);
         make.bottom.mas_equalTo(weakSelf.goodsImageView.mas_bottom);
-//        make.top.mas_equalTo(weakSelf.goodsNameLabel.mas_bottom).offset(OCUISCALE(15));
         make.right.mas_lessThanOrEqualTo(weakSelf.goodsNameLabel.mas_right).priorityHigh();
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.countTextField);
         make.top.mas_equalTo(weakSelf.descLabel);
-//        make.left.mas_offset(weakSelf.descLabel.mas_right);
     }];
 }
 - (void)setShopCartModel:(EMShopCartModel *)shopCartModel{
@@ -130,9 +132,12 @@
 - (void)updateBuyCount:(NSInteger)buyCount{
     self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
 }
+- (void)showOverMaxBuyCountMessage{
+       [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
+}
 - (void)didPlusButtonPressed:(UIButton *)sender{
     if (self.shopCartModel.buyCount>=EMGoodsMaxBuyCount) {
-        [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(OCHeight/2.0-80)];
+        [self showOverMaxBuyCountMessage];
         return ;
     }
     self.shopCartModel.buyCount++;
@@ -146,5 +151,29 @@
         sender.enabled=YES;
     }
      [self updateBuyCount:_shopCartModel.buyCount];
+}
+
+#pragma mark -textFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    BOOL enableChange=YES;
+    NSString *value=textField.text;
+    value=[textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSInteger buyCount=value.integerValue;
+    if (buyCount>EMGoodsMaxBuyCount) {
+        buyCount=EMGoodsMaxBuyCount;
+        enableChange=NO;
+    }
+    if (enableChange) {
+        self.shopCartModel.buyCount=value.integerValue;
+    }else{
+        [self showOverMaxBuyCountMessage];
+    }
+    return enableChange;
+}
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (action == @selector(copy:) || action == @selector(paste:)) {
+        return NO;
+    }
+    return YES;
 }
 @end

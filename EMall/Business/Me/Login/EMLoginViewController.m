@@ -70,12 +70,23 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     [super viewWillDisappear:animated];
     [self.view endEditing:YES];
 }
+- (UITableView *)tableView{
+    if (nil==_tableView) {
+        _tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate=self;
+        _tableView.dataSource=self;
+        _tableView.showsVerticalScrollIndicator=NO;
+        _tableView.showsHorizontalScrollIndicator=NO;
+        _tableView.tableFooterView=[UIView new];
+    }
+    return _tableView;
+}
 - (void)viewDidLoad {
-    self.tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.delegate=self;
-    self.tableView.dataSource=self;
-    self.tableView.showsVerticalScrollIndicator=NO;
-    self.tableView.showsHorizontalScrollIndicator=NO;
+//    self.tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
+//    self.tableView.delegate=self;
+//    self.tableView.dataSource=self;
+//    self.tableView.showsVerticalScrollIndicator=NO;
+//    self.tableView.showsHorizontalScrollIndicator=NO;
     [super viewDidLoad];
     EMLoginHeadView *headView;
     if (self.loginType==EMLoginViewControllerTypeLogin) {
