@@ -19,6 +19,38 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressAddController.m"
+            timestampString = "490419592.6623"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/View/TableCell/Cell/OCUTableViewTextFieldCell.m"
+            timestampString = "490370882.124844"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "-setCellModel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "EMall/Business/Me/Order/EMOrderListController.m"
             timestampString = "490430889.807305"
             startingColumnNumber = "9223372036854775807"
@@ -35,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Util/Category/UITextField/UITextField+DisablePast.m"
-            timestampString = "490603652.293711"
+            filePath = "EMall/Business/Cart/EMCartViewController.m"
+            timestampString = "490881415.255885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "-canPerformAction:withSender:"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-onInitData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

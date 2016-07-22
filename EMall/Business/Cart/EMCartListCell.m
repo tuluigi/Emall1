@@ -18,6 +18,7 @@
 @property (nonatomic,strong)UILabel *goodsNameLabel;
 @property (nonatomic,strong)UILabel *descLabel,*priceLabel;//规格数量
 @property (nonatomic,strong)UITextField *countTextField;
+@property (nonatomic,strong)UIButton *checkMarkButton, *minusButton;//选择按钮
 @end
 
 @implementation EMCartListCell
@@ -37,6 +38,13 @@
     _bgView.backgroundColor=[UIColor whiteColor];
     [self.contentView addSubview:_bgView];
     WEAKSELF
+    
+    _checkMarkButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_normal"] forState:UIControlStateNormal];
+    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
+    [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_bgView addSubview:_checkMarkButton];
+    
     _goodsImageView=[[UIImageView alloc] init];
     [_bgView addSubview:_goodsImageView];
     UIFont *font=[UIFont oc_systemFontOfSize:13];
@@ -56,14 +64,14 @@
     _countTextField.keyboardType=UIKeyboardTypeNumberPad;
     [_countTextField addHiddenKeyBoardInputAccessView];
     [self.bgView addSubview:_countTextField];
-    UIButton *minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    minusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
-    [minusButton setTitle:@"-" forState:UIControlStateNormal];
-    [minusButton setTitleColor:color forState:UIControlStateNormal];
-    [minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    minusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
-    minusButton.layer.borderWidth=0.5;
-    _countTextField.leftView=minusButton;
+    _minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    _minusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
+    [_minusButton setTitle:@"-" forState:UIControlStateNormal];
+    [_minusButton setTitleColor:color forState:UIControlStateNormal];
+    [_minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    _minusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
+    _minusButton.layer.borderWidth=0.5;
+    _countTextField.leftView=_minusButton;
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -91,8 +99,13 @@
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(10), 0));
     }];
+    [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.bgView).offset(OCUISCALE(13));
+        make.centerY.mas_equalTo(weakSelf.bgView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(15), OCUISCALE(15)));
+    }];
     [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.bgView.mas_left).offset(OCUISCALE(12));
+        make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(OCUISCALE(7.5));
         make.top.mas_equalTo(weakSelf.bgView.mas_top).offset(OCUISCALE(14));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(92), OCUISCALE(65)));
         make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-14)).priorityHigh();
@@ -125,12 +138,20 @@
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_shopCartModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     self.goodsNameLabel.text=_shopCartModel.goodsName;
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
-    
+    self.checkMarkButton.selected=!_shopCartModel.unSelected;
     self.priceLabel.text=[NSString stringWithFormat:@"￥%.2f",_shopCartModel.goodsPrice];
     [self updateBuyCount:_shopCartModel.buyCount];
 }
 - (void)updateBuyCount:(NSInteger)buyCount{
     self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
+    if (buyCount<=1) {
+        self.minusButton.enabled=NO;
+    }else{
+        self.minusButton.enabled=YES;
+    }
+    if (_delegate &&[_delegate respondsToSelector:@selector(cartListCellDidBuyCountChanged:)]) {
+        [_delegate cartListCellDidBuyCountChanged:self.shopCartModel];
+    }
 }
 - (void)showOverMaxBuyCountMessage{
        [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
@@ -163,17 +184,27 @@
         buyCount=EMGoodsMaxBuyCount;
         enableChange=NO;
     }
+    if (buyCount<=1) {
+        self.minusButton.enabled=NO;
+    }else{
+        self.minusButton.enabled=YES;
+    }
     if (enableChange) {
         self.shopCartModel.buyCount=value.integerValue;
+        if (_delegate &&[_delegate respondsToSelector:@selector(cartListCellDidBuyCountChanged:)]) {
+            [_delegate cartListCellDidBuyCountChanged:self.shopCartModel];
+        }
     }else{
         [self showOverMaxBuyCountMessage];
     }
     return enableChange;
 }
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    if (action == @selector(copy:) || action == @selector(paste:)) {
-        return NO;
+
+- (void)didCheckMarkButtonPressed:(UIButton *)sender{
+    sender.selected=!sender.selected;
+    self.shopCartModel.unSelected=!sender.isSelected;
+    if (_delegate &&[_delegate respondsToSelector:@selector(cartListCellDidSelectStateChanged:)]) {
+        [_delegate cartListCellDidSelectStateChanged:self.shopCartModel];
     }
-    return YES;
 }
 @end
