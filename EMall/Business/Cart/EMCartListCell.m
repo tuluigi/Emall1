@@ -10,6 +10,7 @@
 #import "EMShopCartModel.h"
 #import "UIDisablePastTextField.h"
 #import "UITextField+HiddenKeyBoardButton.h"
+#import "NSAttributedString+Price.h"
 #define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
 
 @interface EMCartListCell ()<UITextFieldDelegate>
@@ -92,7 +93,7 @@
     
     
     _priceLabel=[[UILabel alloc]  init];
-    _priceLabel.textColor=RGB(227, 0, 0);
+//    _priceLabel.textColor=RGB(227, 0, 0);
     _priceLabel.textAlignment=NSTextAlignmentRight;
     [_bgView addSubview:_priceLabel];
     
@@ -139,7 +140,8 @@
     self.goodsNameLabel.text=_shopCartModel.goodsName;
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
     self.checkMarkButton.selected=!_shopCartModel.unSelected;
-    self.priceLabel.text=[NSString stringWithFormat:@"￥%.2f",_shopCartModel.goodsPrice];
+//    self.priceLabel.text=[NSString stringWithFormat:@"￥%.2f",_shopCartModel.goodsPrice];
+    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice];
     [self updateBuyCount:_shopCartModel.buyCount];
 }
 - (void)updateBuyCount:(NSInteger)buyCount{

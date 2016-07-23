@@ -12,6 +12,7 @@
 #import "EMCartBottomView.h"
 @interface EMCartViewController ()<EMCartListCellDelegate,EMCartBottomViewDelegate>
 @property (nonatomic,strong)EMCartBottomView *bottomView;
+@property (nonatomic,assign)BOOL isDeleteing;//default =No
 @end
 
 @implementation EMCartViewController
@@ -41,7 +42,7 @@
 - (void)onInitData{
     self.navigationItem.title=@"购物车";
     [self.tableView registerClass:[EMCartListCell class] forCellReuseIdentifier:NSStringFromClass([EMCartListCell class])];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didEditButtonPressed)];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didEditButtonPressed:)];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.bottomView];
    CGRect tabarBounds= self.tabBarController.tabBar.bounds;
@@ -67,8 +68,18 @@
     [self.tableView reloadData];
     [self calcuteMyShopCart];
 }
-- (void)didEditButtonPressed{
-    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
+- (void)setIsDeleteing:(BOOL)isDeleteing{
+    _isDeleteing=isDeleteing;
+    UIBarButtonItem *sender=self.navigationItem.rightBarButtonItem;
+    if (_isDeleteing) {
+       sender.title=@"完成";
+    }else{
+        sender.title=@"编辑";
+    }
+    self.bottomView.isDelete=_isDeleteing;
+}
+- (void)didEditButtonPressed:(UIBarButtonItem *)sender{
+    self.isDeleteing=!self.isDeleteing;
 }
 //计算当前购物车的购买人数和总价
 - (void )calcuteMyShopCart{
@@ -87,6 +98,11 @@
         model.unSelected=!select;
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - delete shopCart
+- (void)deleteShopCart:(NSArray *)Array{
+    
 }
 #pragma mark -tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -122,8 +138,17 @@
     [self calcuteMyShopCart];
 }
 //购物车结算
-- (void)cartBottomViewSettlementShopCart{
-    
+- (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
+    if (bottomView.isDelete) {//删除购物车
+        NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
+        
+        NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
+        if (selectArray.count) {
+            [self deleteShopCart:selectArray];
+        }
+    }else{//提交购物车
+        
+    }
 }
 /*
 #pragma mark - Navigation

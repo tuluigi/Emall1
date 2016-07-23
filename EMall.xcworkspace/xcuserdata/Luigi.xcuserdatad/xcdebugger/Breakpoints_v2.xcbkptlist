@@ -68,12 +68,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Business/Cart/EMCartViewController.m"
-            timestampString = "490881415.255885"
+            timestampString = "490936252.454967"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "-onInitData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Util/Category/NSString/NSAttributedString+Price.m"
+            timestampString = "490934539.111086"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "+goodsPriceAttrbuteStringWithPrice:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

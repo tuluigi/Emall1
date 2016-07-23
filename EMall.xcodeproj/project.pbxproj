@@ -66,6 +66,8 @@
 		2A99EB761D3BB63A0024E924 /* EMOrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB751D3BB63A0024E924 /* EMOrderInfoCell.m */; };
 		2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */; };
 		2A99EB7C1D3BC32E0024E924 /* EMCartListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */; };
+		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
+		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -251,6 +253,10 @@
 		2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderDetailAddressCell.m; sourceTree = "<group>"; };
 		2A99EB7A1D3BC32E0024E924 /* EMCartListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartListCell.h; sourceTree = "<group>"; };
 		2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartListCell.m; sourceTree = "<group>"; };
+		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
+		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
+		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
+		2AC647651D43196C00521462 /* EMCartSubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartSubmitViewController.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -396,6 +402,7 @@
 		2A0351F11D1A3DA6002BE7B7 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				2AC647631D43195F00521462 /* Submit */,
 				2A03520C1D1A3FC9002BE7B7 /* EMCartViewController.h */,
 				2A03520D1D1A3FC9002BE7B7 /* EMCartViewController.m */,
 				2A99EB7A1D3BC32E0024E924 /* EMCartListCell.h */,
@@ -723,6 +730,15 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		2AC647631D43195F00521462 /* Submit */ = {
+			isa = PBXGroup;
+			children = (
+				2AC647641D43196C00521462 /* EMCartSubmitViewController.h */,
+				2AC647651D43196C00521462 /* EMCartSubmitViewController.m */,
+			);
+			path = Submit;
+			sourceTree = "<group>";
+		};
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +806,8 @@
 				2ADF60141D27C59C00DF757B /* NSString+Addition.m */,
 				2ADF60191D27C59C00DF757B /* NSString+VideoDuration.h */,
 				2ADF601A1D27C59C00DF757B /* NSString+VideoDuration.m */,
+				2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */,
+				2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -1208,6 +1226,7 @@
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
 				2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */,
+				2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
@@ -1242,6 +1261,7 @@
 				2A2426F51D12C4670078240C /* main.m in Sources */,
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
 				2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */,
+				2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */,
 				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
 				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,

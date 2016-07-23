@@ -7,11 +7,14 @@
 //
 
 #import "EMCartBottomView.h"
-
+#import "NSAttributedString+Price.h"
 @interface EMCartBottomView ()
 @property (nonatomic,strong)UIButton *checkMarkButton;
 @property (nonatomic,strong)UILabel *priceLabel,*checkMarkLabel;
 @property (nonatomic,strong)UIButton *submitButton;
+@property (nonatomic,strong)NSAttributedString *priceAtrr;
+@property (nonatomic,assign)NSInteger  selectCount,totalCount;
+@property (nonatomic,assign)CGFloat totalPrice;
 @end
 
 @implementation EMCartBottomView
@@ -33,7 +36,7 @@
     [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
     [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_checkMarkButton];
-
+    
     _checkMarkLabel=[UILabel labelWithText:@"全选" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
     _checkMarkLabel.textColor=[UIColor colorWithHexString:@"#272727"];
     [self addSubview:_checkMarkLabel];
@@ -76,21 +79,40 @@
         make.width.mas_equalTo(OCUISCALE(104));
     }];
 }
+
 - (void)updateCartBottomWithSelectItemCount:(NSInteger)count totalItems:(NSInteger)totalItems totalPrice:(CGFloat)totalPrice{
+    self.selectCount=count;
+    self.totalCount=totalItems;
+    self.totalPrice=totalPrice;
+    
     if (count==totalItems) {
         self.checkMarkButton.selected=YES;
     }else{
         self.checkMarkButton.selected=NO;
     }
-     NSString *titleStr=@"去结算";
+    if (self.isDelete) {
+        NSString *titleStr=@"删除";
+        if (count) {
+            titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+        }
+        [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
+    }else{
+        NSString *titleStr=@"去结算";
+        if (count) {
+            titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+        }
+        [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
+        
+        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"合计金额:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:totalPrice]];
+        self.priceLabel.attributedText=priceAttrStr;
+    }
     if (count) {
-        titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
         self.submitButton.enabled=YES;
     }else{
         self.submitButton.enabled=NO;
     }
-    [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
-    self.priceLabel.text=[NSString stringWithFormat:@"合计金额:%.2f",totalPrice];
 }
 - (void)didCheckMarkButtonPressed:(UIButton *)sender{
     sender.selected=!sender.selected;
@@ -99,16 +121,26 @@
     }
 }
 - (void)didSubmitButtonPressed:(UIButton *)sender{
-    if (_delegate&&[_delegate respondsToSelector:@selector(cartBottomViewSettlementShopCart)]) {
-        [_delegate cartBottomViewSettlementShopCart];
+    if (_delegate&&[_delegate respondsToSelector:@selector(cartBottomViewSubmitButtonPressed:)]) {
+        [_delegate cartBottomViewSubmitButtonPressed:self];
     }
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setIsDelete:(BOOL)isDelete{
+    _isDelete=isDelete;
+    if (_isDelete) {
+        self.priceLabel.hidden=YES;
+    }else{
+        self.priceLabel.hidden=NO;
+    }
+     [self updateCartBottomWithSelectItemCount:self.selectCount totalItems:self.totalCount totalPrice:self.totalPrice];
 }
-*/
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end
