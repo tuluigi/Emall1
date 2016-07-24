@@ -113,6 +113,7 @@
 		2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60FE1D328BFA00DF757B /* EMServiceController.m */; };
 		2ADF61021D3292C700DF757B /* EMShopAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */; };
 		2AED6CAD1D4461E5001B5910 /* EMCartSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CAC1D4461E5001B5910 /* EMCartSubmitCell.m */; };
+		2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +352,8 @@
 		2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopAddressListCell.m; sourceTree = "<group>"; };
 		2AED6CAB1D4461E5001B5910 /* EMCartSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitCell.h; sourceTree = "<group>"; };
 		2AED6CAC1D4461E5001B5910 /* EMCartSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartSubmitCell.m; sourceTree = "<group>"; };
+		2AED6CAE1D44680E001B5910 /* EMCartAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartAddressCell.h; sourceTree = "<group>"; };
+		2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartAddressCell.m; sourceTree = "<group>"; };
 		4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
 		8AF04033235AC8B980D77C69 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -740,6 +743,8 @@
 				2AC647651D43196C00521462 /* EMCartSubmitViewController.m */,
 				2AED6CAB1D4461E5001B5910 /* EMCartSubmitCell.h */,
 				2AED6CAC1D4461E5001B5910 /* EMCartSubmitCell.m */,
+				2AED6CAE1D44680E001B5910 /* EMCartAddressCell.h */,
+				2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -1261,6 +1266,7 @@
 				2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
+				2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */,
 				2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */,
 				2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */,
 				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,

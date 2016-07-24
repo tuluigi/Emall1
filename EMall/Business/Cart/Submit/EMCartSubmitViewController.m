@@ -9,7 +9,7 @@
 #import "EMCartSubmitViewController.h"
 #import "EMShopCartModel.h"
 #import "EMCartBottomView.h"
-#import "EMSubmitCartCell.h"
+#import "EMCartSubmitCell.h"
 #import "EMShopAddressModel.h"
 @interface EMCartSubmitViewController ()
 @property (nonatomic,strong)EMShopAddressModel *addressModel;
@@ -51,7 +51,7 @@
     UIEdgeInsets inset= self.tableView.contentInset;
     inset.bottom+=OCUISCALE(50);
     self.tableView.contentInset=inset;
-    [self.tableView registerClass:[EMSubmitCartCell class] forCellReuseIdentifier:NSStringFromClass([EMSubmitCartCell class])];
+    [self.tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:NSStringFromClass([EMCartSubmitCell class])];
 }
 #pragma mark - tableview delegate
 
@@ -63,7 +63,7 @@
     if (indexPath.section==0) {
         
     }else if (indexPath.section==1){
-        EMSubmitCartCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMSubmitCartCell class]) forIndexPath:indexPath];
+        EMCartSubmitCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMCartSubmitCell class]) forIndexPath:indexPath];
         cell.shopCartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
         aCell=cell;
     }
