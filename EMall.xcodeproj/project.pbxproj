@@ -116,6 +116,8 @@
 		2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */; };
 		2AED6CB31D44B1DA001B5910 /* EMCartPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CB21D44B1DA001B5910 /* EMCartPayViewController.m */; };
 		2AED6CB61D44B6EC001B5910 /* EMCartPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */; };
+		2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */; };
+		2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +362,10 @@
 		2AED6CB21D44B1DA001B5910 /* EMCartPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartPayViewController.m; sourceTree = "<group>"; };
 		2AED6CB41D44B6EC001B5910 /* EMCartPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartPayCell.h; sourceTree = "<group>"; };
 		2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartPayCell.m; sourceTree = "<group>"; };
+		2AED6CBA1D44C995001B5910 /* EMGoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetailViewController.h; sourceTree = "<group>"; };
+		2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetailViewController.m; sourceTree = "<group>"; };
+		2AED6CBD1D44CA2B001B5910 /* EMGoodsDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetailHeadView.h; sourceTree = "<group>"; };
+		2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetailHeadView.m; sourceTree = "<group>"; };
 		4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
 		8AF04033235AC8B980D77C69 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -402,6 +408,7 @@
 		2A0351EF1D1A3322002BE7B7 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				2AED6CB71D44C966001B5910 /* Goods */,
 				2A0351F51D1A3DC1002BE7B7 /* Base */,
 				2A0351F11D1A3DA6002BE7B7 /* Cart */,
 				2A0351F21D1A3DA6002BE7B7 /* Discovery */,
@@ -1014,6 +1021,25 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		2AED6CB71D44C966001B5910 /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				2AED6CB91D44C988001B5910 /* View */,
+				2AED6CBA1D44C995001B5910 /* EMGoodsDetailViewController.h */,
+				2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
+		2AED6CB91D44C988001B5910 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AED6CBD1D44CA2B001B5910 /* EMGoodsDetailHeadView.h */,
+				2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		77C90C70468B770D313818E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1275,6 +1301,7 @@
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
 				2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */,
+				2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
 				2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */,
@@ -1286,6 +1313,7 @@
 				2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */,
 				2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */,
 				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
+				2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
 				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,
