@@ -7,7 +7,12 @@
 //
 
 #import "OCBaseTableViewController.h"
+@class EMShopAddressModel;
+@protocol EMShoppingAddressListControllerDelegate <NSObject>
 
+- (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel;
+
+@end
 @interface EMShoppingAddressListController : OCBaseTableViewController
-
+@property (nonatomic,weak)id<EMShoppingAddressListControllerDelegate>delegate;
 @end

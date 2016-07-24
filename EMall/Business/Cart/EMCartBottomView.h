@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class EMCartBottomView;
 @protocol EMCartBottomViewDelegate <NSObject>
+@optional
 //选中
 - (void)cartBottomViewDidSelectAllButtonSelected:(BOOL)selected;
 //购物车结算

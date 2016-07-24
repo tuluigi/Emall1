@@ -9,5 +9,6 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMCartSubmitViewController : OCBaseTableViewController
-+ (EMCartSubmitViewController *)cartSubmitViewWithCartArray:(NSArray *)cartArray;
+
+@property (nonatomic,strong)NSArray *cartArray;
 @end

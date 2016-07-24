@@ -61,6 +61,7 @@
     _editButton=[UIButton buttonWithTitle:@"修改" titleColor:ColorHexString(@"#5e5c5c") font:[UIFont oc_systemFontOfSize:13]];
     [_editButton setTitleColor:texColor forState:UIControlStateNormal];
     [_editButton setImage:[UIImage imageNamed:@"test_03"] forState:UIControlStateNormal];
+    [_editButton addTarget:self action:@selector(didEditButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [_bgView addSubview:_editButton];
     
     WEAKSELF
@@ -113,5 +114,10 @@
     self.addressLable.text=addresssModel.detailAddresss;
     self.defaultButton.hidden=!addresssModel.isDefault;
     self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",addresssModel.wechatID];
+}
+- (void)didEditButtonPressed:(UIButton *)sender{
+    if (_delegate&&[_delegate respondsToSelector:@selector(shopAddressListCellDidEditButtonPressed:)]) {
+        [_delegate shopAddressListCellDidEditButtonPressed:self.addresssModel];
+    }
 }
 @end

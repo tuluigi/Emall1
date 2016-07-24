@@ -38,7 +38,7 @@
     return self;
 }
 - (void)onInitContentView{
-    self.contentView.backgroundColor=RGB(241, 243, 240);
+    self.contentView.backgroundColor=[UIColor whiteColor];
     WEAKSELF
     
     
@@ -70,15 +70,15 @@
     
     
     [_goodsNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.goodsImageView);
+        make.top.mas_equalTo(weakSelf.goodsImageView.mas_top);
         make.left.mas_equalTo(weakSelf.goodsImageView.mas_right).offset(OCUISCALE(5));
-        make.right.mas_equalTo(weakSelf.contentView.mas_left).offset(OCUISCALE(-12));
+        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-12));
     }];
     
     [_descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.goodsNameLabel);
         make.bottom.mas_equalTo(weakSelf.goodsImageView.mas_bottom);
-        make.right.mas_equalTo(weakSelf.priceLabel.mas_right);
+        make.right.mas_equalTo(weakSelf.priceLabel.mas_left);
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.goodsNameLabel.mas_right);

@@ -10,6 +10,7 @@
 #import "EMCartListCell.h"
 #import "EMShopCartModel.h"
 #import "EMCartBottomView.h"
+#import "EMCartSubmitViewController.h"
 @interface EMCartViewController ()<EMCartListCellDelegate,EMCartBottomViewDelegate>
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)BOOL isDeleteing;//default =No
@@ -139,15 +140,22 @@
 }
 //购物车结算
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
+    NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
+    
+    NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
+
     if (bottomView.isDelete) {//删除购物车
-        NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
-        
-        NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
         if (selectArray.count) {
             [self deleteShopCart:selectArray];
         }
     }else{//提交购物车
-        
+        if (selectArray.count) {
+            EMCartSubmitViewController *submitController=[[EMCartSubmitViewController alloc]  init];
+            submitController.cartArray=selectArray;
+//            EMCartSubmitViewController *submitController=[EMCartSubmitViewController cartSubmitViewWithCartArray:selectArray];
+            submitController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:submitController animated:YES];
+        }
     }
 }
 /*

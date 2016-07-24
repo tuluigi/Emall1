@@ -11,7 +11,7 @@
 #import "EMShopAddressListCell.h"
 #import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 #import "EMShopAddressModel.h"
-@interface EMShoppingAddressListController ()
+@interface EMShoppingAddressListController ()<EMShopAddressListCellDelegate>
 
 @end
 
@@ -55,6 +55,8 @@
     EMShopAddressListCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMShopAddressListCell class]) forIndexPath:indexPath];
     if (nil==cell) {
         cell=[[EMShopAddressListCell alloc]  initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([EMShopAddressListCell class])];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.delegate=self;
     }
     cell.addresssModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     return cell;
@@ -69,9 +71,18 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    EMShopAddressModel *shopAddressModel=[self.dataSourceArray objectAtIndex:indexPath.row];
-    [self goToAddShopAddressControllerWithAddressModel:shopAddressModel];
+    if (_delegate&&[_delegate respondsToSelector:@selector(shopAddressListControlerDidSelectAddress:)]) {
+        [_delegate shopAddressListControlerDidSelectAddress:self.dataSourceArray[indexPath.row]];
+        if (self.presentingViewController) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }else{
+        EMShopAddressModel *shopAddressModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+        [self goToAddShopAddressControllerWithAddressModel:shopAddressModel];
+    }
+   
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
@@ -83,5 +94,9 @@
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         [self deleteShoppingAddresssModel:[self.dataSourceArray objectAtIndex:indexPath.row]];
     }
+}
+- (void)shopAddressListCellDidEditButtonPressed:(EMShopAddressModel *)addressModel{
+    EMShopAddressModel *shopAddressModel=addressModel;
+    [self goToAddShopAddressControllerWithAddressModel:shopAddressModel];
 }
 @end

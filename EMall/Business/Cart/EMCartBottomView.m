@@ -30,32 +30,28 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
-        [self onInitContentView:NO];
+        [self onInitContentView:self.disableSelect];
     }
     return self;
 }
 - (instancetype)initWithDisableSelect:(BOOL)disableSelect{
-    self=[super init];
-    if (self) {
-        [self onInitContentView:disableSelect];
-    }
+    self=[self init];
+    self.disableSelect=disableSelect;
     return self;
 }
 - (void)onInitContentView:(BOOL)disableSelect{
     self.backgroundColor=[UIColor whiteColor];
     self.disableSelect=disableSelect;
-    if (!disableSelect) {
-        _checkMarkButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_normal"] forState:UIControlStateNormal];
-        [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
-        [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_checkMarkButton];
-        
-        _checkMarkLabel=[UILabel labelWithText:@"全选" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
-        _checkMarkLabel.textColor=[UIColor colorWithHexString:@"#272727"];
-        [self addSubview:_checkMarkLabel];
-
-    }
+    _checkMarkButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_normal"] forState:UIControlStateNormal];
+    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
+    [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_checkMarkButton];
+    
+    _checkMarkLabel=[UILabel labelWithText:@"全选" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
+    _checkMarkLabel.textColor=[UIColor colorWithHexString:@"#272727"];
+    [self addSubview:_checkMarkLabel];
+    
     
     _priceLabel=[UILabel labelWithText:@"" font:nil textAlignment:NSTextAlignmentLeft];
     _priceLabel.adjustsFontSizeToFitWidth=YES;
@@ -67,6 +63,7 @@
     [_submitButton setTitle:@"去结算" forState:UIControlStateNormal];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _submitButton.titleLabel.font=[UIFont oc_boldSystemFontOfSize:17];
+    [_submitButton addTarget:self action:@selector(didSubmitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_submitButton];
     UIView *lineView=[UIView new];
     lineView.backgroundColor=RGB(201, 201, 201);
@@ -76,7 +73,6 @@
         make.left.top.right.mas_equalTo(weakSelf);
         make.height.mas_equalTo(OCUISCALE(0.5));
     }];
-    if (!disableSelect) {
         [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(13));
             make.centerY.mas_equalTo(weakSelf.mas_centerY);
@@ -86,7 +82,7 @@
             make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(5);
             make.centerY.mas_equalTo(weakSelf);
         }];
-    }
+    
    
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(weakSelf.mas_centerY);
@@ -97,8 +93,14 @@
         make.width.mas_equalTo(OCUISCALE(104));
     }];
 }
-
+- (void)setDisableSelect:(BOOL)disableSelect{
+    _disableSelect=disableSelect;
+    _checkMarkLabel.hidden=self.disableSelect;
+    _checkMarkButton.hidden=self.disableSelect;
+}
 - (void)updateCartBottomWithSelectItemCount:(NSInteger)count totalItems:(NSInteger)totalItems totalPrice:(CGFloat)totalPrice{
+
+
     self.selectCount=count;
     self.totalCount=totalItems;
     self.totalPrice=totalPrice;
@@ -115,11 +117,15 @@
         }
         [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
     }else{
-        NSString *titleStr=@"去结算";
-        if (count) {
-            titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+        if (self.disableSelect) {
+            [self.submitButton setTitle:@"提交订单" forState:UIControlStateNormal];
+        }else{
+            NSString *titleStr=@"去结算";
+            if (count) {
+                titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+            }
+            [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
         }
-        [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
         
         UIColor *color=[UIColor colorWithHexString:@"#272727"];
         NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"合计金额:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];

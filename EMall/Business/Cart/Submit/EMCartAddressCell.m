@@ -20,15 +20,17 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        self.selectionStyle=UITableViewCellSelectionStyleNone;
         [self onInitContentView];
     }
     return self;
 }
 - (void)onInitContentView{
-    self.contentView.backgroundColor=RGB(241, 243, 240);
+    self.contentView.backgroundColor=[UIColor whiteColor];
     
     _icomImageView=[[UIImageView alloc]  init];
-    _icomImageView.image=[UIImage imageNamed:@"adddress_defalt"];
+    _icomImageView.image=[UIImage imageNamed:@"cart_adddress_defalt"];
     [self.contentView addSubview:_icomImageView];
     
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont oc_boldSystemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
@@ -37,7 +39,7 @@
     
     UIColor *texColor=[UIColor colorWithHexString:@"#272727"];
     
-    _telLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _telLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
     _telLabel.textColor=texColor;
     [self.contentView addSubview:_telLabel];
     
@@ -56,10 +58,11 @@
     [_icomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(OCUISCALE(12));
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(20));
+        make.size.mas_equalTo(CGSizeMake(14, 20));
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.icomImageView.mas_right).offset(OCUISCALE(5));
-        make.top.mas_equalTo(weakSelf.icomImageView.mas_top);
+        make.centerY.mas_equalTo(weakSelf.icomImageView.mas_centerY);
         make.width.mas_greaterThanOrEqualTo(OCUISCALE(100));
     }];
     [_telLabel mas_makeConstraints:^(MASConstraintMaker *make) {
