@@ -9,5 +9,5 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMCartPayViewController : OCBaseTableViewController
-
+- (instancetype)initWithTotalPrice:(CGFloat)totalPrice;
 @end

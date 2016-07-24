@@ -11,4 +11,5 @@
 @interface NSAttributedString (Price)
 //根据price生成attr price 
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price;
++ (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price markFontSize:(CGFloat)markSize priceInterFontSize:(CGFloat)priceIntegerSize pointInterSize:(CGFloat)pointSize color:(UIColor *)color;
 @end

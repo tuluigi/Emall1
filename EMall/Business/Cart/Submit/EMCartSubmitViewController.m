@@ -15,6 +15,7 @@
 #import "UITableView+FDKeyedHeightCache.h"
 #import "NSAttributedString+Price.h"
 #import "EMShoppingAddressListController.h"
+#import "EMCartPayViewController.h"
 static NSString *const kSubmitCellIdenfier = @"KSubmitCellIdenfier";
 static NSString *const kAddressCellIdenfier = @"kAddressCellIdenfier";
 static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
@@ -173,7 +174,9 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 #pragma mark -bottomView select
 //提交订单
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
-    
+    EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:[self totalPrice]];
+    payController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:payController animated:YES];
 }
 #pragma  mark -address
 - (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel{

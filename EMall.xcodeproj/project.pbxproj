@@ -115,6 +115,7 @@
 		2AED6CAD1D4461E5001B5910 /* EMCartSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CAC1D4461E5001B5910 /* EMCartSubmitCell.m */; };
 		2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */; };
 		2AED6CB31D44B1DA001B5910 /* EMCartPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CB21D44B1DA001B5910 /* EMCartPayViewController.m */; };
+		2AED6CB61D44B6EC001B5910 /* EMCartPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +358,8 @@
 		2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartAddressCell.m; sourceTree = "<group>"; };
 		2AED6CB11D44B1DA001B5910 /* EMCartPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartPayViewController.h; sourceTree = "<group>"; };
 		2AED6CB21D44B1DA001B5910 /* EMCartPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartPayViewController.m; sourceTree = "<group>"; };
+		2AED6CB41D44B6EC001B5910 /* EMCartPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartPayCell.h; sourceTree = "<group>"; };
+		2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartPayCell.m; sourceTree = "<group>"; };
 		4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
 		8AF04033235AC8B980D77C69 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -750,6 +753,8 @@
 				2AED6CAF1D44680E001B5910 /* EMCartAddressCell.m */,
 				2AED6CB11D44B1DA001B5910 /* EMCartPayViewController.h */,
 				2AED6CB21D44B1DA001B5910 /* EMCartPayViewController.m */,
+				2AED6CB41D44B6EC001B5910 /* EMCartPayCell.h */,
+				2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -1295,6 +1300,7 @@
 				2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */,
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,
 				2ADF606B1D27DA5A00DF757B /* EMInfiniteViewCell.m in Sources */,
+				2AED6CB61D44B6EC001B5910 /* EMCartPayCell.m in Sources */,
 				2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */,
 				2ADF60511D27C59C00DF757B /* OCPageLoadAnimationView.m in Sources */,
 				2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */,
