@@ -15,9 +15,14 @@
 @property (nonatomic,strong)NSAttributedString *priceAtrr;
 @property (nonatomic,assign)NSInteger  selectCount,totalCount;
 @property (nonatomic,assign)CGFloat totalPrice;
+@property (nonatomic,assign,readwrite)BOOL disableSelect;
 @end
 
 @implementation EMCartBottomView
++ (EMCartBottomView *)bottomCartViewDisableSelelct:(BOOL)disableSelect;{
+    EMCartBottomView *bottmView=[[EMCartBottomView alloc]  initWithDisableSelect:disableSelect];
+    return bottmView;
+}
 -(instancetype)init{
     self=[self initWithFrame:CGRectZero];
     return self;
@@ -25,21 +30,32 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
-        [self onInitContentView];
+        [self onInitContentView:NO];
     }
     return self;
 }
-- (void)onInitContentView{
+- (instancetype)initWithDisableSelect:(BOOL)disableSelect{
+    self=[super init];
+    if (self) {
+        [self onInitContentView:disableSelect];
+    }
+    return self;
+}
+- (void)onInitContentView:(BOOL)disableSelect{
     self.backgroundColor=[UIColor whiteColor];
-    _checkMarkButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_normal"] forState:UIControlStateNormal];
-    [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
-    [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_checkMarkButton];
-    
-    _checkMarkLabel=[UILabel labelWithText:@"全选" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
-    _checkMarkLabel.textColor=[UIColor colorWithHexString:@"#272727"];
-    [self addSubview:_checkMarkLabel];
+    self.disableSelect=disableSelect;
+    if (!disableSelect) {
+        _checkMarkButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_normal"] forState:UIControlStateNormal];
+        [_checkMarkButton setImage:[UIImage imageNamed:@"cart_check_select"] forState:UIControlStateSelected];
+        [_checkMarkButton addTarget:self action:@selector(didCheckMarkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_checkMarkButton];
+        
+        _checkMarkLabel=[UILabel labelWithText:@"全选" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
+        _checkMarkLabel.textColor=[UIColor colorWithHexString:@"#272727"];
+        [self addSubview:_checkMarkLabel];
+
+    }
     
     _priceLabel=[UILabel labelWithText:@"" font:nil textAlignment:NSTextAlignmentLeft];
     _priceLabel.adjustsFontSizeToFitWidth=YES;
@@ -60,16 +76,18 @@
         make.left.top.right.mas_equalTo(weakSelf);
         make.height.mas_equalTo(OCUISCALE(0.5));
     }];
-    [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(13));
-        make.centerY.mas_equalTo(weakSelf.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(15), OCUISCALE(15)));
-    }];
-    [_checkMarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(5);
-        make.centerY.mas_equalTo(weakSelf);
-    }];
-    
+    if (!disableSelect) {
+        [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(13));
+            make.centerY.mas_equalTo(weakSelf.mas_centerY);
+            make.size.mas_equalTo(CGSizeMake(OCUISCALE(15), OCUISCALE(15)));
+        }];
+        [_checkMarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(5);
+            make.centerY.mas_equalTo(weakSelf);
+        }];
+    }
+   
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(weakSelf.mas_centerY);
         make.right.mas_equalTo(weakSelf.submitButton.mas_left).offset(OCUISCALE(-5));

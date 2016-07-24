@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Luigi. All rights reserved.
 //
 
-#import "OCBaseViewController.h"
+#import "OCBaseTableViewController.h"
 
-@interface EMCartSubmitViewController : OCBaseViewController
+@interface EMCartSubmitViewController : OCBaseTableViewController
 + (EMCartSubmitViewController *)cartSubmitViewWithCartArray:(NSArray *)cartArray;
 @end

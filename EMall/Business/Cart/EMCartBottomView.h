@@ -19,6 +19,15 @@
 @interface EMCartBottomView : UIView
 @property (nonatomic,weak)id <EMCartBottomViewDelegate> delegate;
 @property (nonatomic,assign)BOOL isDelete;//是否是删除
+@property (nonatomic,assign,readonly)BOOL disableSelect;
+/**
+ *  创建CartBootomView
+ *
+ *  @param enableSelect 是否支持选择
+ *
+ *  @return
+ */
++ (EMCartBottomView *)bottomCartViewDisableSelelct:(BOOL)enableSelect;
 
 - (void)updateCartBottomWithSelectItemCount:(NSInteger)count totalItems:(NSInteger)totalItems totalPrice:(CGFloat)totalPrice;
 @end
