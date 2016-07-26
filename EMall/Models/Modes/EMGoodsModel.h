@@ -14,5 +14,6 @@
 @property(nonatomic,copy)NSString *goodsImageUrl;
 @property(nonatomic,assign)NSInteger saleCount;
 @property(nonatomic,assign)CGFloat goodsPrice;
+@property(nonatomic,assign)NSInteger commentCount;//评论数量
 
 @end

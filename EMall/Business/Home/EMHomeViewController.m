@@ -15,6 +15,8 @@
 #import "EMCatModel.h"
 #import "EMHomeHeadReusableView.h"
 #import "EMInfiniteViewCell.h"
+#import "EMGoodsDetailViewController.h"
+#import "EMGoodsModel.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
@@ -157,7 +159,15 @@ EMHomeHeadReusableViewDelegate>
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    EMGoodsModel *goodsModel;
+    if (indexPath.section==0) {
+        goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
+    }else if(indexPath.section==1){
+        goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+    }
+    EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:goodsModel.goodsID];
+    detailController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 #pragma mark - EMHomeCatCell Delegate
 - (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel{

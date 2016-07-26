@@ -9,5 +9,5 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMGoodsDetailViewController : OCBaseTableViewController
-- (instancetype)initWithGoodsID:(NSString *)goodsID;
+- (instancetype)initWithGoodsID:(NSInteger )goodsID;
 @end

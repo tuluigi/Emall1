@@ -19,6 +19,8 @@
 		2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */; };
 		2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */; };
 		2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09402D1D2B9700005BB84D /* EMHomeNetService.m */; };
+		2A13F6FD1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */; };
+		2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */; };
 		2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */; };
 		2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AAF1D3E069B00A405B7 /* UIDisablePastTextField.m */; };
 		2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AB21D3E091000A405B7 /* EMCartBottomView.m */; };
@@ -161,6 +163,10 @@
 		2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeHeadReusableView.m; sourceTree = "<group>"; };
 		2A09402C1D2B9700005BB84D /* EMHomeNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeNetService.h; sourceTree = "<group>"; };
 		2A09402D1D2B9700005BB84D /* EMHomeNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeNetService.m; sourceTree = "<group>"; };
+		2A13F6FB1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsInfoTableViewCell.h; sourceTree = "<group>"; };
+		2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsInfoTableViewCell.m; sourceTree = "<group>"; };
+		2A13F6FE1D47B0070041D2C5 /* EMGoodsDetialBootmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetialBootmView.h; sourceTree = "<group>"; };
+		2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetialBootmView.m; sourceTree = "<group>"; };
 		2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisablePast.h"; sourceTree = "<group>"; };
 		2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisablePast.m"; sourceTree = "<group>"; };
 		2A1E4AAE1D3E069B00A405B7 /* UIDisablePastTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDisablePastTextField.h; sourceTree = "<group>"; };
@@ -1027,6 +1033,8 @@
 				2AED6CB91D44C988001B5910 /* View */,
 				2AED6CBA1D44C995001B5910 /* EMGoodsDetailViewController.h */,
 				2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */,
+				2A13F6FE1D47B0070041D2C5 /* EMGoodsDetialBootmView.h */,
+				2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -1036,6 +1044,8 @@
 			children = (
 				2AED6CBD1D44CA2B001B5910 /* EMGoodsDetailHeadView.h */,
 				2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */,
+				2A13F6FB1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.h */,
+				2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1297,6 +1307,7 @@
 				2A99EB471D3A6C860024E924 /* OCTableCellDetialTextModel.m in Sources */,
 				2A87D56E1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m in Sources */,
 				2AED6CB31D44B1DA001B5910 /* EMCartPayViewController.m in Sources */,
+				2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */,
 				2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */,
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
@@ -1309,6 +1320,7 @@
 				2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */,
 				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,
 				2A2426F51D12C4670078240C /* main.m in Sources */,
+				2A13F6FD1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m in Sources */,
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
 				2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */,
 				2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */,

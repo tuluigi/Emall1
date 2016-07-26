@@ -17,9 +17,12 @@
 - (instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier{
     self=[super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        [self onInitContentView];
     }
     return self;
+}
+- (void)onInitContentView{
+
 }
 /*
 // Only override drawRect: if you perform custom drawing.

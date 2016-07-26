@@ -51,5 +51,53 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
+            timestampString = "491238422.451444"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EMGoodsDetailViewController viewDidLoad]"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Business/Goods/EMGoodsDetailViewController.m"
+                  timestampString = "491238579.79355"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "494">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[EMGoodsDetailViewController viewDidLoad]_block_invoke"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Business/Goods/EMGoodsDetailViewController.m"
+                  timestampString = "491238579.793838"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "47">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -58,5 +58,5 @@
 static NSString * const OCLogoutNofication = @"com.EMMall.logout.success";
 static NSString * const OCLoginSuccessNofication = @"com.EMMall.login.success";
 
-
+static CGFloat const kEMOffX    = 13;
 #endif /* EMallHeader_h */
