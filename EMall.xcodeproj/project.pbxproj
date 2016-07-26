@@ -21,6 +21,7 @@
 		2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09402D1D2B9700005BB84D /* EMHomeNetService.m */; };
 		2A13F6FD1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */; };
 		2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */; };
+		2A13F7031D47B73C0041D2C5 /* OCGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7021D47B73C0041D2C5 /* OCGoodsCommentModel.m */; };
 		2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */; };
 		2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AAF1D3E069B00A405B7 /* UIDisablePastTextField.m */; };
 		2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AB21D3E091000A405B7 /* EMCartBottomView.m */; };
@@ -167,6 +168,8 @@
 		2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsInfoTableViewCell.m; sourceTree = "<group>"; };
 		2A13F6FE1D47B0070041D2C5 /* EMGoodsDetialBootmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetialBootmView.h; sourceTree = "<group>"; };
 		2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetialBootmView.m; sourceTree = "<group>"; };
+		2A13F7011D47B73C0041D2C5 /* OCGoodsCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCGoodsCommentModel.h; sourceTree = "<group>"; };
+		2A13F7021D47B73C0041D2C5 /* OCGoodsCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCGoodsCommentModel.m; sourceTree = "<group>"; };
 		2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisablePast.h"; sourceTree = "<group>"; };
 		2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisablePast.m"; sourceTree = "<group>"; };
 		2A1E4AAE1D3E069B00A405B7 /* UIDisablePastTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDisablePastTextField.h; sourceTree = "<group>"; };
@@ -609,6 +612,8 @@
 				2ADF608F1D292E0D00DF757B /* EMHomeModel.m */,
 				2ADF60991D31D60B00DF757B /* EMUserModel.h */,
 				2ADF609A1D31D60B00DF757B /* EMUserModel.m */,
+				2A13F7011D47B73C0041D2C5 /* OCGoodsCommentModel.h */,
+				2A13F7021D47B73C0041D2C5 /* OCGoodsCommentModel.m */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -1313,6 +1318,7 @@
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
 				2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */,
 				2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */,
+				2A13F7031D47B73C0041D2C5 /* OCGoodsCommentModel.m in Sources */,
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
 				2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */,
