@@ -20,6 +20,10 @@
     }
     return self;
 }
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.navigationItem.title=@"商品评价";
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     [tableView registerClass:[EMGoodsCommentCell class] forCellReuseIdentifier:NSStringFromClass([EMGoodsCommentCell class])];
     return self.dataSourceArray.count;
