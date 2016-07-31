@@ -8,6 +8,13 @@
 
 #import "OCBaseModel.h"
 
+
+@interface EMGoodsObjectItemModel : NSObject
+@property (nonatomic,copy)NSString *itemName;
+@property (nonatomic,copy)NSString *itemID;
+@end
+
+
 @interface EMGoodsModel : OCBaseModel
 @property(nonatomic,assign)NSInteger goodsID;
 @property(nonatomic,copy)NSString *goodsName;

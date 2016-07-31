@@ -8,6 +8,20 @@
 
 #import "EMGoodsSpecView.h"
 #import "EMGoodsModel.h"
+
+@interface EMGoodsSpecCell : UICollectionViewCell
+@property (nonatomic,strong)EMGoodsObjectItemModel *itemModle;
+@end
+@interface EMGoodsSpecCell ()
+
+@end
+@implementation EMGoodsSpecCell
+
+
+
+@end
+
+
 @interface EMGoodsSpecView ()
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
 @property (nonatomic,strong)UICollectionView *myCollectionView;
@@ -49,5 +63,4 @@
     }
     return _myCollectionView;
 }
-@end
 @end
