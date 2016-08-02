@@ -22,6 +22,7 @@
 		2A13F6FD1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */; };
 		2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */; };
 		2A13F7061D48F5250041D2C5 /* EMGoodsSpecView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7051D48F5250041D2C5 /* EMGoodsSpecView.m */; };
+		2A13F7091D50E01A0041D2C5 /* EMMeNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7081D50E01A0041D2C5 /* EMMeNetService.m */; };
 		2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */; };
 		2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AAF1D3E069B00A405B7 /* UIDisablePastTextField.m */; };
 		2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AB21D3E091000A405B7 /* EMCartBottomView.m */; };
@@ -173,6 +174,8 @@
 		2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetialBootmView.m; sourceTree = "<group>"; };
 		2A13F7041D48F5250041D2C5 /* EMGoodsSpecView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsSpecView.h; sourceTree = "<group>"; };
 		2A13F7051D48F5250041D2C5 /* EMGoodsSpecView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsSpecView.m; sourceTree = "<group>"; };
+		2A13F7071D50E01A0041D2C5 /* EMMeNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMeNetService.h; sourceTree = "<group>"; };
+		2A13F7081D50E01A0041D2C5 /* EMMeNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMeNetService.m; sourceTree = "<group>"; };
 		2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisablePast.h"; sourceTree = "<group>"; };
 		2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisablePast.m"; sourceTree = "<group>"; };
 		2A1E4AAE1D3E069B00A405B7 /* UIDisablePastTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDisablePastTextField.h; sourceTree = "<group>"; };
@@ -635,6 +638,8 @@
 				2A2427311D12C8510078240C /* OCBaseNetService.m */,
 				2A09402C1D2B9700005BB84D /* EMHomeNetService.h */,
 				2A09402D1D2B9700005BB84D /* EMHomeNetService.m */,
+				2A13F7071D50E01A0041D2C5 /* EMMeNetService.h */,
+				2A13F7081D50E01A0041D2C5 /* EMMeNetService.m */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -1338,6 +1343,7 @@
 				2A87D56E1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m in Sources */,
 				2AED6CB31D44B1DA001B5910 /* EMCartPayViewController.m in Sources */,
 				2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */,
+				2A13F7091D50E01A0041D2C5 /* EMMeNetService.m in Sources */,
 				2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */,
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,

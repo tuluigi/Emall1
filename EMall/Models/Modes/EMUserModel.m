@@ -9,5 +9,15 @@
 #import "EMUserModel.h"
 
 @implementation EMUserModel
-
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"userID":@"id",
+             @"userName":@"user_name",
+             @"nickName":@"member_name",
+             @"avatar":@"avatar",
+             @"email":@"e_mail",
+             @"tel":@"telephone",
+             @"gender":@"sex",
+             @"birtadyDay":@"birthday",
+             @"level":@"level",};
+}
 @end

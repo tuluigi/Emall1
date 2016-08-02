@@ -9,7 +9,10 @@
 #import "OCBaseModel.h"
 
 @interface EMUserModel : OCBaseModel
-@property(nonatomic,copy)NSString *userID;
+@property(nonatomic,assign)NSInteger userID;
 @property(nonatomic,copy)NSString *userName;
-@property(nonatomic,copy)NSString *userLogo;
+@property(nonatomic,copy)NSString *avatar;
+@property(nonatomic,copy)NSString *email,*tel,*nickName,*gender;
+@property (nonatomic,assign)NSInteger level;
+@property (nonatomic,strong)NSDate *birtadyDay;
 @end

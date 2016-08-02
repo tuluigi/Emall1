@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
 };
 
 @interface EMLoginViewController ()<UITextFieldDelegate>
-@property (nonatomic,copy)NSString *userName,*userPwd,*repatePwd;
+@property (nonatomic,copy)NSString *userName,*userPwd,*repatePwd,*email;
 @property (nonatomic,copy)EMLoginCompletionBlock loginCompletionBlock;
 @property  (nonatomic,copy)EMRegisterCompletionBlock registerCompletionBloc;
 @property (nonatomic,assign)EMLoginViewControllerType loginType;
@@ -146,6 +146,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
 - (void)doRegister{
     if ([NSString isNilOrEmptyForString:self.userName]) {
         [self.view showHUDMessage:@"请输入用户名"];
+    }else if ([NSString isNilOrEmptyForString:self.email]){
+        [self.view showHUDMessage:@"请输入邮箱"];
+    }else if (![self.email isValidateEmail]){
+        [self.view showHUDMessage:@"请输入正确邮箱"];
     }else if ([NSString isNilOrEmptyForString:self.userPwd]){
         [self.view showHUDMessage:@"请输入密码"];
     }else if ([NSString isNilOrEmptyForString:self.repatePwd]){
@@ -162,7 +166,13 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    NSInteger row=0;
+    if (self.loginType==EMLoginViewControllerTypeLogin) {
+        row=4;
+    }else if (self.loginType==EMLoginViewControllerTypeRegister){
+        row=5;
+    }
+    return row;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
@@ -256,13 +266,16 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
             if (indexPath.row==0) {
                 textField.placeholder=@"  用户名";
             }else if (indexPath.row==1){
+                textField.placeholder=@"  邮箱";
+                textField.secureTextEntry=YES;
+            }else if (indexPath.row==2){
                 textField.placeholder=@"  密码";
                 textField.secureTextEntry=YES;
-            }else if (indexPath.row==2&&self.loginType==EMLoginViewControllerTypeRegister){
+            }else if (indexPath.row==3&&self.loginType==EMLoginViewControllerTypeRegister){
                 textField.placeholder=@"  重复密码";
                 textField.secureTextEntry=YES;
             }
-        }else if (indexPath.row==3){
+        }else if (indexPath.row==4){
             NSString *identifer=@"LoginButton";
             cell=[tableView dequeueReusableCellWithIdentifier:identifer];
             if (nil==cell) {
@@ -328,8 +341,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
         if (indexPath.row==0) {
             self.userName=textField.text;
         }else if (indexPath.row==1){
+            self.email=textField.text;
+        }else if (indexPath.row==2){
             self.userPwd=textField.text;
-        }else if (indexPath.row==1){
+        }else if (indexPath.row==3){
             self.repatePwd=textField.text;
         }
     }
