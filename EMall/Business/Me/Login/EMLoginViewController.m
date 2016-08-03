@@ -9,6 +9,7 @@
 #import "EMLoginViewController.h"
 #import "UITextField+IndexPath.h"
 #import "EMMeNetService.h"
+#import "UITextField+HiddenKeyBoardButton.h"
 @interface EMLoginHeadView :UIView
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UILabel *label;
@@ -215,7 +216,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
                 textField.textAlignment=NSTextAlignmentLeft;
                 textField.tag=1000;
                 textField.font=[UIFont oc_systemFontOfSize:15];
+                [textField setAutocorrectionType:UITextAutocorrectionTypeNo];
+                [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
                 [cell.contentView addSubview:textField];
+                [textField addHiddenKeyBoardInputAccessView];
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(25)));
                 }];
@@ -288,16 +292,19 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(25)));
                 }];
+                   [textField addHiddenKeyBoardInputAccessView];
                 textField.layer.cornerRadius=10;
                 textField.layer.masksToBounds=YES;
                 textField.layer.borderColor=ColorHexString(@"#b7b7b7").CGColor;
                 textField.layer.borderWidth=0.5;
-                
+                [textField setAutocorrectionType:UITextAutocorrectionTypeNo];
+                [textField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
                 UIView *leftView=[UIView new];
                 leftView.backgroundColor=[UIColor whiteColor];
                 leftView.frame=CGRectMake(0, 0, 15, 35);
                 textField.leftView=leftView;
                 textField.leftViewMode=UITextFieldViewModeAlways;
+                
             }
             UITextField *textField=(UITextField *)[cell viewWithTag:1000];
             textField.indexPath=indexPath;

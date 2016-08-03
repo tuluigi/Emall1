@@ -16,6 +16,7 @@
 #import "EMShoppingAddressListController.h"
 #import "EMOrderHomeListController.h"
 #import "EMMeNetService.h"
+#import "EMMeInfoViewController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -211,7 +212,11 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 #pragma  mark - getter
 - (EMMEHeadView *)headView{
     if (nil==_headView) {
-        _headView=[EMMEHeadView meHeadView];
+        _headView=[EMMEHeadView meHeadViewOnTapedBlock:^{
+            EMMeInfoViewController *infoController=[[EMMeInfoViewController alloc] init];
+            infoController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:infoController animated:YES];
+        }];
     }
     return _headView;
 }

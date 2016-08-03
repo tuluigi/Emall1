@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^EMMeHeadViewDidTapBlock)(void);
+
 @interface EMMEHeadView : UIView
 - (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level;
-+ (EMMEHeadView *)meHeadView;
++ (EMMEHeadView *)meHeadViewOnTapedBlock:(EMMeHeadViewDidTapBlock)block;
 @end

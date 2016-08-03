@@ -14,6 +14,7 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
 @interface EMMEHeadView ()
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UILabel *nameLable;
+@property (nonatomic,copy)EMMeHeadViewDidTapBlock tapBlock;
 @end
 
 @implementation EMMEHeadView
@@ -39,12 +40,20 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
         make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(EMMeHeaderViewIconTop));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(EMMeHeaderViewIconWidth), OCUISCALE(EMMeHeaderViewIconWidth)));
     }];
-    _headImageView.layer.cornerRadius=OCUISCALE(80/2.0);
+    _headImageView.layer.cornerRadius=OCUISCALE(EMMeHeaderViewIconWidth/2.0);
     _headImageView.layer.masksToBounds=YES;
     [_nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.headImageView.mas_right).offset(OCUISCALE(10));
         make.centerY.mas_equalTo(weakSelf.headImageView.mas_centerY);
     }];
+    _headImageView.userInteractionEnabled=YES;
+    _nameLable.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGeusture)];
+    [self.headImageView addGestureRecognizer:tapGesture];
+    
+    UITapGestureRecognizer *tapGesture1=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGeusture)];
+    [self.nameLable addGestureRecognizer:tapGesture1];
+
 }
 - (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level{
     [_headImageView sd_setImageWithURL:[NSURL URLWithString:headImageUrl] placeholderImage:EMDefaultImage];
@@ -53,10 +62,16 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
 + (CGFloat)headViewHeight{
     return OCUISCALE(OCUISCALE(EMMeHeaderViewIconTop+EMMeHeaderViewIconWidth+EMMeHeaderViewIconBottom));
 }
-+ (EMMEHeadView *)meHeadView{
++ (EMMEHeadView *)meHeadViewOnTapedBlock:(EMMeHeadViewDidTapBlock)block{
     EMMEHeadView *headView=[[EMMEHeadView alloc]  init];
+    headView.tapBlock=block;
 //    headView.frame=CGRectMake(0, 0, OCWidth, [EMMEHeadView headViewHeight]);
     return headView;
+}
+- (void)handleTapGeusture{
+    if (self.tapBlock) {
+        self.tapBlock();
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.
