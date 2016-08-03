@@ -16,8 +16,5 @@
 @property (nonatomic,assign)NSInteger level;
 @property (nonatomic,strong)NSDate *birtadyDay;
 
-/**
- *  存储用户信息
- */
-- (void)syncStorgeUserInfo;
+
 @end

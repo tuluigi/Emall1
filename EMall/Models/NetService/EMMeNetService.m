@@ -8,6 +8,7 @@
 
 #import "EMMeNetService.h"
 #import "EMUserModel.h"
+#import "EMPersistence.h"
 @implementation EMMeNetService
 + (NSURLSessionTask *)userRegisterWithUserName:(NSString *)name
                                          email:(NSString *)email
@@ -31,11 +32,22 @@
       NSDictionary *postDic=@{@"member.user_name":stringNotNil(name),@"member.password":stringNotNil(pwd)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMUserModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [EMPersistence persistenceWithUserModel:responseResult.responseData];
+                [[NSNotificationCenter defaultCenter] postNotificationName:OCLoginSuccessNofication object:nil];
+            }
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }
         }];
     }];
     return task;
+}
++ (void)userLogoutOnCompletionBlock:(void(^)())completionBlock{
+    [EMPersistence userLogou];
+     [[NSNotificationCenter defaultCenter] postNotificationName:OCLogoutNofication object:nil];
+    if (completionBlock) {
+        completionBlock();
+    }
 }
 @end

@@ -74,7 +74,7 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/EMGoodsDetailViewController.m"
-                  timestampString = "491892657.191715"
+                  timestampString = "491913956.161065"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -89,7 +89,7 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/EMGoodsDetailViewController.m"
-                  timestampString = "491892657.191825"
+                  timestampString = "491913956.161178"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMMeNetService.m"
-            timestampString = "491892657.006601"
+            filePath = "EMall/Util/Helper/EMPersistence.m"
+            timestampString = "491913770.475287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "+userLoginWithUserName:pwd:OnCompletionBlock:"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "+persistenceWithUserModel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,14 +121,78 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMMeNetService.m"
-            timestampString = "491892658.174738"
+            filePath = "EMall/Util/Helper/EMPersistence.m"
+            timestampString = "491913772.067159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "+userLoginWithUserName:pwd:OnCompletionBlock:"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "+persistenceWithUserModel:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Util/Helper/EMPersistence.m"
+            timestampString = "491914097.002218"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "+localUserModel"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Business/Me/EMMeViewController.m"
+            timestampString = "491914011.19692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EMMeViewController tableView:didSelectRowAtIndexPath:]"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/EMMeViewController.m"
+                  timestampString = "491913956.165099"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "356">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__56-[EMMeViewController tableView:didSelectRowAtIndexPath:]_block_invoke"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/EMMeViewController.m"
+                  timestampString = "491913956.165197"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

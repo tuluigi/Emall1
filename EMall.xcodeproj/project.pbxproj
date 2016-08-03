@@ -41,9 +41,11 @@
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
 		2A6389A11D51917E0059F350 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6389A01D51917E0059F350 /* NSString+Encrypt.m */; };
-		2A6389A41D51B7AC0059F350 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6389A31D51B7AC0059F350 /* RunInfo.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
+		2A7583E21D51E943008E1B57 /* EMPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E11D51E943008E1B57 /* EMPersistence.m */; };
+		2A7583E51D51FAC4008E1B57 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E31D51FAC4008E1B57 /* RunInfo.m */; };
+		2A7583E81D52008C008E1B57 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */; };
 		2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */; };
 		2A87D56E1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87D56D1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m */; };
 		2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */; };
@@ -215,13 +217,17 @@
 		2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentModel.m; sourceTree = "<group>"; };
 		2A63899F1D51917E0059F350 /* NSString+Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encrypt.h"; sourceTree = "<group>"; };
 		2A6389A01D51917E0059F350 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
-		2A6389A21D51B7AC0059F350 /* RunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunInfo.h; sourceTree = "<group>"; };
-		2A6389A31D51B7AC0059F350 /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
 		2A6389A51D51B8700059F350 /* CCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSingleton.h; sourceTree = "<group>"; };
 		2A6ABB751D2FBAA600DE47B0 /* EMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMLoginViewController.h; sourceTree = "<group>"; };
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
+		2A7583E01D51E943008E1B57 /* EMPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMPersistence.h; sourceTree = "<group>"; };
+		2A7583E11D51E943008E1B57 /* EMPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMPersistence.m; sourceTree = "<group>"; };
+		2A7583E31D51FAC4008E1B57 /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
+		2A7583E41D51FAC4008E1B57 /* RunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunInfo.h; sourceTree = "<group>"; };
+		2A7583E61D52008C008E1B57 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		2A87D5691D3CDD2900D7DBEA /* OCMutableSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMutableSelectionCell.h; sourceTree = "<group>"; };
 		2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCMutableSelectionCell.m; sourceTree = "<group>"; };
 		2A87D56C1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HiddenKeyBoardButton.h"; sourceTree = "<group>"; };
@@ -634,8 +640,6 @@
 				2ADF609A1D31D60B00DF757B /* EMUserModel.m */,
 				2A4AA9631D4878CD008A323A /* EMGoodsCommentModel.h */,
 				2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */,
-				2A6389A21D51B7AC0059F350 /* RunInfo.h */,
-				2A6389A31D51B7AC0059F350 /* RunInfo.m */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -685,6 +689,17 @@
 				2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		2A7583DF1D51E90D008E1B57 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2A7583E41D51FAC4008E1B57 /* RunInfo.h */,
+				2A7583E31D51FAC4008E1B57 /* RunInfo.m */,
+				2A7583E01D51E943008E1B57 /* EMPersistence.h */,
+				2A7583E11D51E943008E1B57 /* EMPersistence.m */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		2A87D5671D3CDD2200D7DBEA /* View */ = {
@@ -815,6 +830,7 @@
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				2A7583DF1D51E90D008E1B57 /* Helper */,
 				2A87D5671D3CDD2200D7DBEA /* View */,
 				2A99EB4F1D3B1D850024E924 /* ThirdLib */,
 				2ADF600B1D27C59C00DF757B /* Category */,
@@ -864,6 +880,8 @@
 		2ADF600F1D27C59C00DF757B /* NSDate */ = {
 			isa = PBXGroup;
 			children = (
+				2A7583E61D52008C008E1B57 /* NSData+CommonCrypto.h */,
+				2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */,
 				2ADF60101D27C59C00DF757B /* NSDate+Category.h */,
 				2ADF60111D27C59C00DF757B /* NSDate+Category.m */,
 			);
@@ -1301,6 +1319,7 @@
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
 				2A99EB401D3A6C860024E924 /* OCUTableViewDetailTextCell.m in Sources */,
 				2A99EB701D3B3C200024E924 /* EMOrderListCell.m in Sources */,
+				2A7583E21D51E943008E1B57 /* EMPersistence.m in Sources */,
 				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
 				2ADF604C1D27C59C00DF757B /* UILabel+Category.m in Sources */,
 				2ADF604F1D27C59C00DF757B /* UIViewController+OCTopBarMessage.m in Sources */,
@@ -1335,11 +1354,11 @@
 				2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */,
 				2ADF609B1D31D60B00DF757B /* EMUserModel.m in Sources */,
 				2ADF60431D27C59C00DF757B /* NSDate+Category.m in Sources */,
+				2A7583E81D52008C008E1B57 /* NSData+CommonCrypto.m in Sources */,
 				2ADF60471D27C59C00DF757B /* NSString+VideoDuration.m in Sources */,
 				2ADF604E1D27C59C00DF757B /* UIViewController+OCImagePickerAuthorization.m in Sources */,
 				2A0352081D1A3FAE002BE7B7 /* EMHomeViewController.m in Sources */,
 				2ADF60531D27C59C00DF757B /* UIView+OCPageLoad.m in Sources */,
-				2A6389A41D51B7AC0059F350 /* RunInfo.m in Sources */,
 				2A99EB431D3A6C860024E924 /* OCUTableViewTextViewCell.m in Sources */,
 				2A03520B1D1A3FBA002BE7B7 /* EMMeViewController.m in Sources */,
 				2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */,
@@ -1365,6 +1384,7 @@
 				2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */,
 				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
 				2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */,
+				2A7583E51D51FAC4008E1B57 /* RunInfo.m in Sources */,
 				2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */,
 				2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */,
 				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,

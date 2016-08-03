@@ -15,7 +15,7 @@
 
 @interface RunInfo : NSObject
 CC_DECLARE_SINGLETON_FOR_CLASS(RunInfo)
-@property (nonatomic,assign,readonly)BOOL isLogin;
+@property (nonatomic,assign,readonly)BOOL isLogined;
 @property(nonatomic,assign) NSInteger userID;
 @property(nonatomic,copy)   NSString *userName;
 @property(nonatomic,copy)   NSString *avatar;
