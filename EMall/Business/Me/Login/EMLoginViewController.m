@@ -8,6 +8,7 @@
 
 #import "EMLoginViewController.h"
 #import "UITextField+IndexPath.h"
+#import "EMMeNetService.h"
 @interface EMLoginHeadView :UIView
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UILabel *label;
@@ -140,7 +141,19 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     }else if ([NSString isNilOrEmptyForString:self.userPwd]){
         [self.view showHUDMessage:@"请输入密码"];
     }else{
-        
+        WEAKSELF
+        [self.view showHUDLoading];
+        NSURLSessionTask *task=[EMMeNetService userLoginWithUserName:self.userName pwd:[self.userPwd md5String] OnCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [weakSelf.view dismissHUDLoading];
+                [weakSelf dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }else{
+                [weakSelf.view showHUDMessage:responseResult.responseMessage];
+            }
+        }];
+        [self addSessionTask:task];
     }
 }
 - (void)doRegister{
@@ -157,7 +170,16 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     }else if(![self.userPwd isEqualToString:self.repatePwd]){
         [self.view showHUDMessage:@"两次输入密码不一样!"];
     }else{
-        
+        WEAKSELF
+        [self.view showHUDLoading];
+       NSURLSessionTask *task=[EMMeNetService userRegisterWithUserName:self.userName email:self.email pwd:[self.userPwd md5String] OnCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [weakSelf.view showHUDMessage:@"注册成功请登录"];
+            }else{
+                [weakSelf.view showHUDMessage:responseResult.responseMessage];
+            }
+        }];
+        [self addSessionTask:task];
     }
 }
 
@@ -241,7 +263,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
             }
         }
     }else if (self.loginType==EMLoginViewControllerTypeRegister) {
-        if (indexPath.row==0||indexPath.row==1||indexPath.row==2) {
+        if (indexPath.row<=3) {
             NSString *identifer=@"LoginUserNamePwdCell";
             cell=[tableView dequeueReusableCellWithIdentifier:identifer];
             if (nil==cell) {
@@ -318,7 +340,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.loginType==EMLoginViewControllerTypeRegister) {
-        if (indexPath.row==3) {
+        if (indexPath.row==4) {
             [self.view endEditing:YES];
             [self doRegister];
         }

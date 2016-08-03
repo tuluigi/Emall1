@@ -9,11 +9,10 @@
 #import "UIView+OCPageLoad.h"
 #import "OCPageLoadAnimationView.h"
 #import "OCPageLoadView.h"
-#import "SVProgressHUD.h"
 static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewPropertyKey";
 @implementation UIView (OCPageLoad)
 -(void)showPageLoadingData:(NSDictionary  *)dic{
-
+    
 }
 -(void)showPageLoadingView:(CGRect)frame{
     NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
@@ -28,7 +27,7 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     
 }
 -(void)showOCPageLoadViewData:(NSDictionary *)dic frame:(CGRect)frame delegate:(id)delegate{
-     OCPageLoadAnimationView *pageLoadView=[self pageLoadView];
+    OCPageLoadAnimationView *pageLoadView=[self pageLoadView];
     if (CGRectEqualToRect(CGRectZero, pageLoadView.frame)||CGRectIsEmpty(pageLoadView.frame)) {
         if (CGRectIsEmpty(frame)||CGRectEqualToRect(CGRectZero, frame)) {
             if (pageLoadView.superview) {
@@ -45,7 +44,7 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     if (CGRectIsEmpty(frame)||CGRectEqualToRect(CGRectZero, frame)) {
         frame=self.bounds;
     }
-     customeView.frame=frame;
+    customeView.frame=frame;
     if ([customeView isKindOfClass:[OCPageLoadView class]]) {
         [(OCPageLoadView *)customeView showLoadingViewInView:self delegate:delegate];
     }
@@ -124,7 +123,7 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     }
 }
 -(OCPageLoadAnimationView *)pageLoadView{
-   __block OCPageLoadAnimationView *pageView;
+    __block OCPageLoadAnimationView *pageView;
     pageView=(OCPageLoadAnimationView *)[self currentPageLoadView];
     if (nil==pageView) {
         pageView=[OCPageLoadAnimationView defaultPageLoadView];
@@ -146,36 +145,37 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     if (nil==hud) {
         hud =  [[MBProgressHUD alloc]  initWithView:self];
         hud.removeFromSuperViewOnHide = YES;
-        hud.mode=MBProgressHUDModeText;
         hud.margin=10;
-        hud.opaque=0.6;
+        hud.color=RGB(52, 53, 55);
+        hud.labelFont=[UIFont oc_systemFontOfSize:15];
         [self addSubview:hud];
     }
     return hud;
 }
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset{
     MBProgressHUD *hudView=[self hudView];
+    hudView.mode=MBProgressHUDModeText;
     [hudView setLabelText:message];
     hudView.yOffset=yOffset;
-     [hudView show:YES];
+    [hudView show:YES];
     [hudView hide:YES afterDelay:1.5];
 }
 -(void)showHUDMessage:(NSString *)message{
     [self showHUDMessage:message yOffset:0];
 }
 -(void)showHUDLoading{
-    [SVProgressHUD setForegroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
-//    [MBProgressHUD showExcutingHUDForView:self labelText:@"请稍后..." detailLabelText:nil yOffset:0 delegate:nil];
+    [self showHUDLoadingWithMessage:@"请稍后..."];
 }
 -(void)showHUDLoadingWithMessage:(NSString *)message{
-[SVProgressHUD showWithStatus:message maskType:SVProgressHUDMaskTypeNone];
+    MBProgressHUD *hudView=[self hudView];
+    hudView.mode=MBProgressHUDModeIndeterminate;
+    hudView.labelText=message;
+    [hudView show:YES];
 }
 -(void)dismissHUDLoading{
-    [SVProgressHUD dismiss];
     [MBProgressHUD hideAllHUDsForView:self animated:YES];
 }
 -(void)dismissHUDLoadingAnimated:(CGFloat)animated{
-    [SVProgressHUD dismiss];
-   [MBProgressHUD hideAllHUDsForView:self animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self animated:YES];
 }
 @end

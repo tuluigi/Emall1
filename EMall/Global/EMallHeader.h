@@ -27,6 +27,7 @@
 #import "UIColor+ILHexStringColor.h"
 #import "UIImageView+EduUtils.h"
 #import "NSString+Utility.h"
+#import "NSString+Encrypt.h"
 #import "UILabel+Category.h"
 #import "UIButton+Category.h"
 #import "UIColor+ILHexStringColor.h"

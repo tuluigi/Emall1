@@ -16,8 +16,7 @@
  * Returns a URL Encoded String
  */
 
-- (NSString *)URLEncodedString;
-- (NSString *)URLDecodedString;
+
 - (NSString *)removeSpaceOfTyping;
 
 
@@ -30,7 +29,5 @@
 + (NSUInteger)numberOfMatchesNonChineseCharacterSetInString:(NSString *)aString;
 
 
-- (NSString *)encode64String;
 
-- (NSString *)decodedWith64String;
 @end

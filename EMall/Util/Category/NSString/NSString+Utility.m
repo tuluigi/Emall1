@@ -17,24 +17,7 @@
 }
 
 
-- (NSString *)URLEncodedString
-{
-    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                             (CFStringRef)self,
-                                                                                             NULL,
-                                                                                             CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                                             kCFStringEncodingUTF8));
-    return result;
-}
 
-- (NSString *)URLDecodedString
-{
-    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-                                                                                                             (CFStringRef)self,
-                                                                                                             CFSTR(""),
-                                                                                                             kCFStringEncodingUTF8));
-    return result;
-}
 
 
 - (NSString *)removeSpaceOfTyping {
@@ -136,18 +119,7 @@
 	int h = (seconds - s - m*60)/3600;
 	return [NSString stringWithFormat:@"%02d:%02d:%02d",h,m,s];
 }
-- (NSString *)encode64String
-{
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *base64String = [data base64EncodedStringWithOptions:0];
-    return base64String;
-}
-- (NSString *)decodedWith64String
-{
-    NSData *dataFrom64String = [[NSData alloc] initWithBase64EncodedString:self options:0];
-    NSString *base64DecodeString = [[NSString alloc] initWithData:dataFrom64String encoding:NSUTF8StringEncoding];
-    return base64DecodeString;
-}
+
 
 
 @end
