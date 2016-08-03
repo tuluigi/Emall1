@@ -13,7 +13,7 @@
                                          email:(NSString *)email
                                            pwd:(NSString *)pwd
                              OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"register"];
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/register"];
     NSDictionary *postDic=@{@"member.user_name":stringNotNil(name),@"member.e_mail":stringNotNil(email),@"member.password":stringNotNil(pwd)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
@@ -27,7 +27,7 @@
 + (NSURLSessionTask *)userLoginWithUserName:(NSString *)name
                                         pwd:(NSString *)pwd
                           OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"login"];
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/login"];
       NSDictionary *postDic=@{@"member.user_name":stringNotNil(name),@"member.password":stringNotNil(pwd)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMUserModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {

@@ -14,4 +14,5 @@ pod 'SVProgressHUD', '~> 1.1.3'
 pod 'CocoaLumberjack', '~> 2.3.0'
 pod 'TPKeyboardAvoiding', '~> 1.3'
 pod 'JSBadgeView', '~> 1.4.1'
+pod 'AESCrypt', '~> 0.0.1'
 end

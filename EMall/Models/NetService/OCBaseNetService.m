@@ -39,5 +39,15 @@
     }
   
 }
-
+static NSString const *DomainHost  = @"http://45.118.132.56:8081/";
++(NSString *)urlWithSuffixPath:(NSString *)str{
+    if (str&&str.length) {
+        if ([str hasPrefix:@"http://"]||[str hasPrefix:@"https://"]||[str hasPrefix:@"www."]) {
+            
+        }else{
+            str=[NSString stringWithFormat:@"%@%@",DomainHost,str];
+        }
+    }
+    return str;
+}
 @end

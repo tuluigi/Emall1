@@ -66,13 +66,6 @@
  *  @param tasks task
  */
 - (void )cancleSessionTasks:(NSArray *)tasks;
-/**
- *  根据默认域名生成完整接口地址
- *
- *  @param str 接口名称部分
- *
- *  @return 完整接口地址
- */
-+(NSString *)urlWithSuffixPath:(NSString *)str;
+
 @end
 #endif

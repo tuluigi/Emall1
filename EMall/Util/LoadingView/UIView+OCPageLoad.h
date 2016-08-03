@@ -71,6 +71,13 @@
 -(OCPageLoadView *)currentPageLoadView;
 
 #pragma mark - 文本提示
+/**
+ *  hud隐藏之后block
+ *
+ *  @param message
+ *  @param completionBlock
+ */
+-(void)showHUDMessage:(NSString *)message completionBlock:(void (^)())completionBlock;
 -(void)showHUDMessage:(NSString *)message;
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset;
 -(void)showHUDLoading;

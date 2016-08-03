@@ -14,7 +14,7 @@
 #import "Mantle.h"
 #import "MBProgressHUD.h"
 #import "CocoaLumberjack.h"
-
+#import "CCSingleton.h"
 
 #pragma mark --Util
 #import "OCUIUtil.h"

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AESCrypt.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,16 +87,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>00B859436EEE1CFC689FA6E30589BF27</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>08C909A91D95D9818B440D7FA3DE790C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
 		<dict>
 			<key>primary</key>
@@ -102,12 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>179328CD3872A0EE82965E8FD0C8F12E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>29852B71914AA2E261D18F89DE5A907F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3569F4634BC2F4879FBBC65AAA42A359</key>
+		<key>34D76A9228E7A33833D2E1373663E387</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4167F39DD56398D865B71ED1A874F18D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,7 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>604D9747403A77A000EF9E5627BE8670</key>
+		<key>5EF62D6105ED2E41FBA3D0AA1BA883AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,17 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B0EF7D17975F661DDF21D7F3C97F2B44</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BCCC0F4081C473B2448DD2FB829E748C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA6E9ECC56FF225192F9A020973F248F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE51040EBB0A716A92205F1FD0873153</key>
+		<key>E38E3E6D40178D191C29F698C6D7F8B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FEEE4BC2661608A66ED860824D5B252D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

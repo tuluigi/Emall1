@@ -15,4 +15,9 @@
 @property(nonatomic,copy)NSString *email,*tel,*nickName,*gender;
 @property (nonatomic,assign)NSInteger level;
 @property (nonatomic,strong)NSDate *birtadyDay;
+
+/**
+ *  存储用户信息
+ */
+- (void)syncStorgeUserInfo;
 @end

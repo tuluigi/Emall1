@@ -174,7 +174,12 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
         [self.view showHUDLoading];
        NSURLSessionTask *task=[EMMeNetService userRegisterWithUserName:self.userName email:self.email pwd:[self.userPwd md5String] OnCompletionBlock:^(OCResponseResult *responseResult) {
             if (responseResult.responseCode==OCCodeStateSuccess) {
-                [weakSelf.view showHUDMessage:@"注册成功请登录"];
+                [weakSelf.view showHUDMessage:@"注册成功,请登录!" completionBlock:^{
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       [weakSelf.navigationController popViewControllerAnimated:YES];
+                   });
+                }];
+               
             }else{
                 [weakSelf.view showHUDMessage:responseResult.responseMessage];
             }
@@ -273,7 +278,7 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
                 textField.delegate=self;
                 textField.textAlignment=NSTextAlignmentLeft;
                 textField.tag=1000;
-                textField.font=[UIFont oc_systemFontOfSize:13];
+                textField.font=[UIFont oc_systemFontOfSize:15];
                 [cell.contentView addSubview:textField];
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.edges.mas_equalTo(UIEdgeInsetsMake(0, OCUISCALE(25), OCUISCALE(5), OCUISCALE(25)));
@@ -282,14 +287,21 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
                 textField.layer.masksToBounds=YES;
                 textField.layer.borderColor=ColorHexString(@"#b7b7b7").CGColor;
                 textField.layer.borderWidth=0.5;
+                
+                UIView *leftView=[UIView new];
+                leftView.backgroundColor=[UIColor whiteColor];
+                leftView.frame=CGRectMake(0, 0, 10, 35);
+                textField.leftView=leftView;
+                textField.leftViewMode=UITextFieldViewModeAlways;
             }
             UITextField *textField=(UITextField *)[cell viewWithTag:1000];
             textField.indexPath=indexPath;
             if (indexPath.row==0) {
                 textField.placeholder=@"  用户名";
+                textField.secureTextEntry=NO;
             }else if (indexPath.row==1){
                 textField.placeholder=@"  邮箱";
-                textField.secureTextEntry=YES;
+                textField.secureTextEntry=NO;
             }else if (indexPath.row==2){
                 textField.placeholder=@"  密码";
                 textField.secureTextEntry=YES;

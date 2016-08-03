@@ -152,6 +152,12 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
     }
     return hud;
 }
+-(void)showHUDMessage:(NSString *)message completionBlock:(void (^)())completionBlock{
+    MBProgressHUD *hudView=[self hudView];
+    hudView.completionBlock=completionBlock;
+    [self showHUDMessage:message];
+
+}
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset{
     MBProgressHUD *hudView=[self hudView];
     hudView.mode=MBProgressHUDModeText;

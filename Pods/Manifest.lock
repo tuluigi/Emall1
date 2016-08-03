@@ -1,4 +1,5 @@
 PODS:
+  - AESCrypt (0.0.1)
   - AFNetworking (3.1.0):
     - AFNetworking/NSURLSession (= 3.1.0)
     - AFNetworking/Reachability (= 3.1.0)
@@ -39,6 +40,7 @@ PODS:
   - UITableView+FDTemplateLayoutCell (1.4)
 
 DEPENDENCIES:
+  - AESCrypt (~> 0.0.1)
   - AFNetworking (~> 3.1.0)
   - CocoaLumberjack (~> 2.3.0)
   - FXBlurView (~> 1.6.4)
@@ -54,6 +56,7 @@ DEPENDENCIES:
   - UITableView+FDTemplateLayoutCell (~> 1.3)
 
 SPEC CHECKSUMS:
+  AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
@@ -68,6 +71,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
-PODFILE CHECKSUM: 0825a878e6b7d85a6f972301c6a1efa3b40909c6
+PODFILE CHECKSUM: 67164c584a4f30cfd4da5d4b7b23f3732f2e5a00
 
 COCOAPODS: 1.0.1

@@ -12,7 +12,8 @@
 #import "EMHomeModel.h"
 @implementation EMHomeNetService
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"homeSpread"];
+//    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"homeSpread"];
+    NSString *apiPath=@"http://static.duapp.com/app/shopping/api/homeSpread";
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAdModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
@@ -31,7 +32,8 @@
  *  @return
  */
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock{
-    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"home"];
+//    NSString *apiPath=[OCNetSessionManager urlWithSuffixPath:@"home"];
+NSString *apiPath=@"http://static.duapp.com/app/shopping/api/home";
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (completionBlock) {
