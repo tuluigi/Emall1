@@ -19,6 +19,7 @@
 		2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0352131D1A4464002BE7B7 /* EMMEHeadView.m */; };
 		2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */; };
 		2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09402D1D2B9700005BB84D /* EMHomeNetService.m */; };
+		2A0FD4161D52E5A800D575E3 /* EMImagePickBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FD4151D52E5A800D575E3 /* EMImagePickBrowserHelper.m */; };
 		2A13F6FD1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */; };
 		2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */; };
 		2A13F7061D48F5250041D2C5 /* EMGoodsSpecView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7051D48F5250041D2C5 /* EMGoodsSpecView.m */; };
@@ -175,6 +176,8 @@
 		2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeHeadReusableView.m; sourceTree = "<group>"; };
 		2A09402C1D2B9700005BB84D /* EMHomeNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeNetService.h; sourceTree = "<group>"; };
 		2A09402D1D2B9700005BB84D /* EMHomeNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeNetService.m; sourceTree = "<group>"; };
+		2A0FD4141D52E5A800D575E3 /* EMImagePickBrowserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMImagePickBrowserHelper.h; sourceTree = "<group>"; };
+		2A0FD4151D52E5A800D575E3 /* EMImagePickBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMImagePickBrowserHelper.m; sourceTree = "<group>"; };
 		2A13F6FB1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsInfoTableViewCell.h; sourceTree = "<group>"; };
 		2A13F6FC1D47A31F0041D2C5 /* EMGoodsInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsInfoTableViewCell.m; sourceTree = "<group>"; };
 		2A13F6FE1D47B0070041D2C5 /* EMGoodsDetialBootmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetialBootmView.h; sourceTree = "<group>"; };
@@ -717,6 +720,8 @@
 				2A7583E31D51FAC4008E1B57 /* RunInfo.m */,
 				2A7583E01D51E943008E1B57 /* EMPersistence.h */,
 				2A7583E11D51E943008E1B57 /* EMPersistence.m */,
+				2A0FD4141D52E5A800D575E3 /* EMImagePickBrowserHelper.h */,
+				2A0FD4151D52E5A800D575E3 /* EMImagePickBrowserHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1402,6 +1407,7 @@
 				2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */,
 				2A13F7091D50E01A0041D2C5 /* EMMeNetService.m in Sources */,
 				2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */,
+				2A0FD4161D52E5A800D575E3 /* EMImagePickBrowserHelper.m in Sources */,
 				2ADF60861D28B3FC00DF757B /* EMOrderModel.m in Sources */,
 				2ADF60FF1D328BFA00DF757B /* EMServiceController.m in Sources */,
 				2A99EB491D3A6C860024E924 /* OCTableCellSwitchModel.m in Sources */,

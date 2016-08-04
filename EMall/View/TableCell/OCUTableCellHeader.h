@@ -15,7 +15,7 @@
 #import "OCTableCellButtonModel.h"
 #import "OCTableCellTextFiledModel.h"
 #import "OCTableCellTextViewModel.h"
-
+#import "OCTableCellRightImageModel.h"
 
 
 #import "OCUTableViewCell.h"
@@ -25,6 +25,8 @@
 #import "OCUTableViewButtonCell.h"
 #import "OCUTableViewTextFieldCell.h"
 #import "OCUTableViewTextViewCell.h"
+#import "OCUTableViewRightImageCell.h"
+
 
 #import "OCUTableCellDelegate.h"
 

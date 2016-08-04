@@ -14,6 +14,7 @@
 
 @implementation OCUTableViewRightImageCell
 - (void)onInitContentView{
+    [super onInitContentView];
     _rightImageView=[UIImageView new];
     _rightImageView.contentMode=UIViewContentModeScaleAspectFill;
     _rightImageView.clipsToBounds=YES;
@@ -24,8 +25,24 @@
         make.centerY.mas_equalTo(weakSelf.contentView.mas_centerY);
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(10);
         make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(-10);
-        make.height.mas_equalTo(make.width);
+        make.height.mas_equalTo(_rightImageView.mas_width);
     }];
+}
+
+-(void)setCellModel:(OCTableCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    OCTableCellRightImageModel *model = (OCTableCellRightImageModel *)cellModel;
+    if ([NSString isNilOrEmptyForString:model.imageUrl]) {
+        self.rightImageView.image=[UIImage imageNamed:model.placeholderImageUrl];
+    }else{
+    if ([model.imageUrl hasPrefix:@"http://"]||[model.imageUrl hasPrefix:@"https://"]) {
+        [_rightImageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:model.placeholderImageUrl]];
+    }else if ([model.imageUrl hasPrefix:NSHomeDirectory()]){
+        _rightImageView.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:model.imageUrl]]];
+    }else{
+        _rightImageView.image=[UIImage imageNamed:model.imageUrl];
+    }
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

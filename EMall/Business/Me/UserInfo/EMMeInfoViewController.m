@@ -8,7 +8,7 @@
 
 #import "EMMeInfoViewController.h"
 #import "OCUTableCellHeader.h"
-
+#import "EMImagePickBrowserHelper.h"
 typedef NS_ENUM(NSInteger,EMMeUserInfoItem) {
     EMMeUserInfoItemNickName        =10,
     EMMeUserInfoItemGender      ,
@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"个人资料";
     
-    OCTableCellTextFiledModel *avatarModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"头像" imageName:[RI  avatar] accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemAvtar];
+    OCTableCellRightImageModel *avatarModel=[[OCTableCellRightImageModel alloc]  initWithTitle:@"头像" imageName:[RI  avatar] accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemAvtar];
+    avatarModel.placeholderImageUrl=EMDefaultImageName;
     OCTableCellTextFiledModel *nickNameModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"昵称" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemNickName];
    OCTableCellDetialTextModel *genderModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"性别" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
     genderModel.detailText=@"男";
@@ -86,14 +87,14 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     
     return cell;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    OCTableCellModel *cellModel=[[self.dataSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-//    CGFloat height= OCUISCALE(44);
-////    if (cellModel.type==EMUserTableCellModelTypeOrderState) {
-////        height=[EMMeOrderStateCell orderStateCellHeight];
-////    }
-//    return height;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    OCTableCellModel *cellModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    CGFloat height= OCUISCALE(44);
+    if (cellModel.type==EMMeUserInfoItemAvtar) {
+        height=OCUISCALE(60);
+    }
+    return height;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OCTableCellModel *cellModel=[self.dataSourceArray  objectAtIndex:indexPath.row];
@@ -116,7 +117,10 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
             
         }];
     }else if (cellModel.type==EMMeUserInfoItemAvtar){
-    alertController.title=@"";
+        alertController.title=@"";
+        [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
+            
+        }];
     }
 }
 
