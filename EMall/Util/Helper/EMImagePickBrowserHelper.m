@@ -36,6 +36,7 @@ MWPhotoBrowserDelegate,UIImagePickerControllerDelegate>
     return self;
 }
 + (void)showImagePickerOnController:(UIViewController *)controller takeType:(EMTakePictureType)takePictureType onCompletionBlock:(EMImagePickerCompletionBlock)completionBlock{
+    [EMImagePickBrowserHelper sharedHelper].imagePickerCompletionBlock=completionBlock;
     if (takePictureType==EMTakePictureTypeCamrea) {//相机
         BOOL isAvable=[UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
         if (isAvable) {
@@ -113,12 +114,12 @@ MWPhotoBrowserDelegate,UIImagePickerControllerDelegate>
         }
     }else if (takePictureType==EMTakePictureTypeAll){//相机和相册
         
-        UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"上传图片" message:nil
+        UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"" message:nil
                                                                         preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *menAction=[UIAlertAction actionWithTitle:@"拍照上传" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [EMImagePickBrowserHelper showImagePickerOnController:controller takeType:EMTakePictureTypeCamrea onCompletionBlock:completionBlock];
         }];
-        UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"拍照上传" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"相册上传" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
              [EMImagePickBrowserHelper showImagePickerOnController:controller takeType:EMTakePictureTypePhotoAblum onCompletionBlock:completionBlock];
         }];
         UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -170,8 +171,11 @@ MWPhotoBrowserDelegate,UIImagePickerControllerDelegate>
     browser.startOnGrid = NO;
     browser.autoPlayOnAppear = NO;
     [browser setCurrentPhotoIndex:1];
+    browser.enableSwipeToDismiss=YES;
     // Prsent
     [controller.navigationController pushViewController:browser animated:YES];
+    browser.navigationController.navigationBar.barTintColor=browser.navigationController.navigationBar.barTintColor;
+    browser.navigationController.navigationBar.tintColor=controller.navigationController.navigationBar.tintColor;
     // Manipulate
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];

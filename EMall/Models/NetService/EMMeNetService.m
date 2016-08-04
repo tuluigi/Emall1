@@ -50,4 +50,23 @@
         completionBlock();
     }
 }
+
++ (NSURLSessionTask *)editUserInfoWithUserID:(NSInteger)userID
+                                    UserName:(NSString *)name
+                                       email:(NSString *)email
+                                    birthday:(NSString *)birthday
+                                      avatar:(NSString *)avatar
+                                      gender:(NSString *)gender
+                           OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/update"];
+    NSDictionary *postDic=@{@"member.id":@(userID),@"member.user_name":stringNotNil(name),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
 @end

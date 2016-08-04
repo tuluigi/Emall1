@@ -17,7 +17,7 @@
  *  @param pwd
  *  @param compleitonBlock
  *
- *  @return 
+ *  @return
  */
 + (NSURLSessionTask *)userRegisterWithUserName:(NSString *)name
                                          email:(NSString *)email
@@ -33,12 +33,33 @@
  *  @return
  */
 + (NSURLSessionTask *)userLoginWithUserName:(NSString *)name
-                                           pwd:(NSString *)pwd
-                             OnCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+                                        pwd:(NSString *)pwd
+                          OnCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**
  *  用户退出登陆
  *
  *  @param completionBlock
  */
 + (void)userLogoutOnCompletionBlock:(void(^)())completionBlock;
+
+/**
+ *  修改用户信息
+ *
+ *  @param userID
+ *  @param name
+ *  @param email
+ *  @param birthday
+ *  @param avatar
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)editUserInfoWithUserID:(NSInteger)userID
+                                    UserName:(NSString *)name
+                                       email:(NSString *)email
+                                    birthday:(NSString *)birthday
+                                      avatar:(NSString *)avatar
+                                      gender:(NSString *)gender
+                           OnCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
 @end

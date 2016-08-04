@@ -9,6 +9,7 @@
 #import "OCTableCellModel.h"
 
 @interface OCTableCellRightImageModel : OCTableCellModel
-@property ( nonatomic,copy) NSString *imageUrl;
+@property (nonatomic,copy) NSString *imageUrl;
 @property (nonatomic,copy)NSString *placeholderImageUrl;
+@property (nonatomic,strong)UIImage *image;
 @end
