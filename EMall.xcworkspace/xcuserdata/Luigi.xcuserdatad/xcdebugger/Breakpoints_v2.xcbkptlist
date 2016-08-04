@@ -35,29 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Base/OCBaseViewController.m"
-            timestampString = "491993261.842246"
+            filePath = "EMall/Business/Me/EMMeViewController.m"
+            timestampString = "492009789.130083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-dealloc"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/View/TableCell/Cell/OCUTableViewRightImageCell.m"
-            timestampString = "491993441.161341"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-setCellModel:"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-handleUserLoginStateDataSource"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

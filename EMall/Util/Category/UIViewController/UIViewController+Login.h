@@ -11,5 +11,5 @@
 typedef void(^EMLoginResultBlock)(BOOL isSucceed);
 
 @interface UIViewController (Login)
-- (void)loginOnController:(UIViewController *)aController onCompletionBlock:(EMLoginResultBlock)completionBlock;
+- (void)showLoginControllerOnCompletionBlock:(EMLoginResultBlock)completionBlock;
 @end

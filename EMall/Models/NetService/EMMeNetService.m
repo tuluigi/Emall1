@@ -50,7 +50,21 @@
         completionBlock();
     }
 }
-
++ (NSURLSessionTask *)getUserInfoWithUserID:(NSInteger)userID onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"/member/findById"];
+    NSDictionary *postDic=@{@"id":@(userID)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMUserModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [EMPersistence persistenceWithUserModel:responseResult.responseData];
+            }
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
 + (NSURLSessionTask *)editUserInfoWithUserID:(NSInteger)userID
                                     UserName:(NSString *)name
                                        email:(NSString *)email

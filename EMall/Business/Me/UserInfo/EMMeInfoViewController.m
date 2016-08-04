@@ -53,6 +53,14 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)getUserInfo{
+    NSURLSessionTask *task=[EMMeNetService getUserInfoWithUserID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            
+        }
+    }];
+    [self addSessionTask:task];
+}
 - (void)didRightBarButtonPressed{
     [self.view endEditing:YES];
     OCTableCellRightImageModel *avatorImageModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemAvtar];

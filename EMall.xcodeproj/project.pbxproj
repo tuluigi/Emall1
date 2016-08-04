@@ -27,6 +27,7 @@
 		2A13F70D1D5227850041D2C5 /* EMMeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F70C1D5227850041D2C5 /* EMMeInfoViewController.m */; };
 		2A13F7101D5237D00041D2C5 /* OCUTableViewRightImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F70F1D5237D00041D2C5 /* OCUTableViewRightImageCell.m */; };
 		2A13F7131D5238E50041D2C5 /* OCTableCellRightImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7121D5238E50041D2C5 /* OCTableCellRightImageModel.m */; };
+		2A13F7161D537C8A0041D2C5 /* EMEdiePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */; };
 		2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */; };
 		2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AAF1D3E069B00A405B7 /* UIDisablePastTextField.m */; };
 		2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AB21D3E091000A405B7 /* EMCartBottomView.m */; };
@@ -192,6 +193,8 @@
 		2A13F70F1D5237D00041D2C5 /* OCUTableViewRightImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewRightImageCell.m; sourceTree = "<group>"; };
 		2A13F7111D5238E50041D2C5 /* OCTableCellRightImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTableCellRightImageModel.h; sourceTree = "<group>"; };
 		2A13F7121D5238E50041D2C5 /* OCTableCellRightImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellRightImageModel.m; sourceTree = "<group>"; };
+		2A13F7141D537C8A0041D2C5 /* EMEdiePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMEdiePwdViewController.h; sourceTree = "<group>"; };
+		2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMEdiePwdViewController.m; sourceTree = "<group>"; };
 		2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisablePast.h"; sourceTree = "<group>"; };
 		2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisablePast.m"; sourceTree = "<group>"; };
 		2A1E4AAE1D3E069B00A405B7 /* UIDisablePastTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDisablePastTextField.h; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 			children = (
 				2A13F70B1D5227850041D2C5 /* EMMeInfoViewController.h */,
 				2A13F70C1D5227850041D2C5 /* EMMeInfoViewController.m */,
+				2A13F7141D537C8A0041D2C5 /* EMEdiePwdViewController.h */,
+				2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -1365,6 +1370,7 @@
 				2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */,
 				2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */,
 				2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */,
+				2A13F7161D537C8A0041D2C5 /* EMEdiePwdViewController.m in Sources */,
 				2ADF60561D27C59C00DF757B /* UIScrollView+OCRefresh.m in Sources */,
 				2A13F7131D5238E50041D2C5 /* OCTableCellRightImageModel.m in Sources */,
 				2A99EB451D3A6C860024E924 /* OCTableCellBadgeModel.m in Sources */,

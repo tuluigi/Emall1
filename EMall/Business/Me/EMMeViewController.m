@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrderState          ,//订单状态
     EMUserTableCellModelTypeShoppingAddress     ,//收获地址
     EMUserTableCellModelTypeServices            ,//联系客服
+    EMUserTableCellModelTypeEditPwd           ,//修改买吗
     EMUserTableCellModelTypeLogout              ,//退出登录
     
 };
@@ -48,20 +49,15 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     WEAKSELF
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLoginSuccessNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         
-        if ([RI isLogined]) {
-            OCTableCellDetialTextModel *quitModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"退出登录" imageName:@"me_logout" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeLogout];
-            quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
-            NSArray *groupArray3=@[quitModel];
-            [weakSelf.dataSourceArray addObject:groupArray3];
-        }
+        [weakSelf handleUserLoginStateDataSource];
         [weakSelf.tableView reloadData];
         
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLogoutNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf.dataSourceArray removeLastObject];
+         [weakSelf.dataSourceArray removeObjectsInRange:NSMakeRange(weakSelf.dataSourceArray.count-2, 2)];
         [weakSelf.tableView reloadData];
     }];
-    NSArray *groupArray0,*groupArray1,*groupArray2,*groupArray3;
+    NSArray *groupArray0,*groupArray1,*groupArray2;
     OCTableCellDetialTextModel *userInfoModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"全部订单" imageName:@"me_order" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrder];
     userInfoModel.tableCellStyle=UITableViewCellStyleSubtitle;
     
@@ -79,17 +75,13 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
     serviceModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray2=@[serviceModel];
-      self.dataSourceArray=[NSMutableArray arrayWithObjects:groupArray0,groupArray1,groupArray2, nil];
-    if ([RI isLogined]) {
-        OCTableCellDetialTextModel *quitModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"退出登录" imageName:@"me_logout" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeLogout];
-        quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
-        groupArray3=@[quitModel];
-        [self.dataSourceArray addObject:groupArray3];
-    }
-  
+   
+    
+    self.dataSourceArray=[NSMutableArray arrayWithObjects:groupArray0,groupArray1,groupArray2, nil];
     
     
-    [self.headView setUserName:@"小明" headImageUrl:@"http://www.ld12.com/upimg358/20160130/063405411156224.jpg" level:1];
+     [self handleUserLoginStateDataSource];
+    [self.headView setUserName:[RI userName] headImageUrl:[RI userName] level:1];
     CGSize size=[self.headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     self.headView.frame=CGRectMake(0, 0, size.width, size.height);
     self.tableView.tableHeaderView=self.headView;
@@ -106,6 +98,21 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     [self.tableView reloadData];
     
     
+}
+- (void)handleUserLoginStateDataSource{
+    if ([RI isLogined]) {
+        OCTableCellDetialTextModel *editPwdModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"修改密码" imageName:@"me_passoword" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeEditPwd];
+        editPwdModel.tableCellStyle=UITableViewCellStyleSubtitle;
+        NSArray * groupArray3=@[editPwdModel];
+        [self.dataSourceArray addObject:groupArray3];
+        
+        OCTableCellDetialTextModel *quitModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"退出登录" imageName:@"me_logout" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeLogout];
+        quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
+        NSArray * groupArray4=@[quitModel];
+        [self.dataSourceArray addObject:groupArray4];
+    }else{
+       
+    }
 }
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
@@ -197,7 +204,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
                 [self.navigationController pushViewController:orderHomeListController animated:YES];
             }
         }else{
-            [self loginOnController:self onCompletionBlock:^(BOOL isSucceed) {
+            [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
                 
             }];
         }
@@ -213,9 +220,15 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 - (EMMEHeadView *)headView{
     if (nil==_headView) {
         _headView=[EMMEHeadView meHeadViewOnTapedBlock:^{
-            EMMeInfoViewController *infoController=[[EMMeInfoViewController alloc] init];
-            infoController.hidesBottomBarWhenPushed=YES;
-            [self.navigationController pushViewController:infoController animated:YES];
+            if ([RI isLogined]) {
+                EMMeInfoViewController *infoController=[[EMMeInfoViewController alloc] init];
+                infoController.hidesBottomBarWhenPushed=YES;
+                [self.navigationController pushViewController:infoController animated:YES];
+            }else{
+                [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+                    
+                }];
+            }
         }];
     }
     return _headView;

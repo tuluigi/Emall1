@@ -9,7 +9,7 @@
 #import "UIViewController+Login.h"
 #import "EMLoginViewController.h"
 @implementation UIViewController (Login)
-- (void)loginOnController:(UIViewController *)aController onCompletionBlock:(EMLoginResultBlock)completionBlock{
+- (void)showLoginControllerOnCompletionBlock:(EMLoginResultBlock)completionBlock{
     EMLoginViewController *loginController=[EMLoginViewController loginViewControllerOnCompletionBlock:^(EMUserModel *userModel) {
         if (completionBlock) {
             BOOL isSucceed=NO;

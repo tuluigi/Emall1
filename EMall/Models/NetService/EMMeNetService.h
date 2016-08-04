@@ -41,7 +41,15 @@
  *  @param completionBlock
  */
 + (void)userLogoutOnCompletionBlock:(void(^)())completionBlock;
-
+/**
+ *  获取用户信息
+ *
+ *  @param userID          用户id
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getUserInfoWithUserID:(NSInteger)userID onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**
  *  修改用户信息
  *
