@@ -31,6 +31,7 @@ typedef void(^EMImagePickerCompletionBlock)(UIImage *editImage,UIImage *originIm
                            takeType:(EMTakePictureType)takePictureType
                   onCompletionBlock:(EMImagePickerCompletionBlock)completionBlock;
 
+
 /**
  *  浏览图片
  *

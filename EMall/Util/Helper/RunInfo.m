@@ -35,4 +35,7 @@ CC_SYNTHESIZE_SINGLETON_FOR_CLASS(RunInfo)
         _isLogined=NO;
     }
 }
+-(void)userLogout{
+    [EMPersistence userLogou];
+}
 @end

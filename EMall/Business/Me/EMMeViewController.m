@@ -17,6 +17,7 @@
 #import "EMOrderHomeListController.h"
 #import "EMMeNetService.h"
 #import "EMMeInfoViewController.h"
+#import "EMEdiePwdViewController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -184,13 +185,28 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     OCTableCellModel *cellModel=[[self.dataSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (cellModel.type==EMUserTableCellModelTypeLogout){
-        [EMMeNetService userLogoutOnCompletionBlock:^{
+        UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"确定要退出当前账号吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           
+        }];
+        UIAlertAction *quitAction=[UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [EMMeNetService userLogoutOnCompletionBlock:^{
+                
+            }];
+        }];
+        [alertController addAction:cancleAction];
+        [alertController addAction:quitAction];
+        [self presentViewController:alertController animated:YES completion:^{
             
         }];
     }else if (cellModel.type==EMUserTableCellModelTypeServices) {
         EMServiceController *serviceController=[[EMServiceController alloc]  initWithStyle:UITableViewStyleGrouped];
         serviceController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:serviceController animated:YES];
+    }else if (cellModel.type==EMUserTableCellModelTypeEditPwd){
+        EMEdiePwdViewController *editPwdController=[[EMEdiePwdViewController alloc]  init];
+        editPwdController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:editPwdController animated:YES];
     }
     else{
         if ([RI isLogined]) {

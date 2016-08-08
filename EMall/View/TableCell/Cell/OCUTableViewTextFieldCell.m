@@ -23,7 +23,9 @@
     WEAKSELF
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-10));
-        make.centerY.mas_equalTo(weakSelf.contentView.mas_centerY);
+//        make.centerY.mas_equalTo(weakSelf.contentView.mas_centerY);
+        make.top.mas_equalTo(weakSelf.contentView.mas_top);
+        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom);
         make.left.mas_equalTo(weakSelf.contentView.mas_left).mas_equalTo(OCUISCALE(100));
     }];
 }
@@ -37,7 +39,7 @@
 - (UITextField *)textField{
     if (nil==_textField) {
         _textField=[[UITextField alloc] init];
-        _textField.font=[UIFont oc_systemFontOfSize:13];
+        _textField.font=[UIFont oc_systemFontOfSize:14];
         _textField.textAlignment=NSTextAlignmentRight;
         _textField.delegate=self;
     }

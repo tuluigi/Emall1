@@ -53,6 +53,7 @@
 		2A7583E81D52008C008E1B57 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */; };
 		2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */; };
 		2A87D56E1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A87D56D1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m */; };
+		2A93BAB31D58252A00266F51 /* EMFindPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A93BAB21D58252A00266F51 /* EMFindPwdViewController.m */; };
 		2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */; };
 		2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB1F1D3A6C860024E924 /* OCUTableViewButtonCell.m */; };
 		2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB211D3A6C860024E924 /* OCUTableViewCell.m */; };
@@ -247,6 +248,8 @@
 		2A87D56A1D3CDD2900D7DBEA /* OCMutableSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCMutableSelectionCell.m; sourceTree = "<group>"; };
 		2A87D56C1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HiddenKeyBoardButton.h"; sourceTree = "<group>"; };
 		2A87D56D1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HiddenKeyBoardButton.m"; sourceTree = "<group>"; };
+		2A93BAB11D58252A00266F51 /* EMFindPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMFindPwdViewController.h; sourceTree = "<group>"; };
+		2A93BAB21D58252A00266F51 /* EMFindPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMFindPwdViewController.m; sourceTree = "<group>"; };
 		2A99EB1C1D3A6C860024E924 /* OCUTableViewBadgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewBadgeCell.h; sourceTree = "<group>"; };
 		2A99EB1D1D3A6C860024E924 /* OCUTableViewBadgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUTableViewBadgeCell.m; sourceTree = "<group>"; };
 		2A99EB1E1D3A6C860024E924 /* OCUTableViewButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUTableViewButtonCell.h; sourceTree = "<group>"; };
@@ -545,6 +548,8 @@
 				2A13F70C1D5227850041D2C5 /* EMMeInfoViewController.m */,
 				2A13F7141D537C8A0041D2C5 /* EMEdiePwdViewController.h */,
 				2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */,
+				2A93BAB11D58252A00266F51 /* EMFindPwdViewController.h */,
+				2A93BAB21D58252A00266F51 /* EMFindPwdViewController.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -1410,6 +1415,7 @@
 				2A99EB471D3A6C860024E924 /* OCTableCellDetialTextModel.m in Sources */,
 				2A87D56E1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m in Sources */,
 				2AED6CB31D44B1DA001B5910 /* EMCartPayViewController.m in Sources */,
+				2A93BAB31D58252A00266F51 /* EMFindPwdViewController.m in Sources */,
 				2A13F7001D47B0070041D2C5 /* EMGoodsDetialBootmView.m in Sources */,
 				2A13F7091D50E01A0041D2C5 /* EMMeNetService.m in Sources */,
 				2A99EB461D3A6C860024E924 /* OCTableCellButtonModel.m in Sources */,

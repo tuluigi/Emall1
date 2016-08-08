@@ -19,4 +19,5 @@ CC_DECLARE_SINGLETON_FOR_CLASS(RunInfo)
 @property(nonatomic,assign) NSInteger userID;
 @property(nonatomic,copy)   NSString *userName;
 @property(nonatomic,copy)   NSString *avatar;
+-(void)userLogout;
 @end

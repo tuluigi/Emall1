@@ -10,6 +10,7 @@
 #import "UITextField+IndexPath.h"
 #import "EMMeNetService.h"
 #import "UITextField+HiddenKeyBoardButton.h"
+#import "EMFindPwdViewController.h"
 @interface EMLoginHeadView :UIView
 @property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic,strong)UILabel *label;
@@ -372,6 +373,10 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
         if (indexPath.row==2) {
              [self.view endEditing:YES];
             [self doLogin];
+        }else if (indexPath.row==3){//忘记密码
+            EMFindPwdViewController *findPwdController=[[EMFindPwdViewController alloc]  init];
+            findPwdController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:findPwdController animated:YES];
         }
     }
 }

@@ -35,6 +35,7 @@ static NSString *const  kUserPersistenceKey  =@"kUserPersistenceKey";
     RI.userID=0;
     RI.userName=nil;
     RI.avatar=nil;
+     [[NSNotificationCenter defaultCenter] postNotificationName:OCLogoutNofication object:nil];
 }
 + (EMUserModel *)localUserModel{
     EMUserModel *userModel;

@@ -70,4 +70,34 @@
                                       gender:(NSString *)gender
                            OnCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
+
+/**
+ *  修改用户密码
+ *
+ *  @param userID
+ *  @param originPwd
+ *  @param newPwd
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)editUserPwdWithUserID:(NSInteger)userID
+                                  originPwd:(NSString *)originPwd
+                                     newPwd:(NSString *)newPwd
+                          onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
+
+/**
+ *  用户找回密码
+ *
+ *  @param userName
+ *  @param email
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)findUserPwdWithUserName:(NSString *)userName
+                                  email:(NSString *)email
+                          onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
 @end

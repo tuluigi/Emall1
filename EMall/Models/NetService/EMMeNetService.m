@@ -45,7 +45,7 @@
 }
 + (void)userLogoutOnCompletionBlock:(void(^)())completionBlock{
     [EMPersistence userLogou];
-     [[NSNotificationCenter defaultCenter] postNotificationName:OCLogoutNofication object:nil];
+    
     if (completionBlock) {
         completionBlock();
     }
@@ -74,6 +74,35 @@
                            OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/update"];
     NSDictionary *postDic=@{@"member.id":@(userID),@"member.user_name":stringNotNil(name),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
++ (NSURLSessionTask *)editUserPwdWithUserID:(NSInteger)userID
+                                  originPwd:(NSString *)originPwd
+                                     newPwd:(NSString *)newPwd
+                          onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/updatePwd"];
+    NSDictionary *postDic=@{@"id":@(userID),@"password":originPwd,@"newPwd":newPwd};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+                       if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
++ (NSURLSessionTask *)findUserPwdWithUserName:(NSString *)userName
+                                        email:(NSString *)email
+                            onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/findpwd"];
+    NSDictionary *postDic=@{@"username":email,@"email":stringNotNil(userName)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
