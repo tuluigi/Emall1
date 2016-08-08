@@ -10,6 +10,7 @@
 #import "UITextField+IndexPath.h"
 #import "UITextField+DisablePast.h"
 #import "UITextField+HiddenKeyBoardButton.h"
+#import "EMMeNetService.h"
 @interface EMFindPwdViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong)UIImageView *headImageView;
 @property (nonatomic,copy)NSString *userName,*email;
@@ -34,6 +35,27 @@
 
 - (void)findUserPassword{
     [self.tableView endEditing:YES];
+    if ([NSString isNilOrEmptyForString:self.userName]) {
+        [self.tableView showHUDMessage:@"请输入用户名"];
+    }else if ([NSString isNilOrEmptyForString:self.email]){
+        [self.tableView showHUDMessage:@"请输入邮箱"];
+    }else if (![self.email isValidateEmail]){
+        [self.tableView showHUDMessage:@"请输入正确邮箱"];
+    }else{
+        [self.tableView showHUDLoading];
+        WEAKSELF
+        NSURLSessionTask *task=[EMMeNetService findUserPwdWithUserName:self.userName email:self.email onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {//找回成功那个
+                NSString *message=[NSString stringWithFormat:@"验证邮件已发送至%@，请登录邮箱按提示操作",weakSelf.email];
+                [weakSelf.tableView showHUDMessage:message completionBlock:^{
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                }];
+            }else{
+                [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
+            }
+        }];
+        [self addSessionTask:task];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -125,7 +147,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==2) {//找回密码
-        
+        [self findUserPassword];
     }
 }
 @end
