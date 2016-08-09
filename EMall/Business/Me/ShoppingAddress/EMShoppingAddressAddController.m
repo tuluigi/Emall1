@@ -24,6 +24,10 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
 @interface EMShoppingAddressAddController ()<EMShopProvienceCityControllerDelegate>
 @property (nonatomic,strong)EMShopAddressModel *addressModel;
 
+@property (nonatomic,strong)OCTableCellTextFiledModel   *nameFieldModel,*telFieldModel,*wechatDeitalModel;
+@property (nonatomic,strong)OCTableCellDetialTextModel *provienceDeitalModel;
+@property (nonatomic,strong)OCTableCellTextViewModel *detailTextViewModel;
+@property (nonatomic,strong)OCTableCellSwitchModel *isDefialutModel;
 @end
 
 @implementation EMShoppingAddressAddController
@@ -52,35 +56,42 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
         self.navigationItem.title=@"修改收获地址";
     }
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didSaveButtonPressed)];
-    OCTableCellTextFiledModel   *nameFieldModel   =[[OCTableCellTextFiledModel alloc] initWithTitle:@"收货人" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeUserName];
-    nameFieldModel.inputText=self.addressModel.userName;
-    nameFieldModel.tableCellStyle=UITableViewCellStyleValue1;
+    _nameFieldModel   =[[OCTableCellTextFiledModel alloc] initWithTitle:@"收货人" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeUserName];
+    _nameFieldModel.inputText=self.addressModel.userName;
+    _nameFieldModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    OCTableCellTextFiledModel   *telFieldModel   =[[OCTableCellTextFiledModel alloc] initWithTitle:@"联系电话" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeTel];
-    telFieldModel.inputText=self.addressModel.userTel;
-    telFieldModel.tableCellStyle=UITableViewCellStyleValue1;
+    _telFieldModel   =[[OCTableCellTextFiledModel alloc] initWithTitle:@"联系电话" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeTel];
+    _telFieldModel.inputText=self.addressModel.userTel;
+    _telFieldModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    OCTableCellDetialTextModel *wechatDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"微信号" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeWeChat];
-    wechatDeitalModel.detailText=self.addressModel.wechatID;
-    wechatDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
+    _wechatDeitalModel=[[OCTableCellTextFiledModel alloc] initWithTitle:@"微信号" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeWeChat];
+    _wechatDeitalModel.inputText=self.addressModel.wechatID;
+    _wechatDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
-     OCTableCellDetialTextModel *provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeProvience];
-    provienceDeitalModel.detailText=self.addressModel.province;
-    provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
+    _provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeProvience];
+    _provienceDeitalModel.detailText=self.addressModel.province;
+    _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    OCTableCellTextViewModel *detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"街道" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeStreet];
-    detailTextViewModel.inputText=self.addressModel.detailAddresss;
+    _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"街道" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeStreet];
+    _detailTextViewModel.inputText=self.addressModel.detailAddresss;
     
-    OCTableCellSwitchModel *isDefialutModel=[[OCTableCellSwitchModel alloc] initWithTitle:@"设置常用地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeIsDefault];
-    isDefialutModel.on=self.addressModel.isDefault;
-    isDefialutModel.tableCellStyle=UITableViewCellStyleValue1;
+    _isDefialutModel=[[OCTableCellSwitchModel alloc] initWithTitle:@"设置常用地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeIsDefault];
+    _isDefialutModel.on=self.addressModel.isDefault;
+    _isDefialutModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    self.dataSourceArray=[[NSMutableArray alloc] initWithObjects:nameFieldModel,telFieldModel,wechatDeitalModel,provienceDeitalModel,detailTextViewModel,isDefialutModel, nil];
+    self.dataSourceArray=[[NSMutableArray alloc] initWithObjects:_nameFieldModel,_telFieldModel,_wechatDeitalModel,_provienceDeitalModel,_detailTextViewModel,_isDefialutModel, nil];
     [self.tableView reloadData];
 }
 
 - (void)didSaveButtonPressed{
-    
+    [self.view endEditing:YES];
+    if ([NSString isNilOrEmptyForString:self.nameFieldModel.inputText]) {
+        [self.tableView showHUDMessage:@"请输入收货人名称"];
+    }else if ([NSString isNilOrEmptyForString:self.telFieldModel.inputText]){
+        [self.tableView showHUDMessage:@"请输入收货人电话"];
+    }else if (![self.telFieldModel.inputText isValidateEmail]){
+       [self.tableView showHUDMessage:@"请输入正确电话号码"];
+    }
 }
 #pragma mark -setter getter
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -125,7 +136,14 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     }
     
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height=44;
+      OCTableCellModel *cellModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    if (cellModel.type==EMShopAddressItemTypeStreet) {
+        height=60;
+    }
+    return height;
+}
 
 
 #pragma mark -address delegate
