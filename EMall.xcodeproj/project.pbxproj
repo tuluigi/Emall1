@@ -1172,6 +1172,7 @@
 				2A2426EE1D12C4670078240C /* Resources */,
 				772022D24B785817A254A32B /* [CP] Embed Pods Frameworks */,
 				AB433F776084999E1FC012E6 /* [CP] Copy Pods Resources */,
+				4F07FD597A3C5D25EC9E81C3 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1288,6 +1289,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4F07FD597A3C5D25EC9E81C3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMall/Pods-EMall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		772022D24B785817A254A32B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1609,9 +1625,9 @@
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHDPad2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6e1ab40d-7fac-49f2-85b7-a37f1240d272";
+				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
 			};
 			name = Debug;
 		};
@@ -1625,9 +1641,9 @@
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHDPad2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6e1ab40d-7fac-49f2-85b7-a37f1240d272";
+				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
 			};
 			name = Release;
 		};
