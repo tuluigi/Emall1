@@ -27,20 +27,25 @@
 - (void)onInitContentView{
     _avatarImageView=[[UIImageView alloc]  init];
     [self.contentView addSubview:_avatarImageView];
-    
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
+    UIColor *textColor=[UIColor colorWithHexString:@"#272727"];;
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont oc_boldSystemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
+    _nameLabel.textColor=textColor;
     [self.contentView addSubview:_nameLabel];
     
     _levelLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:14] textAlignment:NSTextAlignmentLeft];
+    _levelLabel.textColor=textColor;
     [self.contentView addSubview:_levelLabel];
     _contentLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _contentLabel.textColor=[UIColor colorWithHexString:@"#272727"];
+    _contentLabel.numberOfLines=0;
     [self.contentView addSubview:_contentLabel];
     _timeLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _timeLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
     [self.contentView addSubview:_timeLabel];
     
     WEAKSELF
     [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_offset(weakSelf.contentView).offset(kEMOffX);
+        make.left.top.mas_equalTo(weakSelf.contentView).offset(kEMOffX);
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(40), OCUISCALE(40)));
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -56,6 +61,7 @@
         make.top.mas_equalTo(weakSelf.levelLabel.mas_bottom).offset(OCUISCALE(5));
         make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-kEMOffX ));
     }];
+    _contentLabel.preferredMaxLayoutWidth=OCWidth-kEMOffX*2;
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.avatarImageView.mas_left);
         make.top.mas_equalTo(weakSelf.contentLabel.mas_bottom).offset(OCUISCALE(5));
@@ -68,6 +74,12 @@
     [self.nameLabel setText:_goodsCommentModel.nickName];
     self.levelLabel.text=[NSString stringWithFormat:@"评价：%@",_goodsCommentModel.levelString ];
     self.contentLabel.text=_goodsCommentModel.content;
-    self.timeLabel.text=@"";
+    NSDateFormatter *formmater=[[NSDateFormatter alloc]  init];
+    formmater.dateFormat=@"yyyy-MM-dd";
+    NSDate *aDate=[NSDate dateWithTimeIntervalSince1970:_goodsCommentModel.commentTime];
+    
+    NSString *timeString=[formmater stringFromDate:aDate];
+    timeString=[NSString stringWithFormat:@"%@    %@",timeString,_goodsCommentModel.goodsSize];
+    self.timeLabel.text=timeString;
 }
 @end

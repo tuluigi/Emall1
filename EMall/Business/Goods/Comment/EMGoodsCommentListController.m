@@ -8,6 +8,7 @@
 
 #import "EMGoodsCommentListController.h"
 #import "EMGoodsCommentCell.h"
+#import "EMGoodsCommentModel.h"
 @interface EMGoodsCommentListController ()
 @property (nonatomic,assign)NSInteger goodsID;
 @end
@@ -16,13 +17,31 @@
 - (instancetype)initWithGoodsID:(NSInteger)goodsID{
     self=[super init];
     if (self) {
-        
+        _goodsID=goodsID;
     }
     return self;
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationItem.title=@"商品评价";
+    [self getGoodsCommentListWithGoodsID:self.goodsID];
+}
+
+- (void)getGoodsCommentListWithGoodsID:(NSInteger)goodsID{
+    [self.tableView showPageLoadingView];
+    for (NSInteger i=0 ; i<20;i++) {
+        EMGoodsCommentModel *commentModel=[[EMGoodsCommentModel alloc]  init];
+        commentModel.userID=@"1";
+        commentModel.nickName=@"幸福的小吃货";
+        commentModel.userAvatar=@"http://u3.tdimg.com/8/166/12/_42729752116303126665090711325153380278.jpg";
+        commentModel.content=@"这件商品真的挺不错的，买了之后使用起来很好，很方便，强烈推荐大家都来购买";
+        commentModel.goodsSize=@"红色，20cm*30cm";
+        commentModel.level=3;
+        commentModel.commentTime=[[NSDate date] timeIntervalSince1970];
+        [self.dataSourceArray addObject:commentModel];
+    }
+    [self.tableView dismissPageLoadView];
+    [self.tableView reloadData];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     [tableView registerClass:[EMGoodsCommentCell class] forCellReuseIdentifier:NSStringFromClass([EMGoodsCommentCell class])];

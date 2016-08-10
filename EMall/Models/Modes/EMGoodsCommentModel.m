@@ -25,6 +25,7 @@
             _levelString=@"好评";
             break;
         default:
+            _levelString=@"好评";
             break;
     }
     return _levelString;

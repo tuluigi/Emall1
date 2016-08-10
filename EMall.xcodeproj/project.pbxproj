@@ -41,6 +41,7 @@
 		2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427311D12C8510078240C /* OCBaseNetService.m */; };
 		2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427351D12C8C50078240C /* OCResponseResult.m */; };
 		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
+		2A31E8061D5B860B00FC73A9 /* EMGoodsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -227,6 +228,8 @@
 		2A2427371D12C8D90078240C /* OCNetSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCNetSessionManager.h; sourceTree = "<group>"; };
 		2A2427381D12C8D90078240C /* OCNetSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCNetSessionManager.m; sourceTree = "<group>"; };
 		2A24273A1D12C9410078240C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		2A31E8041D5B860B00FC73A9 /* EMGoodsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsWebViewController.h; sourceTree = "<group>"; };
+		2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsWebViewController.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -705,6 +708,15 @@
 			path = NetWork;
 			sourceTree = "<group>";
 		};
+		2A31E8031D5B85F600FC73A9 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				2A31E8041D5B860B00FC73A9 /* EMGoodsWebViewController.h */,
+				2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		2A4AA95C1D48782B008A323A /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1132,6 +1144,7 @@
 		2AED6CB71D44C966001B5910 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				2A31E8031D5B85F600FC73A9 /* WebView */,
 				2A4AA95C1D48782B008A323A /* Comment */,
 				2AED6CB91D44C988001B5910 /* View */,
 				2AED6CBA1D44C995001B5910 /* EMGoodsDetailViewController.h */,
@@ -1177,6 +1190,7 @@
 				2A2426EE1D12C4670078240C /* Resources */,
 				772022D24B785817A254A32B /* [CP] Embed Pods Frameworks */,
 				AB433F776084999E1FC012E6 /* [CP] Copy Pods Resources */,
+				FCAF0F7F064E8990B4A0A157 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1338,6 +1352,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FCAF0F7F064E8990B4A0A157 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMall/Pods-EMall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1377,6 +1406,7 @@
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
 				2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */,
+				2A31E8061D5B860B00FC73A9 /* EMGoodsWebViewController.m in Sources */,
 				2ADF608D1D28BE3B00DF757B /* EMCatItemView.m in Sources */,
 				2ADF60981D292FDA00DF757B /* EMGoodsItemView.m in Sources */,
 				2ADF60681D27D9AE00DF757B /* EMInfiniteView.m in Sources */,

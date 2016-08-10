@@ -11,6 +11,8 @@
 #import "EMGoodsModel.h"
 #import "NSString+VideoDuration.h"
 #import "EMGoodsDetialBootmView.h"
+#import "EMGoodsCommentListController.h"
+#import "EMGoodsWebViewController.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate>
@@ -31,6 +33,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor redColor];
     // Do any additional setup after loading the view.
     self.fd_prefersNavigationBarHidden=YES;
     [self.view addSubview:self.backButton];
@@ -49,7 +52,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(50),0 ));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(-20, 0, OCUISCALE(50),0 ));
     }];
      EMGoodsModel  * agoodsModel=[[EMGoodsModel alloc] init];
     agoodsModel.goodsImageUrl=@"http://pic31.nipic.com/20130710/13151003_093759013311_2.jpg";
@@ -143,6 +146,19 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }
     return height;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==2) {
+        if (indexPath.row==0) {
+            EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
+            commentListController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:commentListController animated:YES];
+        }
+    }else if (indexPath.section==3){
+        EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithUrl:nil];
+        goodsWebController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:goodsWebController animated:YES];
+    }
+}
 #pragma mark - bottomview delegate
 - (void)goodsDetialBootmViewSubmitButtonPressed{
     
@@ -156,9 +172,9 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (UIButton *)backButton{
     if (nil==_backButton) {
         _backButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        [_backButton setTitle:@"返回" forState:UIControlStateNormal];
+//        [_backButton setTitle:@"返回" forState:UIControlStateNormal];
         [_backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [_backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"goods_backBtn"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(didBackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;

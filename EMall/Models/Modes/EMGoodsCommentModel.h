@@ -17,7 +17,7 @@
 @property (nonatomic,copy)NSString *goodsID;
 @property (nonatomic,copy)NSString *goodsSize;
 @property (nonatomic,copy)NSString *goodColor;
-@property (nonatomic,assign)NSInteger level;//评级
+@property (nonatomic,assign)NSInteger level;//评级 1,2,3
 @property (nonatomic,copy,readonly)NSString *levelString;
 @property (nonatomic,assign)long long commentTime;//评论时间
 @end
