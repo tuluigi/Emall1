@@ -229,7 +229,9 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 
 #pragma mark - EMMeOrderCellDelegate
 - (void)orderStateCellDidSelectItem:(EMOrderStateModel *)stateModel{
-    
+    EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:stateModel.state];
+    orderHomeListController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:orderHomeListController animated:YES];
 }
 
 #pragma  mark - getter
