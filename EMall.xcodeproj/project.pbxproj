@@ -83,6 +83,7 @@
 		2A99EB761D3BB63A0024E924 /* EMOrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB751D3BB63A0024E924 /* EMOrderInfoCell.m */; };
 		2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */; };
 		2A99EB7C1D3BC32E0024E924 /* EMCartListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */; };
+		2AB965A21D5AF6390049BE2A /* EMAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A11D5AF6390049BE2A /* EMAreaModel.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -311,6 +312,8 @@
 		2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderDetailAddressCell.m; sourceTree = "<group>"; };
 		2A99EB7A1D3BC32E0024E924 /* EMCartListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartListCell.h; sourceTree = "<group>"; };
 		2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartListCell.m; sourceTree = "<group>"; };
+		2AB965A01D5AF6390049BE2A /* EMAreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAreaModel.h; sourceTree = "<group>"; };
+		2AB965A11D5AF6390049BE2A /* EMAreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAreaModel.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -672,6 +675,8 @@
 				2ADF609A1D31D60B00DF757B /* EMUserModel.m */,
 				2A4AA9631D4878CD008A323A /* EMGoodsCommentModel.h */,
 				2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */,
+				2AB965A01D5AF6390049BE2A /* EMAreaModel.h */,
+				2AB965A11D5AF6390049BE2A /* EMAreaModel.m */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -1359,6 +1364,7 @@
 				2ADF604A1D27C59C00DF757B /* UIImage+OCColorImage.m in Sources */,
 				2ADF60F81D328B8B00DF757B /* EMShoppingAddressListController.m in Sources */,
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
+				2AB965A21D5AF6390049BE2A /* EMAreaModel.m in Sources */,
 				2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2A99EB6D1D3B2ABB0024E924 /* EMOrderListController.m in Sources */,
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
@@ -1625,9 +1631,9 @@
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opencourses.testhd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
+				PROVISIONING_PROFILE = "d1ddd0a7-39d7-4452-b986-327a8df1e890";
 			};
 			name = Debug;
 		};
@@ -1637,13 +1643,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opencourses.testhd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
+				PROVISIONING_PROFILE = "d1ddd0a7-39d7-4452-b986-327a8df1e890";
 			};
 			name = Release;
 		};

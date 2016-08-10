@@ -9,6 +9,7 @@
 #import "EMMeNetService.h"
 #import "EMUserModel.h"
 #import "EMPersistence.h"
+#import "EMAreaModel.h"
 @implementation EMMeNetService
 + (NSURLSessionTask *)userRegisterWithUserName:(NSString *)name
                                          email:(NSString *)email
@@ -105,6 +106,22 @@
     NSDictionary *postDic=@{@"username":email,@"email":stringNotNil(userName)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
++ (NSURLSessionTask *)getAreaWithParentID:(NSInteger )parentID
+                        onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/findpwd"];
+    NSDictionary *postDic;
+    if (parentID>0) {
+        postDic=@{@"id":@(parentID)};
+    }
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAreaModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

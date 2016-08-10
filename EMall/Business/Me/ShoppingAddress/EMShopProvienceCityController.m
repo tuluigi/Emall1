@@ -7,7 +7,8 @@
 //
 
 #import "EMShopProvienceCityController.h"
-
+#import "EMAreaModel.h"
+#import "EMMeNetService.h"
 @interface EMShopProvienceCityController ()
 @property (nonatomic,copy)NSString *provienceID,*provienceName;
 @end
@@ -34,10 +35,22 @@
     
 }
 - (void)getProviences{
-    
+    [self getCitysWithPorvicenID:0];
 }
 - (void)getCitysWithPorvicenID:(NSString *)provienceID{
-    
+    [self.tableView showPageLoadingView];
+    WEAKSELF
+    NSURLSessionTask *task=[EMMeNetService getAreaWithParentID:0 onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.dataSourceArray removeAllObjects];
+            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+            [weakSelf.tableView reloadData];
+        }else{
+            [weakSelf.tableView showPageLoadedMessage:responseResult.responseMessage delegate:nil];
+        }
+    }];
+    [self addSessionTask:task];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -56,15 +69,17 @@ NSString *identifer=@"EMShopProvicenCityCellIdenfier";
     }else{
          cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.textLabel.text=[self.dataSourceArray objectAtIndex:indexPath.row];
+    EMAreaModel *areaModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    cell.textLabel.text=areaModel.areaName;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EMAreaModel *areaModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     if (self.provienceID) {
         
     }else{
         NSString *provience=[self.dataSourceArray objectAtIndex:indexPath.row];
-        EMShopProvienceCityController *citysViewController=[[EMShopProvienceCityController alloc] initWithProvienceID:provience provienceName:nil];
+        EMShopProvienceCityController *citysViewController=[[EMShopProvienceCityController alloc] initWithProvienceID:areaModel.areaID provienceName:areaModel.areaName];
         citysViewController.delegate=self;
         citysViewController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:citysViewController animated:YES];

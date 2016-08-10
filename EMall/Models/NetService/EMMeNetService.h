@@ -100,4 +100,17 @@
                                   email:(NSString *)email
                           onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
+/**
+ *  获取地区列表
+ *
+ *  @param parentID        父类别id(获取省的话，传空)
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getAreaWithParentID:(NSInteger )parentID
+                        onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
+
+
 @end
