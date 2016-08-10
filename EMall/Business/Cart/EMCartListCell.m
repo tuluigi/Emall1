@@ -47,6 +47,8 @@
     [_bgView addSubview:_checkMarkButton];
     
     _goodsImageView=[[UIImageView alloc] init];
+    _goodsImageView.contentMode=UIViewContentModeScaleAspectFill;
+    _goodsImageView.clipsToBounds=YES;
     [_bgView addSubview:_goodsImageView];
     UIFont *font=[UIFont oc_systemFontOfSize:13];
     UIColor *color=[UIColor colorWithHexString:@"#272727"];

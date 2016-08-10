@@ -9,7 +9,7 @@
 #import "EMOrderListController.h"
 #import "EMOrderListCell.h"
 #import "UITableView+FDTemplateLayoutCell.h"
-@interface EMOrderListController ()<EMOrderListCellDelegate>
+@interface EMOrderListController ()<EMOrderListCellDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -21,11 +21,11 @@
     
     for (NSInteger i=0; i<10; i++) {
         EMOrderModel *orderModel=[[EMOrderModel alloc]  init];
-        orderModel.goodsName=@"仿真盆栽现代家居装饰家室美式装修";
-        orderModel.goodsImageUrl=@"http://img4.cache.netease.com/photo/0008/2016-06-22/BQ54OKL42FKJ0008.550x.0.jpg";
-        orderModel.goodsPrice=102;
+        orderModel.goodsName=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
+        orderModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3037/144/577361485/30577/37b6c893/57a7e726Neca76d4a.jpg";
+        orderModel.goodsPrice=109;
         orderModel.buyCount=i+1;
-        orderModel.spec=@"100x20";
+        orderModel.spec=@"白色 XL";
         [self.dataSourceArray addObject:orderModel];
     }
     [self.tableView reloadData];
@@ -64,5 +64,8 @@
 //查看订单详情
 - (void)orderListCellShouldCheckOrderDetail{
 
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
 }
 @end

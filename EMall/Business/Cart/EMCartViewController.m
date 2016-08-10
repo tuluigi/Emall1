@@ -59,11 +59,11 @@
 
     for (NSInteger i=0; i<20; i++) {
         EMShopCartModel *model=[[EMShopCartModel alloc]  init];
-        model.goodsImageUrl=@"http://img4.cache.netease.com/photo/0008/2016-06-22/BQ54OKL42FKJ0008.550x.0.jpg";
-        model.goodsName=@"仿真盆栽现代家居装饰家室美式装修";
+        model.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
+        model.goodsName=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
         model.buyCount=1;
-        model.goodsPrice=53;
-        model.spec =@"100cm*30cm";
+        model.goodsPrice=109;
+        model.spec =@"白色 XL";
         [self.dataSourceArray addObject:model];
     }
     [self.tableView reloadData];

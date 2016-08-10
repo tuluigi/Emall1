@@ -99,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/EMMeOrderStateCell.m"
-            timestampString = "492516610.815563"
+            filePath = "EMall/Util/ThirdLib/ZJScrollPageView/ZJContentView.m"
+            timestampString = "492524363.29962"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
+            landmarkName = "-gestureRecognizerShouldBegin:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
