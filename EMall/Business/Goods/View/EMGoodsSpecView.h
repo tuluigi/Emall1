@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @class EMGoodsModel;
 @interface EMGoodsSpecView : UIView
-
++(EMGoodsSpecView *)specGoodsView;
 @end

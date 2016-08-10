@@ -13,6 +13,7 @@
 #import "EMGoodsDetialBootmView.h"
 #import "EMGoodsCommentListController.h"
 #import "EMGoodsWebViewController.h"
+#import "EMGoodsSpecView.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate>
@@ -147,7 +148,17 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     return height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==2) {
+   
+    if (indexPath.section==1) {
+        EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsView];
+        [self.view addSubview:specView];
+        WEAKSELF
+        [specView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(weakSelf.view);
+            make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
+            make.height.mas_equalTo(OCUISCALE(400));
+        }];
+    }else if (indexPath.section==2) {
         if (indexPath.row==0) {
             EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
             commentListController.hidesBottomBarWhenPushed=YES;
