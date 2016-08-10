@@ -30,7 +30,7 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
     _headImageView=[[UIImageView alloc]  init];
     [self addSubview:_headImageView];
     
-    _nameLable =[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _nameLable =[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
     _nameLable.textColor=[UIColor whiteColor];
     [self addSubview:_nameLable];
     WEAKSELF
@@ -56,8 +56,13 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
 
 }
 - (void)setUserName:(NSString *)userName headImageUrl:(NSString *)headImageUrl level:(NSInteger)level{
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:headImageUrl] placeholderImage:EMDefaultImage];
-    _nameLable.text=userName;
+    [_headImageView sd_setImageWithURL:[NSURL URLWithString:headImageUrl] placeholderImage:[UIImage imageNamed:@"avator_default"]];
+    if ([RI isLogined]) {
+       _nameLable.text=userName;
+    }else{
+        _nameLable.text=@"点击登录";
+    }
+    
 }
 + (CGFloat)headViewHeight{
     return OCUISCALE(OCUISCALE(EMMeHeaderViewIconTop+EMMeHeaderViewIconWidth+EMMeHeaderViewIconBottom));

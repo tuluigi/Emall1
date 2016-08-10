@@ -60,8 +60,11 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 }
 - (void)setCatModel:(EMCatModel *)catModel{
     _catModel=catModel;
+    NSInteger i=catModel.catID%100;
+    
+    NSString *imageUrl=[NSString stringWithFormat:@"0%ld",i+1];
 //    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
-    _iconImageView.image=[UIImage imageNamed:@"cat_05"];
+    _iconImageView.image=[UIImage imageNamed:imageUrl];
     self.nameLabel.text=_catModel.catName;
 }
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture{

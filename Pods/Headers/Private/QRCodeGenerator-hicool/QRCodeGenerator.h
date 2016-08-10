@@ -1,0 +1,1 @@
+../../../QRCodeGenerator-hicool/QRCodeGenerator/Classes/QRCodeGenerator.h

@@ -33,7 +33,7 @@
 - (void)setAdModel:(EMAdModel *)adModel{
     _adModel=adModel;
     NSString *adImageUrl=_adModel.adImageUrl;
-    adImageUrl=@"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg";
+//    adImageUrl=@"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg";
      [_iconImageView sd_setImageWithURL:[NSURL URLWithString:adImageUrl] placeholderImage:EMDefaultImage];
 }
 @end

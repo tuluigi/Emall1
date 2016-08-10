@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3D6C6A8C4ABEE313C3F0D4 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF04033235AC8B980D77C69 /* libPods-EMall.a */; };
 		2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351F81D1A3E2B002BE7B7 /* OCBaseTableViewController.m */; };
 		2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351FA1D1A3E2B002BE7B7 /* OCBaseViewController.m */; };
 		2A0352041D1A3E2B002BE7B7 /* OCRootTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0351FE1D1A3E2B002BE7B7 /* OCRootTabbarController.m */; };
@@ -136,6 +135,7 @@
 		2AED6CB61D44B6EC001B5910 /* EMCartPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CB51D44B6EC001B5910 /* EMCartPayCell.m */; };
 		2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */; };
 		2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */; };
+		ABC83C24744517F13554C6F5 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEA5D91F9C7977399EB6B59 /* libPods-EMall.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,7 +156,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		228E5A4C578871C0A974D1C1 /* Pods-EMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.debug.xcconfig"; sourceTree = "<group>"; };
+		00D23786FC2ECED435500B0A /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
+		0DEA5D91F9C7977399EB6B59 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0351F71D1A3E2B002BE7B7 /* OCBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseTableViewController.h; sourceTree = "<group>"; };
 		2A0351F81D1A3E2B002BE7B7 /* OCBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseTableViewController.m; sourceTree = "<group>"; };
 		2A0351F91D1A3E2B002BE7B7 /* OCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseViewController.h; sourceTree = "<group>"; };
@@ -421,8 +422,7 @@
 		2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetailViewController.m; sourceTree = "<group>"; };
 		2AED6CBD1D44CA2B001B5910 /* EMGoodsDetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsDetailHeadView.h; sourceTree = "<group>"; };
 		2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsDetailHeadView.m; sourceTree = "<group>"; };
-		4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
-		8AF04033235AC8B980D77C69 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34840CBE01BE0982006F40A6 /* Pods-EMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,7 +430,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A3D6C6A8C4ABEE313C3F0D4 /* libPods-EMall.a in Frameworks */,
+				ABC83C24744517F13554C6F5 /* libPods-EMall.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,13 +451,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2450F9D85E8D29E8A4975762 /* Pods */ = {
+		06E593161CFB887B2906FE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				228E5A4C578871C0A974D1C1 /* Pods-EMall.debug.xcconfig */,
-				4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */,
+				0DEA5D91F9C7977399EB6B59 /* libPods-EMall.a */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2A0351EF1D1A3322002BE7B7 /* Business */ = {
@@ -573,8 +572,8 @@
 				2A24270C1D12C4670078240C /* EMallTests */,
 				2A2427171D12C4670078240C /* EMallUITests */,
 				2A2426F11D12C4670078240C /* Products */,
-				2450F9D85E8D29E8A4975762 /* Pods */,
-				77C90C70468B770D313818E7 /* Frameworks */,
+				D0613CE8F0577F7FF80C4CCB /* Pods */,
+				06E593161CFB887B2906FE1C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1156,12 +1155,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		77C90C70468B770D313818E7 /* Frameworks */ = {
+		D0613CE8F0577F7FF80C4CCB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8AF04033235AC8B980D77C69 /* libPods-EMall.a */,
+				34840CBE01BE0982006F40A6 /* Pods-EMall.debug.xcconfig */,
+				00D23786FC2ECED435500B0A /* Pods-EMall.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1177,7 +1177,6 @@
 				2A2426EE1D12C4670078240C /* Resources */,
 				772022D24B785817A254A32B /* [CP] Embed Pods Frameworks */,
 				AB433F776084999E1FC012E6 /* [CP] Copy Pods Resources */,
-				4F07FD597A3C5D25EC9E81C3 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1294,21 +1293,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F07FD597A3C5D25EC9E81C3 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMall/Pods-EMall-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		772022D24B785817A254A32B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1622,7 +1606,7 @@
 		};
 		2A24271E1D12C4670078240C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 228E5A4C578871C0A974D1C1 /* Pods-EMall.debug.xcconfig */;
+			baseConfigurationReference = 34840CBE01BE0982006F40A6 /* Pods-EMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
@@ -1639,7 +1623,7 @@
 		};
 		2A24271F1D12C4670078240C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4727CFAAC3FD42C9F3A6EC1B /* Pods-EMall.release.xcconfig */;
+			baseConfigurationReference = 00D23786FC2ECED435500B0A /* Pods-EMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";

@@ -17,6 +17,7 @@
 #import "EMInfiniteViewCell.h"
 #import "EMGoodsDetailViewController.h"
 #import "EMGoodsModel.h"
+#import "EMAdModel.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
@@ -45,26 +46,43 @@ EMHomeHeadReusableViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"海吃GO";
+    self.navigationItem.title=@"嗨吃GO";
     [self.view addSubview:self.myCollectionView];
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)didHomeRighBarButtonPressed{
+    if ([RI isLogined]) {
+       [self.tabBarController setSelectedIndex:([self.tabBarController.viewControllers count]-1)];
+    }else{
+        [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+            
+        }];
+    }
+}
 #pragma mark -Net
 - (void)getHomeADList{
     WEAKSELF
     NSURLSessionTask *task=[EMHomeNetService getHomeAdListOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.adArray=responseResult.responseData;
-            for (NSInteger i=0; i<1; i++) {
-                [weakSelf.adArray addObjectsFromArray:weakSelf.adArray];
+//            for (NSInteger i=0; i<1; i++) {
+//                [weakSelf.adArray addObjectsFromArray:weakSelf.adArray];
+//            }
+            //暂时为了测试用
+            for (EMAdModel *adModel in weakSelf.adArray) {
+                if (adModel.adID%2) {
+                    adModel.adImageUrl=@"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg";
+                }else{
+                     adModel.adImageUrl=@"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg";
+                }
             }
             [weakSelf.myCollectionView reloadData];
         }
@@ -76,10 +94,7 @@ EMHomeHeadReusableViewDelegate>
     NSURLSessionTask *task=[EMHomeNetService getHomeDataOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.homeModel=responseResult.responseData;
-            for (NSInteger i=0; i<5; i++) {
-                [weakSelf.homeModel.catArray addObjectsFromArray:weakSelf.homeModel.catArray];
-            }
-            
+            [weakSelf.homeModel.catArray addObjectsFromArray:weakSelf.homeModel.catArray];
             [weakSelf.myCollectionView reloadData];
         }
     }];

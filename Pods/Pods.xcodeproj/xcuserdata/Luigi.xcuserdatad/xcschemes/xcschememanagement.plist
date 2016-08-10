@@ -74,6 +74,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCodeGenerator-hicool.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,12 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3B9257C2BE61B5DC7E539205BA9E0015</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3D55C18E3063A42CF6B00BE2C65896EC</key>
+		<key>2CC5A230D9526E7282CF4691418A69A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,17 +137,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>453749785F876D9F4A8E8D66C21594B4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>5813251FEA21E4AEE97385709F1912DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>87DD0322DC8316B54F529828EE7B0748</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,12 +157,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B1832DE686D057ACB9D4BF527D0AF7C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BCCC0F4081C473B2448DD2FB829E748C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3B7CD9E6D96EE30335F4C491689031C</key>
+		<key>C24F566F461C9A43FE691D2EA02D762B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCAFEC7D91F9CB71EC167AE8B5CD269D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,7 +187,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E594AE504A3C2AFC42482E26067413A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E63EA3FC3E0A88A11341641DBAC04F9F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E86C03D810E68502DAAA74592E51B9A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

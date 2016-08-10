@@ -75,7 +75,9 @@
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    attributes.size=[EMOrderStatetItemView orderStateItemViewSize];
+    CGSize size=[EMOrderStatetItemView orderStateItemViewSize];
+    size.width=OCWidth/4;
+    attributes.size=size;
     return attributes;
 }
 
@@ -123,6 +125,7 @@
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGSize size = [EMOrderStatetItemView orderStateItemViewSize];
+    size=CGSizeMake(OCWidth/self.orderStateArry.count, size.height);
     return size;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
