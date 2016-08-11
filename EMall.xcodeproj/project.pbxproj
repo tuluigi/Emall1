@@ -34,7 +34,6 @@
 		2A2426F81D12C4670078240C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2426F71D12C4670078240C /* AppDelegate.m */; };
 		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
 		2A2427001D12C4670078240C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FF1D12C4670078240C /* Assets.xcassets */; };
-		2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2427011D12C4670078240C /* LaunchScreen.storyboard */; };
 		2A24270E1D12C4670078240C /* EMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24270D1D12C4670078240C /* EMallTests.m */; };
 		2A2427191D12C4670078240C /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427181D12C4670078240C /* EMallUITests.m */; };
 		2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24272E1D12C81E0078240C /* OCBaseModel.m */; };
@@ -86,6 +85,7 @@
 		2AB965A21D5AF6390049BE2A /* EMAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A11D5AF6390049BE2A /* EMAreaModel.m */; };
 		2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */; };
 		2AB965A81D5C1FC30049BE2A /* EMGoodsSpecMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A71D5C1FC30049BE2A /* EMGoodsSpecMaskView.m */; };
+		2AB965B91D5C65250049BE2A /* EMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965B81D5C65250049BE2A /* EMCache.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -211,7 +211,6 @@
 		2A2426F71D12C4670078240C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2A2426FD1D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2A2426FF1D12C4670078240C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2A2427021D12C4670078240C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A2427041D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A2427091D12C4670078240C /* EMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A24270D1D12C4670078240C /* EMallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallTests.m; sourceTree = "<group>"; };
@@ -322,6 +321,8 @@
 		2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsListCell.m; sourceTree = "<group>"; };
 		2AB965A61D5C1FC30049BE2A /* EMGoodsSpecMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsSpecMaskView.h; sourceTree = "<group>"; };
 		2AB965A71D5C1FC30049BE2A /* EMGoodsSpecMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsSpecMaskView.m; sourceTree = "<group>"; };
+		2AB965B71D5C65250049BE2A /* EMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCache.h; sourceTree = "<group>"; };
+		2AB965B81D5C65250049BE2A /* EMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCache.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -602,7 +603,6 @@
 				2A2426F71D12C4670078240C /* AppDelegate.m */,
 				2A2426FC1D12C4670078240C /* Main.storyboard */,
 				2A2426FF1D12C4670078240C /* Assets.xcassets */,
-				2A2427011D12C4670078240C /* LaunchScreen.storyboard */,
 				2A2427041D12C4670078240C /* Info.plist */,
 				2A2426F31D12C4670078240C /* Supporting Files */,
 				2A24273A1D12C9410078240C /* PrefixHeader.pch */,
@@ -864,6 +864,15 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		2AB965A91D5C65140049BE2A /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				2AB965B71D5C65250049BE2A /* EMCache.h */,
+				2AB965B81D5C65250049BE2A /* EMCache.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		2AC647631D43195F00521462 /* Submit */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +893,7 @@
 		2ADF60031D27C4CC00DF757B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				2AB965A91D5C65140049BE2A /* Cache */,
 				2A7583DF1D51E90D008E1B57 /* Helper */,
 				2A87D5671D3CDD2200D7DBEA /* View */,
 				2A99EB4F1D3B1D850024E924 /* ThirdLib */,
@@ -1293,7 +1303,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A2427031D12C4670078240C /* LaunchScreen.storyboard in Resources */,
 				2A2427001D12C4670078240C /* Assets.xcassets in Resources */,
 				2A2426FE1D12C4670078240C /* Main.storyboard in Resources */,
 			);
@@ -1368,6 +1377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AB965B91D5C65250049BE2A /* EMCache.m in Sources */,
 				2ADF604A1D27C59C00DF757B /* UIImage+OCColorImage.m in Sources */,
 				2ADF60F81D328B8B00DF757B /* EMShoppingAddressListController.m in Sources */,
 				2ADF60601D27CCC500DF757B /* UIImageView+EduUtils.m in Sources */,
@@ -1537,14 +1547,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		2A2427011D12C4670078240C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A2427021D12C4670078240C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1635,6 +1637,7 @@
 			baseConfigurationReference = 4572D58B230EE5E14B01750D /* Pods-EMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
@@ -1652,6 +1655,7 @@
 			baseConfigurationReference = 5BC62C06126C80684E0FA600 /* Pods-EMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";

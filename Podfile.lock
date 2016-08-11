@@ -44,6 +44,7 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - SVProgressHUD (1.1.3)
+  - TMCache (2.1.0)
   - TPKeyboardAvoiding (1.3)
   - UITableView+FDTemplateLayoutCell (1.4)
 
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.1)
   - SVProgressHUD (~> 1.1.3)
+  - TMCache (~> 2.1.0)
   - TPKeyboardAvoiding (~> 1.3)
   - UITableView+FDTemplateLayoutCell (~> 1.3)
 
@@ -81,9 +83,10 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
-PODFILE CHECKSUM: 1014eac34055a19ad3e209a6f14b2fae775e80e4
+PODFILE CHECKSUM: a74a70292a680c717d92f8276cecdd06a3ac2f4d
 
 COCOAPODS: 1.0.1

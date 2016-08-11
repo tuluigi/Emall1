@@ -94,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TMCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -107,6 +112,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0D5D1559BC66D2186C58BF912F4AD0AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
 		<dict>
 			<key>primary</key>
@@ -118,11 +128,6 @@
 			<true/>
 		</dict>
 		<key>29852B71914AA2E261D18F89DE5A907F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2CC5A230D9526E7282CF4691418A69A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,6 +147,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>641EEEF053DA84A98516FAF167905D56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
@@ -157,7 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1832DE686D057ACB9D4BF527D0AF7C9</key>
+		<key>9ECC2C33B240E1E3CA06410BEB098A81</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB0AB088E8C7814129B4EC7CFC7470C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,12 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C24F566F461C9A43FE691D2EA02D762B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DCAFEC7D91F9CB71EC167AE8B5CD269D</key>
+		<key>C5B3F62FBBC347F2DFBE3EB3EA3EB004</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,22 +192,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E29D74D39F1B90C9617A3F71CCF35048</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E2FE87384A67337831E53490EEA8BF11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E594AE504A3C2AFC42482E26067413A8</key>
+		<key>E5E314F05F4E3D02049A40D1DE953479</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E63EA3FC3E0A88A11341641DBAC04F9F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E86C03D810E68502DAAA74592E51B9A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

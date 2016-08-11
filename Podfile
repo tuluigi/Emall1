@@ -17,4 +17,5 @@ pod 'JSBadgeView', '~> 1.4.1'
 pod 'AESCrypt', '~> 0.0.1'
 pod 'MWPhotoBrowser', '~> 2.1.2'
 pod 'QRCodeGenerator-hicool', '~> 0.0.1'
+pod 'TMCache', '~> 2.1.0'
 end

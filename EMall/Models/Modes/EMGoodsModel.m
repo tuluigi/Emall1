@@ -9,7 +9,7 @@
 #import "EMGoodsModel.h"
 
 
-@implementation EMGoodsObjectItemModel
+@implementation EMSpecModel
 
 
 
