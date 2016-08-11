@@ -11,10 +11,14 @@
 @implementation EMCatModel
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"catID":@"id",
-             @"catName":@"name",
-             @"catImageUrl":@"logo",};
+             @"pid":@"pid",
+              @"catName":@"classify_name",
+             @"catImageUrl":@"icon_url",};
 }
-- (NSString *)catImageUrl{
-    return    @"http://pic24.nipic.com/20121015/9095554_135805004000_2.jpg";
+- (NSMutableArray *)childCatArray{
+    if (nil==_childCatArray) {
+        _childCatArray=[[NSMutableArray alloc]  init];
+    }
+    return _childCatArray;
 }
 @end

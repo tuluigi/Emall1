@@ -17,8 +17,16 @@
 @property(nonatomic,assign)CGFloat goodsPrice;
 @end
 
+
+@interface EMHomeCatModel : OCBaseModel
+@property (nonatomic,assign)NSInteger catID;
+@property (nonatomic,assign)NSInteger pid;//父类别ID
+@property (nonatomic,copy)NSString *catName;
+@property (nonatomic,copy)NSString *catImageUrl;
+@end
+
 @interface EMHomeModel : OCBaseModel
-@property (nonatomic,strong)NSMutableArray *catArray;
+@property (nonatomic,strong)NSMutableArray <EMHomeCatModel *>*catArray;
 
 @property (nonatomic,strong)NSMutableArray <EMHomeGoodsModel *>*greatGoodsArray;//精品商品的数组
 @property (nonatomic,strong)NSMutableArray <EMHomeGoodsModel *>*hotGoodsArray;//热销商品数组

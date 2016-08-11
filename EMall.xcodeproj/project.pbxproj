@@ -41,6 +41,10 @@
 		2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427351D12C8C50078240C /* OCResponseResult.m */; };
 		2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427381D12C8D90078240C /* OCNetSessionManager.m */; };
 		2A31E8061D5B860B00FC73A9 /* EMGoodsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */; };
+		2A31E8091D5CBB7F00FC73A9 /* EMCatNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8081D5CBB7F00FC73A9 /* EMCatNetService.m */; };
+		2A31E80D1D5CBCE400FC73A9 /* EMCatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E80C1D5CBCE400FC73A9 /* EMCatViewController.m */; };
+		2A31E8101D5CC4BD00FC73A9 /* EMCatItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */; };
+		2A31E8131D5CD70900FC73A9 /* EMGoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -230,6 +234,14 @@
 		2A24273A1D12C9410078240C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2A31E8041D5B860B00FC73A9 /* EMGoodsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsWebViewController.h; sourceTree = "<group>"; };
 		2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsWebViewController.m; sourceTree = "<group>"; };
+		2A31E8071D5CBB7F00FC73A9 /* EMCatNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCatNetService.h; sourceTree = "<group>"; };
+		2A31E8081D5CBB7F00FC73A9 /* EMCatNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCatNetService.m; sourceTree = "<group>"; };
+		2A31E80B1D5CBCE400FC73A9 /* EMCatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCatViewController.h; sourceTree = "<group>"; };
+		2A31E80C1D5CBCE400FC73A9 /* EMCatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCatViewController.m; sourceTree = "<group>"; };
+		2A31E80E1D5CC4BD00FC73A9 /* EMCatItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCatItemCell.h; sourceTree = "<group>"; };
+		2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCatItemCell.m; sourceTree = "<group>"; };
+		2A31E8111D5CD70900FC73A9 /* EMGoodsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsListViewController.h; sourceTree = "<group>"; };
+		2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsListViewController.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -467,6 +479,7 @@
 		2A0351EF1D1A3322002BE7B7 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				2A31E80A1D5CBCBF00FC73A9 /* Cat */,
 				2AED6CB71D44C966001B5910 /* Goods */,
 				2A0351F51D1A3DC1002BE7B7 /* Base */,
 				2A0351F11D1A3DA6002BE7B7 /* Cart */,
@@ -698,6 +711,8 @@
 				2A13F7081D50E01A0041D2C5 /* EMMeNetService.m */,
 				2AB965BA1D5C7E920049BE2A /* EMGoodsNetService.h */,
 				2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */,
+				2A31E8071D5CBB7F00FC73A9 /* EMCatNetService.h */,
+				2A31E8081D5CBB7F00FC73A9 /* EMCatNetService.m */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -720,6 +735,17 @@
 				2A31E8051D5B860B00FC73A9 /* EMGoodsWebViewController.m */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		2A31E80A1D5CBCBF00FC73A9 /* Cat */ = {
+			isa = PBXGroup;
+			children = (
+				2A31E80B1D5CBCE400FC73A9 /* EMCatViewController.h */,
+				2A31E80C1D5CBCE400FC73A9 /* EMCatViewController.m */,
+				2A31E80E1D5CC4BD00FC73A9 /* EMCatItemCell.h */,
+				2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */,
+			);
+			path = Cat;
 			sourceTree = "<group>";
 		};
 		2A4AA95C1D48782B008A323A /* Comment */ = {
@@ -1166,6 +1192,8 @@
 				2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */,
 				2A13F6FE1D47B0070041D2C5 /* EMGoodsDetialBootmView.h */,
 				2A13F6FF1D47B0070041D2C5 /* EMGoodsDetialBootmView.m */,
+				2A31E8111D5CD70900FC73A9 /* EMGoodsListViewController.h */,
+				2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -1396,6 +1424,7 @@
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
+				2A31E8101D5CC4BD00FC73A9 /* EMCatItemCell.m in Sources */,
 				2A99EB731D3B64D20024E924 /* EMOrderDetailController.m in Sources */,
 				2A99EB651D3B1D8E0024E924 /* ZJScrollSegmentView.m in Sources */,
 				2ADF604B1D27C59C00DF757B /* UIImage+OCFixIssue.m in Sources */,
@@ -1414,6 +1443,7 @@
 				2ADF60541D27C59C00DF757B /* OCNRefresheFootView.m in Sources */,
 				2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */,
 				2A0352051D1A3E2B002BE7B7 /* UIViewController+OpenCourse.m in Sources */,
+				2A31E8091D5CBB7F00FC73A9 /* EMCatNetService.m in Sources */,
 				2A99EB3E1D3A6C860024E924 /* OCUTableViewButtonCell.m in Sources */,
 				2A31E8061D5B860B00FC73A9 /* EMGoodsWebViewController.m in Sources */,
 				2ADF608D1D28BE3B00DF757B /* EMCatItemView.m in Sources */,
@@ -1438,6 +1468,7 @@
 				2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */,
+				2A31E80D1D5CBCE400FC73A9 /* EMCatViewController.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
 				2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */,
 				2ADF609B1D31D60B00DF757B /* EMUserModel.m in Sources */,
@@ -1498,6 +1529,7 @@
 				2ADF60491D27C59C00DF757B /* UIColor+ILHexStringColor.m in Sources */,
 				2AB965A81D5C1FC30049BE2A /* EMGoodsSpecMaskView.m in Sources */,
 				2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */,
+				2A31E8131D5CD70900FC73A9 /* EMGoodsListViewController.m in Sources */,
 				2A13F7061D48F5250041D2C5 /* EMGoodsSpecView.m in Sources */,
 				2ADF60631D27CD2E00DF757B /* NSString+Utility.m in Sources */,
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,

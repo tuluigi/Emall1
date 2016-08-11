@@ -24,6 +24,16 @@
 
 @end
 
+@implementation EMHomeCatModel
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"catID":@"id",
+             @"catName":@"name",
+             @"catImageUrl":@"logo",};
+}
+
+
+@end
+
 @implementation EMHomeModel
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"catArray":@"category",
@@ -36,7 +46,7 @@
             NSMutableArray *sessions=[[NSMutableArray alloc]  init];
             for (id item in value) {
                 NSError *aError;
-                EMCatModel *catModel=[MTLJSONAdapter modelOfClass:[EMCatModel class] fromJSONDictionary:item error:&aError];
+                EMCatModel *catModel=[MTLJSONAdapter modelOfClass:[EMHomeCatModel class] fromJSONDictionary:item error:&aError];
                 if (catModel&&nil==aError) {
                     [sessions addObject:catModel];
                 }

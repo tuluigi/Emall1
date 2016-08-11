@@ -18,6 +18,8 @@
 #import "EMGoodsDetailViewController.h"
 #import "EMGoodsModel.h"
 #import "EMAdModel.h"
+#import "EMCatViewController.h"
+#import "EMGoodsListViewController.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
@@ -60,7 +62,7 @@ EMHomeHeadReusableViewDelegate>
 }
 - (void)didHomeRighBarButtonPressed{
     if ([RI isLogined]) {
-       [self.tabBarController setSelectedIndex:([self.tabBarController.viewControllers count]-1)];
+        [self.tabBarController setSelectedIndex:([self.tabBarController.viewControllers count]-1)];
     }else{
         [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
             
@@ -73,15 +75,15 @@ EMHomeHeadReusableViewDelegate>
     NSURLSessionTask *task=[EMHomeNetService getHomeAdListOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.adArray=responseResult.responseData;
-//            for (NSInteger i=0; i<1; i++) {
-//                [weakSelf.adArray addObjectsFromArray:weakSelf.adArray];
-//            }
+            //            for (NSInteger i=0; i<1; i++) {
+            //                [weakSelf.adArray addObjectsFromArray:weakSelf.adArray];
+            //            }
             //暂时为了测试用
             for (EMAdModel *adModel in weakSelf.adArray) {
                 if (adModel.adID%2) {
                     adModel.adImageUrl=@"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg";
                 }else{
-                     adModel.adImageUrl=@"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg";
+                    adModel.adImageUrl=@"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg";
                 }
             }
             [weakSelf.myCollectionView reloadData];
@@ -139,7 +141,6 @@ EMHomeHeadReusableViewDelegate>
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     
     CGSize size = flowLayout.itemSize;
@@ -174,19 +175,25 @@ EMHomeHeadReusableViewDelegate>
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    EMGoodsModel *goodsModel;
     if (indexPath.section==0) {
-        goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
-    }else if(indexPath.section==1){
-        goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+        
+    }else{
+        EMHomeGoodsModel *goodsModel;
+        if (indexPath.section==1) {
+            goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
+        }else if(indexPath.section==2){
+            goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+        }
+        EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:goodsModel.goodsID];
+        detailController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:detailController animated:YES];
     }
-    EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:goodsModel.goodsID];
-    detailController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:detailController animated:YES];
 }
 #pragma mark - EMHomeCatCell Delegate
 - (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel{
-    //
+    EMCatViewController *catController=[[EMCatViewController alloc]  init];
+    catController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:catController animated:YES];
 }
 /**
  *  分类点击更多
@@ -197,6 +204,9 @@ EMHomeHeadReusableViewDelegate>
     }else if (type==EMHomeHeadReusableViewTypeHot){
         
     }
+    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:type];
+    listController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:listController animated:YES];
 }
 #pragma mark -EMInfiniteVieDelegate
 - (NSInteger)numberOfInfiniteViewCellsInInfiniteView:(EMInfiniteView *)infiniteView{

@@ -70,6 +70,10 @@
         make.right.mas_equalTo(weakSelf.mas_right).offset(OCUISCALE(-12));
         make.centerY.mas_equalTo(weakSelf.imageView.mas_centerY);
     }];
+    self.userInteractionEnabled=YES;
+    
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(didHeadMoreButtonPressed)];
+    [self addGestureRecognizer:tapGesture];
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
     UICollectionViewLayoutAttributes *attrs=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
