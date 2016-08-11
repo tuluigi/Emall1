@@ -15,23 +15,35 @@
 #import "EMGoodsWebViewController.h"
 #import "EMGoodsSpecView.h"
 #import "EMGoodsSpecMaskView.h"
+#import "EMGoodsNetService.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
-@interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate>
+@interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate>
 @property (nonatomic,strong)UIButton *backButton;
 @property (nonatomic,strong)UIImageView *headImageView;
 
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
 @property (nonatomic,strong)EMGoodsDetialBootmView *bottomView;
 @property (nonatomic,assign)__block CGAffineTransform tramsform;
+
+@property (nonatomic,strong)EMGoodsModel *aGoodsModel;
+@property (nonatomic,assign)NSInteger goodsID;
+
+@property (nonatomic,strong)EMGoodsDetailModel *detailModel;
 @end
 
 @implementation EMGoodsDetailViewController
 - (instancetype)initWithGoodsID:(NSInteger )goodsID{
     self=[super init];
     if (self) {
+        self.goodsID=goodsID;
         self.tableViewStyle=UITableViewStyleGrouped;
     }
+    return self;
+}
+- (instancetype)initWithGoodsModel:(EMGoodsModel * )goodsModel{
+    self=[self initWithGoodsID:goodsModel.goodsID];
+    self.goodsModel=goodsModel;
     return self;
 }
 - (void)viewDidLoad {
@@ -74,6 +86,25 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppIntoForground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
+    
+    [self getGoodsDetailWithGoodsID:self.goodsID];
+}
+
+- (void)getGoodsDetailWithGoodsID:(NSInteger)goodsID{
+    WEAKSELF
+    [self.tableView showPageLoadingView];
+    NSURLSessionTask *task=[EMGoodsNetService getGoodsDetailWithGoodsID:goodsID onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            weakSelf.detailModel=responseResult.responseData;
+        }else{
+            [weakSelf.tableView showPageLoadedMessage:@"获取数据失败,点击重试" delegate:self];
+        }
+    }];
+    [self addSessionTask:task];
+}
+-(void)ocPageLoadedViewOnTouced{
+    [self getGoodsDetailWithGoodsID:self.goodsID];
 }
 -(void)handleAppIntoForground{
    self.view.center = CGPointMake(self.view.superview.bounds.size.width/2,

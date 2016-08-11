@@ -35,7 +35,7 @@
 }
 - (void)getGoodsListWithCursor:(NSString *)cursor{
     WEAKSELF
-    if (nil==cursor) {
+    if ([NSString isNilOrEmptyForString:cursor]) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
@@ -44,7 +44,10 @@
            if (nil==cursor) {
                [weakSelf.dataSourceArray removeAllObjects];
            }
-           [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+           for (NSInteger i=0; i<10; i++) {
+               [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+           }
+           
            [weakSelf.myCollectionView reloadData];
        }
        weakSelf.cursor=responseResult.cursor;

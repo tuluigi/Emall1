@@ -24,7 +24,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"pName":@"spec_name",
              @"specsArray":@"detail",
-            };
+             };
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
     if ([key isEqualToString:@"specsArray"]) {
@@ -68,6 +68,7 @@
 
 @interface EMGoodsModel ()
 @property (nonatomic,copy)NSString *picture_01,*picture_02,*picture_03,*picture_04,*picture_05;
+@property(nonatomic,strong,readwrite)NSMutableArray <NSString *>*goodsImageArray;
 @end
 
 @implementation EMGoodsModel
@@ -86,9 +87,9 @@
              @"commentCount":@"comment_num",
              @"goodsDetails":@"product_details",
              @"userName":@"member_name",
-              @"avatar":@"avatar",
-              @"userName":@"member_name",
-              @"commentContent":@"content",
+             @"avatar":@"avatar",
+             @"userName":@"member_name",
+             @"commentContent":@"content",
              @"specArray":@"spec",};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
@@ -104,6 +105,29 @@
         return nil;
     }
 }
+-(NSMutableArray<NSString *> *)goodsImageArray{
+    if (nil==_goodsImageArray) {
+        _goodsImageArray=[[NSMutableArray alloc]  init];
+    }
+    if (!_goodsImageArray.count) {
+        if (![NSString isNilOrEmptyForString:self.picture_01]) {
+            [_goodsImageArray addObject:self.picture_01];
+        }
+        if (![NSString isNilOrEmptyForString:self.picture_02]) {
+            [_goodsImageArray addObject:self.picture_02];
+        }
+        if (![NSString isNilOrEmptyForString:self.picture_03]) {
+            [_goodsImageArray addObject:self.picture_03];
+        }
+        if (![NSString isNilOrEmptyForString:self.picture_04]) {
+            [_goodsImageArray addObject:self.picture_04];
+        }
+        if (![NSString isNilOrEmptyForString:self.picture_05]) {
+            [_goodsImageArray addObject:self.picture_05];
+        }
+    }
+    return _goodsImageArray;
+}
 @end
 
 @implementation EMGoodsDetailModel
@@ -111,7 +135,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsModel":@"goods",
              @"goodsInfoArray":@"detail",
-            };
+             };
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
     if ([key isEqualToString:@"goodsInfoArray"]) {

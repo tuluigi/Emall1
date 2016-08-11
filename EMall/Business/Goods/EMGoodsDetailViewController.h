@@ -7,7 +7,8 @@
 //
 
 #import "OCBaseTableViewController.h"
-
+@class  EMGoodsModel;
 @interface EMGoodsDetailViewController : OCBaseTableViewController
 - (instancetype)initWithGoodsID:(NSInteger )goodsID;
+- (instancetype)initWithGoodsModel:(EMGoodsModel * )goodsModel;
 @end

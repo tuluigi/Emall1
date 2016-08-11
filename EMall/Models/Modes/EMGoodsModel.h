@@ -46,7 +46,7 @@
 @property(nonatomic,copy)NSString *goodsName;
 
 @property(nonatomic,copy)NSString *goodsImageUrl;//商品主图
-@property(nonatomic,strong)NSMutableArray <NSString *>*goodsImageArray;//商品其他图集
+@property(nonatomic,strong,readonly)NSMutableArray <NSString *>*goodsImageArray;//商品其他图集<通过接口返回的5张图片来拼起来的>
 
 @property(nonatomic,assign)NSInteger saleCount;//销售数量
 @property(nonatomic,assign)CGFloat goodsPrice;

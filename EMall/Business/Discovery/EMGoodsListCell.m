@@ -43,8 +43,8 @@
 -(UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     CGSize size=[EMGoodsItemView goodsItemViewSize];
-//    size.width=OCWidth/2.0;
-//    size.height+=10;
+    size.width=OCWidth/2.0;
+    size.height+=10;
     attributes.size=size;
     return attributes;
 }
