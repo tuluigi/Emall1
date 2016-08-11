@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/View/EMGoodsSpecView.m"
-            timestampString = "492581258.125992"
+            filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
+            timestampString = "492592239.51977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "-collectionView:didSelectItemAtIndexPath:"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-handleAppIntoForground"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

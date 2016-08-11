@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^EMGoodsSpecMaskViewDismissBlock)(BOOL addCart ,NSInteger goodsID,NSInteger buyCount,NSInteger sepecID);
+@class EMGoodsSpecMaskView;
+@class EMGoodsSpecView;
+typedef void(^EMGoodsSpecMaskViewDismissBlock)(EMGoodsSpecMaskView *aSpecMaskView);
 @interface EMGoodsSpecMaskView : UIView
-+ (EMGoodsSpecMaskView *)goodsSpecMaskViewWithGoodsInfo:(id)goodsInfo onDismsiBlock:(EMGoodsSpecMaskViewDismissBlock)dismisBlock;
++ (EMGoodsSpecMaskView *)goodsMaskViewOnDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock;
+
+- (void)presemtSpecView;
+- (void)dismissSpecView;
+- (void)finishedDismiss;
 @end

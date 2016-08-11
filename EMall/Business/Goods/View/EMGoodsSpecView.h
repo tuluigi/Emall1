@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class EMGoodsModel;
-typedef void(^EMGoodsSpecViewDismissBlock)(BOOL addCart ,NSInteger goodsID,NSInteger buyCount,NSInteger sepecID);
+@class EMGoodsSpecView;
+typedef void(^EMGoodsSpecViewDismissBlock)(EMGoodsSpecView *specView, BOOL addCart ,NSInteger goodsID,NSInteger buyCount,NSInteger sepecID);
 @interface EMGoodsSpecView : UIView
 
 + (CGRect)specFrame;

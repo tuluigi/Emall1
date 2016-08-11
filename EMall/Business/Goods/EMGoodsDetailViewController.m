@@ -15,7 +15,6 @@
 #import "EMGoodsWebViewController.h"
 #import "EMGoodsSpecView.h"
 #import "EMGoodsSpecMaskView.h"
-#import <UIViewController+KNSemiModal.h>
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate>
@@ -24,6 +23,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
 @property (nonatomic,strong)EMGoodsDetialBootmView *bottomView;
+@property (nonatomic,assign)__block CGAffineTransform tramsform;
 @end
 
 @implementation EMGoodsDetailViewController
@@ -55,18 +55,31 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
-        make.edges.mas_equalTo(UIEdgeInsetsMake(-20, 0, OCUISCALE(50),0 ));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(50),0 ));
     }];
-     EMGoodsModel  * agoodsModel=[[EMGoodsModel alloc] init];
+    UIEdgeInsets contentInset=self.tableView.contentInset;
+    contentInset.top-=20;
+    self.tableView.contentInset=contentInset;
+    EMGoodsModel  * agoodsModel=[[EMGoodsModel alloc] init];
     agoodsModel.goodsImageUrl=@"http://pic31.nipic.com/20130710/13151003_093759013311_2.jpg";
     agoodsModel.goodsName=@"这是一件很好的商品，新款上市了，大家赶紧来看看啊看";
     agoodsModel.goodsPrice=123;
     agoodsModel.saleCount=134;
     agoodsModel.commentCount=3455;
     self.goodsModel=agoodsModel;
-
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        weakSelf.tramsform=weakSelf.view.transform;
+    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppIntoForground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
 }
-
+-(void)handleAppIntoForground{
+   self.view.center = CGPointMake(self.view.superview.bounds.size.width/2,
+                              self.view.superview.bounds.size.height/2);
+//    self.view.transform=self.view.transform;;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -78,7 +91,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kGoodsCommonCellIdenfier];
     [self.tableView registerClass:[EMGoodsInfoTableViewCell class] forCellReuseIdentifier:kGoodsInfoCellIdenfier];
-
+    
     return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -94,14 +107,14 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     UITableViewCell *aCell;
     if (indexPath.section==2||indexPath.section==1||indexPath.section==3) {
         aCell=[tableView dequeueReusableCellWithIdentifier:kGoodsCommonCellIdenfier forIndexPath:indexPath];
-         aCell.selectionStyle=UITableViewCellSelectionStyleNone;
+        aCell.selectionStyle=UITableViewCellSelectionStyleNone;
         aCell.textLabel.font=[UIFont oc_systemFontOfSize:14];
         aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
         aCell.textLabel.textAlignment=NSTextAlignmentLeft;
-          aCell.accessoryType=UITableViewCellAccessoryNone;
+        aCell.accessoryType=UITableViewCellAccessoryNone;
         aCell.textLabel.numberOfLines=0;
         if (indexPath.section==1) {
-              aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             aCell.textLabel.text=@"请选择规格、数量";
         }else if (indexPath.section==2){
             if (indexPath.row==0) {
@@ -110,13 +123,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             }else if (indexPath.row ==1){
                 aCell.textLabel.font=[UIFont oc_systemFontOfSize:12];
                 aCell.textLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
-               
+                
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",@"xiaoli",@"这个东西真好用，哈哈哈，大家杆件都来购买呀"];
             }
         }else if (indexPath.section==3){
-             aCell.textLabel.text=@"商品详情";
-             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            aCell.textLabel.text=@"商品详情";
+            aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
@@ -134,7 +147,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }];
     }else if (indexPath.section==2){
         if (indexPath.row==1) {
-           
+            
         }
     }
     return height;
@@ -150,59 +163,27 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     return height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   
+    
     if (indexPath.section==1) {
-        __block UIView *maskView=[[UIView alloc]  initWithFrame:[[UIScreen mainScreen] bounds]];
-        maskView.backgroundColor=[UIColor blackColor];
-        maskView.alpha=0;
-        [self.view addSubview:maskView];
-        
-        EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:nil onDismsiBlock:^(BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
-            CGRect rect=[EMGoodsSpecView specFrame];
-            rect.origin.y=OCHeight;
-           
-            /*
+        WEAKSELF
+        __block EMGoodsSpecMaskView *maskView=[EMGoodsSpecMaskView goodsMaskViewOnDismissBlock:^(EMGoodsSpecMaskView *aSpecMaskView) {
             [UIView animateWithDuration:0.3 animations:^{
-                 self.view.layer.transform=[self firstTran];
-                specView.frame=rect;
-                maskView.alpha=0;
-                self.view.layer.transform = CATransform3DIdentity;
+                [aSpecMaskView dismissSpecView];
+                weakSelf.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
             } completion:^(BOOL finished) {
-                [maskView removeFromSuperview];
-                
+                [aSpecMaskView finishedDismiss];
             }];
-             */
-        
-            [UIView animateWithDuration: 0.35 animations: ^{
-               specView.frame=rect;
-                
-                self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
-            } completion:^(BOOL finished) {
-                [maskView removeFromSuperview];
-            }];
-         
         }];
-   
         
-        [UIView animateWithDuration: 0.35 animations: ^{
-              maskView.alpha=0.5;
-            self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.8,0.8);
-            specView.frame=[EMGoodsSpecView specFrame];
-            [[[UIApplication sharedApplication] keyWindow] addSubview:specView];
-        } completion: nil];
-        
-        /*
         
         [UIView animateWithDuration:0.3 animations:^{
-            maskView.alpha=0.5;
-            self.view.layer.transform=[self firstTran];
-            self.view.layer.transform=[self secondTran];
-            specView.frame=[EMGoodsSpecView specFrame];
-            [[[UIApplication sharedApplication] keyWindow] addSubview:specView];
+            self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.8,0.8);
+            [[UIApplication sharedApplication].keyWindow addSubview:maskView];
+            [maskView presemtSpecView];
         } completion:^(BOOL finished) {
-
+            
         }];
-        */
+        
     }else if (indexPath.section==2) {
         if (indexPath.row==0) {
             EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
@@ -215,18 +196,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         [self.navigationController pushViewController:goodsWebController animated:YES];
     }
 }
-- (CATransform3D )firstTran{
-    CATransform3D transform = CATransform3DIdentity;
-    transform.m24 = -1/2000;
-    transform = CATransform3DScale(transform, 0.9, 0.9, 1);
-    return transform;
-}
-- (CATransform3D )secondTran{
-    CATransform3D transfrom =CATransform3DIdentity;
-    transfrom=CATransform3DTranslate(transfrom, 0, self.view.frame.size.height*(-0.88), 0);
-    transfrom=CATransform3DScale(transfrom, 0.8, 0.8, 1);
-    return transfrom;
-}
+
 #pragma mark - bottomview delegate
 - (void)goodsDetialBootmViewSubmitButtonPressed{
     
@@ -240,7 +210,6 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (UIButton *)backButton{
     if (nil==_backButton) {
         _backButton=[UIButton buttonWithType:UIButtonTypeCustom];
-//        [_backButton setTitle:@"返回" forState:UIControlStateNormal];
         [_backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_backButton setImage:[UIImage imageNamed:@"goods_backBtn"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(didBackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -263,13 +232,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     return _bottomView;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

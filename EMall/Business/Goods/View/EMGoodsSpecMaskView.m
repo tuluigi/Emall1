@@ -12,34 +12,54 @@
 
 @interface EMGoodsSpecMaskView ()
 @property (nonatomic,copy)EMGoodsSpecMaskViewDismissBlock dismissBlock;
+@property (nonatomic,strong)EMGoodsSpecView *specView;
 @end
 
 @implementation EMGoodsSpecMaskView
-+ (EMGoodsSpecMaskView *)goodsSpecMaskViewWithGoodsInfo:(id)goodsInfo onDismsiBlock:(EMGoodsSpecMaskViewDismissBlock)dismisBlock{
+- (void)dealloc{
+    NSLog(@"%@ is dealloc",self);
+}
++ (EMGoodsSpecMaskView *)goodsMaskViewOnDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock{
     EMGoodsSpecMaskView *aView=[[EMGoodsSpecMaskView alloc]  initWithFrame:[[UIScreen mainScreen] bounds]];
-    aView.dismissBlock=dismisBlock;
-    EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:goodsInfo onDismsiBlock:^(BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
-        if (aView.dismissBlock) {
-            aView.dismissBlock(addCart,goodsID,buyCount,sepecID);
-        }
-    }];
-    CGRect frame=specView.frame;
-    frame.origin.y=CGRectGetHeight(specView.bounds)-frame.size.height;
-    specView.frame=frame;
-    [aView addSubview:specView];
+    [aView addSubview:aView.specView];
+    aView.dismissBlock=dismissBlock;
     return  aView;
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self=[super initWithFrame:frame]) {
-        self.backgroundColor=[UIColor blackColor];
-        UITapGestureRecognizer *gesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture)];
-        [self addGestureRecognizer:gesture];
+        self.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
     }
     return self;
 }
-- (void)handleTapGesture{
+
+- (void)presemtSpecView{
+    self.specView.frame=[EMGoodsSpecView specFrame];
+    [self addSubview:self.specView];
+}
+- (void)dismissSpecView{
+    CGRect rect=[EMGoodsSpecView specFrame];
+    rect.origin.y=OCHeight;
+    self.specView.frame=rect;
+}
+- (void)finishedDismiss{
+    [self.specView removeFromSuperview];
+    self.specView=nil;
+    [self removeFromSuperview];
+}
+- (EMGoodsSpecView *)specView{
+    if (nil==_specView) {
+        _specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:nil onDismsiBlock:^(EMGoodsSpecView *specView, BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
+            if (self.dismissBlock) {
+                self.dismissBlock(self);
+            }
+        }];
+    }
+    return _specView;
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    WEAKSELF
     if (self.dismissBlock) {
-        self.dismissBlock(NO,0,0,0);
+        self.dismissBlock(weakSelf);
     }
 }
 @end
