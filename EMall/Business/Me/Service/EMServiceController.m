@@ -78,7 +78,7 @@
         cell.detailTextLabel.text=self.telPhone;
         cell.imageView.image=[UIImage imageNamed:@"service_tel"];
     }else if (indexPath.row==1){
-        cell.textLabel.text=@"扫描二维码，关注海吃微信公众号";
+        cell.textLabel.text=@"扫描二维码，关注嗨吃GO微信公众号";
         cell.detailTextLabel.text=@"";
         cell.imageView.image=[UIImage imageNamed:@"service_wechat"];
     }
