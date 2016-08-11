@@ -7,7 +7,8 @@
 //
 
 #import "EMDiscoveryViewController.h"
-
+#import "EMHomeGoodsCell.h"
+#import "EMGoodsModel.h"
 @interface EMDiscoveryViewController ()
 
 @end
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title=@"发现";
     // Do any additional setup after loading the view.
 }
 
@@ -23,7 +25,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    NSInteger count=self.dataSourceArray.count;
+    return count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *aCell;
+       
+    return aCell;
+}
 /*
 #pragma mark - Navigation
 

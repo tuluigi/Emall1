@@ -84,6 +84,7 @@
 		2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */; };
 		2A99EB7C1D3BC32E0024E924 /* EMCartListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */; };
 		2AB965A21D5AF6390049BE2A /* EMAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A11D5AF6390049BE2A /* EMAreaModel.m */; };
+		2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -318,6 +319,8 @@
 		2A99EB7B1D3BC32E0024E924 /* EMCartListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartListCell.m; sourceTree = "<group>"; };
 		2AB965A01D5AF6390049BE2A /* EMAreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAreaModel.h; sourceTree = "<group>"; };
 		2AB965A11D5AF6390049BE2A /* EMAreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAreaModel.m; sourceTree = "<group>"; };
+		2AB965A31D5B693D0049BE2A /* EMGoodsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsListCell.h; sourceTree = "<group>"; };
+		2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsListCell.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -494,6 +497,8 @@
 			children = (
 				2A03520F1D1A3FDA002BE7B7 /* EMDiscoveryViewController.h */,
 				2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */,
+				2AB965A31D5B693D0049BE2A /* EMGoodsListCell.h */,
+				2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -1425,6 +1430,7 @@
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
 				2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */,
 				2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */,
+				2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */,
 				2ADF60741D28AAAB00DF757B /* EMGoodsModel.m in Sources */,
