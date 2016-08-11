@@ -7,11 +7,12 @@
 //
 
 #import "EMHomeGoodsCell.h"
-#import "EMGoodsModel.h"
+#import "EMHomeModel.h"
 #import "EMGoodsItemView.h"
+#import "EMGoodsModel.h"
 @interface EMHomeGoodsCell ()
 @property (nonatomic,strong)EMGoodsItemView *goodsItemView;
-@property (nonatomic,strong) EMGoodsModel *goodsModel;
+@property (nonatomic,strong) EMHomeGoodsModel *goodsModel;
 @end
 
 @implementation EMHomeGoodsCell
@@ -32,11 +33,21 @@
         make.edges.mas_equalTo(UIEdgeInsetsMake(padding, padding, padding, padding));
     }];
 }
-- (void)setGoodsModel:(EMGoodsModel *)goodsModel{
+- (void)setGoodsModel:(EMHomeGoodsModel *)goodsModel{
     _goodsModel=goodsModel;
-    self.goodsItemView.goodsModel=goodsModel;
+    EMGoodsModel *model=[EMHomeGoodsCell goodsModelWithHomeGoodsModel:_goodsModel];
+    self.goodsItemView.goodsModel=model;
 }
-- (void)setGoodsModel:(EMGoodsModel *)goodsModel dataSource:(NSArray *)dataSource{
++ (EMGoodsModel *)goodsModelWithHomeGoodsModel:(EMHomeGoodsModel *)homeGoods{
+    EMGoodsModel *goodsModel=[[EMGoodsModel alloc]  init];
+    goodsModel.goodsID=homeGoods.goodsID;
+    goodsModel.goodsName=homeGoods.goodsName;
+    goodsModel.goodsImageUrl=homeGoods.goodsImageUrl;
+    goodsModel.goodsPrice=homeGoods.goodsPrice;
+    goodsModel.saleCount=homeGoods.saleCount;
+    return goodsModel;
+}
+- (void)setGoodsModel:(EMHomeGoodsModel *)goodsModel dataSource:(NSArray *)dataSource{
     [self setGoodsModel:goodsModel];
     NSInteger index=[dataSource indexOfObject:goodsModel];
     CGFloat padding=OCUISCALE(5);

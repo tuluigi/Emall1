@@ -4,13 +4,15 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -19,13 +21,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
-            timestampString = "492592239.51977"
+            filePath = "EMall/Models/Modes/EMGoodsModel.m"
+            timestampString = "492603906.21769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-handleAppIntoForground"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "+JSONTransformerForKey:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

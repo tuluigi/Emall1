@@ -52,18 +52,23 @@
 @property(nonatomic,assign)CGFloat goodsPrice;
 @property(nonatomic,assign)NSInteger commentCount;//评论数量
 
-@property (nonatomic,copy)NSString *remarks;//备注
+@property (nonatomic,copy)NSString *remark;//备注
 @property (nonatomic,copy)NSString *goodsDetails;//详细信息
 
-@property (nonatomic,copy)NSString *parmameter;//
+@property (nonatomic,copy)NSString *parameter;//
+
 @property (nonatomic,copy)NSString *userName;//
 @property (nonatomic,copy)NSString *avatar;//
+@property (nonatomic,copy)NSString *commentContent;//用户的一条评论
+
 @property (nonatomic,assign)NSInteger postage;
 @property (nonatomic,assign)NSInteger state;
 
 
 @property (nonatomic,strong)NSArray *specArray;//商品列表中可能用到的规格信息
 @end
+
+
 
 /**
  *  商品详细信息model

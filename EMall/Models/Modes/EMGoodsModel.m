@@ -11,16 +11,128 @@
 
 @implementation EMSpecModel
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"pName":@"p_name",
+             @"name":@"name",
+             @"specID":@"id",
+             @"infoID":@"gdid",
+             };
+}
+
+@end
+@implementation EMSpecListModel
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"pName":@"spec_name",
+             @"specsArray":@"detail",
+            };
+}
++(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
+    if ([key isEqualToString:@"specsArray"]) {
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            id result;
+            if ([value isKindOfClass:[NSArray class]]) {
+                result = [MTLJSONAdapter modelsOfClass:[EMSpecModel class] fromJSONArray:value error:error];
+            }
+            return result;
+        }];
+    }else{
+        return nil;
+    }
+}
+@end
+@implementation EMGoodsInfoModel
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"goodsID":@"gid",
+             @"infoID":@"id",
+             @"promotePrice":@"promotion_price",
+             @"amount":@"amount",
+             @"specListArray":@"spec",
+             };
+}
++(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
+    if ([key isEqualToString:@"specListArray"]) {
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            id result;
+            if ([value isKindOfClass:[NSArray class]]) {
+                result = [MTLJSONAdapter modelsOfClass:[EMSpecModel class] fromJSONArray:value error:error];
+            }
+            return result;
+        }];
+    }else{
+        return nil;
+    }
+}
+@end
 
 
+@interface EMGoodsModel ()
+@property (nonatomic,copy)NSString *picture_01,*picture_02,*picture_03,*picture_04,*picture_05;
 @end
 
 @implementation EMGoodsModel
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
-    return @{@"goodsID":@"id",
+    return @{@"goodsID":@"gid",
              @"goodsName":@"name",
-             @"goodsPrice":@"price",
-             @"saleCount":@"sales",
-             @"goodsImageUrl":@"image",};
+             @"goodsImageUrl":@"picture",
+             @"saleCount":@"sales_num",
+             @"goodsImageUrl":@"postage",
+             @"state":@"state",
+             @"postage":@"postage",
+             @"commentCount":@"comment_num",
+             @"remark":@"remark",
+             @"parameter":@"parameter",
+             @"commentCount":@"comment_num",
+             @"goodsDetails":@"product_details",
+             @"userName":@"member_name",
+              @"avatar":@"avatar",
+              @"userName":@"member_name",
+              @"commentContent":@"content",
+             @"specArray":@"spec",};
 }
++(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
+    if ([key isEqualToString:@"specArray"]) {
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            id result;
+            if ([value isKindOfClass:[NSArray class]]) {
+                result = [MTLJSONAdapter modelsOfClass:[EMSpecListModel class] fromJSONArray:value error:error];
+            }
+            return result;
+        }];
+    }else{
+        return nil;
+    }
+}
+@end
+
+@implementation EMGoodsDetailModel
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"goodsModel":@"goods",
+             @"goodsInfoArray":@"detail",
+            };
+}
++(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
+    if ([key isEqualToString:@"goodsInfoArray"]) {
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            id result;
+            if ([value isKindOfClass:[NSArray class]]) {
+                result = [MTLJSONAdapter modelsOfClass:[EMGoodsInfoModel class] fromJSONArray:value error:error];
+            }
+            return result;
+        }];
+    }else if([key isEqualToString:@"goodsModel"]){
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            id result;
+            if ([value isKindOfClass:[NSDictionary class]]) {
+                result = [MTLJSONAdapter modelOfClass:[EMGoodsModel class] fromJSONDictionary:value error:error];
+            }
+            return result;
+        }];
+    }else{
+        return nil;
+    }
+}
+
 @end

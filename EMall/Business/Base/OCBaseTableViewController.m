@@ -20,7 +20,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cursor = @"";
+   
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets=YES;
     // Do any additional setup after loading the view.

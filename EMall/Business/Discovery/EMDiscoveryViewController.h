@@ -8,6 +8,6 @@
 
 #import "OCBaseTableViewController.h"
 
-@interface EMDiscoveryViewController : OCBaseTableViewController
+@interface EMDiscoveryViewController : OCBaseViewController
 
 @end

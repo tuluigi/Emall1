@@ -33,6 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+     self.cursor = @"";
     // Do any additional setup after loading the view
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0) {
         self.modalPresentationCapturesStatusBarAppearance = NO;        // Load resources for iOS 7 or later

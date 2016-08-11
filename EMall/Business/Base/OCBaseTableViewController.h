@@ -14,10 +14,7 @@
 }
 
 @property (nonatomic, strong,readonly,getter=tableView) UITableView *tableView;
-/**
- *  分页的页码，default = @""
- */
-@property (nonatomic, copy) __block NSString *cursor;       //记录新加载数据的个数以及在数组中的位置
+
 /**
  *  tableview datasource
  */

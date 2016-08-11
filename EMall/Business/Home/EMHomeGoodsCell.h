@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class EMGoodsModel;
+@class EMHomeGoodsModel;
 @interface EMHomeGoodsCell : UICollectionViewCell
 
 
-- (void)setGoodsModel:(EMGoodsModel *)goodsModel dataSource:(NSArray *)dataSource;
+- (void)setGoodsModel:(EMHomeGoodsModel *)goodsModel dataSource:(NSArray *)dataSource;
 @end

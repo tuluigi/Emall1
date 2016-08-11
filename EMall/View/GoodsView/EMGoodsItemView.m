@@ -44,7 +44,7 @@
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(weakSelf);
         make.right.mas_equalTo(weakSelf);
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(170), OCUISCALE(120)));
+        make.height.mas_equalTo(OCUISCALE(120));
     }];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
@@ -55,7 +55,7 @@
         make.left.mas_equalTo(weakSelf.iconImageView);
         make.top.mas_equalTo(weakSelf.nameLabel.mas_bottom).offset(OCUISCALE(10));
         make.right.mas_equalTo(weakSelf.iconImageView.mas_centerX);
-        make.bottom.mas_equalTo(weakSelf.mas_bottom);
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).priorityHigh();
     }];
     
     [_saleCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +72,7 @@
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%@",[NSString tenThousandUnitString:_goodsModel.saleCount]];
 }
 + (CGSize)goodsItemViewSize{
-    return CGSizeMake(OCUISCALE(170), OCUISCALE(120+5+20+5+10));
+    return CGSizeMake(OCUISCALE(170), OCUISCALE(120+5+20+20+10));
 }
 
 @end

@@ -86,6 +86,7 @@
 		2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */; };
 		2AB965A81D5C1FC30049BE2A /* EMGoodsSpecMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965A71D5C1FC30049BE2A /* EMGoodsSpecMaskView.m */; };
 		2AB965B91D5C65250049BE2A /* EMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965B81D5C65250049BE2A /* EMCache.m */; };
+		2AB965BC1D5C7E920049BE2A /* EMGoodsNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -323,6 +324,8 @@
 		2AB965A71D5C1FC30049BE2A /* EMGoodsSpecMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsSpecMaskView.m; sourceTree = "<group>"; };
 		2AB965B71D5C65250049BE2A /* EMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCache.h; sourceTree = "<group>"; };
 		2AB965B81D5C65250049BE2A /* EMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCache.m; sourceTree = "<group>"; };
+		2AB965BA1D5C7E920049BE2A /* EMGoodsNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsNetService.h; sourceTree = "<group>"; };
+		2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsNetService.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -693,6 +696,8 @@
 				2A09402D1D2B9700005BB84D /* EMHomeNetService.m */,
 				2A13F7071D50E01A0041D2C5 /* EMMeNetService.h */,
 				2A13F7081D50E01A0041D2C5 /* EMMeNetService.m */,
+				2AB965BA1D5C7E920049BE2A /* EMGoodsNetService.h */,
+				2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -1429,6 +1434,7 @@
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
 				2A99EB4B1D3A6C860024E924 /* OCTableCellTextViewModel.m in Sources */,
 				2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */,
+				2AB965BC1D5C7E920049BE2A /* EMGoodsNetService.m in Sources */,
 				2AB965A51D5B693D0049BE2A /* EMGoodsListCell.m in Sources */,
 				2ADF60901D292E0D00DF757B /* EMHomeModel.m in Sources */,
 				2A99EB4A1D3A6C860024E924 /* OCTableCellTextFiledModel.m in Sources */,
