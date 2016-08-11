@@ -60,4 +60,8 @@ static NSString * const OCLogoutNofication = @"com.EMMall.logout.success";
 static NSString * const OCLoginSuccessNofication = @"com.EMMall.login.success";
 
 static CGFloat const kEMOffX    = 13;
+//整个app中默认的浅色字体颜色
+#define kEM_GrayDarkTextColor [UIColor colorWithHexString:@"#272727"]
+//整个app中默认深色字体颜色
+#define kEM_LightDarkTextColor [UIColor colorWithHexString:@"#5d5c5c"]
 #endif /* EMallHeader_h */

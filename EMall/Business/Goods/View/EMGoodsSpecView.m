@@ -9,6 +9,31 @@
 #import "EMGoodsSpecView.h"
 #import "EMGoodsModel.h"
 
+
+@interface EMGoodsSepcHeadView : UICollectionReusableView
+@property (nonatomic,strong)UILabel *titleLabel;
+@end
+
+@implementation EMGoodsSepcHeadView
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
+    if (self) {
+        [self onInitContentView];
+    }
+    return self;
+}
+
+- (void)onInitContentView{
+    _titleLabel=[UILabel labelWithText:@"颜色" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _titleLabel.textColor=kEM_GrayDarkTextColor;
+    [self addSubview:_titleLabel];
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(5, 5, 5, 5));
+    }];
+}
+
+
+@end
 @interface EMGoodsSpecCell : UICollectionViewCell
 @property (nonatomic,strong)UIButton *titleButton;
 @property (nonatomic,copy)NSString *titleString;
@@ -29,7 +54,7 @@
 - (void)onInitContentView{
     
     _titleButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    UIColor *textColor=[UIColor colorWithHexString:@"#272727"];
+    UIColor *textColor=kEM_LightDarkTextColor;
     [_titleButton setTitleColor:textColor forState:UIControlStateNormal];
     [_titleButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     _titleButton.layer.cornerRadius=3;
@@ -69,7 +94,7 @@
 
 @implementation EMGoodsSpecView
 +(EMGoodsSpecView *)specGoodsView{
-    EMGoodsSpecView *aView=[[EMGoodsSpecView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(400))];
+    EMGoodsSpecView *aView=[[EMGoodsSpecView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(450))];
     
     return aView;
 }
@@ -118,9 +143,9 @@
     _submitButton.titleLabel.font=[UIFont oc_boldSystemFontOfSize:17];
     [_submitButton addTarget:self action:@selector(didActionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_submitButton];
-    UIView *lineView=[UIView new];
-    lineView.backgroundColor=RGB(201, 201, 201);
-    [self addSubview:lineView];
+//    UIView *lineView=[UIView new];
+//    lineView.backgroundColor=RGB(201, 201, 201);
+//    [self addSubview:lineView];
     WEAKSELF
     [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(weakSelf).offset(kEMOffX);
@@ -145,27 +170,28 @@
         make.top.mas_equalTo(weakSelf.goodsImageView.mas_bottom).offset(kEMOffX);
         make.height.mas_equalTo(0.5);
     }];
+ 
+    
+//    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(weakSelf);
+//        make.height.mas_equalTo(OCUISCALE(0.5));
+//        make.bottom.mas_equalTo(weakSelf.submitButton.mas_top);
+//    }];
+    [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(weakSelf);
+        make.height.mas_equalTo(50);
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).priorityHigh();
+    }];
     [_myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf);
         make.top.mas_equalTo(lineView0.mas_bottom);
-        make.bottom.mas_equalTo(lineView.mas_top);
-    }];
-    
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(weakSelf);
-        make.height.mas_equalTo(OCUISCALE(0.5));
         make.bottom.mas_equalTo(weakSelf.submitButton.mas_top);
     }];
-    [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(weakSelf);
-        make.height.mas_equalTo(50);
-    }];
-    
     
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg"] placeholderImage:EMDefaultImage];
     _titleLabel.text=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
     _priceLabel.text=@"￥120";
-//    [self.myCollectionView reloadData];
+    [self.myCollectionView reloadData];
 }
 - (void)didActionButtonPressed:(UIButton *)sender{
     if (sender==self.submitButton) {
@@ -181,19 +207,41 @@
     return 3;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 3;
+    return 35;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     EMGoodsSpecCell *cell=(EMGoodsSpecCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class]) forIndexPath:indexPath];
     cell.titleString=nil;
     return cell;
 }
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-//    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
-//    
-//    CGSize size = flowLayout.itemSize;
-    return CGSizeMake(60, 30);
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    
+    CGSize size = flowLayout.itemSize;
+    return size;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
+    return size;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    EMGoodsSepcHeadView *reusableView;
+    reusableView =(EMGoodsSepcHeadView *)[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class]) forIndexPath:indexPath];
+    if (indexPath.section==0) {
+        reusableView.titleLabel.text=@"请选择颜色:";
+    }else if(indexPath.section==1){
+        reusableView.titleLabel.text=@"请选择尺寸:";
+    }else if (indexPath.section==2){
+        reusableView.titleLabel.text=@"请选择数量:";
+    }
+    return reusableView;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
@@ -201,15 +249,20 @@
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
-        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, OCWidth, 60) collectionViewLayout:flowLayout];
+        flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
+        
+        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
         mainView.dataSource = self;
         mainView.delegate = self;
+        mainView.userInteractionEnabled=YES;
+        mainView.alwaysBounceVertical=YES;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMGoodsSpecCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class])];
+        [_myCollectionView registerClass:[EMGoodsSepcHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class])];
         
     }
     return _myCollectionView;

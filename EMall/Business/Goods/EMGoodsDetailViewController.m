@@ -151,13 +151,16 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
    
     if (indexPath.section==1) {
         EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsView];
+        CGRect frame=specView.frame;
+        frame.origin.y=CGRectGetHeight(self.view.bounds)-frame.size.height;
+        specView.frame=frame;
         [self.view addSubview:specView];
-        WEAKSELF
-        [specView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(weakSelf.view);
-            make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
-            make.height.mas_equalTo(OCUISCALE(400));
-        }];
+//        WEAKSELF
+//        [specView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.mas_equalTo(weakSelf.view);
+//            make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
+//            make.height.mas_equalTo(OCUISCALE(400));
+//        }];
     }else if (indexPath.section==2) {
         if (indexPath.row==0) {
             EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
