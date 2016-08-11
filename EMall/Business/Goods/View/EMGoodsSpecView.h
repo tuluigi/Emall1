@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class EMGoodsModel;
+typedef void(^EMGoodsSpecViewDismissBlock)(BOOL addCart ,NSInteger goodsID,NSInteger buyCount,NSInteger sepecID);
 @interface EMGoodsSpecView : UIView
-+(EMGoodsSpecView *)specGoodsView;
+
++ (CGRect)specFrame;
++(EMGoodsSpecView *)specGoodsViewWithGoodInfo:(id)goodInfo onDismsiBlock:(EMGoodsSpecViewDismissBlock)dismisBlock;
 @end

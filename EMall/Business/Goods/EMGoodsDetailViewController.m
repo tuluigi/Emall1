@@ -14,6 +14,8 @@
 #import "EMGoodsCommentListController.h"
 #import "EMGoodsWebViewController.h"
 #import "EMGoodsSpecView.h"
+#import "EMGoodsSpecMaskView.h"
+#import <UIViewController+KNSemiModal.h>
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate>
@@ -150,17 +152,57 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.section==1) {
-        EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsView];
-        CGRect frame=specView.frame;
-        frame.origin.y=CGRectGetHeight(self.view.bounds)-frame.size.height;
-        specView.frame=frame;
-        [self.view addSubview:specView];
-//        WEAKSELF
-//        [specView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.mas_equalTo(weakSelf.view);
-//            make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
-//            make.height.mas_equalTo(OCUISCALE(400));
-//        }];
+        __block UIView *maskView=[[UIView alloc]  initWithFrame:[[UIScreen mainScreen] bounds]];
+        maskView.backgroundColor=[UIColor blackColor];
+        maskView.alpha=0;
+        [self.view addSubview:maskView];
+        
+        EMGoodsSpecView *specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:nil onDismsiBlock:^(BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
+            CGRect rect=[EMGoodsSpecView specFrame];
+            rect.origin.y=OCHeight;
+           
+            /*
+            [UIView animateWithDuration:0.3 animations:^{
+                 self.view.layer.transform=[self firstTran];
+                specView.frame=rect;
+                maskView.alpha=0;
+                self.view.layer.transform = CATransform3DIdentity;
+            } completion:^(BOOL finished) {
+                [maskView removeFromSuperview];
+                
+            }];
+             */
+        
+            [UIView animateWithDuration: 0.35 animations: ^{
+               specView.frame=rect;
+                
+                self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+            } completion:^(BOOL finished) {
+                [maskView removeFromSuperview];
+            }];
+         
+        }];
+   
+        
+        [UIView animateWithDuration: 0.35 animations: ^{
+              maskView.alpha=0.5;
+            self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.8,0.8);
+            specView.frame=[EMGoodsSpecView specFrame];
+            [[[UIApplication sharedApplication] keyWindow] addSubview:specView];
+        } completion: nil];
+        
+        /*
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            maskView.alpha=0.5;
+            self.view.layer.transform=[self firstTran];
+            self.view.layer.transform=[self secondTran];
+            specView.frame=[EMGoodsSpecView specFrame];
+            [[[UIApplication sharedApplication] keyWindow] addSubview:specView];
+        } completion:^(BOOL finished) {
+
+        }];
+        */
     }else if (indexPath.section==2) {
         if (indexPath.row==0) {
             EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
@@ -172,6 +214,18 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         goodsWebController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goodsWebController animated:YES];
     }
+}
+- (CATransform3D )firstTran{
+    CATransform3D transform = CATransform3DIdentity;
+    transform.m24 = -1/2000;
+    transform = CATransform3DScale(transform, 0.9, 0.9, 1);
+    return transform;
+}
+- (CATransform3D )secondTran{
+    CATransform3D transfrom =CATransform3DIdentity;
+    transfrom=CATransform3DTranslate(transfrom, 0, self.view.frame.size.height*(-0.88), 0);
+    transfrom=CATransform3DScale(transfrom, 0.8, 0.8, 1);
+    return transfrom;
 }
 #pragma mark - bottomview delegate
 - (void)goodsDetialBootmViewSubmitButtonPressed{

@@ -44,6 +44,7 @@
     self=[self initWithFrame:CGRectZero];
     return self;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
@@ -90,20 +91,35 @@
 @property (nonatomic,strong)UILabel *titleLabel,*priceLabel;
 @property (nonatomic,strong)UIButton *submitButton,*closeButton;
 @property (nonatomic,strong)UICollectionView *myCollectionView;
+@property (nonatomic,strong)EMGoodsSpecViewDismissBlock dismissBlock;
 @end
 
 @implementation EMGoodsSpecView
-+(EMGoodsSpecView *)specGoodsView{
-    EMGoodsSpecView *aView=[[EMGoodsSpecView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(450))];
-    
++ (CGRect)specFrame{
+    CGFloat height=OCUISCALE(450);
+    CGRect rect=CGRectMake(0, OCHeight-height, OCWidth, height);
+    return rect;
+}
++(EMGoodsSpecView *)specGoodsViewWithGoodInfo:(id)goodInfo onDismsiBlock:(EMGoodsSpecViewDismissBlock)dismisBlock{
+    CGRect frame=[EMGoodsSpecView specFrame];
+    frame.origin.y=OCHeight;
+    EMGoodsSpecView *aView=[[EMGoodsSpecView alloc]  initWithFrame:frame];
+    aView.dismissBlock=dismisBlock;
     return aView;
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {
         [self onInitContentView];
+//        UITapGestureRecognizer *gesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture)];
+//        [self addGestureRecognizer:gesture];
     }
     return self;
+}
+- (void)handleTapGesture{
+    if (self.dismissBlock) {
+        self.dismissBlock(NO,0,0,0);
+    }
 }
 - (void)onInitContentView{
     self.backgroundColor=[UIColor whiteColor];
@@ -199,6 +215,9 @@
 //            [_delegate goodsDetialBootmViewSubmitButtonPressed];
 //        }
     }else if (sender==self.closeButton){
+        if (self.dismissBlock) {
+            self.dismissBlock(NO,0,0,0);
+        }
         [self removeFromSuperview];
     }
     
