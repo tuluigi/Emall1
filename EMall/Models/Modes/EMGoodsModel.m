@@ -55,7 +55,7 @@
         return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
             id result;
             if ([value isKindOfClass:[NSArray class]]) {
-                result = [MTLJSONAdapter modelsOfClass:[EMSpecModel class] fromJSONArray:value error:error];
+                result = [MTLJSONAdapter modelsOfClass:[EMSpecListModel class] fromJSONArray:value error:error];
             }
             return result;
         }];
@@ -130,6 +130,10 @@
 }
 @end
 
+@interface EMGoodsDetailModel ()
+@property (nonatomic,strong,readwrite)NSMutableDictionary *specDic;
+@end
+
 @implementation EMGoodsDetailModel
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
@@ -155,8 +159,33 @@
             return result;
         }];
     }else{
+        
         return nil;
     }
 }
-
+- (NSMutableDictionary *)specDic{
+    if (!_specDic) {
+        NSMutableArray *allSpecArray=[[NSMutableArray alloc]  init];
+        NSMutableSet *specCatSet=[[NSMutableSet alloc]  init];
+        for (EMGoodsInfoModel *infoModel in self.goodsInfoArray) {
+            for (EMSpecListModel *specListModel in infoModel.specListArray) {
+                [specCatSet addObject:specListModel.pName];
+                [allSpecArray addObjectsFromArray:specListModel.specsArray];
+            }
+        }
+        if (specCatSet.count) {
+            NSMutableDictionary *resultDic=[NSMutableDictionary new];
+            NSArray *specNameArray=[specCatSet allObjects];
+            for (NSString *pName in specNameArray) {
+                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_pName=%@",pName];
+                NSArray *tempArray=[allSpecArray filteredArrayUsingPredicate:predicate];
+                if (tempArray.count) {
+                    [resultDic setObject:tempArray forKey:pName];
+                }
+            }
+            _specDic=resultDic;
+        }
+    }
+    return _specDic;
+}
 @end

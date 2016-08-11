@@ -104,6 +104,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UICollectionViewLeftAlignedLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,11 +117,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D5D1559BC66D2186C58BF912F4AD0AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
 		<dict>
 			<key>primary</key>
@@ -127,7 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>20888E620DD0F0C87256A20A62125CBE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>29852B71914AA2E261D18F89DE5A907F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C41D6396567A0AA8F036B6A8294E1DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,12 +152,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>516AAD5EFD321D05319A8459171F0267</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5813251FEA21E4AEE97385709F1912DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>641EEEF053DA84A98516FAF167905D56</key>
+		<key>5D7D89048F9D70A3EF137DDE79B513D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E8A777AF070DB4A146261122BFCF183</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>67DB77FABD55409A0C9211C6B78F0592</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6898B7A5BBCF31836D2348021183B00D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,12 +197,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9ECC2C33B240E1E3CA06410BEB098A81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB0AB088E8C7814129B4EC7CFC7470C5</key>
+		<key>BC79BD46CBF35DB4FFAB204F99599627</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,27 +207,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5B3F62FBBC347F2DFBE3EB3EA3EB004</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DE3B07ED7FF04F506B0C5E00F4973589</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E29D74D39F1B90C9617A3F71CCF35048</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E2FE87384A67337831E53490EEA8BF11</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E5E314F05F4E3D02049A40D1DE953479</key>
 		<dict>
 			<key>primary</key>
 			<true/>

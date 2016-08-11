@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 @class EMGoodsSpecMaskView;
 @class EMGoodsSpecView;
+@class EMGoodsDetailModel;
 typedef void(^EMGoodsSpecMaskViewDismissBlock)(EMGoodsSpecMaskView *aSpecMaskView);
 @interface EMGoodsSpecMaskView : UIView
-+ (EMGoodsSpecMaskView *)goodsMaskViewOnDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock;
++ (EMGoodsSpecMaskView *)goodsMaskViewWithGoodsDetailModel:(EMGoodsDetailModel *)detailModel onDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock;
 
 - (void)presemtSpecView;
 - (void)dismissSpecView;

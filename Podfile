@@ -18,4 +18,5 @@ pod 'AESCrypt', '~> 0.0.1'
 pod 'MWPhotoBrowser', '~> 2.1.2'
 pod 'QRCodeGenerator-hicool', '~> 0.0.1'
 pod 'TMCache', '~> 2.1.0'
+pod 'UICollectionViewLeftAlignedLayout', '~> 1.0.2'
 end

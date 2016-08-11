@@ -76,4 +76,9 @@
 @interface EMGoodsDetailModel : OCBaseModel
 @property (nonatomic,strong)EMGoodsModel *goodsModel;//商品基本信息
 @property (nonatomic,strong)NSArray *goodsInfoArray;//商品明细
+
+/**
+ *  该商品的所有的明细分类
+ */
+@property (nonatomic,strong,readonly)NSMutableDictionary *specDic;
 @end

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6898B7A5BBCF31836D2348021183B00D'
-               BlueprintName = 'TMCache'
+               BlueprintIdentifier = '5E8A777AF070DB4A146261122BFCF183'
+               BlueprintName = 'UICollectionViewLeftAlignedLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libTMCache.a'>
+               BuildableName = 'libUICollectionViewLeftAlignedLayout.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

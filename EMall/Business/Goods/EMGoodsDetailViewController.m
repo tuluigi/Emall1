@@ -197,7 +197,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     
     if (indexPath.section==1) {
         WEAKSELF
-        __block EMGoodsSpecMaskView *maskView=[EMGoodsSpecMaskView goodsMaskViewOnDismissBlock:^(EMGoodsSpecMaskView *aSpecMaskView) {
+        __block EMGoodsSpecMaskView *maskView=[EMGoodsSpecMaskView goodsMaskViewWithGoodsDetailModel:self.detailModel onDismissBlock:^(EMGoodsSpecMaskView *aSpecMaskView) {
             [UIView animateWithDuration:0.3 animations:^{
                 [aSpecMaskView dismissSpecView];
                 weakSelf.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
@@ -206,9 +206,10 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             }];
         }];
         
-        
+      
+
         [UIView animateWithDuration:0.3 animations:^{
-            self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.8,0.8);
+            self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.85,0.85);
             [[UIApplication sharedApplication].keyWindow addSubview:maskView];
             [maskView presemtSpecView];
         } completion:^(BOOL finished) {

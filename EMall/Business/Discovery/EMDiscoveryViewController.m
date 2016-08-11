@@ -21,7 +21,12 @@
 @end
 
 @implementation EMDiscoveryViewController
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.dataSourceArray.count==0) {
+        [self getGoodsListWithCursor:self.cursor];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"发现";
@@ -47,7 +52,7 @@
            for (NSInteger i=0; i<10; i++) {
                [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
            }
-           
+            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
            [weakSelf.myCollectionView reloadData];
        }
        weakSelf.cursor=responseResult.cursor;
@@ -80,7 +85,7 @@
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);

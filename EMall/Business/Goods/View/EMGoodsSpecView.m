@@ -86,7 +86,6 @@
 }
 - (void)setTitleString:(NSString *)titleString{
     _titleString=titleString;
-    _titleString=@"红白色";
     self.titleLabel.text=_titleString;
 //    [self.titleButton setTitle:_titleString forState:UIControlStateNormal];
 }
@@ -108,6 +107,8 @@
 @property (nonatomic,strong)UIButton *submitButton,*closeButton;
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)EMGoodsSpecViewDismissBlock dismissBlock;
+@property (nonatomic,strong)EMGoodsDetailModel *detailModel;
+@property (nonatomic,strong)NSArray *keysArray;
 @end
 
 @implementation EMGoodsSpecView
@@ -115,14 +116,16 @@
     NSLog(@"EMGoodsSpecView is dealloc");
 }
 + (CGRect)specFrame{
-    CGFloat height=OCHeight*0.8;
+    CGFloat height=OCHeight*0.7;
     CGRect rect=CGRectMake(0, OCHeight-height, OCWidth, height);
     return rect;
 }
 +(EMGoodsSpecView *)specGoodsViewWithGoodInfo:(id)goodInfo onDismsiBlock:(EMGoodsSpecViewDismissBlock)dismisBlock{
     CGRect frame=[EMGoodsSpecView specFrame];
     frame.origin.y=OCHeight;
+    
     EMGoodsSpecView *aView=[[EMGoodsSpecView alloc]  initWithFrame:frame];
+    aView.detailModel=goodInfo;
     aView.dismissBlock=dismisBlock;
     return aView;
 }
@@ -130,7 +133,6 @@
     self=[super initWithFrame:frame];
     if (self) {
         [self onInitContentView];
-
     }
     return self;
 }
@@ -139,7 +141,6 @@
     self.backgroundColor=[UIColor whiteColor];
     
     UIColor *textColor=[UIColor colorWithHexString:@"#272727"];
-    
     
     _goodsImageView=[UIImageView new];
     _goodsImageView.contentMode=UIViewContentModeScaleAspectFill;
@@ -228,15 +229,24 @@
     }
     
 }
+- (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
+    _detailModel=detailModel;
+    self.keysArray=[_detailModel.specDic allKeys];
+}
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return self.keysArray.count;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 15;
+    NSString *key=[self.keysArray objectAtIndex:section];
+    NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
+    return valueArray.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+    NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
     EMGoodsSpecCell *cell=(EMGoodsSpecCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class]) forIndexPath:indexPath];
-    cell.titleString=nil;
+    EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
+    cell.titleString=specModel.name;
     return cell;
 }
 
@@ -256,13 +266,8 @@
     if (kind==UICollectionElementKindSectionHeader) {
        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class]) forIndexPath:indexPath];
         EMGoodsSepcHeadView *specHeadView=(EMGoodsSepcHeadView *)reusableView;
-        if (indexPath.section==0) {
-            specHeadView.titleLabel.text=@"请选择颜色:";
-        }else if(indexPath.section==1){
-            specHeadView.titleLabel.text=@"请选择尺寸:";
-        }else if (indexPath.section==2){
-            specHeadView.titleLabel.text=@"请选择数量:";
-        }
+        NSString *title=[NSString stringWithFormat:@"请选择%@:", [self.keysArray objectAtIndex:indexPath.section]];
+        specHeadView.titleLabel.text=title;
     }else if (kind==UICollectionElementKindSectionFooter){
         reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
     }
@@ -281,7 +286,7 @@
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
@@ -296,6 +301,7 @@
         mainView.delegate = self;
         mainView.userInteractionEnabled=YES;
         mainView.alwaysBounceVertical=YES;
+        
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMGoodsSpecCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class])];
         [_myCollectionView registerClass:[EMGoodsSepcHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class])];

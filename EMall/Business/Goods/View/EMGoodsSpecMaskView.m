@@ -9,18 +9,20 @@
 #import "EMGoodsSpecMaskView.h"
 #import "EMGoodsSpecView.h"
 
-
+#import "EMGoodsModel.h"
 @interface EMGoodsSpecMaskView ()
 @property (nonatomic,copy)EMGoodsSpecMaskViewDismissBlock dismissBlock;
 @property (nonatomic,strong)EMGoodsSpecView *specView;
+@property (nonatomic,strong)EMGoodsDetailModel *detailModel;
 @end
 
 @implementation EMGoodsSpecMaskView
 - (void)dealloc{
     NSLog(@"%@ is dealloc",self);
 }
-+ (EMGoodsSpecMaskView *)goodsMaskViewOnDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock{
++ (EMGoodsSpecMaskView *)goodsMaskViewWithGoodsDetailModel:(EMGoodsDetailModel *)detailModel onDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock{
     EMGoodsSpecMaskView *aView=[[EMGoodsSpecMaskView alloc]  initWithFrame:[[UIScreen mainScreen] bounds]];
+    aView.detailModel=detailModel;
     [aView addSubview:aView.specView];
     aView.dismissBlock=dismissBlock;
     return  aView;
@@ -48,7 +50,7 @@
 }
 - (EMGoodsSpecView *)specView{
     if (nil==_specView) {
-        _specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:nil onDismsiBlock:^(EMGoodsSpecView *specView, BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
+        _specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:self.detailModel onDismsiBlock:^(EMGoodsSpecView *specView, BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
             if (self.dismissBlock) {
                 self.dismissBlock(self);
             }
