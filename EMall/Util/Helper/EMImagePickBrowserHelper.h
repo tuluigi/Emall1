@@ -40,6 +40,6 @@ typedef void(^EMImagePickerCompletionBlock)(UIImage *editImage,UIImage *originIm
  *  @param index
  */
 + (void)showImageBroswerOnController:(UIViewController *)controller
-                      withImageArray:(NSArray *)imageArray
+                      withImageArray:(NSArray <MWPhoto *>*)imageArray
                         currentIndex:(NSInteger)index;
 @end

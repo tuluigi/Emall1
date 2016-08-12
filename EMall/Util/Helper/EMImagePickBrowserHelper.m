@@ -158,7 +158,9 @@ MWPhotoBrowserDelegate,UIImagePickerControllerDelegate>
 #pragma mark- actionSheetDelegate
 
 
-+ (void)showImageBroswerOnController:(UIViewController *)controller withImageArray:(NSArray *)imageArray currentIndex:(NSInteger)index{
++ (void)showImageBroswerOnController:(UIViewController *)controller
+                      withImageArray:(NSArray <MWPhoto *>*)imageArray
+                        currentIndex:(NSInteger)index{
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:[EMImagePickBrowserHelper sharedHelper]];
     [EMImagePickBrowserHelper sharedHelper].phototBrowserImagesArray=imageArray;
     // Set options

@@ -54,11 +54,18 @@ EMHomeHeadReusableViewDelegate>
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)didLeftBarButtonPressed{
+    EMCatViewController *catController=[[EMCatViewController alloc]  init];
+    catController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:catController animated:YES];
 }
 - (void)didHomeRighBarButtonPressed{
     if ([RI isLogined]) {
@@ -74,18 +81,27 @@ EMHomeHeadReusableViewDelegate>
     WEAKSELF
     NSURLSessionTask *task=[EMHomeNetService getHomeAdListOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            weakSelf.adArray=responseResult.responseData;
-            //            for (NSInteger i=0; i<1; i++) {
-            //                [weakSelf.adArray addObjectsFromArray:weakSelf.adArray];
-            //            }
+//            weakSelf.adArray=responseResult.responseData;
+            if (nil==weakSelf.adArray) {
+                weakSelf.adArray=[[NSMutableArray alloc] init];
+            }
+            for (NSInteger i=0; i<6; i++) {
+                EMAdModel *adModel=[[EMAdModel alloc]  init];
+                [weakSelf.adArray addObject:adModel];
+            }
+            NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
+                                  @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
+                                  @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
+                                  @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
+                                  @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
+                                  @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
             //暂时为了测试用
             for (EMAdModel *adModel in weakSelf.adArray) {
-                if (adModel.adID%2) {
-                    adModel.adImageUrl=@"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg";
-                }else{
-                    adModel.adImageUrl=@"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg";
-                }
+                NSInteger index=[weakSelf.adArray indexOfObject:adModel];
+                index=index%imageArray.count;
+                adModel.adImageUrl=[imageArray objectAtIndex:index];
             }
+
             [weakSelf.myCollectionView reloadData];
         }
     }];
@@ -215,7 +231,8 @@ EMHomeHeadReusableViewDelegate>
 
 - (EMInfiniteViewCell *)infiniteView:(EMInfiniteView *)infiniteView cellForRowAtIndex:(NSInteger)index{
     EMInfiniteViewCell *cell=(EMInfiniteViewCell *)[infiniteView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class]) atIndex:index];
-    cell.adModel=[self.adArray objectAtIndex:index];
+    EMAdModel *adInfo=[self.adArray objectAtIndex:index];
+    cell.imageUrl=adInfo.adImageUrl;
     return cell;
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{

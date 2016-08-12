@@ -16,11 +16,14 @@
 #import "EMGoodsSpecView.h"
 #import "EMGoodsSpecMaskView.h"
 #import "EMGoodsNetService.h"
+#import "EMInfiniteView.h"
+#import "EMImagePickBrowserHelper.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
-@interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate>
+@interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>
 @property (nonatomic,strong)UIButton *backButton;
 @property (nonatomic,strong)UIImageView *headImageView;
+@property (nonatomic,strong)EMInfiniteView *infiniteView;
 
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
 @property (nonatomic,strong)EMGoodsDetialBootmView *bottomView;
@@ -30,6 +33,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @property (nonatomic,assign)NSInteger goodsID;
 
 @property (nonatomic,strong)EMGoodsDetailModel *detailModel;
+
 @end
 
 @implementation EMGoodsDetailViewController
@@ -53,7 +57,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     self.fd_prefersNavigationBarHidden=YES;
     [self.view addSubview:self.backButton];
     [self.view bringSubviewToFront:self.backButton];
-    self.tableView.tableHeaderView=self.headImageView;
+   
     WEAKSELF
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32));
@@ -72,14 +76,6 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     UIEdgeInsets contentInset=self.tableView.contentInset;
     contentInset.top-=20;
     self.tableView.contentInset=contentInset;
-    EMGoodsModel  * agoodsModel=[[EMGoodsModel alloc] init];
-    agoodsModel.goodsImageUrl=@"http://pic31.nipic.com/20130710/13151003_093759013311_2.jpg";
-    agoodsModel.goodsName=@"这是一件很好的商品，新款上市了，大家赶紧来看看啊看";
-    agoodsModel.goodsPrice=123;
-    agoodsModel.saleCount=134;
-    agoodsModel.commentCount=3455;
-    self.goodsModel=agoodsModel;
-    
     
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         weakSelf.tramsform=weakSelf.view.transform;
@@ -89,7 +85,20 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     
     [self getGoodsDetailWithGoodsID:self.goodsID];
 }
+- (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
+    _detailModel=detailModel;
+    
+    NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
+                          @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
+                          @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
+                          @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
+                          @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
+                          @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
+    [_detailModel.goodsModel.goodsImageArray addObjectsFromArray:imageArray];
 
+     self.tableView.tableHeaderView=self.infiniteView;
+    [self.tableView reloadData];
+}
 - (void)getGoodsDetailWithGoodsID:(NSInteger)goodsID{
     WEAKSELF
     [self.tableView showPageLoadingView];
@@ -150,13 +159,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }else if (indexPath.section==2){
             if (indexPath.row==0) {
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-                aCell.textLabel.text=[NSString stringWithFormat:@"商品评价 (%@)",[NSString tenThousandUnitString:self.goodsModel.commentCount]];
+                aCell.textLabel.text=[NSString stringWithFormat:@"商品评价 (%@)",[NSString tenThousandUnitString:self.detailModel.goodsModel.commentCount]];
             }else if (indexPath.row ==1){
                 aCell.textLabel.font=[UIFont oc_systemFontOfSize:12];
                 aCell.textLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
                 
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",@"xiaoli",@"这个东西真好用，哈哈哈，大家杆件都来购买呀"];
+                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(self.detailModel.goodsModel.userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
         }else if (indexPath.section==3){
             aCell.textLabel.text=@"商品详情";
@@ -164,7 +173,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
-        [cell setTitle:self.goodsModel.goodsName price:self.goodsModel.goodsPrice saleCount:self.goodsModel.saleCount];
+        [cell setTitle:self.detailModel.goodsModel.goodsName price:self.detailModel.goodsModel.goodsPrice saleCount:self.detailModel.goodsModel.saleCount];
         aCell=cell;
     }
     return aCell;
@@ -228,7 +237,27 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         [self.navigationController pushViewController:goodsWebController animated:YES];
     }
 }
+#pragma mark -EMInfiniteVieDelegate
+- (NSInteger)numberOfInfiniteViewCellsInInfiniteView:(EMInfiniteView *)infiniteView{
+    NSInteger count= self.detailModel.goodsModel.goodsImageArray.count;
+    return count;
+}
 
+- (EMInfiniteViewCell *)infiniteView:(EMInfiniteView *)infiniteView cellForRowAtIndex:(NSInteger)index{
+    NSString *idenfier=NSStringFromClass([EMInfiniteViewCell class]);
+    EMInfiniteViewCell *cell=(EMInfiniteViewCell *)[infiniteView dequeueReusableCellWithReuseIdentifier:idenfier atIndex:index];
+    NSString  *imageUrl=[self.detailModel.goodsModel.goodsImageArray objectAtIndex:index];
+    cell.imageUrl=imageUrl;
+    return cell;
+}
+- (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{
+    NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
+    for (NSString *imageUrl in self.detailModel.goodsModel.goodsImageArray) {
+        MWPhoto *photo=[MWPhoto photoWithURL:[NSURL URLWithString:imageUrl]];
+        [imageArray addObject:photo];
+    }
+    [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:imageArray currentIndex:index];
+}
 #pragma mark - bottomview delegate
 - (void)goodsDetialBootmViewSubmitButtonPressed{
     
@@ -262,6 +291,14 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         _bottomView.delegate=self;
     }
     return _bottomView;
+}
+-(EMInfiniteView *)infiniteView{
+    if (nil==_infiniteView) {
+        _infiniteView=[[EMInfiniteView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(333))];
+         [_infiniteView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
+        _infiniteView.delegate=self;
+    }
+    return _infiniteView;
 }
 /*
  #pragma mark - Navigation

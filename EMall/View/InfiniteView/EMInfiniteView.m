@@ -8,6 +8,7 @@
 
 #import "EMInfiniteView.h"
 #import "EMInfiniteViewCell.h"
+static NSInteger const kMaxRowCount     =3;
 @interface EMInfiniteView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong,readwrite) UICollectionView *collectionView;
 @property (nonatomic,strong)UIPageControl *pageControl;
@@ -15,10 +16,13 @@
 
 @property (nonatomic,strong)NSTimer *myTimer;
 
+@property (nonatomic,strong)NSIndexPath *currentIndexPath;
+@property (nonatomic,assign)CGFloat offx;
+
 @end
 
 @implementation EMInfiniteView
-
+@synthesize totalNumber=_totalNumber;
 - (instancetype)init{
     self=[self initWithFrame:CGRectZero];
     return self;
@@ -54,6 +58,14 @@
     self.pageControl.numberOfPages=_totalNumber;
     [self addTimer];
 }
+-(NSInteger)totalNumber{
+    if (!_totalNumber) {
+        if (_delegate&&[_delegate respondsToSelector:@selector(numberOfInfiniteViewCellsInInfiniteView:)]) {
+          _totalNumber=[_delegate numberOfInfiniteViewCellsInInfiniteView:self];
+        }
+    }
+    return _totalNumber;
+}
 - (void)setCurrentIndex:(NSInteger)currentIndex{
     _currentIndex=currentIndex;
     self.pageControl.currentPage=_currentIndex;
@@ -65,12 +77,25 @@
         self.myTimer=timer;
     }
 }
-
-- (void)autoLoadNextPage{
+- (NSInteger)nextIndex{
     NSInteger nextIndex=(self.currentIndex+1);
-    if (nextIndex>self.totalNumber) {
+    if (nextIndex>=self.totalNumber) {
         nextIndex=0;
     }
+    return nextIndex;
+}
+- (NSInteger)preIndex{
+    NSInteger preIndex=(self.currentIndex-1);
+    if (preIndex>=self.totalNumber) {
+        preIndex=0;
+    }else if (preIndex<0){
+        preIndex=self.totalNumber-1;
+    }
+    return preIndex;
+}
+- (void)autoLoadNextPage{
+    NSInteger offsetX = self.collectionView.contentOffset.x;
+    self.offx=offsetX;
      [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
 }
@@ -79,54 +104,77 @@
     [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:identifier];
 }
 - (UICollectionViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index{
-    id cell= [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSInteger row=(index+1)%kMaxRowCount;
+    id cell= [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
     return cell;
 }
 #pragma mark -delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 3;
+    return kMaxRowCount;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell=nil;
+    self.currentIndexPath=indexPath;
+    
+    NSInteger row=self.currentIndex;
+    if (indexPath.row==0) {
+        row=[self preIndex];
+    }else if (indexPath.row==1){
+        row=self.currentIndex;
+    }else if (indexPath.row==2){
+        row=[self nextIndex];
+    }
     if (_delegate&&[_delegate respondsToSelector:@selector(infiniteView:cellForRowAtIndex:)]) {
-        cell= [_delegate infiniteView:self cellForRowAtIndex:self.currentIndex];
+        cell= [_delegate infiniteView:self cellForRowAtIndex:row];
     }else{
         cell=[[UICollectionViewCell alloc]  init];
     }
-    
     return cell;
 }
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (_delegate && [_delegate respondsToSelector:@selector(infiniteView:didSelectRowAtIndex:)]) {
-        [_delegate infiniteView:self didSelectRowAtIndex:indexPath.row];
+        [_delegate infiniteView:self didSelectRowAtIndex:self.currentIndex];
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return collectionView.bounds.size;
 }
 #pragma mark - scrollview delegate
-//定时器自动滑动
+////定时器自动滑动
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    NSInteger offsetX = scrollView.contentOffset.x;
+    self.offx=offsetX;
+
+}
+
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self scrollViewDidEndDecelerating:scrollView];
 }
+
 //手动滑动
 -(void)scrollViewDidEndDecelerating:(nonnull UIScrollView *)scrollView
 {
     if (self.totalNumber) {
         NSInteger offsetX = scrollView.contentOffset.x;
         NSInteger viewW = scrollView.bounds.size.width;
-        NSInteger offset = offsetX/viewW - 1;
-        NSInteger currentPage=0;
-        if (offset != 0)
-        {
-            currentPage = (_currentIndex + offset + self.totalNumber) % self.totalNumber;
-            NSIndexPath *indexpath = [NSIndexPath indexPathForItem:1 inSection:0];
-            [self.collectionView scrollToItemAtIndexPath:indexpath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-            
+        NSInteger currentOffset = offsetX/viewW - 1;
+        
+        NSInteger lastOffset=self.offx/viewW -1;
+        if (lastOffset!=currentOffset) {
+            NSInteger currentPage=0;
+            if (currentOffset != 0)
+            {
+                currentPage = (_currentIndex + currentOffset + self.totalNumber) % self.totalNumber;
+                self.currentIndex=currentPage;
+                NSIndexPath *indexpath = [NSIndexPath indexPathForItem:1 inSection:0];
+                [self.collectionView scrollToItemAtIndexPath:indexpath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+                
+                [self.collectionView reloadData];
+            }else{
+                self.currentIndex=currentPage;
+            }
         }
-        self.currentIndex=currentPage;
     }
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
