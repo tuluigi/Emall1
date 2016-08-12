@@ -109,6 +109,7 @@
 @property (nonatomic,strong)EMGoodsSpecViewDismissBlock dismissBlock;
 @property (nonatomic,strong)EMGoodsDetailModel *detailModel;
 @property (nonatomic,strong)NSArray *keysArray;
+@property (nonatomic,strong)NSMutableArray *dataSource;
 @end
 
 @implementation EMGoodsSpecView

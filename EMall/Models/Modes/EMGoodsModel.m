@@ -63,6 +63,7 @@
         return nil;
     }
 }
+
 @end
 
 
@@ -188,4 +189,22 @@
     }
     return _specDic;
 }
+- (NSMutableArray *)goodsSpecListArray{
+    if (nil==_goodsSpecListArray) {
+        _goodsSpecListArray=[[NSMutableArray alloc]  init];
+    }
+    
+    return _goodsSpecListArray;
+}
+//- (NSMutableArray *)allSpecArray{
+//    if (nil==_allSpecArray) {
+//        _allSpecArray=[NSMutableArray new];
+//    }
+//    if (!_allSpecArray.count) {
+//        for (EMSpecListModel *specListModel in self.specListArray) {
+//            [_allSpecArray addObjectsFromArray:specListModel.specsArray];
+//        }
+//    }
+//    return _allSpecArray;
+//}
 @end

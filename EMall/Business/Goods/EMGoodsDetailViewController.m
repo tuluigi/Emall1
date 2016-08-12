@@ -87,7 +87,9 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
     _detailModel=detailModel;
-    
+    if (_detailModel) {
+        [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
+    }
     NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
                           @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
                           @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
@@ -108,6 +110,16 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             weakSelf.detailModel=responseResult.responseData;
         }else{
             [weakSelf.tableView showPageLoadedMessage:@"获取数据失败,点击重试" delegate:self];
+        }
+    }];
+    [self addSessionTask:task];
+}
+- (void)getGoodsSpecListWithGoodsID:(NSInteger)goodsID{
+    WEAKSELF
+    NSURLSessionTask *task=[EMGoodsNetService getGoodsSpeListWithGoodsID:self.goodsID onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.detailModel.goodsSpecListArray removeAllObjects];
+            [weakSelf.detailModel.goodsSpecListArray addObjectsFromArray:responseResult.responseData];
         }
     }];
     [self addSessionTask:task];
