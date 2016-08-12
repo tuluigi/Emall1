@@ -45,6 +45,7 @@
 		2A31E80D1D5CBCE400FC73A9 /* EMCatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E80C1D5CBCE400FC73A9 /* EMCatViewController.m */; };
 		2A31E8101D5CC4BD00FC73A9 /* EMCatItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */; };
 		2A31E8131D5CD70900FC73A9 /* EMGoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */; };
+		2A31E8161D5D462F00FC73A9 /* EMShopCartNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -242,6 +243,8 @@
 		2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCatItemCell.m; sourceTree = "<group>"; };
 		2A31E8111D5CD70900FC73A9 /* EMGoodsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsListViewController.h; sourceTree = "<group>"; };
 		2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsListViewController.m; sourceTree = "<group>"; };
+		2A31E8141D5D462F00FC73A9 /* EMShopCartNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShopCartNetService.h; sourceTree = "<group>"; };
+		2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopCartNetService.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -713,6 +716,8 @@
 				2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */,
 				2A31E8071D5CBB7F00FC73A9 /* EMCatNetService.h */,
 				2A31E8081D5CBB7F00FC73A9 /* EMCatNetService.m */,
+				2A31E8141D5D462F00FC73A9 /* EMShopCartNetService.h */,
+				2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -1420,6 +1425,7 @@
 				2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */,
 				2ADF60EC1D3200AF00DF757B /* EMMeOrderStateCell.m in Sources */,
 				2A2427391D12C8D90078240C /* OCNetSessionManager.m in Sources */,
+				2A31E8161D5D462F00FC73A9 /* EMShopCartNetService.m in Sources */,
 				2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,

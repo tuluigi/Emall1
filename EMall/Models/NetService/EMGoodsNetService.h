@@ -39,4 +39,14 @@
 + (NSURLSessionTask *)getGoodsDetailWithGoodsID:(NSInteger )goodsID
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
+/**
+ *  获取当前商品规格分组
+ *
+ *  @param goodsID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getGoodsSpeListWithGoodsID:(NSInteger )goodsID
+                              onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 @end
