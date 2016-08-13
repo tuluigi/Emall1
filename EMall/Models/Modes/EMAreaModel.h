@@ -12,4 +12,5 @@
 @property (nonatomic,copy)NSString *areaName,*shortname;
 @property (nonatomic,assign)NSInteger parentID,areaID;
 @property (nonatomic,copy)NSString *lng,*lat;
+@property (nonatomic,strong)NSMutableArray <EMAreaModel *>*childAreaArray;
 @end

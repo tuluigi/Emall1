@@ -18,6 +18,7 @@
 #import "EMGoodsNetService.h"
 #import "EMInfiniteView.h"
 #import "EMImagePickBrowserHelper.h"
+#import "EMShopCartNetService.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>
@@ -52,7 +53,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor redColor];
+    self.view.backgroundColor=[UIColor whiteColor];
     // Do any additional setup after loading the view.
     self.fd_prefersNavigationBarHidden=YES;
     [self.view addSubview:self.backButton];
@@ -104,9 +105,11 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (void)getGoodsDetailWithGoodsID:(NSInteger)goodsID{
     WEAKSELF
     [self.tableView showPageLoadingView];
+    self.bottomView.hidden=YES;
     NSURLSessionTask *task=[EMGoodsNetService getGoodsDetailWithGoodsID:goodsID onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissPageLoadView];
         if (responseResult.responseCode==OCCodeStateSuccess) {
+            weakSelf.bottomView.hidden=NO;
             weakSelf.detailModel=responseResult.responseData;
         }else{
             [weakSelf.tableView showPageLoadedMessage:@"获取数据失败,点击重试" delegate:self];
@@ -127,6 +130,21 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 -(void)ocPageLoadedViewOnTouced{
     [self getGoodsDetailWithGoodsID:self.goodsID];
 }
+- (void)addShopCartWithGoodsID:(NSInteger)goodsID infoID:(NSInteger)specID buyCount:(NSInteger)buyCount{
+    
+    WEAKSELF
+    [self.view showHUDLoading];
+    NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:INFINITY buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.view dismissHUDLoading];
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.view showHUDMessage:@"添加到购物车成功"];
+        }else{
+            [weakSelf.view showHUDMessage:@"添加失败"];
+        }
+    }];
+    [self addSessionTask:task];
+}
+
 -(void)handleAppIntoForground{
    self.view.center = CGPointMake(self.view.superview.bounds.size.width/2,
                               self.view.superview.bounds.size.height/2);
@@ -272,7 +290,19 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 #pragma mark - bottomview delegate
 - (void)goodsDetialBootmViewSubmitButtonPressed{
-    
+    if ([RI isLogined]) {
+        if (self.detailModel.goodsInfoArray.count) {
+            EMGoodsInfoModel *infoModel=[self.detailModel.goodsInfoArray firstObject];
+            [self addShopCartWithGoodsID:self.goodsID infoID:infoModel.infoID buyCount:1];
+        }else{
+            [self.view showHUDMessage:@"商品数据错误"];
+        }
+    }else{
+        WEAKSELF
+        [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+            [weakSelf goodsDetialBootmViewSubmitButtonPressed];
+        }];
+    }
 }
 #pragma  mark - getter setter
 - (void)setGoodsModel:(EMGoodsModel *)goodsModel{

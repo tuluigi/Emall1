@@ -25,4 +25,5 @@
 - (void)setContentOffSet:(CGPoint)offset animated:(BOOL)animated;
 /** 给外界 重新加载内容的方法 */
 - (void)reload;
+- (void)reloadData;
 @end

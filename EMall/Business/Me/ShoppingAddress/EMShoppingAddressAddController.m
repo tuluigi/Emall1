@@ -10,6 +10,7 @@
 #import "EMShopProvienceCityController.h"
 #import "OCUTableCellHeader.h"
 #import "EMShopAddressModel.h"
+#import "EMCitySelectViewController.h"
 typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     EMShopAddressItemTypeUserName       =1,//用户名
     EMShopAddressItemTypeTel            ,
@@ -129,10 +130,16 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OCTableCellModel *cellModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     if (cellModel.type==EMShopAddressItemTypeProvience) {
+        EMCitySelectViewController *citySelctController=[[EMCitySelectViewController alloc]  init];
+        citySelctController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:citySelctController animated:YES];
+        
+        /*
         EMShopProvienceCityController *provienceViewController=[[EMShopProvienceCityController alloc] init];
         provienceViewController.delegate=self;
         provienceViewController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:provienceViewController animated:YES];
+         */
     }
     
 }

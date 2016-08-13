@@ -217,7 +217,9 @@
         }
         
     }
-    
+    if (!self.titleLabels.count) {
+        return;
+    }
     ZJCustomLabel *firstLabel = (ZJCustomLabel *)self.titleLabels[0];
     
     if (firstLabel) {
@@ -233,7 +235,9 @@
 }
 
 - (void)setupScrollLineAndCover {
-    
+    if (!self.titleLabels.count) {
+        return;
+    }
     ZJCustomLabel *firstLabel = (ZJCustomLabel *)self.titleLabels[0];
     CGFloat coverX = firstLabel.zj_x;
     CGFloat coverW = firstLabel.zj_width;
@@ -489,7 +493,6 @@
     [self setupTitles];
     [self setupUI];
     [self setSelectedIndex:0 animated:YES];
-    
 }
 
 #pragma mark - getter --- setter

@@ -83,6 +83,9 @@
             
             [weakSelf.contentView setContentOffSet:CGPointMake(weakSelf.contentView.bounds.size.width * index, 0.0) animated:NO];
             
+            if (_delegate&&[_delegate respondsToSelector:@selector(pageScrollView:didTitleSelected:titleIndex:)]) {
+                [_delegate pageScrollView:weakSelf didTitleSelected:label.text titleIndex:index];
+            }
         }];
         [self addSubview:segment];
         _segmentView = segment;

@@ -11,6 +11,7 @@
 #import "EMShopAddressListCell.h"
 #import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 #import "EMShopAddressModel.h"
+
 @interface EMShoppingAddressListController ()<EMShopAddressListCellDelegate>
 
 @end

@@ -19,7 +19,6 @@
 
 @interface ZJScrollPageView : UIView
 typedef void(^ExtraBtnOnClick)(UIButton *extraBtn);
-
 @property (copy, nonatomic) ExtraBtnOnClick extraBtnOnClick;
 @property (weak, nonatomic, readonly) ZJContentView *contentView;
 @property (weak, nonatomic, readonly) ZJScrollSegmentView *segmentView;

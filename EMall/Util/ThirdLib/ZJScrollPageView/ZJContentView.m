@@ -117,7 +117,9 @@
     [self.collectionView reloadData];
 
 }
-
+- (void)reloadData{
+    [self.collectionView reloadData];
+}
 #pragma mark - UICollectionViewDelegate --- UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

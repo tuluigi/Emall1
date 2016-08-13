@@ -40,8 +40,8 @@
   
 }
 //
-//static NSString const *DomainHost  = @"http://45.118.132.56:8081/";
-static NSString const *DomainHost  = @"http://www.tulip.city:8090/";
+static NSString const *DomainHost  = @"http://45.118.132.56:8081/";
+//static NSString const *DomainHost  = @"http://www.tulip.city:8090/";
 +(NSString *)urlWithSuffixPath:(NSString *)str{
     if (str&&str.length) {
         if ([str hasPrefix:@"http://"]||[str hasPrefix:@"https://"]||[str hasPrefix:@"www."]) {

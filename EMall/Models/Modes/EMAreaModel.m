@@ -17,4 +17,10 @@
              @"lng":@"lng",
              @"lat":@"lat",};
 }
+- (NSMutableArray<EMAreaModel *> *)childAreaArray{
+    if (nil==_childAreaArray) {
+        _childAreaArray=[NSMutableArray new];
+    }
+    return _childAreaArray;
+}
 @end

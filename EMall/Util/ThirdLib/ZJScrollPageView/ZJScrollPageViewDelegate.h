@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ZJContentView;
-
+@class ZJScrollPageView;
 
 @protocol ZJScrollPageViewChildVcDelegate <NSObject>
 
@@ -41,7 +41,15 @@
  */
 - (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index;
 
-
+@optional
+/**
+ *  标题上额title被选中
+ *
+ *  @param pageView
+ *  @param title
+ *  @param index    
+ */
+- (void)pageScrollView:(ZJScrollPageView *)pageView didTitleSelected:(NSString *)title titleIndex:(NSInteger)index;
 
 @end
 

@@ -46,6 +46,8 @@
 		2A31E8101D5CC4BD00FC73A9 /* EMCatItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E80F1D5CC4BD00FC73A9 /* EMCatItemCell.m */; };
 		2A31E8131D5CD70900FC73A9 /* EMGoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */; };
 		2A31E8161D5D462F00FC73A9 /* EMShopCartNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */; };
+		2A31E8191D5E00BA00FC73A9 /* EMCitySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8181D5E00BA00FC73A9 /* EMCitySelectViewController.m */; };
+		2A31E81C1D5E012300FC73A9 /* EMCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E81B1D5E012300FC73A9 /* EMCityViewController.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -245,6 +247,10 @@
 		2A31E8121D5CD70900FC73A9 /* EMGoodsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsListViewController.m; sourceTree = "<group>"; };
 		2A31E8141D5D462F00FC73A9 /* EMShopCartNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShopCartNetService.h; sourceTree = "<group>"; };
 		2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShopCartNetService.m; sourceTree = "<group>"; };
+		2A31E8171D5E00BA00FC73A9 /* EMCitySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCitySelectViewController.h; sourceTree = "<group>"; };
+		2A31E8181D5E00BA00FC73A9 /* EMCitySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCitySelectViewController.m; sourceTree = "<group>"; };
+		2A31E81A1D5E012300FC73A9 /* EMCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCityViewController.h; sourceTree = "<group>"; };
+		2A31E81B1D5E012300FC73A9 /* EMCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCityViewController.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -1174,6 +1180,10 @@
 				2ADF61011D3292C700DF757B /* EMShopAddressListCell.m */,
 				2A99EB4C1D3A7FFD0024E924 /* EMShopProvienceCityController.h */,
 				2A99EB4D1D3A7FFD0024E924 /* EMShopProvienceCityController.m */,
+				2A31E8171D5E00BA00FC73A9 /* EMCitySelectViewController.h */,
+				2A31E8181D5E00BA00FC73A9 /* EMCitySelectViewController.m */,
+				2A31E81A1D5E012300FC73A9 /* EMCityViewController.h */,
+				2A31E81B1D5E012300FC73A9 /* EMCityViewController.m */,
 			);
 			path = ShoppingAddress;
 			sourceTree = "<group>";
@@ -1494,6 +1504,7 @@
 				2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */,
 				2ADF60771D28AAC200DF757B /* EMCatModel.m in Sources */,
 				2ADF60FB1D328BA100DF757B /* EMShoppingAddressAddController.m in Sources */,
+				2A31E81C1D5E012300FC73A9 /* EMCityViewController.m in Sources */,
 				2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */,
 				2ADF60831D28B2CB00DF757B /* EMShopAddressModel.m in Sources */,
 				2A99EB471D3A6C860024E924 /* OCTableCellDetialTextModel.m in Sources */,
@@ -1512,6 +1523,7 @@
 				2A99EB3D1D3A6C860024E924 /* OCUTableViewBadgeCell.m in Sources */,
 				2AED6CB01D44680E001B5910 /* EMCartAddressCell.m in Sources */,
 				2A7583E51D51FAC4008E1B57 /* RunInfo.m in Sources */,
+				2A31E8191D5E00BA00FC73A9 /* EMCitySelectViewController.m in Sources */,
 				2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */,
 				2A99EB791D3BBE7D0024E924 /* EMOrderDetailAddressCell.m in Sources */,
 				2A99EB3F1D3A6C860024E924 /* OCUTableViewCell.m in Sources */,

@@ -115,7 +115,7 @@
 }
 + (NSURLSessionTask *)getAreaWithParentID:(NSInteger )parentID
                         onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/findpwd"];
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"area/findById"];
     NSDictionary *postDic;
     if (parentID>0) {
         postDic=@{@"id":@(parentID)};
