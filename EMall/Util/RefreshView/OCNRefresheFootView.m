@@ -12,6 +12,7 @@
 @interface OCNRefresheFootView ()
 @property (nonatomic, assign) BOOL enableLoadingMoreData;//是否不能加载更多
 @property (nonatomic, strong) UIImageView *animationImageView;
+@property (nonatomic,strong)UIActivityIndicatorView *activitIndicatorView;
 @property (nonatomic, strong) UILabel     *titleLable;
 @property (nonatomic, strong) UITapGestureRecognizer *retryGesture;
 @property (nonatomic,assign,readwrite) OCNRefreshState ocNRefreshState;
@@ -35,6 +36,7 @@
     self.enableLoadingMoreData=YES;
     [super prepare];
     self.mj_h = kLoadMoreRefreshFootViewHeight;
+    /*
     _animationImageView=[[UIImageView alloc]  init];
     [self addSubview:_animationImageView];
     NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
@@ -52,6 +54,8 @@
     }
     _animationImageView.animationImages=imageArray;
     _animationImageView.animationDuration=kLoadMoreAnimationDuration;
+    */
+    
     
     _titleLable=[[UILabel alloc]  init];
     _titleLable.textAlignment=NSTextAlignmentCenter;
@@ -60,13 +64,26 @@
     [self addSubview:_titleLable];
     
     WEAKSELF
+    /*
     [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
         make.top.mas_equalTo(weakSelf.mas_top).offset(0);
         make.size.mas_equalTo(CGSizeMake(70, 30));
     }];
+    */
+    _activitIndicatorView=[[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activitIndicatorView.hidesWhenStopped=YES;
+    [self addSubview:_activitIndicatorView];
+    
+    [_activitIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(weakSelf.mas_centerX);
+      make.top.mas_equalTo(weakSelf.mas_top).offset(5);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    }];
+
+    
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.animationImageView.mas_bottom);
+        make.top.mas_equalTo(weakSelf.activitIndicatorView.mas_bottom);
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(-5);
     }];
@@ -77,18 +94,20 @@
 }
 - (void)endRefreshing{
     [super endRefreshing];
-    [self.animationImageView stopAnimating];
-    self.animationImageView.hidden=YES;
+//    [self.animationImageView stopAnimating];
+//    self.animationImageView.hidden=YES;
+    [self.activitIndicatorView stopAnimating];
     self.titleLable.hidden=YES;
 }
 - (void)beginRefreshing{
-    self.animationImageView.hidden=NO;
+//    self.animationImageView.hidden=NO;
     self.titleLable.hidden=NO;
     if (self.isRefreshing) {
         return;
     }
     [super beginRefreshing];
-    [self.animationImageView startAnimating];
+//    [self.animationImageView startAnimating];
+    [self.activitIndicatorView startAnimating];
 }
 
 
@@ -102,12 +121,13 @@
     switch (state) {
         case MJRefreshStateIdle:{
             self.ocNRefreshState=OCNRefreshStateNormal;
-            if ([self.animationImageView isAnimating]) {
-                [self.animationImageView stopAnimating];
-                if ([self.animationImageView.animationImages count]) {
-                    self.animationImageView.image=[self.animationImageView.animationImages firstObject];
-                }
-            }
+            [self.activitIndicatorView stopAnimating];
+//            if ([self.animationImageView isAnimating]) {
+//                [self.animationImageView stopAnimating];
+//                if ([self.animationImageView.animationImages count]) {
+//                    self.animationImageView.image=[self.animationImageView.animationImages firstObject];
+//                }
+//            }
         }
             break;
         case MJRefreshStatePulling:
@@ -115,16 +135,18 @@
             if (!self.mj_h) {
                 self.mj_h=kLoadMoreRefreshFootViewHeight;
             }
-            if ([self.animationImageView isAnimating]) {
-                [self.animationImageView stopAnimating];
-            }
+            [self.activitIndicatorView stopAnimating];
+//            if ([self.animationImageView isAnimating]) {
+//                [self.animationImageView stopAnimating];
+//            }
             break;
         case MJRefreshStateRefreshing:{
             self.ocNRefreshState=OCNRefreshStateRefreshing;
             self.titleLable.text=@"正在加载...";
-            if (![self.animationImageView isAnimating]) {
-            [self.animationImageView startAnimating];
-            }
+            [self.activitIndicatorView startAnimating];
+//            if (![self.animationImageView isAnimating]) {
+//                [self.animationImageView startAnimating];
+//            }
         }
               break;
         case MJRefreshStateWillRefresh:{
@@ -153,37 +175,39 @@
         _enableLoadingMoreData=enableLoadingMoreData;
         if (!_enableLoadingMoreData) {
             self.animationImageView.hidden=YES;
+            self.activitIndicatorView.hidden=YES;
             self.titleLable.hidden=YES;
             self.hidden=YES;
             WEAKSELF
-            [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.removeExisting=YES;
-                make.centerX.mas_equalTo(weakSelf.mas_centerX);
-                make.top.mas_equalTo(weakSelf.mas_top).offset(0);
-                make.size.mas_equalTo(CGSizeMake(70, 0));
-            }];
+//            [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.removeExisting=YES;
+//                make.centerX.mas_equalTo(weakSelf.mas_centerX);
+//                make.top.mas_equalTo(weakSelf.mas_top).offset(0);
+//                make.size.mas_equalTo(CGSizeMake(70, 0));
+//            }];
             [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.removeExisting=YES;
-                make.top.mas_equalTo(weakSelf.animationImageView.mas_bottom);
+                make.top.mas_equalTo(weakSelf.activitIndicatorView.mas_bottom);
                 make.centerX.mas_equalTo(weakSelf.mas_centerX);
                 make.height.mas_equalTo(0);
             }];
         }else{
-            self.animationImageView.hidden=NO;
+//            self.animationImageView.hidden=NO;
+            self.activitIndicatorView.hidden=NO;
             self.titleLable.hidden=NO;
             self.hidden=NO;
             self.titleLable.text=@"";
              _titleLable.font=[UIFont oc_systemFontOfSize:11];
             WEAKSELF
-            [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.removeExisting=YES;
-                make.centerX.mas_equalTo(weakSelf.mas_centerX);
-                make.top.mas_equalTo(weakSelf.mas_top).offset(0);
-                make.size.mas_equalTo(CGSizeMake(70, 30));
-            }];
+//            [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.removeExisting=YES;
+//                make.centerX.mas_equalTo(weakSelf.mas_centerX);
+//                make.top.mas_equalTo(weakSelf.mas_top).offset(0);
+//                make.size.mas_equalTo(CGSizeMake(70, 30));
+//            }];
             [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.removeExisting=YES;
-                make.top.mas_equalTo(weakSelf.animationImageView.mas_bottom);
+                make.top.mas_equalTo(weakSelf.activitIndicatorView.mas_bottom);
                 make.centerX.mas_equalTo(weakSelf.mas_centerX);
                 make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(-5);
             }];
@@ -213,14 +237,15 @@
     NSString *restryMessage=message;
     self.hidden=NO;
     self.animationImageView.hidden=YES;
+    [self.activitIndicatorView stopAnimating];
     self.titleLable.hidden=NO;
-    WEAKSELF
-    [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.removeExisting=YES;
-        make.centerX.mas_equalTo(weakSelf.mas_centerX);
-        make.top.mas_equalTo(weakSelf.mas_top).offset(0);
-        make.size.mas_equalTo(CGSizeMake(70, 0));
-    }];
+//    WEAKSELF
+//    [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.removeExisting=YES;
+//        make.centerX.mas_equalTo(weakSelf.mas_centerX);
+//        make.top.mas_equalTo(weakSelf.mas_top).offset(0);
+//        make.size.mas_equalTo(CGSizeMake(70, 0));
+//    }];
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
         make.edges.mas_equalTo(UIEdgeInsetsZero);

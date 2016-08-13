@@ -37,14 +37,27 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     [self getGoodsListWithCursor:self.cursor];
+    WEAKSELF
+    [weakSelf.myCollectionView addOCPullDownResreshHandler:^{
+        weakSelf.cursor=1;
+        [weakSelf getGoodsListWithCursor:weakSelf.cursor];
+    }];
+    [weakSelf.myCollectionView addOCPullInfiniteScrollingHandler:^{
+        weakSelf.cursor++;
+        [weakSelf getGoodsListWithCursor:weakSelf.cursor];
+    }];
 }
 - (void)getGoodsListWithCursor:(NSInteger )cursor{
     WEAKSELF
-    if (cursor<2) {
+    if (self.dataSourceArray.count==0) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
        [weakSelf.myCollectionView dismissPageLoadView];
+       [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
+       if (responseResult.cursor>=responseResult.totalPage) {
+           [weakSelf.myCollectionView enableInfiniteScrolling:YES];
+       }
        if (responseResult.responseCode==OCCodeStateSuccess) {
            if (cursor<2) {
                [weakSelf.dataSourceArray removeAllObjects];
@@ -54,10 +67,19 @@
            }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
            [weakSelf.myCollectionView reloadData];
+       }else{
+           if (weakSelf.dataSourceArray.count==0 ) {
+               [weakSelf.myCollectionView showPageLoadedMessage:@"获取数据失败，点击重试" delegate:self];
+           }else{
+               [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
+           }
        }
        weakSelf.cursor=responseResult.cursor;
    }];
     [self addSessionTask:task];
+}
+-(void)ocPageLoadedViewOnTouced{
+    [self getGoodsListWithCursor:self.cursor];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

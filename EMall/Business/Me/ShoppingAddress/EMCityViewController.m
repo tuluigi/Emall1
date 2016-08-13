@@ -23,7 +23,7 @@
 //    [self.view addSubview:self.tableView];
 //    self.automaticallyAdjustsScrollViewInsets=YES;
 //        self.edgesForExtendedLayout=UIRectEdgeNone;
-    self.tableView.separatorStyle=UITableViewCellSelectionStyleNone;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
     
       [self.tableView reloadData];
 }

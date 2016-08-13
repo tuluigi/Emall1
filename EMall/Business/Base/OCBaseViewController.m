@@ -33,7 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.cursor = @"";
+     self.cursor = 1;
     // Do any additional setup after loading the view
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0) {
         self.modalPresentationCapturesStatusBarAppearance = NO;        // Load resources for iOS 7 or later
@@ -43,7 +43,8 @@
         self.navigationController.navigationBar.opaque=YES;
         
     }
-    self.view.backgroundColor=RGB(241, 243, 240);
+    self.view.backgroundColor=[UIColor whiteColor];
+//    self.view.backgroundColor=RGB(241, 243, 240);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -26,8 +26,11 @@
     self.navigationItem.title=@"收货地址";
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"新增" style:UIBarButtonItemStylePlain target:self action:@selector(addShoppingAddress)];
     [self.tableView registerClass:[EMShopAddressListCell class] forCellReuseIdentifier:NSStringFromClass([EMShopAddressListCell class])];
-    [self getShoppingAddrsssModelWithUserID:nil];
     [self getAddressList];
+    WEAKSELF
+    [weakSelf.tableView addOCPullDownResreshHandler:^{
+        [weakSelf getAddressList];
+    }];
 }
 - (void)addShoppingAddress{
     [self goToAddShopAddressControllerWithAddressModel:nil];
@@ -38,33 +41,16 @@
     addShopingAddressController.delegate=self;
     [self.navigationController pushViewController:addShopingAddressController animated:YES];
 }
-- (void)getShoppingAddrsssModelWithUserID:(NSString *)userID{
-    return;
-    for (NSInteger i=0; i<10; i++) {
-        EMShopAddressModel *addressModel=[[EMShopAddressModel alloc]  init];
-        addressModel.userName=@"李小明";
-        addressModel.userTel=@"13523576349";
-        addressModel.wechatID=@"haichigo";
-        addressModel.province=@"北京市";
-        addressModel.city=@"北京市";
-        addressModel.country=@"海淀区";
-        
-        addressModel.detailAddresss=@"创新大厦 D座 20层";
-        if (i==2) {
-            addressModel.isDefault=YES;
-        }else{
-            addressModel.isDefault=NO;
-        }
-        [self.dataSourceArray addObject:addressModel];
-    }
-    [self.tableView reloadData];
-}
+
 - (void)getAddressList{
 //    return;//暂时没有数据，这么测试用
     WEAKSELF
-    [self.tableView showPageLoadingView];
+    if (self.dataSourceArray.count==0) {
+       [self.tableView showPageLoadingView];
+    }
     NSURLSessionTask *task=[EMMeNetService getShoppingAddressListWithUrseID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissPageLoadView];
+        [weakSelf.tableView stopRefreshAndInfiniteScrolling];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             NSArray *array=responseResult.responseData;
             [weakSelf.dataSourceArray removeAllObjects];
@@ -72,7 +58,7 @@
                 [weakSelf.dataSourceArray addObjectsFromArray:array];
                 [weakSelf.tableView reloadData];
             }else{
-                 [weakSelf.tableView showPageLoadedMessage:@"您还没有添加收货地址，赶紧来试试添加吧" delegate:nil];
+                 [weakSelf.tableView showPageLoadedMessage:@"您还没有添加收货地址 \n 赶紧来试试添加吧" delegate:nil];
             }
         }else{
             [weakSelf.tableView showPageLoadedMessage:responseResult.responseMessage delegate:self];
@@ -82,10 +68,7 @@
 }
 - (void)deleteShoppingAddresssModel:(EMShopAddressModel *)addresssModel{
     WEAKSELF
-    if (self.dataSourceArray.count==0) {
-        [self.tableView showHUDLoading];
-    }
-    
+    [self.tableView showHUDLoading];
     NSURLSessionTask *task=[EMMeNetService deleteShoppingAddressWithAddresID:addresssModel.addressID onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissHUDLoading];
         if (responseResult.responseCode==OCCodeStateSuccess) {
@@ -93,6 +76,9 @@
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
             [weakSelf.dataSourceArray removeObject:addresssModel];
             [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            if (weakSelf.dataSourceArray.count==0) {
+                  [weakSelf.tableView showPageLoadedMessage:@"您还没有添加收货地址\n赶紧来试试添加吧" delegate:nil];
+            }
         }else{
             [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
         }
@@ -103,7 +89,7 @@
     if (shopAddress.addressID) {
         [self getAddressList];
     }else{
-        [self.tableView reloadData];
+        [self getAddressList];
 //        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_addressID=@%",shopAddress];
     }
 }

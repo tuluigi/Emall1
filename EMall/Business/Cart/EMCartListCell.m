@@ -68,7 +68,7 @@
     [_countTextField addHiddenKeyBoardInputAccessView];
     [self.bgView addSubview:_countTextField];
     _minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    _minusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
+    _minusButton.frame=CGRectMake(0, 0, OCUISCALE(22), OCUISCALE(25));
     [_minusButton setTitle:@"-" forState:UIControlStateNormal];
     [_minusButton setTitleColor:color forState:UIControlStateNormal];
     [_minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -78,7 +78,7 @@
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    plusButton.frame=CGRectMake(0, 0, OCUISCALE(18), OCUISCALE(18));
+    plusButton.frame=CGRectMake(0, 0, OCUISCALE(22), OCUISCALE(25));
     [plusButton setTitle:@"+" forState:UIControlStateNormal];
     [plusButton setTitleColor:color forState:UIControlStateNormal];
     plusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
@@ -115,9 +115,9 @@
     }];
     [_countTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.goodsImageView);
-        make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-12))
+        make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-8))
         ;
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(52), OCUISCALE(18)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(60), OCUISCALE(25)));
     }];
     
     [_goodsNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

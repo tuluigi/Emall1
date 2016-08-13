@@ -34,7 +34,7 @@
  *  @return
  */
 + (NSURLSessionTask *)getShopCartListWithUserID:(NSInteger)useID
-                                     pid:(NSString *)pid
+                                     pid:(NSInteger )pid
                                    pageSize:(NSInteger)pageSize
                           onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**
@@ -45,7 +45,7 @@
  *
  *  @return
  */
-+ (NSURLSessionTask *)deleteShopCartWithCartIDs:(NSArray <NSString *>*)cartIDArray
++ (NSURLSessionTask *)deleteShopCartWithCartIDs:(NSArray <NSNumber *>*)cartIDArray
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 /**

@@ -113,6 +113,9 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     [self.navigationController pushViewController:registerController animated:YES];
 }
 - (void)backToPreviousController{
+    if (self.loginCompletionBlock) {
+        self.loginCompletionBlock(nil);
+    }
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

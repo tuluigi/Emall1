@@ -28,7 +28,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
 - (void)addRefreshHeadViewWithUrl:(NSString *)url onHandler:(OpenCourseRefreshBlock)refreshBlock{
     OCNRefreshHeadView *headView=(OCNRefreshHeadView *)self.header;
     if (nil==headView) {
-        UIColor *circleColor = [UIColor blackColor];
+        UIColor *circleColor = RGB(229, 26, 30);
         CGFloat width=CGRectGetWidth(self.frame);
         if (!width) {
             width=CGRectGetWidth([UIApplication sharedApplication].keyWindow.bounds);
@@ -120,7 +120,8 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
  *  停止下拉和上拉动画
  */
 -(void)stopRefreshAndInfiniteScrolling{
-    [self stopRefreshAndInfiniteScrolling];
+    [self stopInfiniteScrolling];
+    [self stopPullDownRefresh];
 }
 
 @end

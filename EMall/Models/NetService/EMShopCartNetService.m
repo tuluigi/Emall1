@@ -35,11 +35,11 @@
  *  @return
  */
 + (NSURLSessionTask *)getShopCartListWithUserID:(NSInteger)useID
-                                            pid:(NSString *)pid
+                                            pid:(NSInteger )pid
                                        pageSize:(NSInteger)pageSize
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods_cart"];
-    NSDictionary *postDic=@{@"mid":@(useID),@"cursor":stringNotNil(pid),@"pageSize":@(pageSize)};
+    NSDictionary *postDic=@{@"mid":@(useID),@"cursor":@(pid),@"pageSize":@(pageSize)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMShopCartModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
@@ -57,11 +57,20 @@
  *
  *  @return
  */
-+ (NSURLSessionTask *)deleteShopCartWithCartIDs:(NSArray <NSString *>*)cartIDArray
++ (NSURLSessionTask *)deleteShopCartWithCartIDs:(NSArray <NSNumber *>*)cartIDArray
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods_cart/delete"];
-    NSDictionary *postDic=@{@"goodsCart.id":@(0)};
-    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+    NSString *parmString=@"?";
+    for (NSInteger i=0; i<cartIDArray.count; i++) {
+        NSString *aString=[NSString stringWithFormat:@"%@=%@",@"id",cartIDArray[i]];
+        parmString=[parmString stringByAppendingString:aString];
+        if (i<cartIDArray.count-1) {
+            parmString=[parmString stringByAppendingString:@"&"];
+        }
+    }
+    apiPath=[apiPath stringByAppendingString:parmString];
+//    NSDictionary *postDic=@{@"goodsCart.id":@(0)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);

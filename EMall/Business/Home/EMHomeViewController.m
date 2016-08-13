@@ -56,6 +56,11 @@ EMHomeHeadReusableViewDelegate>
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
     
+    WEAKSELF
+    [self.myCollectionView addOCPullDownResreshHandler:^{
+        [weakSelf getHomeData];
+        [weakSelf getHomeADList];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +90,7 @@ EMHomeHeadReusableViewDelegate>
             if (nil==weakSelf.adArray) {
                 weakSelf.adArray=[[NSMutableArray alloc] init];
             }
+            [weakSelf.adArray removeAllObjects];
             for (NSInteger i=0; i<6; i++) {
                 EMAdModel *adModel=[[EMAdModel alloc]  init];
                 [weakSelf.adArray addObject:adModel];
@@ -110,6 +116,7 @@ EMHomeHeadReusableViewDelegate>
 - (void)getHomeData{
     WEAKSELF
     NSURLSessionTask *task=[EMHomeNetService getHomeDataOnCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.homeModel=responseResult.responseData;
             [weakSelf.homeModel.catArray addObjectsFromArray:weakSelf.homeModel.catArray];

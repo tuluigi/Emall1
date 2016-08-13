@@ -20,6 +20,7 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 @property (strong, nonatomic) NSArray *circles;
 @property (strong, nonatomic) CALayer *indicatorLayer;
 
+@property (nonatomic,strong)UIActivityIndicatorView *activitIndicatorView;
 @property (strong, nonatomic) UIImageView *bgImageView;
 @property (strong, nonatomic) UIImageView *animationImageView;
 
@@ -72,8 +73,9 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     [containerView_ setBackgroundColor:[UIColor clearColor]];
     [self addSubview:containerView_];
 
-//    
+    WEAKSELF
 //    _animationImageView=[[UIImageView alloc]  initWithFrame:CGRectMake(self.frame.size.width/2 - 60, 0 , 120, 85)];
+    /*
     _animationImageView=[[UIImageView alloc]  init];
     NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
     for (NSInteger i=0; i<27; i++) {
@@ -86,13 +88,25 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     _animationImageView.animationDuration=kRefreshAnimationDuration;
     _animationImageView.hidden=YES;
     [self addSubview:_animationImageView];
-    WEAKSELF
+    
     [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
         make.centerY.mas_equalTo(weakSelf.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(120, 85));
     }];
     _animationImageView.backgroundColor=[UIColor clearColor];
+    */
+    _activitIndicatorView=[[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activitIndicatorView.hidesWhenStopped=YES;
+    _activitIndicatorView.color=RGB(229, 26, 30);
+    [self addSubview:_activitIndicatorView];
+    [_activitIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(weakSelf.mas_centerX);
+        make.centerY.mas_equalTo(weakSelf.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    }];
+    
+    
     NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCircles];
     for (int i = 0; i < kNumberOfCircles; ++i) {
         CALayer *circle = [CALayer new];
@@ -225,9 +239,14 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 - (void)beginLoadingAnimation
 {
     containerView_.hidden=YES;
+    [self.activitIndicatorView startAnimating];
+    
+    /*
     self.animationImageView.hidden=!containerView_.hidden;
 //    self.animationImageView.center=containerView_.center;
     [ self.animationImageView startAnimating];
+    */
+    
     
     /*
     containerView_.layer.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
@@ -353,8 +372,11 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 {
     
     containerView_.hidden=NO;
+    /*
     self.animationImageView.hidden=!containerView_.hidden;
     [self.animationImageView stopAnimating];
+     */
+    [self.activitIndicatorView stopAnimating];
     CALayer *circle = nil;
     for (int i = 0; i < kNumberOfCircles; ++i) {
         circle = self.circles[i];

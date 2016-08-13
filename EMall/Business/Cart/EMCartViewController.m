@@ -40,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.dataSourceArray.count==0) {
-        [self getCartListWithCursor:nil];
+        [self getCartListWithCursor:self.cursor];
     }
 }
 - (void)viewDidLoad {
@@ -56,52 +56,118 @@
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didEditButtonPressed:)];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.bottomView];
-   CGRect tabarBounds= self.tabBarController.tabBar.bounds;
+    CGRect tabarBounds= self.tabBarController.tabBar.bounds;
     WEAKSELF
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
         make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-tabarBounds.size.height);
         make.height.mas_equalTo(OCUISCALE(50));
     }];
-//   UIEdgeInsets inset= self.tableView.contentInset;
-//    inset.bottom+=OCUISCALE(50);
-//    self.tableView.contentInset=inset;
+
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
         make.top.mas_equalTo(weakSelf.view.mas_top);
         make.left.right.mas_equalTo(weakSelf.view);
-        make.bottom.mas_equalTo(weakSelf.bottomView.mas_top);
+        make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
     }];
-
+    
     [self.tableView reloadData];
     [self calcuteMyShopCart];
-    [self getCartListWithCursor:nil];
+    [self getCartListWithCursor:self.cursor];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:OCLoginSuccessNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        
+        [weakSelf handleUserLoginSucceedNotification];
+        
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:OCLogoutNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf handleUserLogoutSucceedNotification];
+    }];
+    [self.tableView addOCPullDownResreshHandler:^{
+        weakSelf.cursor=1;
+        [weakSelf getCartListWithCursor:weakSelf.cursor];
+    }];
+    [self.tableView addOCPullInfiniteScrollingHandler:^{
+        weakSelf.cursor++;
+        [weakSelf getCartListWithCursor:weakSelf.cursor];
+    }];
+}
+- (void)handleUserLoginSucceedNotification{
+    [self handleUserLogoutSucceedNotification];
+    self.cursor=1;
+    [self getCartListWithCursor:self.cursor];
 }
 
+- (void)handleUserLogoutSucceedNotification{
+    self.cursor=1;
+    [self.dataSourceArray removeAllObjects];
+    [self.tableView reloadData];
+}
 #pragma mark - getCart list
-- (void)getCartListWithCursor:(NSString *)cursor{
+- (void)getCartListWithCursor:(NSInteger )cursor{
     WEAKSELF
-    if (![NSString isNilOrEmptyForString:cursor]) {
+    if (self.dataSourceArray.count==0) {
         [weakSelf.tableView showPageLoadingView];
+        weakSelf.bottomView.hidden=YES;
     }
-    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:0 pageSize:10 onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:cursor pageSize:10 onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissPageLoadView];
+        [weakSelf.tableView stopRefreshAndInfiniteScrolling];
+        if (responseResult.cursor==responseResult.totalPage) {
+            [weakSelf.tableView enableInfiniteScrolling:NO];
+        }
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            if ([NSString isNilOrEmptyForString:cursor]) {
+            weakSelf.bottomView.hidden=NO;
+            if (cursor<=1) {
                 [weakSelf.dataSourceArray removeAllObjects];
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.tableView reloadData];
+        }else{
+            if (cursor<=1) {
+                [weakSelf.tableView showPageLoadedMessage:@"获取数据失败" delegate:self];
+            }else{
+                [weakSelf.tableView showHUDMessage:@"获取数据失败"];
+            }
         }
     }];
     [weakSelf addSessionTask:task];
 }
 
+- (void)deletaCartWithCartID:(NSArray <EMShopCartModel *>*)array{
+    WEAKSELF
+    NSMutableArray <NSNumber *>*cartIDArray=[NSMutableArray new];
+    NSMutableArray <NSIndexPath *>*indexPathArray=[NSMutableArray new];
+    for (EMShopCartModel *shopCartModel in array) {
+        [cartIDArray addObject:@(shopCartModel.cartID)];
+        NSInteger index=[self.dataSourceArray indexOfObject:shopCartModel];
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
+        [indexPathArray addObject:indexPath];
+    }
+    [self.tableView showHUDLoading];
+    NSURLSessionTask *task=[EMShopCartNetService deleteShopCartWithCartIDs:cartIDArray onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.tableView dismissHUDLoading];
+            [weakSelf.dataSourceArray removeObjectsInArray:array];
+            [weakSelf.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
+        }
+    }];
+    [self addSessionTask:task];
+}
+- (void)updateShopCart:(NSInteger)cartID buyCount:(NSInteger)buyCount{
+    
+    NSURLSessionTask *task=[EMShopCartNetService editShopCartWithCartID:cartID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
+    }];
+    [self addSessionTask:task];
+
+}
 - (void)setIsDeleteing:(BOOL)isDeleteing{
     _isDeleteing=isDeleteing;
     UIBarButtonItem *sender=self.navigationItem.rightBarButtonItem;
     if (_isDeleteing) {
-       sender.title=@"完成";
+        sender.title=@"完成";
     }else{
         sender.title=@"编辑";
     }
@@ -130,12 +196,20 @@
 }
 
 #pragma mark - delete shopCart
-- (void)deleteShopCart:(NSArray *)Array{
-    
+- (void)deleteShopCart:(NSArray <EMShopCartModel *>*)Array{
+    [self deletaCartWithCartID:Array];
 }
 #pragma mark -tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataSourceArray.count;
+    NSInteger row= self.dataSourceArray.count;
+    if (row==0) {
+        self.bottomView.hidden=YES;
+        [tableView showPageLoadedMessage:@"您的购物车是空的,去看看其他商品吧" delegate:nil];
+    }else{
+        self.bottomView.hidden=NO;
+        [self.tableView dismissPageLoadView];
+    }
+    return row;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     EMCartListCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMCartListCell class]) forIndexPath:indexPath];
@@ -144,7 +218,7 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-  __block  EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    __block  EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     CGFloat height=[tableView fd_heightForCellWithIdentifier:NSStringFromClass([EMCartListCell class]) configuration:^(id cell) {
         [(EMCartListCell *)cell setShopCartModel:cartModel];
     }];
@@ -156,6 +230,18 @@
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle==UITableViewCellEditingStyleDelete) {
+         EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+        [self deleteShopCart:@[cartModel]];
+    }
+}
 #pragma mark -cell delegate
 //选中状态
 - (void)cartListCellDidSelectStateChanged:(EMShopCartModel *)shopCartModel{
@@ -164,6 +250,7 @@
 //购买数量改变
 - (void)cartListCellDidBuyCountChanged:(EMShopCartModel *)shopCartModel{
     [self calcuteMyShopCart];
+    [self updateShopCart:shopCartModel.cartID buyCount:shopCartModel.buyCount];
 }
 
 #pragma mark -bottom view delegate
@@ -177,7 +264,7 @@
     NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
     
     NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
-
+    
     if (bottomView.isDelete) {//删除购物车
         if (selectArray.count) {
             [self deleteShopCart:selectArray];
@@ -186,20 +273,20 @@
         if (selectArray.count) {
             EMCartSubmitViewController *submitController=[[EMCartSubmitViewController alloc]  init];
             submitController.cartArray=selectArray;
-//            EMCartSubmitViewController *submitController=[EMCartSubmitViewController cartSubmitViewWithCartArray:selectArray];
+            //            EMCartSubmitViewController *submitController=[EMCartSubmitViewController cartSubmitViewWithCartArray:selectArray];
             submitController.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:submitController animated:YES];
         }
     }
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -60,7 +60,7 @@
 
 
 - (void)onInitRootControllers{
-   
+    self.delegate=self;
     EMHomeViewController *homeViewController=[[EMHomeViewController alloc] init];
     UINavigationController *homeNavController=[[UINavigationController alloc] initWithRootViewController:homeViewController];
     OCTbabarItem *homeTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"首页" image:[UIImage imageNamed:@"tabbar_home"] selectedImage:[UIImage   imageNamed:@"tabbar_home_select"]];
@@ -93,7 +93,26 @@
 
     
 }
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    UINavigationController *navController=(UINavigationController *)viewController;
+    if ([navController.topViewController isKindOfClass:[EMCartViewController class]]) {
+        if (![RI isLogined]) {
+            [navController.topViewController showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+                if (!isSucceed) {
+                    [tabBarController setSelectedIndex:0];
+                }else{
+                    [tabBarController setSelectedViewController:viewController];
+                }
+            }];
+            return NO;
+        }
+    }
+    return YES;
+}
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+   
 
+}
 /*
  #pragma mark - Navigation
  
