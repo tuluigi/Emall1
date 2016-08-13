@@ -11,7 +11,7 @@
 #import "UIDisablePastTextField.h"
 #import "UITextField+HiddenKeyBoardButton.h"
 #import "NSAttributedString+Price.h"
-#define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
+
 
 @interface EMCartListCell ()<UITextFieldDelegate>
 @property (nonatomic,strong)UIView *bgView;

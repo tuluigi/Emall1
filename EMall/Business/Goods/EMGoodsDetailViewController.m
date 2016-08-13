@@ -236,7 +236,10 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     
     if (indexPath.section==1) {
         WEAKSELF
-        __block EMGoodsSpecMaskView *maskView=[EMGoodsSpecMaskView goodsMaskViewWithGoodsDetailModel:self.detailModel onDismissBlock:^(EMGoodsSpecMaskView *aSpecMaskView) {
+        __block EMGoodsSpecMaskView *maskView=[EMGoodsSpecMaskView goodsMaskViewWithGoodsDetailModel:self.detailModel onDismissBlock:^(EMGoodsSpecMaskView *aSpecMaskView, NSInteger info, NSInteger buyCount) {
+            if (buyCount) {
+                [weakSelf addShopCartWithGoodsID:weakSelf.goodsID infoID:info buyCount:buyCount];
+            }
             [UIView animateWithDuration:0.3 animations:^{
                 [aSpecMaskView dismissSpecView];
                 weakSelf.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);

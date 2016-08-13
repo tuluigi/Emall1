@@ -62,6 +62,8 @@
 static NSString * const OCLogoutNofication = @"com.EMMall.logout.success";
 static NSString * const OCLoginSuccessNofication = @"com.EMMall.login.success";
 
+#define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
+
 static CGFloat const kEMOffX    = 13;
 //整个app中默认的浅色字体颜色
 #define kEM_GrayDarkTextColor [UIColor colorWithHexString:@"#272727"]

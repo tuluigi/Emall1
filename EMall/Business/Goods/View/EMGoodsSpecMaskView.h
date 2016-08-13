@@ -10,7 +10,7 @@
 @class EMGoodsSpecMaskView;
 @class EMGoodsSpecView;
 @class EMGoodsDetailModel;
-typedef void(^EMGoodsSpecMaskViewDismissBlock)(EMGoodsSpecMaskView *aSpecMaskView);
+typedef void(^EMGoodsSpecMaskViewDismissBlock)(EMGoodsSpecMaskView *aMskView, NSInteger info ,NSInteger buyCount);
 @interface EMGoodsSpecMaskView : UIView
 + (EMGoodsSpecMaskView *)goodsMaskViewWithGoodsDetailModel:(EMGoodsDetailModel *)detailModel onDismissBlock:(EMGoodsSpecMaskViewDismissBlock)dismissBlock;
 

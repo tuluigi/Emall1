@@ -52,16 +52,16 @@
     if (nil==_specView) {
         _specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:self.detailModel onDismsiBlock:^(EMGoodsSpecView *specView, BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
             if (self.dismissBlock) {
-                self.dismissBlock(self);
+                self.dismissBlock(self,sepecID,buyCount);
             }
         }];
     }
     return _specView;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    WEAKSELF
     if (self.dismissBlock) {
-        self.dismissBlock(weakSelf);
+        WEAKSELF
+        self.dismissBlock(weakSelf,0,0);
     }
 }
 @end
