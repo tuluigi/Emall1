@@ -63,6 +63,10 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:self];
 }
+
+
+
+
 - (NSString *)removeSufferEmail{
     NSString *newStr=self;
     BOOL isEamlil=[self isValidateEmail];

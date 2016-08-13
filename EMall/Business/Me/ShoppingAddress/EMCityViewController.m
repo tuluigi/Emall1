@@ -12,30 +12,31 @@
 
 @interface EMCityViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,assign)NSInteger pageInde,selectIndex;
-@property (nonatomic,strong)NSMutableArray *dataSourceArray;
-@property (nonatomic,strong)UITableView *tableView;
+//@property (nonatomic,strong)NSMutableArray *dataSourceArray;
+//@property (nonatomic,strong)UITableView *tableView;
 @end
 
 @implementation EMCityViewController
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
+//    self.automaticallyAdjustsScrollViewInsets=YES;
+//        self.edgesForExtendedLayout=UIRectEdgeNone;
     self.tableView.separatorStyle=UITableViewCellSelectionStyleNone;
     
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
       [self.tableView reloadData];
 }
--(UITableView *)tableView{
-    if (nil==_tableView) {
-        _tableView=[[UITableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        _tableView.delegate=self;
-        _tableView.dataSource=self;
-        _tableView.tableFooterView=[UIView new];
-        
-    }
-    return _tableView;
-}
+//-(UITableView *)tableView{
+//    if (nil==_tableView) {
+//        _tableView=[[UITableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
+//        _tableView.delegate=self;
+//        _tableView.dataSource=self;
+//        _tableView.tableFooterView=[UIView new];
+//        
+//    }
+//    return _tableView;
+//}
 - (void)setAreas:(NSMutableArray *)array selectIndex:(NSInteger)selectIndex{
     self.dataSourceArray=array;
     self.selectIndex=selectIndex;
@@ -44,7 +45,7 @@
 }
 - (void)setSelectIndex:(NSInteger)selectIndex{
     if (_selectIndex!=selectIndex) {
-         [self updaetCellTextColorWithOldSelectRow:_selectIndex latestRow:selectIndex];
+       //  [self updaetCellTextColorWithOldSelectRow:_selectIndex latestRow:selectIndex];
         _selectIndex=selectIndex;
     }
 }
@@ -64,23 +65,17 @@
    
    
     EMAreaModel *areaModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    /*
     if (indexPath.row==self.selectIndex) {
          cell.textLabel.textColor=RGB(229, 24, 31);
     }else{
         cell.textLabel.textColor=kEM_LightDarkTextColor;
     }
+     */
     cell.textLabel.text=areaModel.areaName;
     return cell;
 }
-- (void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    EMAreaModel *areaModel=[self.dataSourceArray objectAtIndex:indexPath.row];
-    if (indexPath.row==self.selectIndex) {
-        cell.textLabel.textColor=RGB(229, 24, 31);
-    }else{
-        cell.textLabel.textColor=kEM_LightDarkTextColor;
-    }
 
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BOOL isAnother=YES;
@@ -109,12 +104,7 @@
     if (isFirstTime) {
         self.tableView.frame=self.view.bounds;
     }else{
-//    if (self.selectIndex<self.dataSourceArray.count) {
-//        EMAreaModel *selectAreaModel=[self.dataSourceArray objectAtIndex:self.selectIndex];
-//        if (_delegate &&[_delegate respondsToSelector:@selector(cityViewControllerDidSelectWithAreadModel:pageInde:isAnother:isUserSelect:)]) {
-//            [_delegate cityViewControllerDidSelectWithAreadModel:selectAreaModel pageInde:self.pageInde isAnother:NO isUserSelect:NO];
-//        }
-//    }
+
     }
 }
 

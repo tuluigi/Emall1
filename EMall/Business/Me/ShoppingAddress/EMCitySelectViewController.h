@@ -6,8 +6,14 @@
 //  Copyright © 2016年 Luigi. All rights reserved.
 //
 
-#import "OCBaseViewController.h"
+#import "OCBaseTableViewController.h"
+@class EMAreaModel;
+@protocol EMCitySelectViewControllerDelegate <NSObject>
+
+- (void)didFinishSelectWithAreaInfoArray:(NSArray <EMAreaModel *>*)aresInoArray;
+
+@end
 
 @interface EMCitySelectViewController : OCBaseViewController
-
+@property (nonatomic,weak)id <EMCitySelectViewControllerDelegate >delegate;
 @end

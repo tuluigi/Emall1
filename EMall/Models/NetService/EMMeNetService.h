@@ -97,8 +97,8 @@
  *  @return
  */
 + (NSURLSessionTask *)findUserPwdWithUserName:(NSString *)userName
-                                  email:(NSString *)email
-                          onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+                                        email:(NSString *)email
+                            onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 /**
  *  获取地区列表
@@ -111,6 +111,51 @@
 + (NSURLSessionTask *)getAreaWithParentID:(NSInteger )parentID
                         onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
-
-
+/**
+ *  添加或者修改收获地址
+ *
+ *  @param userID
+ *  @param addressID
+ *  @param receiver
+ *  @param tel
+ *  @param provience
+ *  @param city
+ *  @param country
+ *  @param detailaddress
+ *  @param state
+ *  @param compleitonBlock <#compleitonBlock description#>
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)addOrEditShoppingAddressWithUrseID:(NSInteger)userID
+                                               addressID:(NSInteger)addressID
+                                                receiver:(NSString *)receiver tel:(NSString *)tel
+                                                provicen:(NSString *)provience
+                                                    city:(NSString *)city
+                                                 country:(NSString *)country
+                                           detailAddress:(NSString *)detailaddress
+                                                wechatID:(NSString *)wechatID
+                                                   state:(NSInteger)state
+                                       onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+/**
+ *  获取收获地址列表
+ *
+ *  @param userID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getShoppingAddressListWithUrseID:(NSInteger)userID
+                                     onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+/**
+ *  删除收获地址
+ *
+ *  @param userID
+ *  @param addressID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)deleteShoppingAddressWithAddresID:(NSInteger)addressID
+                                      onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 @end

@@ -8,8 +8,9 @@
 
 #import "OCUTableViewTextViewCell.h"
 #import "OCTableCellTextViewModel.h"
+#import "UIPlaceHolderTextView.h"
 @interface OCUTableViewTextViewCell ()<UITextViewDelegate>
-@property (nonatomic,strong,readwrite)UITextView *textView;
+@property (nonatomic,strong,readwrite)UIPlaceHolderTextView *textView;
 @end
 
 @implementation OCUTableViewTextViewCell
@@ -24,13 +25,17 @@
 -(void)setCellModel:(OCTableCellModel *)cellModel{
     [super setCellModel:cellModel];
     OCTableCellTextViewModel *textViewModel = (OCTableCellTextViewModel *)cellModel;
-//    self.textView.placeholder=textViewModel.placeHoleder;
+    self.textView.placeholder=textViewModel.placeHoleder;
     self.textView.text=textViewModel.inputText;
 }
--(UITextView *)textView{
+-(UIPlaceHolderTextView *)textView{
     if (nil==_textView) {
-        _textView=[[UITextView alloc]  init];
+        _textView=[[UIPlaceHolderTextView alloc]  init];
         _textView.delegate=self;
+        _textView.layer.borderWidth=0.5;
+        _textView.layer.borderColor=[UIColor lightGrayColor].CGColor;
+        _textView.layer.cornerRadius=3;
+        _textView.layer.masksToBounds=YES;
     }
     return _textView;
 }

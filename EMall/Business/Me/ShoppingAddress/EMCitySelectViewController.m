@@ -25,15 +25,18 @@ static NSInteger const kNumberOfCoulum  =4;//一共最多4级
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //    self.automaticallyAdjustsScrollViewInsets=YES;
     self.navigationItem.title=@"地区选择";
     
-    //    [self.pageScrolView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    //    }];
     [self getAddressListWithParentAreaModel:nil pageIndex:0];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didRightButtomPressed)];
+    self.navigationItem.rightBarButtonItem.enabled=NO;
 }
-
+-(void)didRightButtomPressed{
+    if (_delegate &&[_delegate respondsToSelector:@selector(didFinishSelectWithAreaInfoArray:)]) {
+        [_delegate didFinishSelectWithAreaInfoArray:self.selectAreaArray];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -95,9 +98,19 @@ static NSInteger const kNumberOfCoulum  =4;//一共最多4级
 }
 #pragma mark -PageScrollView Delegate
 - (NSInteger)numberOfChildViewControllers{
-    NSInteger row= self.selectAreaArray.count+1;
-    if (row>kNumberOfCoulum) {
-        row=kNumberOfCoulum;
+    NSInteger row=0;
+    if (self.dataSource.count==0) {//刚进来获取数据
+        row=0;
+    }else{
+        row= self.selectAreaArray.count+1;
+        if (row>kNumberOfCoulum) {
+            row=kNumberOfCoulum;
+        }
+    }
+    if (row==kNumberOfCoulum) {
+        self.navigationItem.rightBarButtonItem.enabled=YES;
+    }else{
+        self.navigationItem.rightBarButtonItem.enabled=NO;
     }
     return row;
 }
@@ -167,7 +180,7 @@ static NSInteger const kNumberOfCoulum  =4;//一共最多4级
             [self reloadSegmentViewTitleArray:self.titleArray selectIndex:pageIndex++];
             [self.pageScrolView.contentView setContentOffSet:CGPointMake((OCWidth*(pageIndex+1)), 0) animated:YES];
         }else{
-             [self.pageScrolView.contentView reloadData];
+            [self.pageScrolView.contentView reloadData];
             [self getAddressListWithParentAreaModel:aremModel  pageIndex:pageIndex+1];
         }
     }

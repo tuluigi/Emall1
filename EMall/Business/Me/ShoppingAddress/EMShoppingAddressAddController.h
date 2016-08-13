@@ -8,6 +8,14 @@
 
 #import "OCBaseTableViewController.h"
 @class EMShopAddressModel;
+
+@protocol EMShoppingAddressAddControllerDelegate <NSObject>
+
+- (void)shoppingAddressAddOrEditControllerDidShopingAddressChanged:(EMShopAddressModel *)shopAddress;
+
+@end
+
 @interface EMShoppingAddressAddController : OCBaseTableViewController
 +(EMShoppingAddressAddController *)shoppingAddrssControllerWithAddressModel:(EMShopAddressModel *)addressModel;
+@property(nonatomic,weak)id<EMShoppingAddressAddControllerDelegate>delegate;
 @end

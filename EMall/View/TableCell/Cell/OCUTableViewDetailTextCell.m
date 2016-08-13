@@ -15,6 +15,9 @@
     [super onInitContentView];
     self.detailTextLabel.textColor=[UIColor colorWithHexString:@"#000000"];
     self.detailTextLabel.font=[UIFont oc_systemFontOfSize:13];
+    self.detailTextLabel.numberOfLines=0;
+    self.detailTextLabel.preferredMaxLayoutWidth=OCWidth-100;
+    self.detailTextLabel.adjustsFontSizeToFitWidth=YES;
 }
 
 

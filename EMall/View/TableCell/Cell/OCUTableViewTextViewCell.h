@@ -7,7 +7,7 @@
 //
 
 #import "OCUTableViewCell.h"
-
+@class UIPlaceHolderTextView;
 @interface OCUTableViewTextViewCell : OCUTableViewCell
-@property (nonatomic,strong,readonly)UITextView *textView;
+@property (nonatomic,strong,readonly)UIPlaceHolderTextView *textView;
 @end

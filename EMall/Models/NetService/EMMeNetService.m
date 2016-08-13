@@ -10,6 +10,7 @@
 #import "EMUserModel.h"
 #import "EMPersistence.h"
 #import "EMAreaModel.h"
+#import "EMShopAddressModel.h"
 @implementation EMMeNetService
 + (NSURLSessionTask *)userRegisterWithUserName:(NSString *)name
                                          email:(NSString *)email
@@ -122,6 +123,76 @@
     }
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAreaModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
+
++ (NSURLSessionTask *)addOrEditShoppingAddressWithUrseID:(NSInteger)userID
+                                               addressID:(NSInteger)addressID
+                                                receiver:(NSString *)receiver tel:(NSString *)tel
+                                                provicen:(NSString *)provience
+                                                    city:(NSString *)city
+                                                 country:(NSString *)country
+                                           detailAddress:(NSString *)detailaddress
+                                                wechatID:(NSString *)wechatID
+                                                   state:(NSInteger)state
+                                       onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member_address/saveOrUpdate"];
+    NSDictionary *postDic=@{@"memberAddress.mid":@(userID),@"memberAddress.telphone":stringNotNil(tel),@"memberAddress.province":stringNotNil(provience),@"memberAddress.city":stringNotNil(city),@"memberAddress.county":stringNotNil(country),@"memberAddress.detail_address":stringNotNil(detailaddress),@"memberAddress.state":@(state)};
+    NSMutableDictionary *parmDic=[NSMutableDictionary dictionaryWithDictionary:postDic];
+    if (addressID) {
+        [parmDic setObject:@(addressID) forKey:@"memberAddress.id"];
+    }
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:parmDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
+/**
+ *  获取收获地址列表
+ *
+ *  @param userID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getShoppingAddressListWithUrseID:(NSInteger)userID
+                                     onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member_address"];
+    NSDictionary *postDic=@{@"mid":@(userID)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMShopAddressModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+
+}
+/**
+ *  删除收获地址
+ *
+ *  @param userID
+ *  @param addressID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)deleteShoppingAddressWithAddresID:(NSInteger)addressID
+                                    onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member_address/delete"];
+    NSDictionary *postDic=@{@"id":@(addressID)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }
