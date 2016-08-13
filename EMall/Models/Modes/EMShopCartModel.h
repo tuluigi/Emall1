@@ -10,7 +10,7 @@
 
 @interface EMShopCartModel : OCBaseModel
 @property(nonatomic,copy)NSString *cartID;
-@property(nonatomic,copy)NSString *goodsID;
+@property(nonatomic,assign)NSInteger *goodsID;
 @property(nonatomic,copy)NSString *goodsName;
 @property(nonatomic,copy)NSString *goodsImageUrl;
 @property(nonatomic,assign)CGFloat goodsPrice;

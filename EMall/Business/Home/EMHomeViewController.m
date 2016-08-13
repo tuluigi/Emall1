@@ -181,11 +181,13 @@ EMHomeHeadReusableViewDelegate>
         [(EMInfiniteView *)reusableView setDelegate:self];
     }else if (indexPath.section==1||indexPath.section==2){
         reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class]) forIndexPath:indexPath];
+      
         if (indexPath.section==1) {
             [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeGreat];
         }else if(indexPath.section==2){
             [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeHot];
         }
+          ((EMHomeHeadReusableView *)reusableView).delegate=self;
     }
     return reusableView;
 }

@@ -73,7 +73,8 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     _provienceDeitalModel.detailText=[[self.addressModel.province stringByAppendingString:self.addressModel.city] stringByAppendingString:self.addressModel.country];
     _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"街道" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeDetailAddress];
+    _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"详细地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeDetailAddress];
+    _detailTextViewModel.placeHoleder=@"请输入详细地址";
     _detailTextViewModel.inputText=self.addressModel.detailAddresss;
     
     _isDefialutModel=[[OCTableCellSwitchModel alloc] initWithTitle:@"设置常用地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeIsDefault];

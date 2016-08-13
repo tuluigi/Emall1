@@ -36,6 +36,7 @@
         _textView.layer.borderColor=[UIColor lightGrayColor].CGColor;
         _textView.layer.cornerRadius=3;
         _textView.layer.masksToBounds=YES;
+        _textView.font=[UIFont oc_systemFontOfSize:13];
     }
     return _textView;
 }

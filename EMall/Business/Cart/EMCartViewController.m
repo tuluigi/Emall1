@@ -11,6 +11,7 @@
 #import "EMShopCartModel.h"
 #import "EMCartBottomView.h"
 #import "EMCartSubmitViewController.h"
+#import "EMGoodsDetailViewController.h"
 @interface EMCartViewController ()<EMCartListCellDelegate,EMCartBottomViewDelegate>
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)BOOL isDeleteing;//default =No
@@ -41,7 +42,9 @@
     [self onInitData];
 }
 - (void)onInitData{
+    self.automaticallyAdjustsScrollViewInsets=YES;
     self.navigationItem.title=@"购物车";
+    
     [self.tableView registerClass:[EMCartListCell class] forCellReuseIdentifier:NSStringFromClass([EMCartListCell class])];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didEditButtonPressed:)];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -50,7 +53,7 @@
     WEAKSELF
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
-        make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-OCUISCALE(tabarBounds.size.height));
+        make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-tabarBounds.size.height);
         make.height.mas_equalTo(OCUISCALE(50));
     }];
    UIEdgeInsets inset= self.tableView.contentInset;
@@ -121,6 +124,12 @@
         [(EMCartListCell *)cell setShopCartModel:cartModel];
     }];
     return height;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:cartModel.goodsID];
+    detailController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 #pragma mark -cell delegate
 //选中状态

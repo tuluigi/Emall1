@@ -49,6 +49,7 @@
     [_moreButton setImageEdgeInsets:UIEdgeInsetsMake(0, titleSize.width, 0, 0)];
     [_moreButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -btnImage.size.width-8, 0, 0)];
     _moreButton.highlighted=NO;
+    [_moreButton addTarget:self action:@selector(didHeadMoreButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_moreButton];
     WEAKSELF
     [_lineSpaceView mas_makeConstraints:^(MASConstraintMaker *make) {

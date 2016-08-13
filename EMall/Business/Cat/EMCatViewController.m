@@ -79,7 +79,7 @@ UICollectionViewDelegateFlowLayout>
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:idenfier];
     if (nil==cell) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:idenfier];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.selectionStyle=UITableViewCellSelectionStyleGray;
         cell.textLabel.textColor=kEM_GrayDarkTextColor;
         cell.textLabel.font=[UIFont oc_boldSystemFontOfSize:14];
         cell.textLabel.textAlignment=NSTextAlignmentCenter;
@@ -161,7 +161,7 @@ UICollectionViewDelegateFlowLayout>
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);

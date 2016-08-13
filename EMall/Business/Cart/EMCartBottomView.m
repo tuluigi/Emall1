@@ -74,9 +74,9 @@
         make.height.mas_equalTo(OCUISCALE(0.5));
     }];
         [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(13));
+            make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(10));
             make.centerY.mas_equalTo(weakSelf.mas_centerY);
-            make.size.mas_equalTo(CGSizeMake(OCUISCALE(15), OCUISCALE(15)));
+            make.size.mas_equalTo(CGSizeMake(OCUISCALE(30), OCUISCALE(30)));
         }];
         [_checkMarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(5);

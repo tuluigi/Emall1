@@ -103,9 +103,9 @@
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(10), 0));
     }];
     [_checkMarkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.bgView).offset(OCUISCALE(13));
+        make.left.mas_equalTo(weakSelf.bgView).offset(OCUISCALE(10));
         make.centerY.mas_equalTo(weakSelf.bgView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(15), OCUISCALE(15)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(30), OCUISCALE(30)));
     }];
     [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.checkMarkButton.mas_right).offset(OCUISCALE(7.5));

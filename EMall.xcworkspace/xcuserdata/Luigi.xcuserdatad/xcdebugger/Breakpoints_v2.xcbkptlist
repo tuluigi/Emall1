@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressAddController.m"
-            timestampString = "492766211.773482"
+            timestampString = "492769220.670106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-didFinishSelectWithAreaInfoArray:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,12 +84,12 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMMeNetService.m"
-                  timestampString = "492766532.065525"
+                  timestampString = "492767221.099591"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
                   endingLineNumber = "151"
-                  offsetFromSymbolStart = "128">
+                  offsetFromSymbolStart = "110">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -99,12 +99,12 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMMeNetService.m"
-                  timestampString = "492766532.065728"
+                  timestampString = "492767221.099749"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
                   endingLineNumber = "151"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -154,6 +154,22 @@
             startingLineNumber = "120"
             endingLineNumber = "120"
             landmarkName = "-didEditButtonPressed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Business/Home/EMHomeHeadReusableView.m"
+            timestampString = "492767438.876119"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-didHeadMoreButtonPressed"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
