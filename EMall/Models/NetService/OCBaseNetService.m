@@ -21,6 +21,9 @@
         }else if ([responseResult.responseData isKindOfClass:[NSArray class]]){
             NSError *aError;
             responseResult.responseData = [MTLJSONAdapter modelsOfClass:modelClass fromJSONArray:responseResult.responseData error:&aError];
+            if (aError) {
+                
+            }
         }else if ([responseResult.responseData isKindOfClass:[NSString class]]){
             //如果是字符串,暂时不做处理
 

@@ -52,7 +52,8 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
     OCResponseResult *responeResult= *aResponseResult;
     responeResult.responseCode    =[[dic objectForKey:@"code"] integerValue];
     responeResult.responseMessage =[dic objectForKey:@"message"];
-    responeResult.cursor          =[dic objectForKey:@"cursor"];
+    responeResult.cursor          =[[dic objectForKey:@"cursor"] integerValue];
+        responeResult.totalPage          =[[dic objectForKey:@"totalPage"] integerValue];
     responeResult.responseData    =[dic objectForKey:@"data"];
 }
 @end

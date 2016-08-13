@@ -21,7 +21,7 @@ FOUNDATION_EXPORT NSString *const OCNetGET;
 FOUNDATION_EXPORT NSString *const OCNetPOST;
 @interface OCResponseResult : NSObject
 @property ( nonatomic, copy)    NSString    *responseMessage;
-@property ( nonatomic, copy)    NSString    *cursor;//分页用
+@property ( nonatomic, assign)   NSInteger   cursor,totalPage;//分页用
 @property ( nonatomic, strong)  id          responseData;
 @property ( nonatomic, assign)  OCCodeState responseCode;
 +(OCResponseResult *)responseResultWithOCResponseObject:(id)responseObject error:(NSError *)aError;

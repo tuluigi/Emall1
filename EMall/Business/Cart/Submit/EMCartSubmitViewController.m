@@ -20,8 +20,9 @@ static NSString *const kSubmitCellIdenfier = @"KSubmitCellIdenfier";
 static NSString *const kAddressCellIdenfier = @"kAddressCellIdenfier";
 static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 @interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate>
-@property (nonatomic,strong)EMShopAddressModel *addressModel;
+@property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)EMCartBottomView *bottomView;
+@property (nonatomic,assign)CGFloat addressCellheight;
 
 @end
 
@@ -144,14 +145,19 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height;
     if (indexPath.section==0) {
+        if (self.addressCellheight) {
+            height=self.addressCellheight;
+        }else{
         if (self.addressModel) {
             __block EMShopAddressModel *weadAddressModel=self.addressModel;
             [tableView.fd_keyedHeightCache invalidateHeightForKey:kAddressCellIdenfier];
             height=[tableView fd_heightForCellWithIdentifier:kAddressCellIdenfier configuration:^(id cell) {
                 [(EMCartAddressCell *)cell setAddresssModel:weadAddressModel];
             }];
+            self.addressCellheight=height;
         }else{
             height=OCUISCALE(50);
+        }
         }
     }else if(indexPath.section==1){
         __block EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
@@ -180,8 +186,11 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 }
 #pragma  mark -address
 - (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel{
-    self.addressModel=addressModel;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+//    self.addressModel=addressModel;
+    [self.tableView reloadData];
+//    return;
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 /*
  #pragma mark - Navigation

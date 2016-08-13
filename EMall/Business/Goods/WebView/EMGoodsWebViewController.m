@@ -9,7 +9,7 @@
 #import "EMGoodsWebViewController.h"
 
 @interface EMGoodsWebViewController ()<UIWebViewDelegate,OCPageLoadViewDelegate>
-@property (nonatomic,strong)NSString *url;
+@property (nonatomic,strong)NSString *url,*htmlString;
 @property (nonatomic,strong)UIWebView *webView;
 @end
 
@@ -19,6 +19,13 @@
         _url=url;
     }
     return self;
+}
+- (instancetype)initWithHtmlString:(NSString *)htmlString{
+    if (self=[super init]) {
+        _htmlString=htmlString;
+    }
+    return self;
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +40,11 @@
     [self loadData];
 }
 - (void)loadData{
-[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+    if (![NSString isNilOrEmptyForString:self.htmlString]) {
+        [self.webView loadHTMLString:self.htmlString baseURL:nil];
+    }else{
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+    }
 }
 -(UIWebView *)webView{
     if (nil==_webView) {

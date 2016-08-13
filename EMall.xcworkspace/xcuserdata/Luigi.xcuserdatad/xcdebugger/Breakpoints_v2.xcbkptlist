@@ -4,172 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMCitySelectViewController.m"
-            timestampString = "492760726.080866"
+            filePath = "EMall/Models/Modes/EMShopCartModel.m"
+            timestampString = "492781676.836369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-didRightButtomPressed"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressAddController.m"
-            timestampString = "492769220.670106"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-didFinishSelectWithAreaInfoArray:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMMeNetService.m"
-            timestampString = "492764638.405827"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "+addOrEditShoppingAddressWithUrseID:addressID:receiver:tel:provicen:city:country:detailAddress:wechatID:state:onCompletionBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMMeNetService.m"
-            timestampString = "492764638.405827"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "+addOrEditShoppingAddressWithUrseID:addressID:receiver:tel:provicen:city:country:detailAddress:wechatID:state:onCompletionBlock:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__145+[EMMeNetService addOrEditShoppingAddressWithUrseID:addressID:receiver:tel:provicen:city:country:detailAddress:wechatID:state:onCompletionBlock:]_block_invoke"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMMeNetService.m"
-                  timestampString = "492767221.099591"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "110">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__145+[EMMeNetService addOrEditShoppingAddressWithUrseID:addressID:receiver:tel:provicen:city:country:detailAddress:wechatID:state:onCompletionBlock:]_block_invoke_2"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMMeNetService.m"
-                  timestampString = "492767221.099749"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressListController.m"
-            timestampString = "492766314.344672"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-deleteShoppingAddresssModel:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressListController.m"
-            timestampString = "492766531.925651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-shopAddressListCellDidEditButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMShopAddressListCell.m"
-            timestampString = "492766430.11893"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-didEditButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Home/EMHomeHeadReusableView.m"
-            timestampString = "492767438.876119"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-didHeadMoreButtonPressed"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "+JSONTransformerForKey:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

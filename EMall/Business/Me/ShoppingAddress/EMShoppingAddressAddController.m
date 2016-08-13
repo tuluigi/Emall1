@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
 };
 
 @interface EMShoppingAddressAddController ()<EMShopProvienceCityControllerDelegate,EMCitySelectViewControllerDelegate>
-@property (nonatomic,strong)EMShopAddressModel *addressModel;
+@property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)NSArray *areaArray;//用户选择的地区信息
 @property (nonatomic,strong)OCTableCellTextFiledModel   *nameFieldModel,*telFieldModel,*wechatDeitalModel;
 @property (nonatomic,strong)OCTableCellDetialTextModel *provienceDeitalModel;
@@ -70,7 +70,8 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     _wechatDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
     _provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeArea];
-    _provienceDeitalModel.detailText=[[self.addressModel.province stringByAppendingString:self.addressModel.city] stringByAppendingString:self.addressModel.country];
+
+    _provienceDeitalModel.detailText=self.addressModel.fullAdderssString;
     _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
     _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"详细地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeDetailAddress];
@@ -116,16 +117,17 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
                 shopAddressModel.province=proiveArea.areaName;
                 shopAddressModel.city=cityArea.areaName;
                 shopAddressModel.country=countryArea.areaName;
-                shopAddressModel.street=countryArea.areaName;
                 shopAddressModel.detailAddresss=weakSelf.detailTextViewModel.inputText;
                 shopAddressModel.userName=weakSelf.nameFieldModel.inputText;
                 shopAddressModel.userTel=weakSelf.telFieldModel.inputText;
                 shopAddressModel.wechatID=weakSelf.wechatDeitalModel.inputText;
                 shopAddressModel.isDefault=weakSelf.isDefialutModel.on;
+                weakSelf.addressModel=shopAddressModel;
                 if (_delegate &&[_delegate respondsToSelector:@selector(shoppingAddressAddOrEditControllerDidShopingAddressChanged:)]) {
                     [_delegate shoppingAddressAddOrEditControllerDidShopingAddressChanged:shopAddressModel];
                 }
-                [weakSelf.tableView showHUDMessage:@"" completionBlock:^{
+                
+                [weakSelf.tableView showHUDMessage:responseResult.responseMessage completionBlock:^{
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                 }];
             }else{

@@ -34,7 +34,7 @@
  *  @return
  */
 + (NSURLSessionTask *)getShopCartListWithUserID:(NSInteger)useID
-                                     pid:(NSInteger)pid
+                                     pid:(NSString *)pid
                                    pageSize:(NSInteger)pageSize
                           onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**

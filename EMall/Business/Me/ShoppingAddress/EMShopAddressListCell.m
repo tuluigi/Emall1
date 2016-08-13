@@ -111,10 +111,10 @@
     _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
     self.telLabel.text=addresssModel.userTel;
-    NSString *address=[NSString stringWithFormat:@"%@%@%@%@",addresssModel.province,addresssModel.city,addresssModel.country,addresssModel.detailAddresss];
+    NSString *address=[NSString stringWithFormat:@"%@%@%@%@",stringNotNil(addresssModel.city),stringNotNil(addresssModel.city),stringNotNil(addresssModel.country),stringNotNil(addresssModel.detailAddresss)];
     self.addressLable.text=address;
     self.defaultButton.hidden=!addresssModel.isDefault;
-    self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",addresssModel.wechatID];
+    self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",stringNotNil(addresssModel.wechatID)];
 }
 - (void)didEditButtonPressed:(UIButton *)sender{
     if (_delegate&&[_delegate respondsToSelector:@selector(shopAddressListCellDidEditButtonPressed:)]) {

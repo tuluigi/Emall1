@@ -9,5 +9,19 @@
 #import "EMShopAddressModel.h"
 
 @implementation EMShopAddressModel
-
++(NSDictionary *)JSONKeyPathsByPropertyKey{
+    return @{@"addressID":@"id",
+             @"userName":@"addressee",
+             @"userTel":@"telphone",
+             @"province":@"province",
+             @"city":@"city",
+             @"country":@"",
+             @"detailAddresss":@"detail_address",
+             @"isDefault":@"state",
+             @"state":@"state"};
+}
+-(NSString *)fullAdderssString{
+     NSString *address=[NSString stringWithFormat:@"%@%@%@%@",stringNotNil(self.city),stringNotNil(self.city),stringNotNil(self.country),stringNotNil(self.detailAddresss)];
+    return address;
+}
 @end

@@ -35,9 +35,11 @@
 - (void)goToAddShopAddressControllerWithAddressModel:(EMShopAddressModel *)addressModel{
     EMShoppingAddressAddController *addShopingAddressController=[EMShoppingAddressAddController shoppingAddrssControllerWithAddressModel:addressModel];
     addShopingAddressController.hidesBottomBarWhenPushed=YES;
+    addShopingAddressController.delegate=self;
     [self.navigationController pushViewController:addShopingAddressController animated:YES];
 }
 - (void)getShoppingAddrsssModelWithUserID:(NSString *)userID{
+    return;
     for (NSInteger i=0; i<10; i++) {
         EMShopAddressModel *addressModel=[[EMShopAddressModel alloc]  init];
         addressModel.userName=@"李小明";
@@ -46,7 +48,7 @@
         addressModel.province=@"北京市";
         addressModel.city=@"北京市";
         addressModel.country=@"海淀区";
-        addressModel.street=@"中关村";
+        
         addressModel.detailAddresss=@"创新大厦 D座 20层";
         if (i==2) {
             addressModel.isDefault=YES;
@@ -58,10 +60,11 @@
     [self.tableView reloadData];
 }
 - (void)getAddressList{
-    return;//暂时没有数据，这么测试用
+//    return;//暂时没有数据，这么测试用
     WEAKSELF
     [self.tableView showPageLoadingView];
     NSURLSessionTask *task=[EMMeNetService getShoppingAddressListWithUrseID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             NSArray *array=responseResult.responseData;
             [weakSelf.dataSourceArray removeAllObjects];
@@ -79,7 +82,10 @@
 }
 - (void)deleteShoppingAddresssModel:(EMShopAddressModel *)addresssModel{
     WEAKSELF
-    [self.tableView showHUDLoading];
+    if (self.dataSourceArray.count==0) {
+        [self.tableView showHUDLoading];
+    }
+    
     NSURLSessionTask *task=[EMMeNetService deleteShoppingAddressWithAddresID:addresssModel.addressID onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissHUDLoading];
         if (responseResult.responseCode==OCCodeStateSuccess) {
@@ -94,7 +100,12 @@
     [self addSessionTask:task];
 }
 - (void)shoppingAddressAddOrEditControllerDidShopingAddressChanged:(EMShopAddressModel *)shopAddress{
-     [self getAddressList];
+    if (shopAddress.addressID) {
+        [self getAddressList];
+    }else{
+        [self.tableView reloadData];
+//        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_addressID=@%",shopAddress];
+    }
 }
 
 #pragma mark -tableview delegate

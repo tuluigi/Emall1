@@ -25,7 +25,7 @@
                                          searchName:(NSString *)name
                                                aesc:(BOOL)aesc
                                            sortType:(NSInteger)sortType
-                                                pid:(NSString *)pid
+                                                pid:(NSInteger )pid
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 /**

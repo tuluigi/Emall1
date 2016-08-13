@@ -135,7 +135,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     WEAKSELF
     [self.view showHUDLoading];
     NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:INFINITY buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
-        [weakSelf.view dismissHUDLoading];
+//        [weakSelf.view dismissHUDLoading];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.view showHUDMessage:@"添加到购物车成功"];
         }else{
@@ -262,7 +262,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             [self.navigationController pushViewController:commentListController animated:YES];
         }
     }else if (indexPath.section==3){
-        EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithUrl:nil];
+        EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
         goodsWebController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goodsWebController animated:YES];
     }

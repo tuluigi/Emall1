@@ -87,7 +87,7 @@
     _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
     self.telLabel.text=addresssModel.userTel;
-    self.addressLable.text=addresssModel.detailAddresss;
-    self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",addresssModel.wechatID];
+    self.addressLable.text=addresssModel.fullAdderssString;
+    self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",    stringNotNil(addresssModel.wechatID)];
 }
 @end

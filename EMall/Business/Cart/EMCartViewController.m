@@ -12,6 +12,7 @@
 #import "EMCartBottomView.h"
 #import "EMCartSubmitViewController.h"
 #import "EMGoodsDetailViewController.h"
+#import "EMShopCartNetService.h"
 @interface EMCartViewController ()<EMCartListCellDelegate,EMCartBottomViewDelegate>
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)BOOL isDeleteing;//default =No
@@ -36,6 +37,12 @@
     }
     return _bottomView;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.dataSourceArray.count==0) {
+        [self getCartListWithCursor:nil];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -56,22 +63,40 @@
         make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-tabarBounds.size.height);
         make.height.mas_equalTo(OCUISCALE(50));
     }];
-   UIEdgeInsets inset= self.tableView.contentInset;
-    inset.bottom+=OCUISCALE(50);
-    self.tableView.contentInset=inset;
+//   UIEdgeInsets inset= self.tableView.contentInset;
+//    inset.bottom+=OCUISCALE(50);
+//    self.tableView.contentInset=inset;
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.removeExisting=YES;
+        make.top.mas_equalTo(weakSelf.view.mas_top);
+        make.left.right.mas_equalTo(weakSelf.view);
+        make.bottom.mas_equalTo(weakSelf.bottomView.mas_top);
+    }];
 
-    for (NSInteger i=0; i<20; i++) {
-        EMShopCartModel *model=[[EMShopCartModel alloc]  init];
-        model.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
-        model.goodsName=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
-        model.buyCount=1;
-        model.goodsPrice=109;
-        model.spec =@"白色 XL";
-        [self.dataSourceArray addObject:model];
-    }
     [self.tableView reloadData];
     [self calcuteMyShopCart];
+    [self getCartListWithCursor:nil];
 }
+
+#pragma mark - getCart list
+- (void)getCartListWithCursor:(NSString *)cursor{
+    WEAKSELF
+    if (![NSString isNilOrEmptyForString:cursor]) {
+        [weakSelf.tableView showPageLoadingView];
+    }
+    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:0 pageSize:10 onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            if ([NSString isNilOrEmptyForString:cursor]) {
+                [weakSelf.dataSourceArray removeAllObjects];
+            }
+            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+            [weakSelf.tableView reloadData];
+        }
+    }];
+    [weakSelf addSessionTask:task];
+}
+
 - (void)setIsDeleteing:(BOOL)isDeleteing{
     _isDeleteing=isDeleteing;
     UIBarButtonItem *sender=self.navigationItem.rightBarButtonItem;

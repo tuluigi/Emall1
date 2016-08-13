@@ -35,13 +35,13 @@
  *  @return
  */
 + (NSURLSessionTask *)getShopCartListWithUserID:(NSInteger)useID
-                                            pid:(NSInteger)pid
+                                            pid:(NSString *)pid
                                        pageSize:(NSInteger)pageSize
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods_cart"];
-    NSDictionary *postDic=@{@"mid":@(useID),@"pid":@(pid),@"pageSize":@(pageSize)};
+    NSDictionary *postDic=@{@"mid":@(useID),@"cursor":stringNotNil(pid),@"pageSize":@(pageSize)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMShopCartModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMShopCartModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

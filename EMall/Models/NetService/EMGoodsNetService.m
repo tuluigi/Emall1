@@ -13,7 +13,7 @@
                                          searchName:(NSString *)name
                                                aesc:(BOOL)asc
                                            sortType:(NSInteger)sortType
-                                                pid:(NSString *)pid
+                                                pid:(NSInteger )pid
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods"];
     NSMutableDictionary *postDic=[NSMutableDictionary new];
@@ -33,8 +33,8 @@
     if (sortType) {
         [postDic setObject:@(sortType) forKey:@"order_field"];
     }
-    if (![NSString isNilOrEmptyForString:pid]) {
-        [postDic setObject:@"pid" forKey:pid];
+    if (pid) {
+        [postDic setObject:@"cursor" forKey:@(pid)];
     }
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {

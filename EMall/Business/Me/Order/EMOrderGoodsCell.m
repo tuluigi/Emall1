@@ -45,6 +45,7 @@ UICollectionViewDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong)UICollectionView *myCollectionView;
+@property (nonatomic,strong)UIButton *countButton;
 @end
 
 @implementation EMOrderGoodsCell
@@ -52,7 +53,7 @@ UICollectionViewDelegateFlowLayout>
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+      
     }
     return self;
 }
@@ -60,12 +61,24 @@ UICollectionViewDelegateFlowLayout>
     [super awakeFromNib];
     // Initialization code
 }
-
+- (void)onInitConentView{
+    WEAKSELF
+    _countButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [_countButton setTitleColor:kEM_LightDarkTextColor forState:UIControlStateNormal];
+    _countButton.titleLabel.font=[UIFont oc_systemFontOfSize:13];
+    
+    [self.contentView addSubview:self.myCollectionView];
+    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(kEMOffX);
+        make.top.bottom.mas_equalTo(weakSelf.contentView);
+    }];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
+
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];

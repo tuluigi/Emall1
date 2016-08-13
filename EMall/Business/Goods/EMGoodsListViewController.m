@@ -46,15 +46,15 @@ UICollectionViewDelegateFlowLayout
     }];
     [self getGoodsListWithCursor:self.cursor];
 }
-- (void)getGoodsListWithCursor:(NSString *)cursor{
+- (void)getGoodsListWithCursor:(NSInteger )cursor{
     WEAKSELF
-    if ([NSString isNilOrEmptyForString:cursor]) {
+    if (self.cursor<=1) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
     NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.myCollectionView dismissPageLoadView];
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            if (nil==cursor) {
+            if (weakSelf.cursor<2) {
                 [weakSelf.dataSourceArray removeAllObjects];
             }
             for (NSInteger i=0; i<10; i++) {
