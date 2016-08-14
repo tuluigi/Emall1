@@ -94,6 +94,16 @@
         return nil;
     }
 }
+- (NSString *)spec{
+    if ([NSString isNilOrEmptyForString:_spec]) {
+        for (EMSpecModel *model in self.goodSpecArray) {
+            _spec=[NSString stringWithFormat:@"%@ %@",stringNotNil(_spec),stringNotNil(model.name)];
+            _spec=[_spec stringByAppendingString:model.name];
+        }
+        _spec=[_spec stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    }
+    return _spec;
+}
 @end
 
 

@@ -94,9 +94,22 @@
 + (NSURLSessionTask *)getOrderDetailWithOrderID:(NSInteger)orderID
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"order/detail"];
-    NSDictionary *postDic=@{@"id":@(orderID)};
+    NSDictionary *postDic=@{@"oid":@(orderID)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMOrderModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
++ (NSURLSessionTask *)getOrderStateNumWithUserID:(NSInteger)userID
+                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[self urlWithSuffixPath:@"order/stateNum"];
+    NSDictionary *postDic=@{@"mid":@(userID)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

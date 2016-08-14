@@ -57,4 +57,15 @@
  */
 + (NSURLSessionTask *)getOrderDetailWithOrderID:(NSInteger)orderID
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
+/**
+ *  获取用户订单数量
+ *
+ *  @param userID
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)getOrderStateNumWithUserID:(NSInteger)userID
+                              onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 @end

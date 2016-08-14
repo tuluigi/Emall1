@@ -227,6 +227,7 @@ UICollectionViewDelegateFlowLayout>
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
+        
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 100, 20) collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
@@ -235,6 +236,7 @@ UICollectionViewDelegateFlowLayout>
         mainView.showsVerticalScrollIndicator = NO;
         mainView.dataSource = self;
         mainView.delegate = self;
+//        mainView.alwaysBounceHorizontal=YES;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMOrderListGoodsItemCell class] forCellWithReuseIdentifier:NSStringFromClass([EMOrderListGoodsItemCell class])];
     }

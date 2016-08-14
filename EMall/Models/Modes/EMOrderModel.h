@@ -29,7 +29,9 @@ typedef NS_ENUM(NSInteger,EMOrderLogisticsType) {
 @property(nonatomic,strong)EMGoodsInfoModel *goodsInfoModel;//规格说明
 @property(nonatomic,assign)NSInteger buyCount;//购买数量
 @property(nonatomic,assign)CGFloat goodsPrice,discountPrice;
-@property(nonatomic,strong)NSMutableArray *goodSpecArray;
+@property(nonatomic,strong)NSMutableArray <EMSpecModel *>*goodSpecArray;
+
+@property (nonatomic,copy)NSString *spec;
 @end
 
 @interface EMOrderModel : OCBaseModel

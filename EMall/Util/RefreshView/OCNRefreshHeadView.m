@@ -239,7 +239,10 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     
     self.animationImageView.hidden=!containerView_.hidden;
     [ self.animationImageView startAnimating];
-    self.titleLabel.text=self.loadingMessage;
+    if (![self.titleLabel.text isEqualToString:self.loadingMessage]) {
+          self.titleLabel.text=self.loadingMessage;
+    }
+  
     
     
     

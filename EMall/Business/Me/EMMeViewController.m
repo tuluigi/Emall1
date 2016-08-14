@@ -18,6 +18,7 @@
 #import "EMMeNetService.h"
 #import "EMMeInfoViewController.h"
 #import "EMEdiePwdViewController.h"
+#import "EMOrderNetService.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
@@ -30,7 +31,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 
 @interface EMMeViewController ()<EMMeOrderStateCellDelegate>
 @property (nonatomic,strong)EMMEHeadView *headView;
-@property (nonatomic,strong)NSMutableArray *orderStateArray;
+@property (nonatomic,strong)__block NSMutableArray <EMOrderStateModel *>*orderStateArray;
 @end
 
 @implementation EMMeViewController
@@ -42,6 +43,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getOrderStaetNum];
 }
 - (void)onInitData{
     self.fd_prefersNavigationBarHidden=YES;
@@ -52,15 +54,10 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     self.tableView.showsHorizontalScrollIndicator=NO;
     WEAKSELF
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLoginSuccessNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        
-        [weakSelf handleUserLoginStateDataSource];
-        [weakSelf.tableView reloadData];
-        
+        [weakSelf handleUserLogStateChanged];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLogoutNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-         [weakSelf.dataSourceArray removeObjectsInRange:NSMakeRange(weakSelf.dataSourceArray.count-2, 2)];
-        [weakSelf.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
-        [weakSelf.tableView reloadData];
+        [weakSelf handleUserLogStateChanged];
     }];
     NSArray *groupArray0,*groupArray1,*groupArray2;
     OCTableCellDetialTextModel *userInfoModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"全部订单" imageName:@"me_order" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeOrder];
@@ -85,7 +82,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     self.dataSourceArray=[NSMutableArray arrayWithObjects:groupArray0,groupArray1,groupArray2, nil];
     
     
-     [self handleUserLoginStateDataSource];
+     [self handleUserLogStateChanged];
     [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
     CGSize size=[self.headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     self.headView.frame=CGRectMake(0, 0, size.width, size.height);
@@ -104,7 +101,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     
     
 }
-- (void)handleUserLoginStateDataSource{
+- (void)handleUserLogStateChanged{
     if ([RI isLogined]) {
         OCTableCellDetialTextModel *editPwdModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"修改密码" imageName:@"me_passoword" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeEditPwd];
         editPwdModel.tableCellStyle=UITableViewCellStyleSubtitle;
@@ -116,8 +113,40 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         NSArray * groupArray4=@[quitModel];
         [self.dataSourceArray addObject:groupArray4];
         [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
+        [self getOrderStaetNum];
     }else{
-       
+        [self.dataSourceArray removeObjectsInRange:NSMakeRange(self.dataSourceArray.count-2, 2)];
+        [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
+        for (EMOrderStateModel *stateModel in self.orderStateArray) {
+            stateModel.badgeNumber=0;
+        }
+    }
+      [self.tableView reloadData];
+}
+- (void)getOrderStaetNum{
+    if ([RI isLogined]) {
+        WEAKSELF
+        NSURLSessionTask *task=[EMOrderNetService getOrderStateNumWithUserID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                NSDictionary *dic=responseResult.responseData;
+                if ([dic isKindOfClass:[NSDictionary class]]) {
+                    NSArray *allKeys=[dic allKeys];
+                    NSArray *allValues=[dic allValues];
+                    for (EMOrderStateModel *stateModel in weakSelf.orderStateArray) {
+                        NSString *key=[NSString stringWithFormat:@"%ld",stateModel.state];
+                        if ([allKeys containsObject:key]) {
+                            NSInteger index=[allKeys indexOfObject:key];
+                            id value=[allValues objectAtIndex:index];
+                            stateModel.badgeNumber=[value integerValue];
+                        }else{
+                            stateModel.badgeNumber=0;
+                        }
+                    }
+                    [weakSelf.tableView reloadData];
+                }
+            }
+        }];
+        [self addSessionTask:task];
     }
 }
 - (UIStatusBarStyle)preferredStatusBarStyle{

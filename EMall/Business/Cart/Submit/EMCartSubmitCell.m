@@ -9,6 +9,7 @@
 #import "EMCartSubmitCell.h"
 #import "EMShopCartModel.h"
 #import "NSAttributedString+Price.h"
+#import "EMOrderModel.h"
 @interface EMCartSubmitCell ()
 @property (nonatomic,strong)UIImageView *goodsImageView;
 @property (nonatomic,strong)UILabel *goodsNameLabel;
@@ -92,7 +93,14 @@
     self.goodsNameLabel.text=_shopCartModel.goodsName;
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice];
-    
+}
+
+- (void)setOrderGoodsModel:(EMOrderGoodsModel *)orderGoodsModel{
+    _orderGoodsModel=orderGoodsModel;
+    [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_orderGoodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
+    self.goodsNameLabel.text=_orderGoodsModel.goodsName;
+    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_orderGoodsModel.spec,_orderGoodsModel.buyCount];
+    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_orderGoodsModel.goodsPrice];
 }
 
 @end

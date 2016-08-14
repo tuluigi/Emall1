@@ -10,7 +10,8 @@
 #import "ZJScrollPageView.h"
 #import "EMOrderListController.h"
 #import "UITextField+HiddenKeyBoardButton.h"
-@interface EMOrderHomeListController ()<ZJScrollPageViewDelegate,UISearchBarDelegate>
+#import "EMOrderDetailController.h"
+@interface EMOrderHomeListController ()<ZJScrollPageViewDelegate,UISearchBarDelegate,EMOrderListControllerDelegate>
 @property (nonatomic,strong)ZJScrollPageView *pageScrolView;
 @property (nonatomic,strong)NSArray <EMOrderStateModel *>*orderStateArray;
 @property (nonatomic,assign)EMOrderState currentOrderState;
@@ -32,6 +33,13 @@
     self.orderStateArray=[EMOrderStateModel orderStateModelArray];
     [self.view addSubview:self.searchBar];
     [self.view addSubview:self.pageScrolView];
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_state=%ld",self.currentOrderState];
+    NSArray *tempArray=[self.orderStateArray filteredArrayUsingPredicate:predicate];
+    if (tempArray&&tempArray.count) {
+        NSInteger index=[self.orderStateArray indexOfObject:[tempArray firstObject]];
+        [self.pageScrolView.contentView setContentOffSet:CGPointMake(OCWidth*index, 0) animated:NO];
+        [self.pageScrolView setSelectedIndex:index animated:NO];
+    }
 }
 - (NSArray *)titleArrayWithOrderStates:(NSArray *)orderSataArray{
     NSMutableArray *titleArray=[[NSMutableArray alloc]  init];
@@ -49,11 +57,17 @@
     EMOrderListController <ZJScrollPageViewChildVcDelegate> *childVc = (EMOrderListController *)reuseViewController;
     if (!childVc) {
         childVc = [[EMOrderListController alloc] init];
+        childVc.delegate=self;
     }
     EMOrderStateModel *stateModel=self.orderStateArray[index];
     childVc.orderState=stateModel.state;
     childVc.goodsName=self.searchBar.text;
     return childVc;
+}
+- (void)orderListControllerDidSelecOrder:(EMOrderModel *)orderModel{
+    EMOrderDetailController *detailController=[[EMOrderDetailController alloc]  initWithOrderID:orderModel.orderID];
+    detailController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{

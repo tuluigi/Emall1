@@ -79,6 +79,12 @@
     }];
     return height;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EMOrderModel *orderModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    if (_delegate&&[_delegate respondsToSelector:@selector(orderListControllerDidSelecOrder:)]) {
+        [_delegate orderListControllerDidSelecOrder:orderModel];
+    }
+}
 #pragma mark -page delegate
 - (void)setUpWhenViewWillAppearForTitle:(NSString *)title forIndex:(NSInteger)index firstTimeAppear: (BOOL)isFirstTime{
     if (isFirstTime) {

@@ -29,7 +29,6 @@
 }
 - (void)onInitContentView{
     _iconImageView=[[UIImageView alloc] init];
-    
     [self addSubview:_iconImageView];
     _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
@@ -37,11 +36,11 @@
     _nameLabel.numberOfLines=1;
     [self addSubview:_nameLabel];
     
-    _badgeView=[[JSBadgeView alloc]  init];
+    _badgeView=[[JSBadgeView alloc]  initWithParentView:_iconImageView alignment:JSBadgeViewAlignmentTopRight];
     _badgeView.badgeTextColor=[UIColor whiteColor];
-    _badgeView.badgeBackgroundColor=[UIColor yellowColor];
+    _badgeView.badgeBackgroundColor=[UIColor redColor];
     _badgeView.badgeTextFont=[UIFont oc_systemFontOfSize:10];
-    [self addSubview:_badgeView];
+    [_iconImageView addSubview:_badgeView];
     
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,11 +52,10 @@
         make.top.mas_equalTo(_iconImageView.mas_bottom).offset(OCUISCALE(5));
         make.width.mas_equalTo([EMOrderStatetItemView orderStateItemViewSize].width);
         make.centerX.mas_equalTo(weakSelf.iconImageView);
-        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-10));
     }];
     [_badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.iconImageView.mas_right).offset(OCUISCALE(-5));
-        make.centerY.mas_equalTo(weakSelf.iconImageView.mas_top);
+        make.left.mas_equalTo(weakSelf.iconImageView.mas_right);
+        make.top.mas_equalTo(weakSelf.iconImageView.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(8), OCUISCALE(8)));
     }];
 }
@@ -76,7 +74,7 @@
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     CGSize size=[EMOrderStatetItemView orderStateItemViewSize];
-    size.width=OCWidth/4;
+    size.width=OCWidth/4.0;
     attributes.size=size;
     return attributes;
 }

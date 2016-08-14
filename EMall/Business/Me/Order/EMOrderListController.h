@@ -9,7 +9,16 @@
 #import "OCBaseTableViewController.h"
 #import "ZJScrollPageViewDelegate.h"
 #import "EMOrderModel.h"
+
+@class EMOrderModel;
+@protocol EMOrderListControllerDelegate <NSObject>
+
+- (void)orderListControllerDidSelecOrder:(EMOrderModel *)orderModel;
+
+@end
+
 @interface EMOrderListController : OCBaseTableViewController <ZJScrollPageViewChildVcDelegate>
 @property (nonatomic,assign)EMOrderState orderState;
 @property (nonatomic,copy)NSString *goodsName;//搜索用
+@property (nonatomic,weak)id<EMOrderListControllerDelegate>delegate;
 @end

@@ -9,5 +9,5 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMOrderDetailController : OCBaseTableViewController
-- (instancetype)initWithOrderID:(NSString *)orderID;
+- (instancetype)initWithOrderID:(NSInteger )orderID;
 @end

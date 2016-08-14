@@ -83,6 +83,7 @@
         make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-20));
     }];
 }
+
 - (void)setAddresssModel:(EMShopAddressModel *)addresssModel{
     _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
