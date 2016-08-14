@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/ShoppingAddress/EMShoppingAddressAddController.m"
-            timestampString = "492834589.183935"
+            filePath = "EMall/Business/Cart/Submit/EMCartSubmitViewController.m"
+            timestampString = "492837900.39962"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-didSaveButtonPressed"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "-getUserDefaultShoppingAddress"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMMeNetService.m"
-            timestampString = "492834656.757075"
+            filePath = "EMall/Business/Cart/EMCartViewController.m"
+            timestampString = "492837375.031621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "+addOrEditShoppingAddressWithUrseID:addressID:receiver:tel:provicen:city:country:detailAddress:wechatID:state:onCompletionBlock:"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-getCartListWithCursor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/Modes/EMShopAddressModel.m"
-            timestampString = "492835043.732321"
+            filePath = "EMall/Business/Cart/EMCartViewController.m"
+            timestampString = "492837496.556636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-fullAdderssString"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

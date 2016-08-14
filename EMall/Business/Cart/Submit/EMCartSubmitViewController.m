@@ -16,9 +16,11 @@
 #import "NSAttributedString+Price.h"
 #import "EMShoppingAddressListController.h"
 #import "EMCartPayViewController.h"
-static NSString *const kSubmitCellIdenfier = @"KSubmitCellIdenfier";
-static NSString *const kAddressCellIdenfier = @"kAddressCellIdenfier";
-static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
+#import "EMOrderNetService.h"
+#import "EMMeNetService.h"
+#define kSubmitCellIdenfier  @"KSubmitCellIdenfier"
+#define  kAddressCellIdenfier @"kAddressCellIdenfier"
+#define  kPriceCellIdenfier  @"kPriceCellIdenfier"
 @interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate>
 @property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)EMCartBottomView *bottomView;
@@ -29,13 +31,22 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 @implementation EMCartSubmitViewController
 
 - (void)setCartArray:(NSArray *)cartArray{
-    [self.tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
-    
-    [self.tableView registerClass:[EMCartAddressCell class] forCellReuseIdentifier:kAddressCellIdenfier];
-// [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kPriceCellIdenfier];
     [self.dataSourceArray addObjectsFromArray:cartArray];
     [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
     [self.tableView reloadData];
+    // Do any additional setup after loading the view.
+}
+- (UITableView *)tableView{
+    if (nil==_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        [_tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
+        
+        [_tableView registerClass:[EMCartAddressCell class] forCellReuseIdentifier:kAddressCellIdenfier];
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
 }
 - (EMCartBottomView *)bottomView{
     if (nil==_bottomView) {
@@ -44,13 +55,7 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
     }
     return _bottomView;
 }
-- (instancetype)init{
-    self=[super init];
-    if (self) {
-       
-    }
-    return self;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -64,7 +69,6 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
 - (void)onInitContentView{
     self.navigationItem.title=@"确认订单";
     [self.view addSubview:self.bottomView];
-   
 
     WEAKSELF
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,14 +80,11 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
     inset.bottom+=OCUISCALE(50);
     self.tableView.contentInset=inset;
     self.addressModel=[[EMShopAddressModel alloc]  init];
-    self.addressModel.userName=@"小名";
-    self.addressModel.userTel=@"13523576349";
-    self.addressModel.wechatID=@"weixin_xxxID";
-    self.addressModel.detailAddresss=@"北京市，海淀区，中关村，巴拉巴拉巴拉巴安拔萝卜";
-    [self getUserDefaultShoppingAddressWithUserID:nil];
-    
-
-    
+    self.addressModel.userName=@"收货人";
+    self.addressModel.userTel=@"收货人电话";
+    self.addressModel.wechatID=@"";
+    self.addressModel.detailAddresss=@"请选择收获地址";
+    [self getUserDefaultShoppingAddress];
 }
 - (CGFloat)totalPrice{
     CGFloat totalPrice=0;
@@ -94,15 +95,26 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
     }
     return totalPrice;
 }
-- (void)getUserDefaultShoppingAddressWithUserID:(NSString *)userID{
-   
-    [self.tableView reloadData];
+- (void)getUserDefaultShoppingAddress{
+    WEAKSELF
+    NSURLSessionTask *task=[EMMeNetService getShoppingAddressListWithUrseID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            NSArray *array=responseResult.responseData;
+            if (array.count) {
+                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_state=1"];
+                NSArray *tempArray=[array filteredArrayUsingPredicate:predicate];
+                if (tempArray&&tempArray.count) {
+                    weakSelf.addressModel=[tempArray firstObject];
+                    [weakSelf.tableView reloadData];
+//                    [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
+        }
+    }];
+    [weakSelf addSessionTask:task];
 }
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    [self.tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
-    
-    [self.tableView registerClass:[EMCartAddressCell class] forCellReuseIdentifier:kAddressCellIdenfier];
     return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -136,7 +148,7 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
         UIColor *color=[UIColor colorWithHexString:@"#272727"];
         NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",self.dataSourceArray.count] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]]];
-
+        
         cell.detailTextLabel.attributedText=priceAttrStr;
         aCell=cell;
     }
@@ -148,16 +160,16 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
         if (self.addressCellheight) {
             height=self.addressCellheight;
         }else{
-        if (self.addressModel) {
-            __block EMShopAddressModel *weadAddressModel=self.addressModel;
-            [tableView.fd_keyedHeightCache invalidateHeightForKey:kAddressCellIdenfier];
-            height=[tableView fd_heightForCellWithIdentifier:kAddressCellIdenfier configuration:^(id cell) {
-                [(EMCartAddressCell *)cell setAddresssModel:weadAddressModel];
-            }];
-            self.addressCellheight=height;
-        }else{
-            height=OCUISCALE(50);
-        }
+            if (self.addressModel) {
+                __block EMShopAddressModel *weadAddressModel=self.addressModel;
+                [tableView.fd_keyedHeightCache invalidateHeightForKey:kAddressCellIdenfier];
+                height=[tableView fd_heightForCellWithIdentifier:kAddressCellIdenfier configuration:^(id cell) {
+                    [(EMCartAddressCell *)cell setAddresssModel:weadAddressModel];
+                }];
+                self.addressCellheight=height;
+            }else{
+                height=OCUISCALE(50);
+            }
         }
     }else if(indexPath.section==1){
         __block EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
@@ -177,20 +189,36 @@ static NSString *const kPriceCellIdenfier = @"kPriceCellIdenfier";
         [self.navigationController pushViewController:addressController animated:YES];
     }
 }
+- (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
+    WEAKSELF
+    [self.view showHUDLoading];
+    NSURLSessionTask *task=[EMOrderNetService submitWithUserID:[RI userID] shopCarts:shopCartArrays addressID:addressID logisticType:type remark:remarks onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.view showHUDMessage:@"提交订单成功"];
+        }else{
+            [weakSelf.view showHUDMessage:responseResult.responseMessage];
+        }
+    }];
+    [self addSessionTask:task];
+}
 #pragma mark -bottomView select
 //提交订单
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
-    EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:[self totalPrice]];
-    payController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:payController animated:YES];
+    
+    [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:1 remarks:nil];
+    
+    
+    //    EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:[self totalPrice]];
+    //    payController.hidesBottomBarWhenPushed=YES;
+    //    [self.navigationController pushViewController:payController animated:YES];
 }
 #pragma  mark -address
 - (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel{
-
-//    self.addressModel=addressModel;
+    
+    self.addressModel=addressModel;
     [self.tableView reloadData];
-//    return;
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //    return;
+    //    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 /*
  #pragma mark - Navigation

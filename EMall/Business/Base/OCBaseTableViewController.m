@@ -12,6 +12,7 @@
 @end
 
 @implementation OCBaseTableViewController
+@synthesize tableView=_tableView;
 -(id)initWithStyle:(UITableViewStyle)style{
     if (self=[super init]) {
         _tableViewStyle = style;
@@ -40,11 +41,8 @@
 }
 
 #pragma mark - UITableViewDataSource=
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSourceArray.count;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
