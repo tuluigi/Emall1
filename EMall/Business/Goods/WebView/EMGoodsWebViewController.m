@@ -43,7 +43,8 @@
     if (![NSString isNilOrEmptyForString:self.htmlString]) {
         [self.webView loadHTMLString:self.htmlString baseURL:nil];
     }else{
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+          [self.webView showPageLoadedMessage:@"暂无介绍" delegate:nil];
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
     }
 }
 -(UIWebView *)webView{

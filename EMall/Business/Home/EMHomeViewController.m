@@ -272,7 +272,7 @@ EMHomeHeadReusableViewDelegate>
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
