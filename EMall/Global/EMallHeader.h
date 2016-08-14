@@ -33,6 +33,8 @@
 #import "UIColor+ILHexStringColor.h"
 #import "UIImage+OCColorImage.h"
 #import "UIScrollView+OCRefresh.h"
+#import "UIResponder+Router.h"
+
 
 #import "UIViewController+OpenCourse.h"
 #import "UIViewController+Login.h"
@@ -70,3 +72,11 @@ static CGFloat const kEMOffX    = 13;
 //整个app中默认深色字体颜色
 #define kEM_LightDarkTextColor [UIColor colorWithHexString:@"#5d5c5c"]
 #endif /* EMallHeader_h */
+
+
+
+
+
+#pragma mark - ResponderEvent
+#define kEMOrderShoudBuyAgainEvent      @"kEMOrderShoudBuyAgainEvent"
+#define kEMOrderGotoOrderDetailEvent  @"kEMOrderGotoOrderDetailEvent"

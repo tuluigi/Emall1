@@ -212,15 +212,18 @@ UICollectionViewDelegateFlowLayout>
 
 
 - (void)didReBuyButtonPressed{
-    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
-        [_delegate orderListCellShouldReBuyThisGoods];
-    }
+//    [[self nextResponder]routerEventName:kEMOrderShoudBuyAgainEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
+//    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
+//        [_delegate orderListCellShouldReBuyThisGoods];
+//    }
 }
 
 - (void)didCheckOrderDetailButtonPressed{
-    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldCheckOrderDetail)]) {
-        [_delegate orderListCellShouldCheckOrderDetail];
-    }
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:@{kEMOrderShoudBuyAgainEvent:@(self.orderModel.orderID)}];
+//     [[self nextResponder]routerEventName:kEMOrderGotoOrderDetailEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
+//    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldCheckOrderDetail)]) {
+//        [_delegate orderListCellShouldCheckOrderDetail];
+//    }
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {

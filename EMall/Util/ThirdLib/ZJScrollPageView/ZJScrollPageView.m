@@ -32,7 +32,9 @@
     }
     return self;
 }
-
+-(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
+    [[self nextResponder] routerEventName:event userInfo:userInfo];
+}
 
 - (void)commonInit {
     

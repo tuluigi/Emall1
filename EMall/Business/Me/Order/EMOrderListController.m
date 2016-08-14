@@ -85,6 +85,9 @@
         [_delegate orderListControllerDidSelecOrder:orderModel];
     }
 }
+-(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
+    [[self nextResponder] routerEventName:event userInfo:userInfo];
+}
 #pragma mark -page delegate
 - (void)setUpWhenViewWillAppearForTitle:(NSString *)title forIndex:(NSInteger)index firstTimeAppear: (BOOL)isFirstTime{
     if (isFirstTime) {

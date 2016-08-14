@@ -11,6 +11,7 @@
 #import "EMOrderListController.h"
 #import "UITextField+HiddenKeyBoardButton.h"
 #import "EMOrderDetailController.h"
+#import "EMShopCartNetService.h"
 @interface EMOrderHomeListController ()<ZJScrollPageViewDelegate,UISearchBarDelegate,EMOrderListControllerDelegate>
 @property (nonatomic,strong)ZJScrollPageView *pageScrolView;
 @property (nonatomic,strong)NSArray <EMOrderStateModel *>*orderStateArray;
@@ -40,6 +41,12 @@
         [self.pageScrolView.contentView setContentOffSet:CGPointMake(OCWidth*index, 0) animated:NO];
         [self.pageScrolView setSelectedIndex:index animated:NO];
     }
+    
+    WEAKSELF
+    [[NSNotificationCenter defaultCenter] addObserverForName:kEMOrderShoudBuyAgainEvent object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        EMOrderModel *order=[note.userInfo objectForKey:kEMOrderShoudBuyAgainEvent];
+        [self orderListControllerDidSelecOrder:order];
+    }];
 }
 - (NSArray *)titleArrayWithOrderStates:(NSArray *)orderSataArray{
     NSMutableArray *titleArray=[[NSMutableArray alloc]  init];
@@ -48,7 +55,27 @@
     }
     return (NSArray *)titleArray;
 }
-
+- (void)addShopCartWithGoodsID:(NSInteger)goodsID infoID:(NSInteger)specID buyCount:(NSInteger)buyCount{
+    WEAKSELF
+    if ([RI isLogined]) {
+//        [self.view showHUDLoading];
+        NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:specID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
+            //        [weakSelf.view dismissHUDLoading];
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [weakSelf.view showHUDMessage:@"添加到购物车成功"];
+            }else{
+                [weakSelf.view showHUDMessage:@"添加失败"];
+            }
+        }];
+        [self addSessionTask:task];
+    }else{
+        [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+            if (isSucceed) {
+                [weakSelf addShopCartWithGoodsID:goodsID infoID:specID buyCount:buyCount];
+            }
+        }];
+    }
+}
 #pragma mark -PageScrollView Delegate
 - (NSInteger)numberOfChildViewControllers{
     return self.orderStateArray.count;
@@ -69,6 +96,19 @@
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+-(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
+    if ([event isEqualToString:kEMOrderGotoOrderDetailEvent ]) {
+        EMOrderModel *order=[userInfo objectForKey:event];
+        [self orderListControllerDidSelecOrder:[userInfo objectForKey:event]];
+    }else if ([event isEqualToString:kEMOrderShoudBuyAgainEvent ]){
+        return;
+        EMOrderModel *orderModel=[userInfo objectForKey:event];
+        for (EMOrderGoodsModel *model in orderModel.goodsArray) {
+            [self addShopCartWithGoodsID:model.goodsID infoID:model.goodsInfoModel.infoID buyCount:1];
+        }
+    }
+}
+
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
       [searchBar endEditing:YES];
@@ -80,6 +120,7 @@
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
 }
+
 #pragma mark -PageScrollView
 - (ZJScrollPageView *)pageScrolView{
     if (nil==_pageScrolView) {

@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Discovery/EMDiscoveryViewController.m"
-            timestampString = "492867483.945188"
+            filePath = "EMall/Business/Me/Order/EMOrderListCell.m"
+            timestampString = "492880986.405465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "-searchBarResultsListButtonClicked:"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "-didCheckOrderDetailButtonPressed"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Business/Me/Order/EMOrderHomeListController.m"
-            timestampString = "492876510.993971"
+            timestampString = "492880986.405465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-orderListControllerDidSelecOrder:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/EMMeViewController.m"
-            timestampString = "492878722.817785"
+            filePath = "EMall/Business/Me/Order/EMOrderHomeListController.m"
+            timestampString = "492880986.405465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "-getOrderStaetNum"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-routerEventName:userInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
