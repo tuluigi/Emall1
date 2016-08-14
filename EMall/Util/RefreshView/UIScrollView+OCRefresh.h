@@ -21,7 +21,7 @@ typedef void(^OpenCourseRefreshBlock)(void);
  *  @param url    图片地址
  *  @param handle
  */
-- (void)addOCPullDownResreshWithImageUrl:(NSString *)url onHandler:(OpenCourseRefreshBlock)handle;
+- (void)addOCPullDownResreshWithTitle:(NSString *)title onHandler:(OpenCourseRefreshBlock)handle;
 /**
  *  顶部下拉刷新View
  *

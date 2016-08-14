@@ -51,6 +51,7 @@
 		2A31E8201D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E81F1D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m */; };
 		2A31E8231D5F103500FC73A9 /* EMOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */; };
 		2A31E8261D60007E00FC73A9 /* EMOrderNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8251D60007E00FC73A9 /* EMOrderNetService.m */; };
+		2A31E8291D607EB900FC73A9 /* EMDiscoveryHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8281D607EB900FC73A9 /* EMDiscoveryHeadView.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -260,6 +261,8 @@
 		2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderGoodsCell.m; sourceTree = "<group>"; };
 		2A31E8241D60007E00FC73A9 /* EMOrderNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderNetService.h; sourceTree = "<group>"; };
 		2A31E8251D60007E00FC73A9 /* EMOrderNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderNetService.m; sourceTree = "<group>"; };
+		2A31E8271D607EB900FC73A9 /* EMDiscoveryHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMDiscoveryHeadView.h; sourceTree = "<group>"; };
+		2A31E8281D607EB900FC73A9 /* EMDiscoveryHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMDiscoveryHeadView.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -529,6 +532,8 @@
 				2A0352101D1A3FDA002BE7B7 /* EMDiscoveryViewController.m */,
 				2AB965A31D5B693D0049BE2A /* EMGoodsListCell.h */,
 				2AB965A41D5B693D0049BE2A /* EMGoodsListCell.m */,
+				2A31E8271D607EB900FC73A9 /* EMDiscoveryHeadView.h */,
+				2A31E8281D607EB900FC73A9 /* EMDiscoveryHeadView.m */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -1556,6 +1561,7 @@
 				2ADF606E1D28A9AA00DF757B /* EMAdModel.m in Sources */,
 				2A99EB641D3B1D8E0024E924 /* ZJScrollPageView.m in Sources */,
 				2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */,
+				2A31E8291D607EB900FC73A9 /* EMDiscoveryHeadView.m in Sources */,
 				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,

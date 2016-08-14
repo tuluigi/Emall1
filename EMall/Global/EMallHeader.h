@@ -31,7 +31,7 @@
 #import "UILabel+Category.h"
 #import "UIButton+Category.h"
 #import "UIColor+ILHexStringColor.h"
-
+#import "UIImage+OCColorImage.h"
 #import "UIScrollView+OCRefresh.h"
 
 #import "UIViewController+OpenCourse.h"

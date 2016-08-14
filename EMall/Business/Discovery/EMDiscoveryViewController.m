@@ -11,6 +11,8 @@
 #import "EMGoodsModel.h"
 #import "EMGoodsDetailViewController.h"
 #import "EMGoodsNetService.h"
+#import "EMDiscoveryHeadView.h"
+#import "UITextField+HiddenKeyBoardButton.h"
 @interface EMDiscoveryViewController ()<
             UICollectionViewDelegate,
             UICollectionViewDataSource,
@@ -19,6 +21,7 @@
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)__block NSMutableArray *dataSourceArray;
 @property (nonatomic,strong)UISearchBar *searchBar;
+@property (nonatomic,assign)__block NSInteger totalCount;
 @end
 
 @implementation EMDiscoveryViewController
@@ -31,18 +34,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"发现";
+   self.edgesForExtendedLayout = UIRectEdgeNone;
     // Do any additional setup after loading the view.
     [self.view addSubview:self.searchBar];
     [self.view addSubview:self.myCollectionView];
-    self.automaticallyAdjustsScrollViewInsets=YES;
+    
     WEAKSELF
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.searchBar.mas_bottom);
         make.left.right.bottom.mas_equalTo(weakSelf.view);
     }];
     [self getGoodsListWithCursor:self.cursor goodsName:nil];
-    
-    [weakSelf.myCollectionView addOCPullDownResreshHandler:^{
+    [weakSelf.myCollectionView addOCPullDownResreshWithTitle:@"零食小点 进口糖果 美味生鲜 ..." onHandler:^{
         weakSelf.cursor=1;
         [weakSelf getGoodsListWithCursor:weakSelf.cursor goodsName:self.searchBar.text];
     }];
@@ -50,36 +53,32 @@
         weakSelf.cursor++;
         [weakSelf getGoodsListWithCursor:weakSelf.cursor goodsName:self.searchBar.text];
     }];
+    [self.myCollectionView startPullDownRefresh];
 }
 - (void)getGoodsListWithCursor:(NSInteger )cursor goodsName:(NSString *)goodsName{
     WEAKSELF
-    if (self.dataSourceArray.count==0) {
-        [weakSelf.myCollectionView showPageLoadingView];
-    }
-   NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0  searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
-       [weakSelf.myCollectionView dismissPageLoadView];
-       [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
-       if (responseResult.cursor>=responseResult.totalPage) {
-           [weakSelf.myCollectionView enableInfiniteScrolling:NO];
-       }
-       if (responseResult.responseCode==OCCodeStateSuccess) {
-           if (cursor<2) {
-               [weakSelf.dataSourceArray removeAllObjects];
-           }
-//           for (NSInteger i=0; i<10; i++) {
-//               [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-//           }
+   NSURLSessionTask *task= [EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0 searchName:goodsName aesc:0 sortType:0 homeType:0 pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.myCollectionView dismissPageLoadView];
+        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
+        if (responseResult.cursor>=responseResult.totalPage) {
+            [weakSelf.myCollectionView enableInfiniteScrolling:NO];
+        }
+        weakSelf.totalCount=responseResult.totalRow;
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            if (cursor<2) {
+                [weakSelf.dataSourceArray removeAllObjects];
+            }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-           [weakSelf.myCollectionView reloadData];
-       }else{
-           if (weakSelf.dataSourceArray.count==0 ) {
-               [weakSelf.myCollectionView showPageLoadedMessage:@"获取数据失败，点击重试" delegate:self];
-           }else{
-               [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
-           }
-       }
-       weakSelf.cursor=responseResult.cursor;
-   }];
+            [weakSelf.myCollectionView reloadData];
+        }else{
+            if (weakSelf.dataSourceArray.count==0 ) {
+                [weakSelf.myCollectionView showPageLoadedMessage:@"获取数据失败，点击重试" delegate:self];
+            }else{
+                [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
+            }
+        }
+        weakSelf.cursor=responseResult.cursor;
+    }];
     [self addSessionTask:task];
 }
 -(void)ocPageLoadedViewOnTouced{
@@ -109,16 +108,41 @@
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
+    if (!self.searchBar.text.length) {
+        size.height=0;
+    }
+    return size;
+}
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *reusableView;
+    if (kind==UICollectionElementKindSectionHeader) {
+        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMDiscoveryHeadView class]) forIndexPath:indexPath];
+        EMDiscoveryHeadView *specHeadView=(EMDiscoveryHeadView *)reusableView;
+        specHeadView.title=[NSString stringWithFormat:@"为您搜索到%ld条结果",self.totalCount];
+    }else if (kind==UICollectionElementKindSectionFooter){
+        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
+    }
+    return reusableView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    CGSize size=CGSizeZero;
+    return size;
+}
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
+   [self.myCollectionView startPullDownRefresh];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
 }
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
+    self.cursor=1;
     [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
 }
 - (UICollectionView *)myCollectionView{
@@ -136,6 +160,7 @@
         mainView.delegate = self;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class])];
+         [_myCollectionView registerClass:[EMDiscoveryHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMDiscoveryHeadView class])];
     }
     return _myCollectionView;
 }
@@ -147,17 +172,24 @@
 }
 - (UISearchBar *)searchBar{
     if (nil==_searchBar) {
-        _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(OCUISCALE(13), OCUISCALE(15)+CGRectGetHeight(self.navigationController.navigationBar.bounds)+20, OCWidth-OCUISCALE(13*2), OCUISCALE(35))];
+        UIImage *searchBgImage=[UIImage imageNamed:@"search_bg"];
+        _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, OCWidth,50)];
         _searchBar.showsCancelButton=NO;
         _searchBar.backgroundColor=[UIColor whiteColor];
         _searchBar.delegate=self;
         _searchBar.returnKeyType=UIReturnKeySearch;
         _searchBar.placeholder=@"输入关键词搜索你的小心愿";
-        
+        UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+        [searchField addHiddenKeyBoardInputAccessView];
+        UIImage *image = [UIImage imageNamed:@"search_btn"];
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:image];
+        iconView.frame = CGRectMake(0, 0, image.size.width , image.size.height);
+        searchField.leftView = iconView;
         //设置背景图片
-        [_searchBar setBackgroundImage:[[UIImage imageNamed:@"searchBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 20, 10, 20)]];
+        [_searchBar setBackgroundImage:[[UIImage imageNamed:@"search_result_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(3, 3, 3, 3)]];
+          [_searchBar setSearchFieldBackgroundImage:searchBgImage forState:UIControlStateNormal];
         //设置背景色
-        [_searchBar setBackgroundColor:[UIColor clearColor]];
+        [_searchBar setBackgroundColor:[UIColor whiteColor]];
     }
     return _searchBar;
 }

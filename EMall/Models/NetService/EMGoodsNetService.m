@@ -14,7 +14,9 @@
                                          searchName:(NSString *)name
                                                aesc:(BOOL)aesc
                                            sortType:(NSInteger)sortType
+                                           homeType:(NSInteger)homeType
                                                 pid:(NSInteger )pid
+                                           pageSize:(NSInteger)pageSize
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods"];
     NSMutableDictionary *postDic=[NSMutableDictionary new];
@@ -37,8 +39,14 @@
     if (pid) {
         [postDic setObject:@"cursor" forKey:@(pid)];
     }
+    if (pageSize) {
+        [postDic setObject:@(pageSize) forKey:@"pageSize"];
+    }
     if (catID) {
         [postDic setObject:@(catID) forKey:@"goods.cid"];
+    }
+    if (homeType) {
+        [postDic setObject:@(homeType) forKey:@"type"];
     }
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {

@@ -9,6 +9,7 @@
 #import "EMOrderHomeListController.h"
 #import "ZJScrollPageView.h"
 #import "EMOrderListController.h"
+#import "UITextField+HiddenKeyBoardButton.h"
 @interface EMOrderHomeListController ()<ZJScrollPageViewDelegate,UISearchBarDelegate>
 @property (nonatomic,strong)ZJScrollPageView *pageScrolView;
 @property (nonatomic,strong)NSArray <EMOrderStateModel *>*orderStateArray;
@@ -57,13 +58,13 @@
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
       [searchBar endEditing:YES];
+    [self.pageScrolView.contentView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
   [searchBar endEditing:YES];
 }
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
-    [self.pageScrolView.contentView reloadData];
 }
 #pragma mark -PageScrollView
 - (ZJScrollPageView *)pageScrolView{
@@ -88,9 +89,13 @@
         _searchBar.delegate=self;
         _searchBar.returnKeyType=UIReturnKeySearch;
         _searchBar.placeholder=@"输入关键字搜索历史订单";
-       
+        UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+        [searchField addHiddenKeyBoardInputAccessView];
+
         //设置背景图片
-        [_searchBar setBackgroundImage:[[UIImage imageNamed:@"searchBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 10, 5, 10)]];
+        [_searchBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] ]];
+
+          [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"searchBar_background"] forState:UIControlStateNormal];
         //设置背景色
         [_searchBar setBackgroundColor:[UIColor clearColor]];
     }

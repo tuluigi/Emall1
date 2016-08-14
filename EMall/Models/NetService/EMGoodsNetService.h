@@ -16,6 +16,7 @@
  *  @param name            商品名称
  *  @param aesc            升降序
  *  @param sortType        排序方式  1 = 销量, 2 = 价格
+ *  @param homeType        type 上架类型 1 = 精品, 2 = 热卖 <只用于首页的>
  *  @param pid
  *  @param compleitonBlock
  *
@@ -26,7 +27,9 @@
                                          searchName:(NSString *)name
                                                aesc:(BOOL)aesc
                                            sortType:(NSInteger)sortType
+                                               homeType:(NSInteger)homeType
                                                 pid:(NSInteger )pid
+                                           pageSize:(NSInteger)pageSize
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 /**

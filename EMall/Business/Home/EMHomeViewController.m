@@ -54,7 +54,7 @@ EMHomeHeadReusableViewDelegate>
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
+//    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
     
     WEAKSELF
     [self.myCollectionView addOCPullDownResreshHandler:^{

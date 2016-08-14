@@ -25,7 +25,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
     return objc_getAssociatedObject(self, kOpenCourseInfonitionScrollHandleBlcok);
 }
 #pragma mark -getter setter
-- (void)addRefreshHeadViewWithUrl:(NSString *)url onHandler:(OpenCourseRefreshBlock)refreshBlock{
+- (void)addRefreshHeadViewWithTitle:(NSString *)title onHandler:(OpenCourseRefreshBlock)refreshBlock{
     OCNRefreshHeadView *headView=(OCNRefreshHeadView *)self.header;
     if (nil==headView) {
         UIColor *circleColor = RGB(229, 26, 30);
@@ -33,7 +33,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
         if (!width) {
             width=CGRectGetWidth([UIApplication sharedApplication].keyWindow.bounds);
         }
-        headView = [OCNRefreshHeadView headerWithCircleColor:circleColor url:url refreshingBlock:^{
+        headView = [OCNRefreshHeadView headerWithCircleColor:circleColor title:title refreshingBlock:^{
             if (refreshBlock) {
                 refreshBlock();
             }
@@ -47,12 +47,12 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
  *  @param url    图片地址
  *  @param handle
  */
--(void)addOCPullDownResreshWithImageUrl:(NSString *)url onHandler:(OpenCourseRefreshBlock)handle{
-    [self addRefreshHeadViewWithUrl:url onHandler:handle];
+- (void)addOCPullDownResreshWithTitle:(NSString *)title onHandler:(OpenCourseRefreshBlock)handle{
+    [self addRefreshHeadViewWithTitle:title onHandler:handle];
 }
 
 - (void)addOCPullDownResreshHandler:(OpenCourseRefreshBlock)handle{
-    [self addRefreshHeadViewWithUrl:nil onHandler:handle];
+       [self addRefreshHeadViewWithTitle:nil onHandler:handle];
 }
 - (void)setPullDownResfreshBackgroudImageUrl:(NSString *)url{
     

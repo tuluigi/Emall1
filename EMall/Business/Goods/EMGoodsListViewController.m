@@ -11,26 +11,43 @@
 #import "EMGoodsModel.h"
 #import "EMGoodsDetailViewController.h"
 #import "EMGoodsNetService.h"
+
+typedef NS_ENUM(NSInteger,EMGoodsListFromType) {
+     EMGoodsListFromTypeCategory=0,//分类过来的
+        EMGoodsListFromTypeHome =1,//首页过来的
+};
+
 @interface EMGoodsListViewController ()<
 UICollectionViewDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout
 >
+
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)__block NSMutableArray *dataSourceArray;
 @property (nonatomic,assign)NSInteger catID;
+@property (nonatomic,assign)EMGoodsListFromType fromType;
 @end
 
 @implementation EMGoodsListViewController
 - (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName{
+    self=[self initWithCatID:catID catName:catName fromType:EMGoodsListFromTypeCategory];
+    return self;
+}
+- (instancetype)initWithHomeType:(NSInteger )typeID typeName:(NSString *)typeName{
+    self=[self initWithCatID:typeID catName:typeName fromType:EMGoodsListFromTypeHome];
+    return self;
+}
+- (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName fromType:(EMGoodsListFromType)fromType{
     self=[super init];
     if (self) {
         self.catID=catID;
         if ([NSString isNilOrEmptyForString:catName]) {
-             self.navigationItem.title=@"商品列表";
+            self.navigationItem.title=@"商品列表";
         }else{
             self.navigationItem.title=catName;
         }
+        self.fromType=fromType;
     }
     return self;
 }
@@ -65,7 +82,13 @@ UICollectionViewDelegateFlowLayout
     if (self.dataSourceArray.count==0) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
-    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:self.catID searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSInteger catID,homtType;
+    if (self.fromType==EMGoodsListFromTypeHome) {
+        homtType=self.catID;
+    }else if(self.fromType==EMGoodsListFromTypeCategory){
+        catID=self.catID;
+    }
+    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:catID searchName:nil aesc:0 sortType:0 homeType:homtType pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.myCollectionView dismissPageLoadView];
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor>=responseResult.totalPage) {
@@ -75,9 +98,6 @@ UICollectionViewDelegateFlowLayout
             if (cursor<2) {
                 [weakSelf.dataSourceArray removeAllObjects];
             }
-//            for (NSInteger i=0; i<10; i++) {
-//                [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-//            }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.myCollectionView reloadData];
             if (weakSelf.dataSourceArray.count==0) {

@@ -21,8 +21,9 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 @property (strong, nonatomic) CALayer *indicatorLayer;
 
 @property (nonatomic,strong)UIActivityIndicatorView *activitIndicatorView;
-@property (strong, nonatomic) UIImageView *bgImageView;
 @property (strong, nonatomic) UIImageView *animationImageView;
+@property (nonatomic,strong)UILabel *titleLabel;
+@property (nonatomic,copy)NSString *loadingMessage;
 
 
 
@@ -33,39 +34,26 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 @end
 
 @implementation OCNRefreshHeadView
-- (UIImageView *)bgImageView{
-    if (nil==_bgImageView) {
-        _bgImageView=[[UIImageView alloc]  init];
-        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _bgImageView.backgroundColor=[UIColor clearColor];
+-(NSString *)loadingMessage{
+    if (nil==_loadingMessage) {
+        _loadingMessage=@"刷新中...";
     }
-    return _bgImageView;
+    return _loadingMessage;
 }
 #pragma mark - 构造方法
-+ (instancetype)headerWithCircleColor:(UIColor *)circleCorlor url:(NSString *)url refreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock
++ (instancetype)headerWithCircleColor:(UIColor *)circleCorlor title:(NSString *)title refreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock
 {
     OCNRefreshHeadView *cmp = [[self alloc] init];
     cmp.refreshingBlock = refreshingBlock;
-    [cmp onInitContentViewWithUrl:url circleColor:circleCorlor];
+    cmp.loadingMessage=title;
+    [cmp onInitContentViewWithUrl:nil circleColor:circleCorlor];
     return cmp;
 }
-- (void)setBackgroundImageWithUrl:(NSString *)url{
-    if ((!_bgImageView.superview)||(!_bgImageView)) {
-        [self addSubview:self.bgImageView];
-        __weak OCNRefreshHeadView *weakSelf=self;
-        [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(weakSelf);
-            make.bottom.mas_equalTo(weakSelf.mas_top).offset(-20);
-        }];
-    }
-    [_bgImageView setImageName:url placeholderImageName:nil original:YES animated:NO success:^(UIImage *image) {
-          
-    }];
-}
+
 - (void)prepare{
     [super prepare];
     // 设置控件的高度
-    self.mj_h = 85;
+    self.mj_h = 80;
     self.backgroundColor = [UIColor clearColor];
 }
 - (void)onInitContentViewWithUrl:(NSString *)url circleColor:(UIColor *)circleColor{
@@ -74,12 +62,11 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     [self addSubview:containerView_];
 
     WEAKSELF
-//    _animationImageView=[[UIImageView alloc]  initWithFrame:CGRectMake(self.frame.size.width/2 - 60, 0 , 120, 85)];
-    /*
+    
     _animationImageView=[[UIImageView alloc]  init];
     NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
-    for (NSInteger i=0; i<27; i++) {
-        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"pull_000%ld",32+i]];
+    for (NSInteger i=1; i<=5; i++) {
+        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"global0%ld",i]];
         if (image) {
             [imageArray addObject:image];
         }
@@ -91,11 +78,19 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     
     [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
-        make.centerY.mas_equalTo(weakSelf.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(120, 85));
+        make.top.mas_equalTo(weakSelf.mas_top).offset(10);
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     _animationImageView.backgroundColor=[UIColor clearColor];
-    */
+    
+    _titleLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
+    [self addSubview:_titleLabel];
+    _titleLabel.textColor=kEM_LightDarkTextColor;
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(weakSelf.mas_centerX);
+        make.top.mas_equalTo(weakSelf.animationImageView.mas_bottom).offset(10);
+    }];
+    /*
     _activitIndicatorView=[[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activitIndicatorView.hidesWhenStopped=YES;
     _activitIndicatorView.color=RGB(229, 26, 30);
@@ -105,7 +100,7 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
         make.centerY.mas_equalTo(weakSelf.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
-    
+    */
     
     NSMutableArray *circles = [NSMutableArray arrayWithCapacity:kNumberOfCircles];
     for (int i = 0; i < kNumberOfCircles; ++i) {
@@ -239,13 +234,13 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 - (void)beginLoadingAnimation
 {
     containerView_.hidden=YES;
-    [self.activitIndicatorView startAnimating];
+//    [self.activitIndicatorView startAnimating];
     
-    /*
+    
     self.animationImageView.hidden=!containerView_.hidden;
-//    self.animationImageView.center=containerView_.center;
     [ self.animationImageView startAnimating];
-    */
+    self.titleLabel.text=self.loadingMessage;
+    
     
     
     /*
@@ -372,11 +367,11 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
 {
     
     containerView_.hidden=NO;
-    /*
+    
     self.animationImageView.hidden=!containerView_.hidden;
     [self.animationImageView stopAnimating];
-     */
-    [self.activitIndicatorView stopAnimating];
+     self.titleLabel.text=@"";
+//    [self.activitIndicatorView stopAnimating];
     CALayer *circle = nil;
     for (int i = 0; i < kNumberOfCircles; ++i) {
         circle = self.circles[i];

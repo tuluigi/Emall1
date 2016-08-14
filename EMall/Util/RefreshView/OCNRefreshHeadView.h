@@ -9,6 +9,6 @@
 #import <MJRefresh/MJRefresh.h>
 
 @interface OCNRefreshHeadView : MJRefreshHeader
-+ (instancetype)headerWithCircleColor:(UIColor *)circleCorlor url:(NSString *)url refreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock;
++ (instancetype)headerWithCircleColor:(UIColor *)circleCorlor title:(NSString *)title refreshingBlock:(MJRefreshComponentRefreshingBlock)refreshingBlock;
 - (void)setBackgroundImageWithUrl:(NSString *)url;
 @end

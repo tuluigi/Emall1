@@ -14,7 +14,7 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
 @implementation OCResponseResult
 +(OCResponseResult *)responseResultWithOCResponseObject:(id)responseObject error:(NSError *)aError{
     OCResponseResult *responeResult=[[OCResponseResult alloc]  init];
-
+    
     if (responseObject != nil && responseObject != [NSNull null]&&nil==aError ) {
         if ([responseObject isKindOfClass:[NSDictionary class]]){
             [OCResponseResult  parseOCResponesDic:responseObject withResponseResut:&responeResult];
@@ -22,29 +22,29 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
             NSError *jsonError;
             NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
             if (dic&&nil==jsonError) {
-               [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
+                [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
             }else{
-                    responeResult.responseCode = OCCodeStateNetworkFailure;
-                    responeResult.responseMessage=OCNetWorkErrorMessage;
-
+                responeResult.responseCode = OCCodeStateNetworkFailure;
+                responeResult.responseMessage=OCNetWorkErrorMessage;
+                
             }
         }else if ([responseObject isKindOfClass:[NSString class]]){
             NSData *aData=[responseObject dataUsingEncoding:4];
             NSError *jsonError;
             NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:aData options:NSJSONReadingMutableLeaves error:&jsonError];
             if (dic&&nil==jsonError) {
-               [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
+                [OCResponseResult  parseOCResponesDic:dic withResponseResut:&responeResult];
             }else{
                 responeResult.responseCode = OCCodeStateNetworkFailure;
-            responeResult.responseMessage=OCNetWorkErrorMessage;
+                responeResult.responseMessage=OCNetWorkErrorMessage;
             }
         }else{
-                responeResult.responseCode = OCCodeStateNetworkFailure;
-                responeResult.responseMessage=OCNetWorkErrorMessage;
-        }
-    }else{
             responeResult.responseCode = OCCodeStateNetworkFailure;
             responeResult.responseMessage=OCNetWorkErrorMessage;
+        }
+    }else{
+        responeResult.responseCode = OCCodeStateNetworkFailure;
+        responeResult.responseMessage=OCNetWorkErrorMessage;
     }
     return responeResult;
 }
@@ -53,7 +53,8 @@ static NSString *OCFailureMessage = @"数据跑丢了，请点击重试";
     responeResult.responseCode    =[[dic objectForKey:@"code"] integerValue];
     responeResult.responseMessage =[dic objectForKey:@"message"];
     responeResult.cursor          =[[dic objectForKey:@"cursor"] integerValue];
-        responeResult.totalPage          =[[dic objectForKey:@"totalPage"] integerValue];
+    responeResult.totalPage          =[[dic objectForKey:@"totalPage"] integerValue];
+    responeResult.totalRow          =[[dic objectForKey:@"totalRow"] integerValue];
     responeResult.responseData    =[dic objectForKey:@"data"];
 }
 @end
