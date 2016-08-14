@@ -16,6 +16,10 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
     EMOrderStateCanceled        ,//已取消
     EMOrderStateUnComment       ,//待评论
 };
+typedef NS_ENUM(NSInteger,EMOrderLogisticsType) {
+    EMOrderLogisticsTypeExpress             =2,//快递
+    EMOrderLogisticsTypeSelfPickUp          =1,//自取
+};
 
 @interface EMOrderModel : OCBaseModel
 @property(nonatomic,copy)NSString *orderID;
@@ -28,6 +32,7 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
 @property(nonatomic,assign)CGFloat totalPrice , goodsPrice;
 @property (nonatomic,copy)NSString *spec;//规格说明
 @property (nonatomic,assign)NSInteger buyCount;//购买数量
+@property (nonatomic,assign)EMOrderLogisticsType logisticsType;//配送方式
 
 @end
 

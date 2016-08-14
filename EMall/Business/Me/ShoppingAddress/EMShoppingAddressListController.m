@@ -12,7 +12,7 @@
 #import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 #import "EMShopAddressModel.h"
 #import "EMMeNetService.h"
-@interface EMShoppingAddressListController ()<EMShopAddressListCellDelegate>
+@interface EMShoppingAddressListController ()<EMShopAddressListCellDelegate,EMShoppingAddressAddControllerDelegate>
 
 @end
 

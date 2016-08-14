@@ -123,6 +123,7 @@
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.tableView reloadData];
+             [weakSelf updatePageLoadMesage];
         }else{
             if (cursor<=1) {
                 [weakSelf.tableView showPageLoadedMessage:@"获取数据失败" delegate:self];
@@ -150,11 +151,22 @@
             [weakSelf.tableView dismissHUDLoading];
             [weakSelf.dataSourceArray removeObjectsInArray:array];
             [weakSelf.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationAutomatic];
+            [weakSelf updatePageLoadMesage];
         }else{
             [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
         }
     }];
     [self addSessionTask:task];
+}
+- (void)updatePageLoadMesage{
+    NSInteger row=self.dataSourceArray.count;
+    if (row==0) {
+        self.bottomView.hidden=YES;
+        [self.tableView showPageLoadedMessage:@"您的购物车是空的,去看看其他商品吧" delegate:nil];
+    }else{
+        self.bottomView.hidden=NO;
+        [self.tableView dismissPageLoadView];
+    }
 }
 - (void)updateShopCart:(NSInteger)cartID buyCount:(NSInteger)buyCount{
     
@@ -202,13 +214,6 @@
 #pragma mark -tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger row= self.dataSourceArray.count;
-    if (row==0) {
-        self.bottomView.hidden=YES;
-        [tableView showPageLoadedMessage:@"您的购物车是空的,去看看其他商品吧" delegate:nil];
-    }else{
-        self.bottomView.hidden=NO;
-        [self.tableView dismissPageLoadView];
-    }
     return row;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
