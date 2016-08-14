@@ -140,7 +140,7 @@ UICollectionViewDelegateFlowLayout>
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     EMCatModel *catModel=[self.collectDataSource objectAtIndex:indexPath.row];
-    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID];
+    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID catName:catModel.catName];
     listController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:listController animated:YES];
     

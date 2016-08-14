@@ -69,10 +69,10 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     _wechatDeitalModel.inputText=self.addressModel.wechatID;
     _wechatDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    _provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeArea];
+//    _provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeArea];
 
-    _provienceDeitalModel.detailText=self.addressModel.fullAreaString;
-    _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
+//    _provienceDeitalModel.detailText=self.addressModel.fullAreaString;
+//    _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
     _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"详细地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeDetailAddress];
     _detailTextViewModel.placeHoleder=@"请输入详细地址";
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     _isDefialutModel.on=self.addressModel.isDefault;
     _isDefialutModel.tableCellStyle=UITableViewCellStyleValue1;
     
-    self.dataSourceArray=[[NSMutableArray alloc] initWithObjects:_nameFieldModel,_telFieldModel,_wechatDeitalModel,_provienceDeitalModel,_detailTextViewModel,_isDefialutModel, nil];
+    self.dataSourceArray=[[NSMutableArray alloc] initWithObjects:_nameFieldModel,_telFieldModel,_wechatDeitalModel,_detailTextViewModel,_isDefialutModel, nil];
     [self.tableView reloadData];
 }
 
@@ -94,9 +94,12 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
         [self.tableView showHUDMessage:@"请输入收货人电话"];
     }else if ([ NSString isNilOrEmptyForString:self.telFieldModel.inputText]){
        [self.tableView showHUDMessage:@"请输入正确电话号码"];
-    }else if ([NSString isNilOrEmptyForString:self.provienceDeitalModel.detailText]){
+    }
+    /*
+    else if ([NSString isNilOrEmptyForString:self.provienceDeitalModel.detailText]){
         [self.tableView showHUDMessage:@"请选择收货地址"];
-    }else if ([NSString isNilOrEmptyForString:self.detailTextViewModel.inputText]){
+    }*/
+    else if ([NSString isNilOrEmptyForString:self.detailTextViewModel.inputText]){
         [self.tableView showHUDMessage:@"请输入详细收货地址"];
     }else{
         WEAKSELF
@@ -182,7 +185,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     CGFloat height=44;
       OCTableCellModel *cellModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     if (cellModel.type==EMShopAddressItemTypeDetailAddress) {
-        height=70;
+        height=100;
     }
     return height;
 }

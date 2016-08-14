@@ -217,20 +217,28 @@ EMHomeHeadReusableViewDelegate>
 }
 #pragma mark - EMHomeCatCell Delegate
 - (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel{
+    
+    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID catName:catModel.catName];
+    listController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:listController animated:YES];
+    
+    /*
     EMCatViewController *catController=[[EMCatViewController alloc]  init];
     catController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:catController animated:YES];
+     */
 }
 /**
  *  分类点击更多
  */
 - (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type{
+    NSString *catName;
     if (type==EMHomeHeadReusableViewTypeGreat) {
-        
+        catName=@"嗨购精品";
     }else if (type==EMHomeHeadReusableViewTypeHot){
-        
+        catName=@"嗨购商品";
     }
-    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:type];
+    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:type catName:catName];
     listController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:listController animated:YES];
 }

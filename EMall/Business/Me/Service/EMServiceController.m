@@ -27,17 +27,18 @@
     [self addSubview:_headImageView];
     UIImage *image=[QRCodeGenerator qrImageForString:@"https://www.pgyer.com/3Z6K" imageSize:OCUISCALE(100)];
     _headImageView.image=image;
+    [_headImageView sd_setImageWithURL:[NSURL URLWithString:@"http://45.118.132.56:8081/images/webchat/QR.jpg"] placeholderImage:EMDefaultImage];
     WEAKSELF
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-20));
         make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(20));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(100), OCUISCALE(100)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(150), OCUISCALE(150)));
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
     }];
 }
 
 + (CGFloat)headViewHeight{
-    return OCUISCALE(100+20+20);
+    return OCUISCALE(150+20+20);
 }
 + (EMServiceFootView *)serviceFootView{
     EMServiceFootView *headView=[[EMServiceFootView alloc]  init];

@@ -10,8 +10,9 @@
 #import "EMGoodsModel.h"
 @implementation EMGoodsNetService
 + (NSURLSessionTask *)getGoodsListWithSearchGoodsID:(NSInteger )goodsID
+                                              catID:(NSInteger)catID
                                          searchName:(NSString *)name
-                                               aesc:(BOOL)asc
+                                               aesc:(BOOL)aesc
                                            sortType:(NSInteger)sortType
                                                 pid:(NSInteger )pid
                                   onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
@@ -24,7 +25,7 @@
         [postDic setObject:name forKey:@"goods.name"];
     }
     NSString *aescString=@"asc";
-    if (asc) {
+    if (aesc) {
         aescString=@"asc";
     }else{
         aescString=@"desc";
@@ -35,6 +36,9 @@
     }
     if (pid) {
         [postDic setObject:@"cursor" forKey:@(pid)];
+    }
+    if (catID) {
+        [postDic setObject:@(catID) forKey:@"goods.cid"];
     }
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {

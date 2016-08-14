@@ -40,6 +40,9 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     // Do any additional setup after loading the view.
     [self onInitData];
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 - (void)onInitData{
     self.fd_prefersNavigationBarHidden=YES;
     
@@ -56,6 +59,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLogoutNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
          [weakSelf.dataSourceArray removeObjectsInRange:NSMakeRange(weakSelf.dataSourceArray.count-2, 2)];
+        [weakSelf.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
         [weakSelf.tableView reloadData];
     }];
     NSArray *groupArray0,*groupArray1,*groupArray2;
@@ -82,7 +86,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     
     
      [self handleUserLoginStateDataSource];
-    [self.headView setUserName:[RI userName] headImageUrl:[RI userName] level:1];
+    [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
     CGSize size=[self.headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     self.headView.frame=CGRectMake(0, 0, size.width, size.height);
     self.tableView.tableHeaderView=self.headView;
@@ -111,6 +115,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
         NSArray * groupArray4=@[quitModel];
         [self.dataSourceArray addObject:groupArray4];
+        [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
     }else{
        
     }

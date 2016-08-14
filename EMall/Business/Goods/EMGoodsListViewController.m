@@ -22,10 +22,15 @@ UICollectionViewDelegateFlowLayout
 @end
 
 @implementation EMGoodsListViewController
-- (instancetype)initWithCatID:(NSInteger )catID{
+- (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName{
     self=[super init];
     if (self) {
         self.catID=catID;
+        if ([NSString isNilOrEmptyForString:catName]) {
+             self.navigationItem.title=@"商品列表";
+        }else{
+            self.navigationItem.title=catName;
+        }
     }
     return self;
 }
@@ -37,7 +42,7 @@ UICollectionViewDelegateFlowLayout
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"商品列表";
+   
     // Do any additional setup after loading the view.
     [self.view addSubview:self.myCollectionView];
     self.automaticallyAdjustsScrollViewInsets=YES;
@@ -60,7 +65,7 @@ UICollectionViewDelegateFlowLayout
     if (self.dataSourceArray.count==0) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
-    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:self.catID searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.myCollectionView dismissPageLoadView];
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor>=responseResult.totalPage) {
@@ -75,6 +80,9 @@ UICollectionViewDelegateFlowLayout
 //            }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.myCollectionView reloadData];
+            if (weakSelf.dataSourceArray.count==0) {
+                 [weakSelf.myCollectionView showPageLoadedMessage:@"暂无商品" delegate:nil];
+            }
         }else{
             if (weakSelf.dataSourceArray.count==0 ) {
                 [weakSelf.myCollectionView showPageLoadedMessage:@"获取数据失败，点击重试" delegate:self];

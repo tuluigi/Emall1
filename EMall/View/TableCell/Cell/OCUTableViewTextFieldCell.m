@@ -40,7 +40,7 @@
     if (nil==_textField) {
         _textField=[[UITextField alloc] init];
         _textField.font=[UIFont oc_systemFontOfSize:14];
-        _textField.textAlignment=NSTextAlignmentRight;
+        _textField.textAlignment=NSTextAlignmentLeft;
         _textField.delegate=self;
     }
     return _textField;

@@ -9,5 +9,5 @@
 #import "OCBaseViewController.h"
 
 @interface EMGoodsListViewController : OCBaseViewController
-- (instancetype)initWithCatID:(NSInteger )catID;
+- (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName;
 @end

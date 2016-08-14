@@ -22,6 +22,7 @@
  *  @return
  */
 + (NSURLSessionTask *)getGoodsListWithSearchGoodsID:(NSInteger )goodsID
+                                              catID:(NSInteger)catID
                                          searchName:(NSString *)name
                                                aesc:(BOOL)aesc
                                            sortType:(NSInteger)sortType

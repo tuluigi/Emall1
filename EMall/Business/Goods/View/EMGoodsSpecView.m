@@ -334,6 +334,7 @@
     [_closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.goodsImageView.mas_top);
         make.right.mas_equalTo(weakSelf.mas_right).offset(-kEMOffX);
+        make.width.mas_lessThanOrEqualTo(40);
     }];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.goodsImageView.mas_right).offset(5);
@@ -388,7 +389,7 @@
 
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
     _detailModel=detailModel;
-    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
+//    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     _titleLabel.text=stringNotNil(_detailModel.goodsModel.goodsName);
     _priceLabel.text=[NSString stringWithFormat:@"￥ %.1f",_detailModel.defaultPrice];

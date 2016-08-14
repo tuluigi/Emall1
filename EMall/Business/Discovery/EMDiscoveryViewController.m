@@ -52,7 +52,7 @@
     if (self.dataSourceArray.count==0) {
         [weakSelf.myCollectionView showPageLoadingView];
     }
-   NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
+   NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0  searchName:nil aesc:NO sortType:0 pid:cursor onCompletionBlock:^(OCResponseResult *responseResult) {
        [weakSelf.myCollectionView dismissPageLoadView];
        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
        if (responseResult.cursor>=responseResult.totalPage) {

@@ -298,8 +298,12 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (EMInfiniteViewCell *)infiniteView:(EMInfiniteView *)infiniteView cellForRowAtIndex:(NSInteger)index{
     NSString *idenfier=NSStringFromClass([EMInfiniteViewCell class]);
     EMInfiniteViewCell *cell=(EMInfiniteViewCell *)[infiniteView dequeueReusableCellWithReuseIdentifier:idenfier atIndex:index];
-    NSString  *imageUrl=[self.detailModel.goodsModel.goodsImageArray objectAtIndex:index];
-    cell.imageUrl=imageUrl;
+    if (index<self.detailModel.goodsModel.goodsImageArray.count) {
+        NSString  *imageUrl=[self.detailModel.goodsModel.goodsImageArray objectAtIndex:index];
+        cell.imageUrl=imageUrl;
+    }else{
+        cell.imageUrl=nil;
+    }
     return cell;
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{

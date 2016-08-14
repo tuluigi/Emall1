@@ -84,6 +84,7 @@ UICollectionViewDelegateFlowLayout>
     
     _orderTimeLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textColor:[UIColor colorWithHexString:@"#949090"] textAlignment:NSTextAlignmentLeft];
     _orderTimeLabel.adjustsFontSizeToFitWidth=YES;
+    _orderTimeLabel.textAlignment=NSTextAlignmentRight;
     [_bgView addSubview:_orderTimeLabel];
     
     [_bgView addSubview:self.myCollectionView];
@@ -185,7 +186,7 @@ UICollectionViewDelegateFlowLayout>
     for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
         buyCount+=goodsModel.buyCount;
     }
-    self.priceLabel.text=[NSString stringWithFormat:@"共%ld件商品，合计%.2f元",buyCount,_orderModel.payPrice];
+    self.priceLabel.text=[NSString stringWithFormat:@"共%ld件商品，合计%.2f元",buyCount,_orderModel.totalPrice];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=self.orderModel.goodsArray.count;
