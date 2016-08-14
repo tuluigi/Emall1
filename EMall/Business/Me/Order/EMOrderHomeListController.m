@@ -88,28 +88,13 @@
         _searchBar.delegate=self;
         _searchBar.returnKeyType=UIReturnKeySearch;
         _searchBar.placeholder=@"输入关键字搜索历史订单";
-        UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
+       
         //设置背景图片
-        [_searchBar setBackgroundImage:searchBarBg];
+        [_searchBar setBackgroundImage:[[UIImage imageNamed:@"searchBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 10, 5, 10)]];
         //设置背景色
         [_searchBar setBackgroundColor:[UIColor clearColor]];
-        //设置文本框背景
-        [_searchBar setSearchFieldBackgroundImage:searchBarBg forState:UIControlStateNormal];
     }
     return _searchBar;
 }
-- (UIImage*) GetImageWithColor:(UIColor*)color andHeight:(CGFloat)height
-{
-    CGRect r= CGRectMake(0.0f, 0.0f, 1.0f, height);
-    UIGraphicsBeginImageContext(r.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, r);
-    
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return img;
-}
+
 @end

@@ -14,40 +14,44 @@
 @interface EMDiscoveryViewController ()<
             UICollectionViewDelegate,
             UICollectionViewDataSource,
-            UICollectionViewDelegateFlowLayout
+            UICollectionViewDelegateFlowLayout,UISearchBarDelegate
                 >
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)__block NSMutableArray *dataSourceArray;
+@property (nonatomic,strong)UISearchBar *searchBar;
 @end
 
 @implementation EMDiscoveryViewController
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.dataSourceArray.count==0) {
-        [self getGoodsListWithCursor:self.cursor];
+        [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"发现";
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.searchBar];
     [self.view addSubview:self.myCollectionView];
     self.automaticallyAdjustsScrollViewInsets=YES;
-    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
-    [self getGoodsListWithCursor:self.cursor];
     WEAKSELF
+    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.searchBar.mas_bottom);
+        make.left.right.bottom.mas_equalTo(weakSelf.view);
+    }];
+    [self getGoodsListWithCursor:self.cursor goodsName:nil];
+    
     [weakSelf.myCollectionView addOCPullDownResreshHandler:^{
         weakSelf.cursor=1;
-        [weakSelf getGoodsListWithCursor:weakSelf.cursor];
+        [weakSelf getGoodsListWithCursor:weakSelf.cursor goodsName:self.searchBar.text];
     }];
     [weakSelf.myCollectionView addOCPullInfiniteScrollingHandler:^{
         weakSelf.cursor++;
-        [weakSelf getGoodsListWithCursor:weakSelf.cursor];
+        [weakSelf getGoodsListWithCursor:weakSelf.cursor goodsName:self.searchBar.text];
     }];
 }
-- (void)getGoodsListWithCursor:(NSInteger )cursor{
+- (void)getGoodsListWithCursor:(NSInteger )cursor goodsName:(NSString *)goodsName{
     WEAKSELF
     if (self.dataSourceArray.count==0) {
         [weakSelf.myCollectionView showPageLoadingView];
@@ -79,7 +83,7 @@
     [self addSessionTask:task];
 }
 -(void)ocPageLoadedViewOnTouced{
-    [self getGoodsListWithCursor:self.cursor];
+    [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -105,6 +109,18 @@
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+
+#pragma mark -searchBar delegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar endEditing:YES];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar endEditing:YES];
+}
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
+    [searchBar endEditing:YES];
+    [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
+}
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
@@ -128,6 +144,22 @@
         _dataSourceArray=[[NSMutableArray alloc]  init];
     }
     return _dataSourceArray;
+}
+- (UISearchBar *)searchBar{
+    if (nil==_searchBar) {
+        _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(OCUISCALE(13), OCUISCALE(15)+CGRectGetHeight(self.navigationController.navigationBar.bounds)+20, OCWidth-OCUISCALE(13*2), OCUISCALE(35))];
+        _searchBar.showsCancelButton=NO;
+        _searchBar.backgroundColor=[UIColor whiteColor];
+        _searchBar.delegate=self;
+        _searchBar.returnKeyType=UIReturnKeySearch;
+        _searchBar.placeholder=@"输入关键词搜索你的小心愿";
+        
+        //设置背景图片
+        [_searchBar setBackgroundImage:[[UIImage imageNamed:@"searchBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 20, 10, 20)]];
+        //设置背景色
+        [_searchBar setBackgroundColor:[UIColor clearColor]];
+    }
+    return _searchBar;
 }
 /*
  #pragma mark - Navigation
