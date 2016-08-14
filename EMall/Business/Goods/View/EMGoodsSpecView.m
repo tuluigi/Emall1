@@ -67,27 +67,27 @@
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(5, 5, 5, 5));
     }];
-
-/*
-    _titleButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [_titleButton setTitleColor:textColor forState:UIControlStateNormal];
-    [_titleButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    _titleButton.layer.cornerRadius=3;
-    _titleButton.layer.masksToBounds=YES;
-    _titleButton.layer.borderColor=textColor.CGColor;
-    _titleButton.layer.borderWidth=0.5;
-    _titleButton.titleLabel.font=[UIFont oc_systemFontOfSize:13];
-    [_titleButton setTitle:@"浅白色" forState:UIControlStateNormal];
-    [self.contentView addSubview:self.titleButton];
-    [self.titleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(5, 5, 5, 5));
-    }];
- */
+    
+    /*
+     _titleButton=[UIButton buttonWithType:UIButtonTypeCustom];
+     [_titleButton setTitleColor:textColor forState:UIControlStateNormal];
+     [_titleButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+     _titleButton.layer.cornerRadius=3;
+     _titleButton.layer.masksToBounds=YES;
+     _titleButton.layer.borderColor=textColor.CGColor;
+     _titleButton.layer.borderWidth=0.5;
+     _titleButton.titleLabel.font=[UIFont oc_systemFontOfSize:13];
+     [_titleButton setTitle:@"浅白色" forState:UIControlStateNormal];
+     [self.contentView addSubview:self.titleButton];
+     [self.titleButton mas_makeConstraints:^(MASConstraintMaker *make) {
+     make.edges.mas_equalTo(UIEdgeInsetsMake(5, 5, 5, 5));
+     }];
+     */
 }
 - (void)setTitleString:(NSString *)titleString{
     _titleString=titleString;
     self.titleLabel.text=_titleString;
-//    [self.titleButton setTitle:_titleString forState:UIControlStateNormal];
+    //    [self.titleButton setTitle:_titleString forState:UIControlStateNormal];
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
@@ -98,10 +98,19 @@
     return attributes;
 }
 @end
-@interface EMGoodsSpecCountCell : UICollectionViewCell
+
+
+
+@protocol EMGoodsSpecCountCellDelegage <NSObject>
+
+- (void)goodsSpecCountCellDidBuyCountValueChanged:(NSInteger)buyCount;
+
+@end
+@interface EMGoodsSpecCountCell : UICollectionViewCell<UITextFieldDelegate>
 @property (nonatomic,strong)UITextField *countTextField;
 @property (nonatomic,strong)UIButton *plusButton, *minusButton;//选择按钮
-
+@property (nonatomic,assign)NSInteger buyCount;
+@property (nonatomic,weak)id <EMGoodsSpecCountCellDelegage>delegate;
 @end
 
 @implementation EMGoodsSpecCountCell
@@ -119,7 +128,6 @@
 }
 - (void)onInitContentView{
     
-    UIFont *font=[UIFont oc_systemFontOfSize:13];
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
     _countTextField=[[UITextField alloc]  init];
     _countTextField.delegate=self;
@@ -132,7 +140,7 @@
     [_countTextField addHiddenKeyBoardInputAccessView];
     [self.contentView addSubview:_countTextField];
     _minusButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    _minusButton.frame=CGRectMake(0, 0, OCUISCALE(22), OCUISCALE(25));
+    _minusButton.frame=CGRectMake(0, 0, OCUISCALE(30), OCUISCALE(30));
     [_minusButton setTitle:@"-" forState:UIControlStateNormal];
     [_minusButton setTitleColor:color forState:UIControlStateNormal];
     [_minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -142,7 +150,7 @@
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    plusButton.frame=CGRectMake(0, 0, OCUISCALE(22), OCUISCALE(25));
+    plusButton.frame=CGRectMake(0, 0, OCUISCALE(30), OCUISCALE(30));
     [plusButton setTitle:@"+" forState:UIControlStateNormal];
     [plusButton setTitleColor:color forState:UIControlStateNormal];
     plusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
@@ -158,7 +166,7 @@
         ;
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(80), OCUISCALE(30)));
     }];
-
+    
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
@@ -167,6 +175,10 @@
     attributes.size=size;
     return attributes;
 }
+- (void)setBuyCount:(NSInteger)buyCount{
+    _buyCount=buyCount;
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
+}
 - (void)updateBuyCount:(NSInteger)buyCount{
     self.countTextField.text=[NSString stringWithFormat:@"%ld",buyCount];
     if (buyCount<=1) {
@@ -174,30 +186,30 @@
     }else{
         self.minusButton.enabled=YES;
     }
-//    if (_delegate &&[_delegate respondsToSelector:@selector(cartListCellDidBuyCountChanged:)]) {
-//        [_delegate cartListCellDidBuyCountChanged:self.shopCartModel];
-//    }
+        if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
+            [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
+        }
 }
 - (void)showOverMaxBuyCountMessage{
     [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
 }
-//- (void)didPlusButtonPressed:(UIButton *)sender{
-//    if (self.shopCartModel.buyCount>=EMGoodsMaxBuyCount) {
-//        [self showOverMaxBuyCountMessage];
-//        return ;
-//    }
-//    self.shopCartModel.buyCount++;
-//    [self updateBuyCount:_shopCartModel.buyCount];
-//}
-//- (void)didMinuseButtonPressed:(UIButton *)sender{
-//    self.shopCartModel.buyCount--;
-//    if (self.shopCartModel.buyCount<=1) {
-//        sender.enabled=NO;
-//    }else{
-//        sender.enabled=YES;
-//    }
-//    [self updateBuyCount:_shopCartModel.buyCount];
-//}
+- (void)didPlusButtonPressed:(UIButton *)sender{
+    if (self.buyCount>=EMGoodsMaxBuyCount) {
+        [self showOverMaxBuyCountMessage];
+        return ;
+    }
+    self.buyCount++;
+    [self updateBuyCount:self.buyCount];
+}
+- (void)didMinuseButtonPressed:(UIButton *)sender{
+    self.buyCount--;
+    if (self.buyCount<=1) {
+        sender.enabled=NO;
+    }else{
+        sender.enabled=YES;
+    }
+    [self updateBuyCount:self.buyCount];
+}
 
 #pragma mark -textFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -215,10 +227,9 @@
         self.minusButton.enabled=YES;
     }
     if (enableChange) {
-//        self.shopCartModel.buyCount=value.integerValue;
-//        if (_delegate &&[_delegate respondsToSelector:@selector(cartListCellDidBuyCountChanged:)]) {
-//            [_delegate cartListCellDidBuyCountChanged:self.shopCartModel];
-//        }
+        if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
+            [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
+        }
     }else{
         [self showOverMaxBuyCountMessage];
     }
@@ -227,8 +238,7 @@
 
 @end
 
-@interface EMGoodsSpecView ()
-<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface EMGoodsSpecView ()<EMGoodsSpecCountCellDelegage,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic,strong)UIImageView *goodsImageView;
 @property (nonatomic,strong)UILabel *titleLabel,*priceLabel;
 @property (nonatomic,strong)UIButton *submitButton,*closeButton;
@@ -237,6 +247,7 @@
 @property (nonatomic,strong)EMGoodsDetailModel *detailModel;
 @property (nonatomic,strong)NSMutableArray *keysArray;
 @property (nonatomic,strong)NSMutableArray *dataSource;
+@property (nonatomic,assign)NSInteger buyCount;
 @end
 
 @implementation EMGoodsSpecView
@@ -273,7 +284,7 @@
 
 - (void)onInitContentView{
     self.backgroundColor=[UIColor whiteColor];
-    
+    self.buyCount=1;
     UIColor *textColor=[UIColor colorWithHexString:@"#272727"];
     
     _goodsImageView=[UIImageView new];
@@ -307,9 +318,10 @@
     [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _submitButton.titleLabel.font=[UIFont oc_boldSystemFontOfSize:17];
     [_submitButton addTarget:self action:@selector(didActionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    _submitButton.enabled=NO;
+    
+//    _submitButton.enabled=NO;
     [self addSubview:_submitButton];
-
+    
     WEAKSELF
     [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(weakSelf).offset(kEMOffX);
@@ -328,13 +340,13 @@
         make.left.mas_equalTo(weakSelf.titleLabel);
         make.bottom.mas_equalTo(weakSelf.goodsImageView.mas_bottom);
     }];
-   
+    
     [lineView0 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf);
         make.top.mas_equalTo(weakSelf.goodsImageView.mas_bottom).offset(kEMOffX);
         make.height.mas_equalTo(0.5);
     }];
- 
+    
     
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf);
@@ -348,31 +360,40 @@
         make.bottom.mas_equalTo(weakSelf.submitButton.mas_top);
     }];
     
-    [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg"] placeholderImage:EMDefaultImage];
-    _titleLabel.text=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
-    _priceLabel.text=@"￥120";
     [self.myCollectionView reloadData];
 }
 - (void)didActionButtonPressed:(UIButton *)sender{
     WEAKSELF
     if (sender==self.submitButton) {
+        EMGoodsInfoModel *infoModel=[weakSelf.detailModel.goodsInfoArray firstObject];
+        NSInteger count=self.buyCount;
+        if (nil==infoModel) {
+            count=0;
+            [self showHUDMessage:@"商品数据错误"];
+            return;
+        }
         if (self.dismissBlock) {
-            EMGoodsInfoModel *infoModel=[weakSelf.detailModel.goodsInfoArray firstObject];
-            self.dismissBlock(weakSelf, YES,weakSelf.detailModel.goodsModel.goodsID,infoModel.infoID ,1);
+            self.dismissBlock(weakSelf, YES,weakSelf.detailModel.goodsModel.goodsID,infoModel.infoID ,count);
         }
     }else if (sender==self.closeButton){
-        
         if (self.dismissBlock) {
             self.dismissBlock(weakSelf, NO,0,0,0);
         }
     }
-    
 }
+
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
     _detailModel=detailModel;
+    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
+    [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
+    _titleLabel.text=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
+    _priceLabel.text=@"￥120";
+    
+    [self.keysArray removeLastObject];
     [self.keysArray addObjectsFromArray:[_detailModel.specDic allKeys]];
     [self.keysArray addObject:@"数量"];
-    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
+    
+//    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.keysArray.count;
@@ -390,7 +411,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *aCell;
-    if (indexPath.row<self.keysArray.count-1) {
+    if (indexPath.section<self.keysArray.count-1) {
         NSString *key=[self.keysArray objectAtIndex:indexPath.section];
         NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
         EMGoodsSpecCell *cell=(EMGoodsSpecCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class]) forIndexPath:indexPath];
@@ -398,22 +419,20 @@
         cell.titleString=specModel.name;
         aCell=cell;
     }else{
-         UICollectionViewCell *cell=(UICollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
+        EMGoodsSpecCountCell *cell=(EMGoodsSpecCountCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCountCell class]) forIndexPath:indexPath];
+        cell.delegate=self;
+        cell.buyCount=self.buyCount;
         aCell=cell;
     }
-   
+    
     return aCell;
 }
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row<self.keysArray.count-1) {
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     CGSize size = flowLayout.itemSize;
     return size;
-    }else{
-        return CGSizeMake(OCWidth, 40);
-    }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
@@ -423,7 +442,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *reusableView;
     if (kind==UICollectionElementKindSectionHeader) {
-       reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class]) forIndexPath:indexPath];
+        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class]) forIndexPath:indexPath];
         EMGoodsSepcHeadView *specHeadView=(EMGoodsSepcHeadView *)reusableView;
         NSString *title=[NSString stringWithFormat:@"请选择%@:", [self.keysArray objectAtIndex:indexPath.section]];
         specHeadView.titleLabel.text=title;
@@ -441,7 +460,11 @@
     return size;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
+    
+}
+#pragma mark - CellCount Delegate
+- (void)goodsSpecCountCellDidBuyCountValueChanged:(NSInteger)buyCount{
+    self.buyCount=buyCount;
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
@@ -463,9 +486,9 @@
         
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMGoodsSpecCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class])];
-                [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
+        [_myCollectionView registerClass:[EMGoodsSpecCountCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCountCell class])];
         [_myCollectionView registerClass:[EMGoodsSepcHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMGoodsSepcHeadView class])];
-         [_myCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
+        [_myCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
     }
     return _myCollectionView;
 }
