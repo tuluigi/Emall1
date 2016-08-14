@@ -112,7 +112,7 @@
                         onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 /**
- *  添加或者修改收获地址
+ *  添加或者修改收货地址
  *
  *  @param userID
  *  @param addressID
@@ -138,7 +138,7 @@
                                                    state:(NSInteger)state
                                        onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**
- *  获取收获地址列表
+ *  获取收货地址列表
  *
  *  @param userID
  *  @param compleitonBlock
@@ -148,7 +148,7 @@
 + (NSURLSessionTask *)getShoppingAddressListWithUrseID:(NSInteger)userID
                                      onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 /**
- *  删除收获地址
+ *  删除收货地址
  *
  *  @param userID
  *  @param addressID

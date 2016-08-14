@@ -91,9 +91,12 @@
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    NSString *textString=_titleString;
-    CGSize aSize=[textString boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
-    CGSize size=CGSizeMake(aSize.width+20,35 );
+    CGSize size=CGSizeMake(50,35 );
+//    if (![NSString isNilOrEmptyForString:_titleString]) {
+//        NSString *textString=_titleString;
+//        CGSize aSize=[textString boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
+//         size=CGSizeMake(aSize.width+20,35 );
+//    }
     attributes.size=size;
     return attributes;
 }
@@ -387,8 +390,8 @@
     _detailModel=detailModel;
     _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
-    _titleLabel.text=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
-    _priceLabel.text=@"￥120";
+    _titleLabel.text=stringNotNil(_detailModel.goodsModel.goodsName);
+    _priceLabel.text=[NSString stringWithFormat:@"￥ %.1f",_detailModel.defaultPrice];
     
     [self.keysArray removeLastObject];
     [self.keysArray addObjectsFromArray:[_detailModel.specDic allKeys]];

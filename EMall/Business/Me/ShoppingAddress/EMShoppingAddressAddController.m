@@ -52,9 +52,9 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
    
     [super viewDidLoad];
     if (nil==self.addressModel) {
-        self.navigationItem.title=@"添加收获地址";
+        self.navigationItem.title=@"添加收货地址";
     }else{
-        self.navigationItem.title=@"修改收获地址";
+        self.navigationItem.title=@"修改收货地址";
     }
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didSaveButtonPressed)];
     _nameFieldModel   =[[OCTableCellTextFiledModel alloc] initWithTitle:@"收货人" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeUserName];
@@ -95,9 +95,9 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     }else if ([ NSString isNilOrEmptyForString:self.telFieldModel.inputText]){
        [self.tableView showHUDMessage:@"请输入正确电话号码"];
     }else if ([NSString isNilOrEmptyForString:self.provienceDeitalModel.detailText]){
-        [self.tableView showHUDMessage:@"请选择收获地址"];
+        [self.tableView showHUDMessage:@"请选择收货地址"];
     }else if ([NSString isNilOrEmptyForString:self.detailTextViewModel.inputText]){
-        [self.tableView showHUDMessage:@"请输入详细收获地址"];
+        [self.tableView showHUDMessage:@"请输入详细收货地址"];
     }else{
         WEAKSELF
         [self.tableView showHUDLoading];

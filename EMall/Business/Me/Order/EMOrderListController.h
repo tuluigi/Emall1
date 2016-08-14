@@ -11,4 +11,5 @@
 #import "EMOrderModel.h"
 @interface EMOrderListController : OCBaseTableViewController <ZJScrollPageViewChildVcDelegate>
 @property (nonatomic,assign)EMOrderState orderState;
+@property (nonatomic,copy)NSString *goodsName;//搜索用
 @end

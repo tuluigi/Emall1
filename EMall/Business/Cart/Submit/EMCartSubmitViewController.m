@@ -87,7 +87,7 @@
     self.addressModel.userName=@"收货人";
     self.addressModel.userTel=@"收货人电话";
     self.addressModel.wechatID=@"";
-    self.addressModel.detailAddresss=@"请选择收获地址";
+    self.addressModel.detailAddresss=@"请选择收货地址";
     
     [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
     [self.tableView reloadData];
@@ -249,7 +249,7 @@
     }
     NSString *title=@"";
     if (section==0) {
-        title=@"收获地址";
+        title=@"收货地址";
     }else if (section==1){
         title=@"配送方式";
     }else if (section==2){

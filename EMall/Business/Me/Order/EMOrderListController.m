@@ -9,6 +9,7 @@
 #import "EMOrderListController.h"
 #import "EMOrderListCell.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "EMOrderNetService.h"
 @interface EMOrderListController ()<EMOrderListCellDelegate,UIGestureRecognizerDelegate>
 
 @end
@@ -18,19 +19,50 @@
     [super viewDidLoad];
     self.tableView.separatorStyle=UITableViewCellSelectionStyleNone;
     [self.tableView registerClass:[EMOrderListCell class] forCellReuseIdentifier:NSStringFromClass([EMOrderListCell class])];
-    
-    for (NSInteger i=0; i<10; i++) {
-        EMOrderModel *orderModel=[[EMOrderModel alloc]  init];
-        orderModel.goodsName=@"太平鸟女装2016秋装新品圆领镂空针织衫A4DC63201";
-        orderModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3037/144/577361485/30577/37b6c893/57a7e726Neca76d4a.jpg";
-        orderModel.goodsPrice=109;
-        orderModel.buyCount=i+1;
-        orderModel.spec=@"白色 XL";
-        [self.dataSourceArray addObject:orderModel];
-    }
-    [self.tableView reloadData];
-}
 
+    WEAKSELF
+    [self.tableView addOCPullDownResreshHandler:^{
+        weakSelf.cursor=1;
+        [weakSelf getOrderListWithOrderState:weakSelf.orderState];
+    }];
+    [self.tableView addOCPullInfiniteScrollingHandler:^{
+        weakSelf.cursor++;
+        [weakSelf getOrderListWithOrderState:weakSelf.orderState];
+    }];
+    [self.tableView startPullDownRefresh];
+}
+- (void)setOrderState:(EMOrderState)orderState{
+    _orderState=orderState;
+}
+- (void)getOrderListWithOrderState:(NSInteger)orderState{
+    WEAKSELF
+//    [self.tableView showPageLoadingView];
+    NSURLSessionTask *task=[EMOrderNetService getOrderListWithUserID:[RI userID] orderID:0 orderState:self.orderState goodsName:self.goodsName cursor:self.cursor pageSize:10 onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
+        weakSelf.cursor=responseResult.cursor;
+        if (responseResult.cursor>=responseResult.totalPage) {
+            [weakSelf.tableView enableInfiniteScrolling:NO];
+        }
+        [weakSelf.tableView stopRefreshAndInfiniteScrolling];
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            if (weakSelf.cursor<=1) {
+                [weakSelf.dataSourceArray removeAllObjects];
+            }
+            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+            [weakSelf.tableView reloadData];
+            if (weakSelf.dataSourceArray.count==0) {
+                [weakSelf.tableView showPageLoadedMessage:@"暂无订单" delegate:nil];
+            }
+        }else{
+            if (weakSelf.dataSourceArray.count==0) {
+                [weakSelf.tableView showPageLoadedMessage:@"获取数据失败" delegate:self];
+            }else{
+                [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
+            }
+        }
+    }];
+    [self addSessionTask:task];
+}
 #pragma mark -tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSourceArray.count;

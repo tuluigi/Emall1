@@ -21,7 +21,7 @@
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
-    EMUserTableCellModelTypeShoppingAddress     ,//收获地址
+    EMUserTableCellModelTypeShoppingAddress     ,//收货地址
     EMUserTableCellModelTypeServices            ,//联系客服
     EMUserTableCellModelTypeEditPwd           ,//修改买吗
     EMUserTableCellModelTypeLogout              ,//退出登录

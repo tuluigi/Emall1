@@ -58,7 +58,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     self.fd_prefersNavigationBarHidden=YES;
     [self.view addSubview:self.backButton];
     [self.view bringSubviewToFront:self.backButton];
-   
+    
     WEAKSELF
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32));
@@ -91,15 +91,16 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if (_detailModel) {
         [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
     }
-    NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
-                          @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
-                          @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
-                          @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
-                          @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
-                          @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
-    [_detailModel.goodsModel.goodsImageArray addObjectsFromArray:imageArray];
-
-     self.tableView.tableHeaderView=self.infiniteView;
+    /*
+     NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
+     @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
+     @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
+     @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
+     @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
+     @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
+     [_detailModel.goodsModel.goodsImageArray addObjectsFromArray:imageArray];
+     */
+    self.tableView.tableHeaderView=self.infiniteView;
     [self.tableView reloadData];
 }
 - (void)getGoodsDetailWithGoodsID:(NSInteger)goodsID{
@@ -131,24 +132,31 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     [self getGoodsDetailWithGoodsID:self.goodsID];
 }
 - (void)addShopCartWithGoodsID:(NSInteger)goodsID infoID:(NSInteger)specID buyCount:(NSInteger)buyCount{
-    
     WEAKSELF
-    [self.view showHUDLoading];
-    NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:specID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
-//        [weakSelf.view dismissHUDLoading];
-        if (responseResult.responseCode==OCCodeStateSuccess) {
-            [weakSelf.view showHUDMessage:@"添加到购物车成功"];
-        }else{
-            [weakSelf.view showHUDMessage:@"添加失败"];
-        }
-    }];
-    [self addSessionTask:task];
+    if ([RI isLogined]) {
+        [self.view showHUDLoading];
+        NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:specID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
+            //        [weakSelf.view dismissHUDLoading];
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [weakSelf.view showHUDMessage:@"添加到购物车成功"];
+            }else{
+                [weakSelf.view showHUDMessage:@"添加失败"];
+            }
+        }];
+        [self addSessionTask:task];
+    }else{
+        [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+            if (isSucceed) {
+                [weakSelf addShopCartWithGoodsID:goodsID infoID:specID buyCount:buyCount];
+            }
+        }];
+    }
 }
 
 -(void)handleAppIntoForground{
-   self.view.center = CGPointMake(self.view.superview.bounds.size.width/2,
-                              self.view.superview.bounds.size.height/2);
-//    self.view.transform=self.view.transform;;
+    self.view.center = CGPointMake(self.view.superview.bounds.size.width/2,
+                                   self.view.superview.bounds.size.height/2);
+    //    self.view.transform=self.view.transform;;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -259,8 +267,8 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             }];
         }];
         
-      
-
+        
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,0.85,0.85);
             [[UIApplication sharedApplication].keyWindow addSubview:maskView];
@@ -351,7 +359,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 -(EMInfiniteView *)infiniteView{
     if (nil==_infiniteView) {
         _infiniteView=[[EMInfiniteView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(333))];
-         [_infiniteView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
+        [_infiniteView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
         _infiniteView.delegate=self;
     }
     return _infiniteView;

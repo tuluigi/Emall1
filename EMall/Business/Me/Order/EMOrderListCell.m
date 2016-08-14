@@ -8,12 +8,52 @@
 
 #import "EMOrderListCell.h"
 #import "EMOrderModel.h"
-@interface EMOrderListCell ()
-@property (nonatomic,strong)UIView *bgView;
-@property (nonatomic,strong)UIImageView *goodsImageView,*checkImageView;
 
-@property (nonatomic,strong)UILabel *goodsNameLabel,*countLabel,*priceLabel;
+@interface EMOrderListGoodsItemCell :UICollectionViewCell
+@property (nonatomic,strong)UIImageView *imageView;
+@property (nonatomic,copy)NSString *imageUrl;
+@end
+@implementation EMOrderListGoodsItemCell
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
+    if (self) {
+        [self onIntiContentView];
+    }
+    return self;
+}
+- (void)onIntiContentView{
+    _imageView=[UIImageView new];
+    [self.contentView addSubview:_imageView];
+    CGFloat padding=5;
+    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(padding, padding, padding, padding));
+    }];
+}
+- (void)setImageUrl:(NSString *)imageUrl{
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:EMDefaultImage ];
+}
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
+    UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    
+    attributes.size=[EMOrderListGoodsItemCell orderGoodsListItemCellSize];
+    return attributes;
+}
++ (CGSize)orderGoodsListItemCellSize{
+    return CGSizeMake(70, 70);
+}
+@end
+
+
+@interface EMOrderListCell ()<UICollectionViewDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout>
+@property (nonatomic,strong)UIView *bgView;
+@property (nonatomic,strong)UIImageView *checkImageView;
+//goodsNameLabel,*countLabel,*goodsImageView,
+@property (nonatomic,strong)UILabel *priceLabel,*orderNumLabel,*orderTimeLabel;
 @property (nonatomic,strong)UIButton *reBuyButton,*detailButton;
+@property (nonatomic,strong)UICollectionView *myCollectionView;
 
 @end
 
@@ -33,22 +73,27 @@
     _bgView.backgroundColor=[UIColor whiteColor];
     [self.contentView addSubview:_bgView];
     WEAKSELF
-    _goodsImageView=[[UIImageView alloc] init];
-    _goodsImageView.contentMode=UIViewContentModeScaleAspectFill;
-    _goodsImageView.clipsToBounds=YES;
-    [_bgView addSubview:_goodsImageView];
     UIFont *font=[UIFont oc_systemFontOfSize:13];
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
-    _goodsNameLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
-    _goodsNameLabel.numberOfLines=2;
-    [_bgView addSubview:_goodsNameLabel];
+    
+    
+
+    _orderNumLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _orderNumLabel.adjustsFontSizeToFitWidth=YES;
+    [_bgView addSubview:_orderNumLabel];
+    
+    _orderTimeLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textColor:[UIColor colorWithHexString:@"#949090"] textAlignment:NSTextAlignmentLeft];
+    _orderTimeLabel.adjustsFontSizeToFitWidth=YES;
+    [_bgView addSubview:_orderTimeLabel];
+    
+    [_bgView addSubview:self.myCollectionView];
+    
     
     _checkImageView=[UIImageView new];
     _checkImageView.image=[UIImage imageNamed:@"arror_right"];
     [_bgView addSubview:_checkImageView];
     
-    _countLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:12] textColor:[UIColor colorWithHexString:@"#949090"] textAlignment:NSTextAlignmentLeft];
-    [_bgView addSubview:_countLabel];
+   
     
     UIView *lineView0=[UIView new];
     lineView0.backgroundColor=RGB(225, 225, 225);
@@ -81,32 +126,36 @@
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(5), 0));
     }];
-    [_goodsImageView  mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.bgView.mas_top).offset(OCUISCALE(10));
-        make.left.mas_equalTo(weakSelf.bgView.mas_left).offset(OCUISCALE(13));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(100), OCUISCALE(70)));
+
+    [_orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.bgView.mas_top).offset(5);
+        make.left.mas_equalTo(weakSelf.bgView.mas_left).offset(kEMOffX);
+        make.right.mas_equalTo(weakSelf.bgView.mas_centerX);
     }];
-    [_goodsNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.goodsImageView);
-        make.left.mas_equalTo(weakSelf.goodsImageView.mas_right).offset(OCUISCALE(6));
-        make.width.mas_equalTo(OCUISCALE(220));
+    [_orderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.orderNumLabel.mas_right);
+        make.top.mas_equalTo(weakSelf.orderNumLabel.mas_top);
+        make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(-kEMOffX);
+    }];
+    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.orderNumLabel.mas_left);
+        make.top.mas_equalTo(weakSelf.orderNumLabel.mas_bottom).offset(10);
+        make.right.mas_equalTo(weakSelf.checkImageView.mas_left).offset(-10);
+        make.height.mas_equalTo([EMOrderListGoodsItemCell orderGoodsListItemCellSize].height);
     }];
     [_checkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(OCUISCALE(-13));
-        make.centerY.mas_equalTo(weakSelf.goodsImageView.mas_centerY);
+        make.centerY.mas_equalTo(weakSelf.myCollectionView.mas_centerY);
     }];
-    [_countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.goodsNameLabel);
-        make.top.mas_equalTo(weakSelf.goodsNameLabel.mas_bottom).offset(OCUISCALE(10));
-    }];
+    
     [lineView0 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.bgView);
-        make.top.mas_equalTo(weakSelf.goodsImageView.mas_bottom).offset(OCUISCALE(10));
+        make.top.mas_equalTo(weakSelf.myCollectionView.mas_bottom).offset(OCUISCALE(10));
         make.height.mas_equalTo(0.5);
     }];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.goodsImageView.mas_left);
-        make.right.mas_equalTo(weakSelf.goodsNameLabel.mas_right);
+        make.left.mas_equalTo(weakSelf.orderNumLabel.mas_left);
+        make.right.mas_equalTo(weakSelf.orderTimeLabel.mas_right);
         make.top.mas_equalTo(lineView0.mas_bottom).offset(OCUISCALE(10));
     }];
     [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -129,14 +178,37 @@
 
 -(void)setOrderModel:(EMOrderModel *)orderModel{
     _orderModel=orderModel;
-//    [self.goodsImageView sd_setImageWithURL:[NSURL URLWithString:_orderModel.goodsImageUrl] placeholderImage:EMDefaultImage];
-    [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_orderModel.goodsImageUrl] placeholderImage:EMDefaultImage];
-    self.goodsNameLabel.text=_orderModel.goodsName;
-    self.countLabel.text=[NSString stringWithFormat:@"%@  %ld件",_orderModel.spec,_orderModel.buyCount];
-    
-    self.priceLabel.text=[NSString stringWithFormat:@"共%ld件商品，合计%.2f元",_orderModel.buyCount,((_orderModel.buyCount)*(_orderModel.goodsPrice))];
-    
+    [self.myCollectionView reloadData];
+    self.orderNumLabel.text=_orderModel.orderNumber;
+    _orderTimeLabel.text=_orderModel.subitTime;
+    NSInteger buyCount=0;
+    for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
+        buyCount+=goodsModel.buyCount;
+    }
+    self.priceLabel.text=[NSString stringWithFormat:@"共%ld件商品，合计%.2f元",buyCount,_orderModel.payPrice];
 }
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    NSInteger count=self.orderModel.goodsArray.count;
+    return count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *aCell;
+    EMOrderListGoodsItemCell *cell=(EMOrderListGoodsItemCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMOrderListGoodsItemCell class]) forIndexPath:indexPath];
+    EMOrderGoodsModel *goodsModel=self.orderModel.goodsArray[indexPath.row];
+    cell.imageUrl=goodsModel.goodsImageUrl;
+    aCell=cell;
+    return aCell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    CGSize size = flowLayout.itemSize;
+    return size;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+}
+
 
 - (void)didReBuyButtonPressed{
     if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
@@ -148,5 +220,23 @@
     if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldCheckOrderDetail)]) {
         [_delegate orderListCellShouldCheckOrderDetail];
     }
+}
+- (UICollectionView *)myCollectionView{
+    if (nil==_myCollectionView) {
+        UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
+        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing=0;
+        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+        UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 100, 20) collectionViewLayout:flowLayout];
+        mainView.backgroundColor = [UIColor clearColor];
+        mainView.pagingEnabled = NO;
+        mainView.showsHorizontalScrollIndicator = NO;
+        mainView.showsVerticalScrollIndicator = NO;
+        mainView.dataSource = self;
+        mainView.delegate = self;
+        _myCollectionView=mainView;
+        [_myCollectionView registerClass:[EMOrderListGoodsItemCell class] forCellWithReuseIdentifier:NSStringFromClass([EMOrderListGoodsItemCell class])];
+    }
+    return _myCollectionView;
 }
 @end

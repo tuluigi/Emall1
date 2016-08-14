@@ -101,6 +101,7 @@ EMHomeHeadReusableViewDelegate>
                                   @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
                                   @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
                                   @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
+            
             //暂时为了测试用
             for (EMAdModel *adModel in weakSelf.adArray) {
                 NSInteger index=[weakSelf.adArray indexOfObject:adModel];

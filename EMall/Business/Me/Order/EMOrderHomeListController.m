@@ -11,7 +11,7 @@
 #import "EMOrderListController.h"
 @interface EMOrderHomeListController ()<ZJScrollPageViewDelegate,UISearchBarDelegate>
 @property (nonatomic,strong)ZJScrollPageView *pageScrolView;
-@property (nonatomic,strong)NSArray *orderStateArray;
+@property (nonatomic,strong)NSArray <EMOrderStateModel *>*orderStateArray;
 @property (nonatomic,assign)EMOrderState currentOrderState;
 @property (nonatomic,strong)UISearchBar *searchBar;
 @end
@@ -49,6 +49,9 @@
     if (!childVc) {
         childVc = [[EMOrderListController alloc] init];
     }
+    EMOrderStateModel *stateModel=self.orderStateArray[index];
+    childVc.orderState=stateModel.state;
+    childVc.goodsName=self.searchBar.text;
     return childVc;
 }
 #pragma mark -searchBar delegate
@@ -60,6 +63,7 @@
 }
 - (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
+    [self.pageScrolView.contentView reloadData];
 }
 #pragma mark -PageScrollView
 - (ZJScrollPageView *)pageScrolView{
@@ -79,10 +83,33 @@
 - (UISearchBar *)searchBar{
     if (nil==_searchBar) {
         _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(OCUISCALE(13), OCUISCALE(15)+CGRectGetHeight(self.navigationController.navigationBar.bounds)+20, OCWidth-OCUISCALE(13*2), OCUISCALE(30))];
-        _searchBar.showsCancelButton=YES;
+        _searchBar.showsCancelButton=NO;
+        _searchBar.backgroundColor=[UIColor whiteColor];
         _searchBar.delegate=self;
+        _searchBar.returnKeyType=UIReturnKeySearch;
         _searchBar.placeholder=@"输入关键字搜索历史订单";
+        UIImage* searchBarBg = [self GetImageWithColor:[UIColor clearColor] andHeight:32.0f];
+        //设置背景图片
+        [_searchBar setBackgroundImage:searchBarBg];
+        //设置背景色
+        [_searchBar setBackgroundColor:[UIColor clearColor]];
+        //设置文本框背景
+        [_searchBar setSearchFieldBackgroundImage:searchBarBg forState:UIControlStateNormal];
     }
     return _searchBar;
+}
+- (UIImage*) GetImageWithColor:(UIColor*)color andHeight:(CGFloat)height
+{
+    CGRect r= CGRectMake(0.0f, 0.0f, 1.0f, height);
+    UIGraphicsBeginImageContext(r.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, r);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
 }
 @end

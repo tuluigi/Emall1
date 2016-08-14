@@ -9,6 +9,7 @@
 #import "EMCartPayViewController.h"
 #import "NSAttributedString+Price.h"
 #import "EMCartPayCell.h"
+#import "EMCartViewController.h"
 static NSString *const kPayInfollIdenfier = @"kPayInfollIdenfier";
 static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 @interface EMCartPayViewController ()
@@ -26,11 +27,27 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
+    self.fd_interactivePopDisabled=YES;
     self.navigationItem.title=@"订单支付";
+    [self.navigationItem setHidesBackButton:YES];;
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didDoneBarButtonPress)];
     [self.tableView reloadData];
 }
-
+- (void)didDoneBarButtonPress{
+    NSArray *viewControlelrs=self.navigationController.viewControllers;
+    UIViewController *targetController;
+    for (UIViewController *aController in viewControlelrs) {
+        if ([aController isKindOfClass:[EMCartViewController class]]) {
+            targetController=aController;
+            break;
+        }
+    }
+    if (targetController) {
+        [self.navigationController popToViewController:targetController animated:YES];
+    }else{
+         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -62,7 +79,7 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
         EMCartPayCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayInfollIdenfier forIndexPath:indexPath];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryNone;
-        [(EMCartPayCell *)cell setPayCartName:@"231wasdfaskfjls;akfja;sfjk2" cartID:@"112312312312312312312312" bankName:@"asdfasdfasdfasdfasdghqerawefasdfasdf"];
+        [(EMCartPayCell *)cell setPayCartName:@"Hi Chi Go" cartID:@"BSB：083153" bankName:@"ACC：908925097"];
         aCell=cell;
     }
     return aCell;

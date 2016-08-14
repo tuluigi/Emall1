@@ -157,7 +157,7 @@
     return task;
 }
 /**
- *  获取收获地址列表
+ *  获取收货地址列表
  *
  *  @param userID
  *  @param compleitonBlock
@@ -179,7 +179,7 @@
 
 }
 /**
- *  删除收获地址
+ *  删除收货地址
  *
  *  @param userID
  *  @param addressID

@@ -42,6 +42,7 @@
     
     _logoImageView=[[UIImageView alloc]  init];
     _logoImageView.image=[UIImage imageNamed:@"cart_adddress_defalt"];
+    _logoImageView.contentMode=UIViewContentModeCenter;
     [self.contentView addSubview:_logoImageView];
     
     _cardNameLabel=[UILabel labelWithText:@"账户名：xxx银行" font:font textAlignment:NSTextAlignmentLeft];

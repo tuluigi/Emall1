@@ -197,6 +197,15 @@
     
     return _goodsSpecListArray;
 }
+-(CGFloat)defaultPrice{
+    if (!_defaultPrice) {
+        if (self.goodsInfoArray.count) {
+            EMGoodsInfoModel *infoModel=self.goodsInfoArray.firstObject;
+            _defaultPrice=infoModel.promotePrice;
+        }
+    }
+    return _defaultPrice;
+}
 //- (NSMutableArray *)allSpecArray{
 //    if (nil==_allSpecArray) {
 //        _allSpecArray=[NSMutableArray new];

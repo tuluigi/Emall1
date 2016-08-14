@@ -39,9 +39,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (self.dataSourceArray.count==0) {
-        [self getCartListWithCursor:self.cursor];
-    }
+    [self getCartListWithCursor:self.cursor];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

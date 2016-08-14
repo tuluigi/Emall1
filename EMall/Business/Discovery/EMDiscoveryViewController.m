@@ -56,15 +56,15 @@
        [weakSelf.myCollectionView dismissPageLoadView];
        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
        if (responseResult.cursor>=responseResult.totalPage) {
-           [weakSelf.myCollectionView enableInfiniteScrolling:YES];
+           [weakSelf.myCollectionView enableInfiniteScrolling:NO];
        }
        if (responseResult.responseCode==OCCodeStateSuccess) {
            if (cursor<2) {
                [weakSelf.dataSourceArray removeAllObjects];
            }
-           for (NSInteger i=0; i<10; i++) {
-               [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-           }
+//           for (NSInteger i=0; i<10; i++) {
+//               [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+//           }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
            [weakSelf.myCollectionView reloadData];
        }else{
