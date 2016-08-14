@@ -32,8 +32,7 @@
 
 - (void)setCartArray:(NSArray *)cartArray{
     [self.dataSourceArray addObjectsFromArray:cartArray];
-    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
-    [self.tableView reloadData];
+   
     // Do any additional setup after loading the view.
 }
 - (UITableView *)tableView{
@@ -84,6 +83,9 @@
     self.addressModel.userTel=@"收货人电话";
     self.addressModel.wechatID=@"";
     self.addressModel.detailAddresss=@"请选择收获地址";
+    
+    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
+    [self.tableView reloadData];
     [self getUserDefaultShoppingAddress];
 }
 - (CGFloat)totalPrice{

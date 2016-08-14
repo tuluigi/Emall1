@@ -18,7 +18,7 @@
                                      isUserSelect:(BOOL)isSelect;
 @end
 
-@interface EMCityViewController : OCBaseTableViewController<ZJScrollPageViewChildVcDelegate>
+@interface EMCityViewController : OCBaseViewController<ZJScrollPageViewChildVcDelegate>
 - (void)setAreas:(NSMutableArray *)array selectIndex:(NSInteger)selectIndex;
 @property (nonatomic,weak)id <EMCityViewControlelrDelegate>delegate;
 @end

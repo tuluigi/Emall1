@@ -23,6 +23,9 @@
     [super viewDidLoad];
    
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
     self.automaticallyAdjustsScrollViewInsets=YES;
     // Do any additional setup after loading the view.
 }
