@@ -75,7 +75,7 @@
 @implementation EMGoodsModel
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
-    return @{@"goodsID":@"gid",
+    return @{@"goodsID":@"id",
              @"goodsName":@"name",
              @"goodsImageUrl":@"picture",
              @"saleCount":@"sales_num",
@@ -91,6 +91,7 @@
              @"avatar":@"avatar",
              @"userName":@"member_name",
              @"commentContent":@"content",
+             @"goodsPrice":@"promotion_price",
              @"specArray":@"spec",};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{

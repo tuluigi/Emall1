@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
 
 @interface EMShoppingAddressAddController ()<EMShopProvienceCityControllerDelegate,EMCitySelectViewControllerDelegate>
 @property (nonatomic,strong)__block EMShopAddressModel *addressModel;
-@property (nonatomic,strong)NSArray *areaArray;//用户选择的地区信息
+@property (nonatomic,strong)NSMutableArray *areaArray;//用户选择的地区信息
 @property (nonatomic,strong)OCTableCellTextFiledModel   *nameFieldModel,*telFieldModel,*wechatDeitalModel;
 @property (nonatomic,strong)OCTableCellDetialTextModel *provienceDeitalModel;
 @property (nonatomic,strong)OCTableCellTextViewModel *detailTextViewModel;
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
     
     _provienceDeitalModel=[[OCTableCellDetialTextModel alloc] initWithTitle:@"所在地区" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMShopAddressItemTypeArea];
 
-    _provienceDeitalModel.detailText=self.addressModel.fullAdderssString;
+    _provienceDeitalModel.detailText=self.addressModel.fullAreaString;
     _provienceDeitalModel.tableCellStyle=UITableViewCellStyleValue1;
     
     _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"详细地址" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMShopAddressItemTypeDetailAddress];
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
         EMAreaModel *cityArea=self.areaArray[1];
         EMAreaModel *countryArea=self.areaArray[2];
         NSString *countryName=countryArea.areaName;
-        if (self.areaArray.count<=4) {
+        if (self.areaArray.count==4) {
             EMAreaModel *streetArea=self.areaArray[3];
             countryName=[countryName stringByAppendingString:streetArea.areaName];
         }
@@ -189,7 +189,11 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
 #pragma mark - city select delegate
 - (void)didFinishSelectWithAreaInfoArray:(NSArray <EMAreaModel *>*)aresInoArray{
     NSString *addressString=@"";
-    self.areaArray=aresInoArray;
+    if (nil==self.areaArray) {
+        self.areaArray=[NSMutableArray new];
+    }
+    [self.areaArray removeAllObjects];
+    [self.areaArray addObjectsFromArray:aresInoArray];
     for (NSInteger i=0; i<aresInoArray.count; i++) {
         EMAreaModel *aremModel=aresInoArray[i];
         addressString=[addressString stringByAppendingString:aremModel.areaName];

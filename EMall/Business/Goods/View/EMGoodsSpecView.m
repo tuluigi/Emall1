@@ -148,6 +148,7 @@
     _minusButton.layer.borderWidth=0.5;
     _countTextField.leftView=_minusButton;
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
+    _countTextField.textAlignment=NSTextAlignmentCenter;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
     plusButton.frame=CGRectMake(0, 0, OCUISCALE(30), OCUISCALE(30));
@@ -164,14 +165,14 @@
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(5);
         make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(5)
         ;
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(80), OCUISCALE(30)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(100), OCUISCALE(30)));
     }];
     
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    CGSize size=CGSizeMake(120,40 );
+    CGSize size=CGSizeMake(150,40 );
     attributes.size=size;
     return attributes;
 }

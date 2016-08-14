@@ -63,8 +63,8 @@
     }];
 }
 - (void)setTitle:(NSString *)title price:(CGFloat)price saleCount:(NSInteger)count{
-    self.titleLabel.text=title;
     self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:13 priceInterFontSize:17 pointInterSize:13 color:[UIColor colorWithHexString:@"#FC4747"]];
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%ld件",count];
+    self.titleLabel.text=title;
 }
 @end

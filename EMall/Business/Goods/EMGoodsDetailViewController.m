@@ -33,7 +33,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @property (nonatomic,strong)EMGoodsModel *aGoodsModel;
 @property (nonatomic,assign)NSInteger goodsID;
 
-@property (nonatomic,strong)EMGoodsDetailModel *detailModel;
+@property (nonatomic,strong)__block EMGoodsDetailModel *detailModel;
 
 @end
 
@@ -134,7 +134,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     
     WEAKSELF
     [self.view showHUDLoading];
-    NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:INFINITY buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMShopCartNetService addShopCartWithUserID:[RI userID] infoID:specID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
 //        [weakSelf.view dismissHUDLoading];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.view showHUDMessage:@"添加到购物车成功"];
@@ -203,7 +203,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
-        [cell setTitle:self.detailModel.goodsModel.goodsName price:self.detailModel.goodsModel.goodsPrice saleCount:self.detailModel.goodsModel.saleCount];
+        CGFloat price=0;
+        if (self.detailModel.goodsInfoArray.count) {
+            EMGoodsInfoModel *infoModel=self.detailModel.goodsInfoArray[0];
+            price=infoModel.promotePrice;
+        }
+        NSString *title=self.detailModel.goodsModel.goodsName;
+        [cell setTitle:title price:price saleCount:self.detailModel.goodsModel.saleCount];
         aCell=cell;
     }
     return aCell;
@@ -212,8 +218,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     CGFloat height=OCUISCALE(50);
     if (indexPath.section==0) {
         WEAKSELF
+        CGFloat price=0;
+        if (self.detailModel.goodsInfoArray.count) {
+            EMGoodsInfoModel *infoModel=self.detailModel.goodsInfoArray[0];
+            price=infoModel.promotePrice;
+        }
         height=[tableView fd_heightForCellWithIdentifier:kGoodsInfoCellIdenfier configuration:^(id cell) {
-            [(EMGoodsInfoTableViewCell *)cell setTitle:weakSelf.goodsModel.goodsName   price:weakSelf.goodsModel.goodsPrice saleCount:weakSelf.goodsModel.saleCount];
+            [(EMGoodsInfoTableViewCell *)cell setTitle:weakSelf.detailModel.goodsModel.goodsName   price:price saleCount:weakSelf.detailModel.goodsModel.saleCount];
         }];
     }else if (indexPath.section==2){
         if (indexPath.row==1) {

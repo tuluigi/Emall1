@@ -15,13 +15,18 @@
              @"userTel":@"telphone",
              @"province":@"province",
              @"city":@"city",
-             @"country":@"",
+             @"country":@"county",
              @"detailAddresss":@"detail_address",
              @"isDefault":@"state",
              @"state":@"state"};
 }
+-(NSString *)fullAreaString{
+    NSString *address=[NSString stringWithFormat:@"%@%@%@",stringNotNil(self.province),stringNotNil(self.city),stringNotNil(self.country)];
+    return address;
+
+}
 -(NSString *)fullAdderssString{
-     NSString *address=[NSString stringWithFormat:@"%@%@%@%@",stringNotNil(self.city),stringNotNil(self.city),stringNotNil(self.country),stringNotNil(self.detailAddresss)];
+     NSString *address=[NSString stringWithFormat:@"%@%@",[self fullAreaString],stringNotNil(self.detailAddresss)];
     return address;
 }
 @end

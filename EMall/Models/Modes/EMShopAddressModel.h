@@ -21,7 +21,9 @@
 @property(nonatomic,assign)BOOL isDefault;//是否默认
 @property(nonatomic,assign)NSInteger state;
 
-@property (nonatomic,copy)NSString *fullAdderssString;
+@property (nonatomic,copy)NSString *fullAdderssString;//完整的详细地址信息
+@property (nonatomic,copy)NSString *fullAreaString;//完整的地区信息
+
 
 @property (nonatomic,assign)CGFloat cellHeight;
 @end

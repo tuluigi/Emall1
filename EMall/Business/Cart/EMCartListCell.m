@@ -76,6 +76,8 @@
     _minusButton.layer.borderWidth=0.5;
     _countTextField.leftView=_minusButton;
     _countTextField.leftViewMode=UITextFieldViewModeAlways;
+    _countTextField.textAlignment=NSTextAlignmentCenter;
+    
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
     plusButton.frame=CGRectMake(0, 0, OCUISCALE(22), OCUISCALE(25));

@@ -50,6 +50,7 @@
 		2A31E81C1D5E012300FC73A9 /* EMCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E81B1D5E012300FC73A9 /* EMCityViewController.m */; };
 		2A31E8201D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E81F1D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m */; };
 		2A31E8231D5F103500FC73A9 /* EMOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */; };
+		2A31E8261D60007E00FC73A9 /* EMOrderNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A31E8251D60007E00FC73A9 /* EMOrderNetService.m */; };
 		2A4AA95F1D487848008A323A /* EMGoodsCommentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */; };
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
@@ -257,6 +258,8 @@
 		2A31E81F1D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		2A31E8211D5F103500FC73A9 /* EMOrderGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderGoodsCell.h; sourceTree = "<group>"; };
 		2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderGoodsCell.m; sourceTree = "<group>"; };
+		2A31E8241D60007E00FC73A9 /* EMOrderNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderNetService.h; sourceTree = "<group>"; };
+		2A31E8251D60007E00FC73A9 /* EMOrderNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderNetService.m; sourceTree = "<group>"; };
 		2A4AA95D1D487848008A323A /* EMGoodsCommentListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentListController.h; sourceTree = "<group>"; };
 		2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentListController.m; sourceTree = "<group>"; };
 		2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentCell.h; sourceTree = "<group>"; };
@@ -730,6 +733,8 @@
 				2A31E8081D5CBB7F00FC73A9 /* EMCatNetService.m */,
 				2A31E8141D5D462F00FC73A9 /* EMShopCartNetService.h */,
 				2A31E8151D5D462F00FC73A9 /* EMShopCartNetService.m */,
+				2A31E8241D60007E00FC73A9 /* EMOrderNetService.h */,
+				2A31E8251D60007E00FC73A9 /* EMOrderNetService.m */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -1573,6 +1578,7 @@
 				2ADF60481D27C59C00DF757B /* UIButton+Category.m in Sources */,
 				2A13F70D1D5227850041D2C5 /* EMMeInfoViewController.m in Sources */,
 				2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */,
+				2A31E8261D60007E00FC73A9 /* EMOrderNetService.m in Sources */,
 				2ADF606B1D27DA5A00DF757B /* EMInfiniteViewCell.m in Sources */,
 				2AED6CB61D44B6EC001B5910 /* EMCartPayCell.m in Sources */,
 				2A0940281D2A8515005BB84D /* EMHomeHeadReusableView.m in Sources */,

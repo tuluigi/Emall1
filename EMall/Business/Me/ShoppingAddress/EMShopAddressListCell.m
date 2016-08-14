@@ -111,8 +111,7 @@
     _addresssModel=addresssModel;
     self.nameLabel.text=addresssModel.userName;
     self.telLabel.text=addresssModel.userTel;
-    NSString *address=[NSString stringWithFormat:@"%@%@%@%@",stringNotNil(addresssModel.city),stringNotNil(addresssModel.city),stringNotNil(addresssModel.country),stringNotNil(addresssModel.detailAddresss)];
-    self.addressLable.text=address;
+    self.addressLable.text=addresssModel.fullAdderssString;
     self.defaultButton.hidden=!addresssModel.isDefault;
     self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",stringNotNil(addresssModel.wechatID)];
 }
