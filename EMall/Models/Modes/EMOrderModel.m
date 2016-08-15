@@ -28,7 +28,8 @@
              @"receiverAddresss":@"address_detail",
              @"receiverID":@"mid",
              @"logisticsTypeString":@"logistics_type",
-             @"goodsArray":@"detail",};
+             @"goodsArray":@"detail",
+             @"receiverWeChat":@"webchat"};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
     if ([key isEqualToString:@"goodsArray"]) {

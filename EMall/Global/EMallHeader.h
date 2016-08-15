@@ -80,3 +80,4 @@ static CGFloat const kEMOffX    = 13;
 #pragma mark - ResponderEvent
 #define kEMOrderShoudBuyAgainEvent      @"kEMOrderShoudBuyAgainEvent"
 #define kEMOrderGotoOrderDetailEvent  @"kEMOrderGotoOrderDetailEvent"
+#define kEMOrderDetailGoodsCommentEvent  @"kEMOrderDetailGoodsCommentEvent"

@@ -11,8 +11,11 @@
 #import "EMCartAddressCell.h"
 #import "EMShopAddressModel.h"
 #import "NSAttributedString+Price.h"
-#import "EMCartSubmitCell.h"
+#import "EMOrderDetailGoodsCell.h"
 #import "EMOrderNetService.h"
+#import "EMOrderInfoCell.h"
+#import "EMOrderDetailGoodsCell.h"
+#import "EMOrderGoodsCommentController.h"
 #define  kSubmitCellIdenfier  @"KSubmitCellIdenfier"
 #define  kAddressCellIdenfier @"kAddressCellIdenfier"
 #define  kPriceCellIdenfier   @"kPriceCellIdenfier"
@@ -39,9 +42,10 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        [_tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
+        [_tableView registerClass:[EMOrderDetailGoodsCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
         
         [_tableView registerClass:[EMCartAddressCell class] forCellReuseIdentifier:kAddressCellIdenfier];
+        [_tableView registerClass:[EMOrderInfoCell class] forCellReuseIdentifier:kPriceCellIdenfier];
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
@@ -50,6 +54,14 @@
     [super viewDidLoad];
     self.navigationItem.title=@"订单详情";
     [self getOrderDetailWithOrderID:self.orderID];
+}
+-(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
+    if ([event isEqualToString:kEMOrderDetailGoodsCommentEvent]) {
+        EMOrderGoodsModel *goodsModel=[userInfo objectForKey:kEMOrderDetailGoodsCommentEvent];
+        EMOrderGoodsCommentController *goodsCommentController=[[EMOrderGoodsCommentController alloc]  initWithGoodsID:goodsModel.goodsID orderID:goodsModel.orderID goodsImageUrl:goodsModel.goodsImageUrl];
+        goodsCommentController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:goodsCommentController animated:YES];
+    }
 }
 - (void)getOrderDetailWithOrderID:(NSInteger )orderID{
     [self.view showPageLoadingView];
@@ -73,7 +85,7 @@
     NSInteger count=0;
     if (section==0) {
         count=1;
-    }else if(section==2){
+    }else if(section==3){
         count=self.orderModel.goodsArray.count;
     }else{
         count=1;
@@ -82,16 +94,17 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *aCell;
-    if (indexPath.section==0) {
+    if (indexPath.section==1) {
         EMCartAddressCell *cell=[tableView dequeueReusableCellWithIdentifier:kAddressCellIdenfier forIndexPath:indexPath];
         EMShopAddressModel *addressModel=[[EMShopAddressModel alloc]  init];
         addressModel.userName=self.orderModel.receiver;
         addressModel.userTel=self.orderModel.receiverTel;
         addressModel.detailAddresss=self.orderModel.receiverAddresss;
+        addressModel.wechatID=self.orderModel.receiverWeChat;
          cell.accessoryType=UITableViewCellAccessoryNone;
         cell.addresssModel=addressModel;
         aCell=cell;
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==2){
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kLogisticsCellIdenfier];
         if (nil==cell) {
             cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kLogisticsCellIdenfier];
@@ -105,14 +118,14 @@
         }
         cell.detailTextLabel.text=self.orderModel.logisticsTypeString;
         aCell=cell;
-    }else if (indexPath.section==2){
-        EMCartSubmitCell *cell=[tableView dequeueReusableCellWithIdentifier:kSubmitCellIdenfier forIndexPath:indexPath];
+    }else if (indexPath.section==3){
+        EMOrderDetailGoodsCell *cell=[tableView dequeueReusableCellWithIdentifier:kSubmitCellIdenfier forIndexPath:indexPath];
         cell.orderGoodsModel=[self.orderModel.goodsArray objectAtIndex:indexPath.row];
         aCell=cell;
     }else{
-        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPriceCellIdenfier];
+        EMOrderInfoCell *cell=[tableView dequeueReusableCellWithIdentifier:kPriceCellIdenfier forIndexPath:indexPath];
         if (nil==cell) {
-            cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPriceCellIdenfier];
+            cell=[[EMOrderInfoCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPriceCellIdenfier];
             cell.selectionStyle=UITableViewCellSelectionStyleGray;
             cell.accessoryType=UITableViewCellAccessoryNone;
         }
@@ -121,18 +134,18 @@
         for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
             buyCount+=goodsModel.buyCount;
         }
-        UIColor *color=[UIColor colorWithHexString:@"#272727"];
-        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",buyCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
-        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.orderModel.totalPrice]];
-        
-        cell.detailTextLabel.attributedText=priceAttrStr;
+//        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+//        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",buyCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+//        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.orderModel.totalPrice]];
+        [cell setOrderID:self.orderModel.orderNumber submitTime:self.orderModel.subitTime payTime:self.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:self.orderModel.totalPrice];
+//        cell.detailTextLabel.attributedText=priceAttrStr;
         aCell=cell;
     }
     return aCell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height;
-    if (indexPath.section==0) {
+    if (indexPath.section==1) {
 
                 __block EMShopAddressModel *weadAddressModel=[[EMShopAddressModel alloc]  init];
                 weadAddressModel.userName=self.orderModel.receiver;
@@ -144,15 +157,23 @@
                 }];
 
 
-    }else if(indexPath.section==2){
+    }else if(indexPath.section==3){
         __block EMOrderGoodsModel *goodsModel=[self.orderModel.goodsArray objectAtIndex:indexPath.row];
         height=[tableView fd_heightForCellWithIdentifier:kSubmitCellIdenfier configuration:^(id cell) {
-            [(EMCartSubmitCell *)cell setOrderGoodsModel:goodsModel];
+            [(EMOrderDetailGoodsCell *)cell setOrderGoodsModel:goodsModel];
         }];
-    }else if(indexPath.section==1){
+    }else if(indexPath.section==2){
         height=44;
     }else{
-        height=OCUISCALE(80);
+        NSInteger buyCount=0;
+        for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
+            buyCount+=goodsModel.buyCount;
+        }
+        WEAKSELF
+        height=[tableView fd_heightForCellWithIdentifier:kPriceCellIdenfier configuration:^(id cell) {
+            [cell setOrderID:weakSelf.orderModel.orderNumber submitTime:weakSelf.orderModel.subitTime payTime:weakSelf.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:weakSelf.orderModel.totalPrice];
+        }];
+//        height=OCUISCALE(80);
     }
     return height;
 }
@@ -167,14 +188,14 @@
         headView.textLabel.textColor=kEM_LightDarkTextColor;
     }
     NSString *title=@"";
-    if (section==0) {
+    if (section==1) {
         title=@"收货地址";
-    }else if (section==1){
-        title=@"配送方式";
     }else if (section==2){
+        title=@"配送方式";
+    }else if (section==3){
         title=@"商品列表";
-    }else if(section==3){
-        title=@"订单总价";
+    }else if(section==0){
+        title=@"订单信息";
     }
     
     headView.textLabel.text=title;

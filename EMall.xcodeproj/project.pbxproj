@@ -105,6 +105,7 @@
 		2AB965C81D61E7FD0049BE2A /* EMOrderGoodsCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965C71D61E7FD0049BE2A /* EMOrderGoodsCommentController.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
+		2AD9DC4A1D62132300EEE0C2 /* EMOrderDetailGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9DC491D62132300EEE0C2 /* EMOrderDetailGoodsCell.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -378,6 +379,8 @@
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
 		2AC647651D43196C00521462 /* EMCartSubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartSubmitViewController.m; sourceTree = "<group>"; };
+		2AD9DC481D62132300EEE0C2 /* EMOrderDetailGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderDetailGoodsCell.h; sourceTree = "<group>"; };
+		2AD9DC491D62132300EEE0C2 /* EMOrderDetailGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderDetailGoodsCell.m; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -959,6 +962,8 @@
 				2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */,
 				2AB965C61D61E7FD0049BE2A /* EMOrderGoodsCommentController.h */,
 				2AB965C71D61E7FD0049BE2A /* EMOrderGoodsCommentController.m */,
+				2AD9DC481D62132300EEE0C2 /* EMOrderDetailGoodsCell.h */,
+				2AD9DC491D62132300EEE0C2 /* EMOrderDetailGoodsCell.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1376,6 +1381,7 @@
 				TargetAttributes = {
 					2A2426EF1D12C4670078240C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = NDDKUXYDGE;
 					};
 					2A2427081D12C4670078240C = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1540,6 +1546,7 @@
 				2A99EB4E1D3A7FFD0024E924 /* EMShopProvienceCityController.m in Sources */,
 				2A99EB7C1D3BC32E0024E924 /* EMCartListCell.m in Sources */,
 				2ADF60931D292F2F00DF757B /* EMHomeGoodsCell.m in Sources */,
+				2AD9DC4A1D62132300EEE0C2 /* EMOrderDetailGoodsCell.m in Sources */,
 				2ADF60521D27C59C00DF757B /* OCPageLoadView.m in Sources */,
 				2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */,
 				2A09402E1D2B9700005BB84D /* EMHomeNetService.m in Sources */,
@@ -1772,7 +1779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d03075b5-4ef5-4c68-9056-00599f6e9863";
+				PROVISIONING_PROFILE = "00a9083a-95f6-4010-bd7b-0876438d2fb7";
 			};
 			name = Debug;
 		};
@@ -1790,7 +1797,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d03075b5-4ef5-4c68-9056-00599f6e9863";
+				PROVISIONING_PROFILE = "00a9083a-95f6-4010-bd7b-0876438d2fb7";
 			};
 			name = Release;
 		};

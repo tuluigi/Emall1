@@ -74,12 +74,6 @@
     [self.nameLabel setText:_goodsCommentModel.nickName];
     self.levelLabel.text=[NSString stringWithFormat:@"评价：%@",_goodsCommentModel.levelString ];
     self.contentLabel.text=_goodsCommentModel.content;
-    NSDateFormatter *formmater=[[NSDateFormatter alloc]  init];
-    formmater.dateFormat=@"yyyy-MM-dd";
-    NSDate *aDate=[NSDate dateWithTimeIntervalSince1970:_goodsCommentModel.commentTime];
-    
-    NSString *timeString=[formmater stringFromDate:aDate];
-    timeString=[NSString stringWithFormat:@"%@    %@",timeString,_goodsCommentModel.goodsSize];
-    self.timeLabel.text=timeString;
+    self.timeLabel.text=_goodsCommentModel.commentTime;
 }
 @end

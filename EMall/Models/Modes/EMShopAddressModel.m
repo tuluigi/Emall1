@@ -18,7 +18,8 @@
              @"country":@"county",
              @"detailAddresss":@"detail_address",
              @"isDefault":@"state",
-             @"state":@"state"};
+             @"state":@"state",
+             @"wechatID":@"webchat"};
 }
 -(NSString *)fullAreaString{
     NSString *address=[NSString stringWithFormat:@"%@%@%@",stringNotNil(self.province),stringNotNil(self.city),stringNotNil(self.country)];

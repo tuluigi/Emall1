@@ -108,18 +108,7 @@
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
--(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
-    if ([event isEqualToString:kEMOrderGotoOrderDetailEvent ]) {
-        EMOrderModel *order=[userInfo objectForKey:event];
-        [self orderListControllerDidSelecOrder:[userInfo objectForKey:event]];
-    }else if ([event isEqualToString:kEMOrderShoudBuyAgainEvent ]){
-        return;
-        EMOrderModel *orderModel=[userInfo objectForKey:event];
-        for (EMOrderGoodsModel *model in orderModel.goodsArray) {
-            [self addShopCartWithGoodsID:model.goodsID infoID:model.goodsInfoModel.infoID buyCount:1];
-        }
-    }
-}
+
 
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{

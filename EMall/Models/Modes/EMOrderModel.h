@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger,EMOrderLogisticsType) {
 @property (nonatomic,assign)CGFloat totalPrice,payPrice,discountPrice;
 
 
-@property(nonatomic,copy)NSString *receiver,*receiverTel,*receiverAddresss;
+@property(nonatomic,copy)NSString *receiver,*receiverTel,*receiverAddresss,*receiverWeChat;
 @property(nonatomic,assign)NSInteger receiverID;
 
 

@@ -12,5 +12,7 @@
 - (void)setOrderID:(NSString *)orderID
         submitTime:(NSString *)subTime
            payTime:(NSString *)payTime
-          sendTime:(NSString *)sendTime;
+          sendTime:(NSString *)sendTime
+        totalCount:(NSInteger)totalCount
+        totalPrice:(NSInteger)totoalPrice;
 @end

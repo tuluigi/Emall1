@@ -164,7 +164,7 @@
                                                    state:(NSInteger)state
                                        onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member_address/saveOrUpdate"];
-    NSDictionary *postDic=@{@"memberAddress.mid":@(userID),@"memberAddress.telphone":stringNotNil(tel),@"memberAddress.province":stringNotNil(provience),@"memberAddress.city":stringNotNil(city),@"memberAddress.county":stringNotNil(country),@"memberAddress.detail_address":stringNotNil(detailaddress),@"memberAddress.state":@(state),@"memberAddress.addressee":stringNotNil(receiver)};
+    NSDictionary *postDic=@{@"memberAddress.mid":@(userID),@"memberAddress.telphone":stringNotNil(tel),@"memberAddress.province":stringNotNil(provience),@"memberAddress.city":stringNotNil(city),@"memberAddress.county":stringNotNil(country),@"memberAddress.detail_address":stringNotNil(detailaddress),@"memberAddress.state":@(state),@"memberAddress.addressee":stringNotNil(receiver),@"memberAddress.webchat":stringNotNil(wechatID)};
     NSMutableDictionary *parmDic=[NSMutableDictionary dictionaryWithDictionary:postDic];
     if (addressID) {
         [parmDic setObject:@(addressID) forKey:@"memberAddress.id"];

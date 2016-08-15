@@ -6,17 +6,17 @@
 //  Copyright © 2016年 Luigi. All rights reserved.
 //
 
-#import "EMCartSubmitCell.h"
-#import "EMShopCartModel.h"
+#import "EMOrderDetailGoodsCell.h"
 #import "NSAttributedString+Price.h"
 #import "EMOrderModel.h"
-@interface EMCartSubmitCell ()
+@interface EMOrderDetailGoodsCell ()
 @property (nonatomic,strong)UIImageView *goodsImageView;
 @property (nonatomic,strong)UILabel *goodsNameLabel;
 @property (nonatomic,strong)UILabel *descLabel,*priceLabel;//规格数量
+@property (nonatomic,strong)UIButton *commentButton;
 @end
 
-@implementation EMCartSubmitCell
+@implementation EMOrderDetailGoodsCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -60,13 +60,15 @@
     //    _priceLabel.textColor=RGB(227, 0, 0);
     _priceLabel.textAlignment=NSTextAlignmentRight;
     [self.contentView addSubview:_priceLabel];
-    
-  
+    [self.contentView addSubview:self.commentButton];
+ 
+
+
     [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(OCUISCALE(12));
         make.top.mas_equalTo(self.contentView.mas_top).offset(OCUISCALE(15));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(92), OCUISCALE(65)));
-        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-15)).priorityHigh();
+       // make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-15)).priorityHigh();
     }];
     
     
@@ -86,20 +88,44 @@
         make.top.mas_equalTo(weakSelf.descLabel);
         make.width.mas_lessThanOrEqualTo(OCUISCALE(100));
     }];
+    UIView *lineView=[UIView new];
+     lineView.backgroundColor=RGB(225, 225, 225);
+    [self.contentView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(kEMOffX);
+        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(-kEMOffX);
+        make.top.mas_equalTo(weakSelf.goodsImageView.mas_bottom).offset(5);
+        make.height.mas_equalTo(0.5);
+    }];
+    [_commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(-kEMOffX);
+        make.top.mas_equalTo(lineView.mas_bottom).offset(OCUISCALE(10));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(50), OCUISCALE(25)));
+        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-15)).priorityHigh();
+    }];
+}
+-(UIButton *)commentButton{
+    if (nil==_commentButton) {
+        UIFont *font=[UIFont oc_systemFontOfSize:13];
+        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+        _commentButton=[UIButton buttonWithTitle:@"评论" titleColor:color font:font];
+        _commentButton.layer.cornerRadius=5.0;
+        _commentButton.layer.masksToBounds=YES;
+        _commentButton.layer.borderColor=[color CGColor];
+        _commentButton.layer.borderWidth=1.0;
+        [_commentButton addTarget:self action:@selector(didCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _commentButton;
+}
+- (void)didCommentButtonPressed{
+    [[self nextResponder] routerEventName:kEMOrderDetailGoodsCommentEvent userInfo:@{kEMOrderDetailGoodsCommentEvent:self.orderGoodsModel}];
 }
 
-- (void)setShopCartModel:(EMShopCartModel *)shopCartModel{
-
-    _shopCartModel=shopCartModel;
-    [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_shopCartModel.goodsImageUrl] placeholderImage:EMDefaultImage];
-    self.goodsNameLabel.text=_shopCartModel.goodsName;
-    
-    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_shopCartModel.spec),_shopCartModel.buyCount];
-    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice];
-}
 
 - (void)setOrderGoodsModel:(EMOrderGoodsModel *)orderGoodsModel{
     _orderGoodsModel=orderGoodsModel;
+     
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_orderGoodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     self.goodsNameLabel.text=_orderGoodsModel.goodsName;
     

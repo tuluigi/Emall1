@@ -53,4 +53,31 @@
  */
 + (NSURLSessionTask *)getGoodsSpeListWithGoodsID:(NSInteger )goodsID
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
+
+/**
+ *  发表评论
+ *
+ *  @param userID
+ *  @param orderID
+ *  @param goodsID
+ *  @param content
+ *  @param star
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)writeComemntWithUsrID:(NSInteger)userID
+                                    orderID:(NSInteger)orderID
+                                     goodID:(NSInteger)goodsID
+                                    content:(NSString *)content
+                                       star:(NSInteger)star
+                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+
++ (NSURLSessionTask *)getGoodsComemntsWithUserID:(NSInteger)userID
+                                         goodsID:(NSInteger )goodsID
+                                            star:(NSInteger)star
+                                          cursor:(NSInteger)cursor
+                                        pageSize:(NSInteger)pageSize
+                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 @end

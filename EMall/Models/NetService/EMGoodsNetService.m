@@ -8,6 +8,7 @@
 
 #import "EMGoodsNetService.h"
 #import "EMGoodsModel.h"
+#import "EMGoodsCommentModel.h"
 @implementation EMGoodsNetService
 + (NSURLSessionTask *)getGoodsListWithSearchGoodsID:(NSInteger )goodsID
                                               catID:(NSInteger)catID
@@ -36,6 +37,7 @@
     if (sortType) {
         [postDic setObject:@(sortType) forKey:@"order_field"];
     }
+    pid=MIN(1, pid);
     if (pid) {
         [postDic setObject:@"cursor" forKey:@(pid)];
     }
@@ -112,5 +114,46 @@
         }];
     }];
     return task;
+}
+
++ (NSURLSessionTask *)writeComemntWithUsrID:(NSInteger)userID
+                                    orderID:(NSInteger)orderID
+                                     goodID:(NSInteger)goodsID
+                                    content:(NSString *)content
+                                       star:(NSInteger)star
+                          onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[self urlWithSuffixPath:@"order_comment/save"];
+    NSDictionary *postDic=@{@"orderComment.mid":@(userID),@"orderComment.oid":@(orderID),@"orderComment.gid":@(goodsID),@"orderComment.star":@(star),@"orderComment.content":stringNotNil(content)};
+    
+    
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
+
+
++ (NSURLSessionTask *)getGoodsComemntsWithUserID:(NSInteger)userID
+                                         goodsID:(NSInteger )goodsID
+                                            star:(NSInteger)star
+                                          cursor:(NSInteger)cursor
+                                        pageSize:(NSInteger)pageSize
+                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[self urlWithSuffixPath:@"order_comment"];
+    cursor=MIN(1, cursor);
+    NSDictionary *postDic=@{@"orderComment.mid":@(userID),@"orderComment.gid":@(goodsID),@"orderComment.star":@(star),@"cusor":@(cursor),@"pageSize":@(pageSize)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsCommentModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+
 }
 @end

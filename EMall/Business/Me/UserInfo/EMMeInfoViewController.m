@@ -42,7 +42,10 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 @end
 
 @implementation EMMeInfoViewController
-
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [MBProgressHUD hideHUDForView:self.view animated:NO];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -217,6 +220,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
             
           [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
                 __block   MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+              progressHud.removeFromSuperViewOnHide=YES;
                 progressHud.mode = MBProgressHUDModeAnnularDeterminate;
                 progressHud.labelText = @"上传中...";
                NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 1) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
@@ -224,6 +228,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
                    progressHud.progress=progress;
                 } onCompletionBlock:^(OCResponseResult *responseResult) {
                     [progressHud hide:YES];
+                    [progressHud removeFromSuperview];
                  
                     if (responseResult.responseCode==OCCodeStateSuccess) {
                         [weakSelf.view showHUDMessage:@"上传成功,请保存"];

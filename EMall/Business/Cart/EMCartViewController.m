@@ -61,7 +61,7 @@
         make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-tabarBounds.size.height);
         make.height.mas_equalTo(OCUISCALE(50));
     }];
-
+    
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
         make.top.mas_equalTo(weakSelf.view.mas_top);
@@ -121,7 +121,7 @@
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.tableView reloadData];
-             [weakSelf updatePageLoadMesage];
+            [weakSelf updatePageLoadMesage];
         }else{
             if (cursor<=1) {
                 [weakSelf.tableView showPageLoadedMessage:@"获取数据失败" delegate:self];
@@ -171,7 +171,7 @@
     NSURLSessionTask *task=[EMShopCartNetService editShopCartWithCartID:cartID buyCount:buyCount onCompletionBlock:^(OCResponseResult *responseResult) {
     }];
     [self addSessionTask:task];
-
+    
 }
 - (void)setIsDeleteing:(BOOL)isDeleteing{
     _isDeleteing=isDeleteing;
@@ -237,11 +237,11 @@
     return YES;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-return @"删除";
+    return @"删除";
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle==UITableViewCellEditingStyleDelete) {
-         EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+        EMShopCartModel *cartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
         [self deleteShopCart:@[cartModel]];
     }
 }
@@ -267,9 +267,10 @@ return @"删除";
     NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
     
     NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
-    if (selectArray.count) {
-        WEAKSELF
-        if (bottomView.isDelete) {//删除购物车
+    
+    WEAKSELF
+    if (bottomView.isDelete) {//删除购物车
+        if (selectArray.count) {
             UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"确定要删除选中的商品么？" message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -284,8 +285,7 @@ return @"删除";
             [self presentViewController:alertController animated:YES completion:^{
                 
             }];
-    }
-    
+        }
     }else{//提交购物车
         if (selectArray.count) {
             EMCartSubmitViewController *submitController=[[EMCartSubmitViewController alloc]  init];
