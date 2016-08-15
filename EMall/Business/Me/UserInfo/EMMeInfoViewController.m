@@ -47,7 +47,8 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     self.navigationItem.title=@"个人资料";
     EMUserModel *model=[EMUserModel loginUserModel];
     _avatarModel=[[OCTableCellRightImageModel alloc]  initWithTitle:@"头像" imageName:[RI  avatar] accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemAvtar];
-    _avatarModel.placeholderImageUrl=model.avatar;
+    _avatarModel.placeholderImageName=@"avator_default";
+    _avatarModel.imageUrl=model.avatar;
     _nickNameModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"昵称" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemNickName];
     _nickNameModel.inputText=model.nickName;
    _genderModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"性别" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
@@ -127,7 +128,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     
     WEAKSELF
     [self.tableView showHUDLoading];
-    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:nil gender:gender wechatID:nil oldAvatar:avatorImageModel.imageUrl OnCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:avatorImageModel.imageUrl gender:gender wechatID:nil oldAvatar:RI.avatar OnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.tableView showHUDMessage:@"修改成功" completionBlock:^{
                 [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -203,8 +204,8 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
                 photo=[MWPhoto photoWithImage:model.image];
             }else if (model.imageUrl.length){
                 photo=[MWPhoto photoWithURL:[NSURL URLWithString:model.imageUrl]];
-            }else if(model.placeholderImageUrl){
-                photo=[MWPhoto  photoWithImage:[UIImage imageNamed:model.placeholderImageUrl]];
+            }else if(model.placeholderImageName){
+                photo=[MWPhoto  photoWithImage:[UIImage imageNamed:model.placeholderImageName]];
             }
             [EMImagePickBrowserHelper showImageBroswerOnController:weakSelf withImageArray:@[photo] currentIndex:0];
         }];
@@ -214,9 +215,11 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
                NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 0.5) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
                    CGFloat progress=totalBytesSent/(totalBytesExpectedToSend*1.0);
                    NSLog(@"上传速度===%.1f",progress);
+//                   [weakSelf.view showHUDProgress:progress message:@"上传中..."];
                 } onCompletionBlock:^(OCResponseResult *responseResult) {
                     if (responseResult.responseCode==OCCodeStateSuccess) {
-                        
+                        weakSelf.avatarModel.imageUrl=responseResult.responseData;
+                        [weakSelf.tableView reloadData];
                     }
                 }];
                 [weakSelf addSessionTask:task];

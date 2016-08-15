@@ -15,6 +15,7 @@
 @implementation OCUTableViewRightImageCell
 - (void)onInitContentView{
     [super onInitContentView];
+    self.imageView.image=nil;
     _rightImageView=[UIImageView new];
     _rightImageView.contentMode=UIViewContentModeScaleAspectFill;
     _rightImageView.clipsToBounds=YES;
@@ -31,16 +32,17 @@
 
 -(void)setCellModel:(OCTableCellModel *)cellModel{
     [super setCellModel:cellModel];
+        self.imageView.image=nil;
    __block OCTableCellRightImageModel *model = (OCTableCellRightImageModel *)cellModel;
     if (model.image) {
         self.rightImageView.image=model.image;
         return;
     }
     if ([NSString isNilOrEmptyForString:model.imageUrl]) {
-        self.rightImageView.image=[UIImage imageNamed:model.placeholderImageUrl];
+        self.rightImageView.image=[UIImage imageNamed:model.placeholderImageName];
     }else{
         if ([model.imageUrl hasPrefix:@"http://"]||[model.imageUrl hasPrefix:@"https://"]) {
-            [_rightImageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:model.placeholderImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [_rightImageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:model.placeholderImageName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 model.image=image;
             }];
         }else if ([model.imageUrl hasPrefix:NSHomeDirectory()]){

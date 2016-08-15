@@ -12,7 +12,7 @@
 #import "EMHomeModel.h"
 @implementation EMHomeNetService
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
-    NSString *apiPath=[self urlWithSuffixPath:@"homeSpread"];
+    NSString *apiPath=[self urlWithSuffixPath:@"spread"];
 //    NSString *apiPath=@"http://static.duapp.com/app/shopping/api/homeSpread";
     NSDictionary *postDic=@{@"type":@(1)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {

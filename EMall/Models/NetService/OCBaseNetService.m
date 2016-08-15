@@ -40,7 +40,6 @@
             }
         });
     }
-  
 }
 //
 //static NSString const *DomainHost  = @"http://45.118.132.56:8081/";

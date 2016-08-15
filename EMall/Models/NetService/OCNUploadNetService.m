@@ -166,8 +166,12 @@
             progressBlock(bytesSent,totalBytesSent,totalBytesExpectedToSend);
         }
     } onCompletionBlock:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:[OCBaseModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (completionBlock) {
+                if ([responseResult.responseData isKindOfClass:[NSDictionary class]]) {
+                    NSString *url=[responseResult.responseData objectForKey:@"url"];
+                    responseResult.responseData=url;
+                }
                 completionBlock(responseResult);
             }
         }];

@@ -28,6 +28,10 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
 - (void)onInitContentView{
     self.backgroundColor=RGB(229, 26, 30);
     _headImageView=[[UIImageView alloc]  init];
+    _headImageView.contentMode=UIViewContentModeScaleAspectFill;
+    _headImageView.clipsToBounds=YES;
+    _headImageView.layer.borderColor=[UIColor whiteColor].CGColor;
+    _headImageView.layer.borderWidth=1.0;
     [self addSubview:_headImageView];
     
     _nameLable =[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:15] textAlignment:NSTextAlignmentLeft];

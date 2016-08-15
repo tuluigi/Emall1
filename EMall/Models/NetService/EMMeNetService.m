@@ -77,13 +77,18 @@
                                    oldAvatar:(NSString *)oldAvatar
                            OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/update"];
-    NSDictionary *postDic=@{@"member.id":@(userID),@"member.member_name":stringNotNil(nickName),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday),@"member.webchat":stringNotNil(weChatID)};
+    NSDictionary *postDic=@{@"member.id":@(userID),@"member.member_name":stringNotNil(nickName),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday)};
     NSMutableDictionary *parmDic=[NSMutableDictionary dictionaryWithDictionary:postDic];
     if (![NSString isNilOrEmptyForString:avatar]) {
         [parmDic setObject:stringNotNil(avatar) forKey:@"member.avatar"];
-        [parmDic setObject:stringNotNil(oldAvatar) forKey:@"old.avatar "];
+        if (![NSString isNilOrEmptyForString:oldAvatar]) {
+          [parmDic setObject:stringNotNil(oldAvatar) forKey:@"old.avatar"];
+        }
     }
-    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+    if (![NSString isNilOrEmptyForString:weChatID]) {
+        [parmDic setObject:weChatID forKey:@"member.webchat"];
+    }
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:parmDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (responseResult.responseCode==OCCodeStateSuccess) {
                 EMUserModel *userModel=[EMPersistence localUserModel];

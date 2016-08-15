@@ -150,13 +150,20 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
         hud.labelFont=[UIFont oc_systemFontOfSize:15];
         [self addSubview:hud];
     }
+    hud.completionBlock=nil;
     return hud;
+}
+-(void)showHUDProgress:(CGFloat)progress message:(NSString *)message{
+    MBProgressHUD *hudView=[self hudView];
+    hudView.progress=progress;
+    hudView.labelText=message;
+    hudView.mode=MBProgressHUDModeDeterminateHorizontalBar;
+    [hudView show:YES];
 }
 -(void)showHUDMessage:(NSString *)message completionBlock:(void (^)())completionBlock{
     MBProgressHUD *hudView=[self hudView];
     hudView.completionBlock=completionBlock;
     [self showHUDMessage:message];
-
 }
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset{
     MBProgressHUD *hudView=[self hudView];
