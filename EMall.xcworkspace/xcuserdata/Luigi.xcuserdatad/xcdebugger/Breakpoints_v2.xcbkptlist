@@ -9,61 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMHomeNetService.m"
-            timestampString = "492920404.612387"
+            filePath = "EMall/Models/NetService/NetWork/OCResponseResult.m"
+            timestampString = "492922962.633938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "+getHomeAdListOnCompletionBlock:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__51+[EMHomeNetService getHomeAdListOnCompletionBlock:]_block_invoke"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMHomeNetService.m"
-                  timestampString = "492920572.400934"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__51+[EMHomeNetService getHomeAdListOnCompletionBlock:]_block_invoke_2"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Models/NetService/EMHomeNetService.m"
-                  timestampString = "492920572.401059"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/OCBaseNetService.m"
-            timestampString = "492920414.772262"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "+parseOCResponseObject:modelClass:error:onCompletionBlock:"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "+responseResultWithOCResponseObject:error:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +26,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Models/NetService/NetWork/OCNetSessionManager.m"
-            timestampString = "492921038.020988"
+            timestampString = "492931243.474661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
+            landmarkName = "-requestWithUrl:parmars:method:onCompletionHander:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Models/NetService/NetWork/OCNetSessionManager.m"
+            timestampString = "492931840.206838"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-requestWithUrl:parmars:method:onCompletionHander:"
             landmarkType = "5">
          </BreakpointContent>

@@ -10,6 +10,7 @@
 #import "OCUTableCellHeader.h"
 #import "EMImagePickBrowserHelper.h"
 #import "EMMeNetService.h"
+#import "EMUserModel.h"
 typedef NS_ENUM(NSInteger,EMMeUserInfoItem) {
     EMMeUserInfoItemAvtar       ,
     EMMeUserInfoItemNickName    ,
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     EMMeUserInfoActionSheetTagAvatar  ,
 };
 @interface EMMeInfoViewController ()
-
+@property (nonatomic,strong)__block EMUserModel *userModel;
 @end
 
 @implementation EMMeInfoViewController
@@ -37,16 +38,17 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     OCTableCellTextFiledModel *nickNameModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"昵称" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemNickName];
    OCTableCellDetialTextModel *genderModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"性别" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
     genderModel.detailText=@"男";
-    OCTableCellDetialTextModel *birthdayModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"生日" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
+    OCTableCellDetialTextModel *birthdayModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"生日" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemBirthday];
 
     
     OCTableCellTextFiledModel *emailModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"邮箱" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemEmail];
 
     self.dataSourceArray=[NSMutableArray arrayWithObjects:avatarModel,nickNameModel,genderModel,birthdayModel,emailModel, nil];
     [self.tableView reloadData];
-    
+    [self getUserInfo];
     UIBarButtonItem *rightButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didRightBarButtonPressed)];
     self.navigationItem.rightBarButtonItem=rightButtonItem;
+    self.navigationItem.rightBarButtonItem.enabled=NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,9 +56,16 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     // Dispose of any resources that can be recreated.
 }
 - (void)getUserInfo{
+    WEAKSELF
+    [self.tableView showPageLoadingView];
     NSURLSessionTask *task=[EMMeNetService getUserInfoWithUserID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
+        [weakSelf.tableView dismissPageLoadView];
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            
+            weakSelf.userModel=responseResult.responseData;
+            weakSelf.navigationItem.rightBarButtonItem.enabled=YES;
+            [weakSelf.tableView reloadData];
+        }else{
+            [weakSelf.tableView showPageLoadedMessage:@"获取信息失败" delegate:nil];
         }
     }];
     [self addSessionTask:task];

@@ -31,7 +31,7 @@ static OCNetSessionManager *sharedSessionManager;
         [[_afSessionManager requestSerializer] setTimeoutInterval:20];
 //        _afSessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
               _afSessionManager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-         _afSessionManager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil ];
+         _afSessionManager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/html charset=utf-8", nil ];
  
     }
     return _afSessionManager;
