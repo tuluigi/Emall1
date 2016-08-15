@@ -267,11 +267,25 @@ return @"删除";
     NSPredicate *preicate=[NSPredicate predicateWithFormat:@"_unSelected=%ld",NO];
     
     NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
+    if (selectArray.count) {
+        WEAKSELF
+        if (bottomView.isDelete) {//删除购物车
+            UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"确定要删除选中的商品么？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            UIAlertAction *quitAction=[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (selectArray.count) {
+                    [weakSelf deleteShopCart:selectArray];
+                }
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:quitAction];
+            [self presentViewController:alertController animated:YES completion:^{
+                
+            }];
+    }
     
-    if (bottomView.isDelete) {//删除购物车
-        if (selectArray.count) {
-            [self deleteShopCart:selectArray];
-        }
     }else{//提交购物车
         if (selectArray.count) {
             EMCartSubmitViewController *submitController=[[EMCartSubmitViewController alloc]  init];

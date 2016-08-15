@@ -77,7 +77,7 @@
  *  @param message
  *  @param completionBlock
  */
--(void)showHUDProgress:(CGFloat)progress message:(NSString *)message;
+-(MBProgressHUD *)showHUDProgress:(CGFloat)progress message:(NSString *)message;
 -(void)showHUDMessage:(NSString *)message completionBlock:(void (^)())completionBlock;
 -(void)showHUDMessage:(NSString *)message;
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset;

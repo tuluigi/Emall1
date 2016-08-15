@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-static NSString *const EMCache_HomeDataSourceKey    =@"EMCache_HomeDataSourceKey";
-static NSString *const EMCache_HomeADDataSourceKey    =@"EMCache_HomeADDataSourceKey";
+static NSString *const EMCache_HomeDataSourceKey        =@"EMCache_HomeDataSourceKey";//首页数据
+static NSString *const EMCache_HomeADDataSourceKey      =@"EMCache_HomeADDataSourceKey";//首页广告
+
+static NSString *const EMCache_DiscoveryDataSourceKey    =@"EMCache_DiscoveryDataSourceKey";//发现
 
 @interface EMCache : NSObject
 + (void)em_setObject:(id)value forKey:(NSString *)key;

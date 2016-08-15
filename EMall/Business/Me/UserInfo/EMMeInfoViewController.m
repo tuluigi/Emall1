@@ -211,15 +211,22 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
         }];
         UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"修改图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
-               NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 0.5) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+          [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
+                __block   MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                progressHud.mode = MBProgressHUDModeAnnularDeterminate;
+                progressHud.labelText = @"上传中...";
+               NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 1) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
                    CGFloat progress=totalBytesSent/(totalBytesExpectedToSend*1.0);
-                   NSLog(@"上传速度===%.1f",progress);
-//                   [weakSelf.view showHUDProgress:progress message:@"上传中..."];
+                   progressHud.progress=progress;
                 } onCompletionBlock:^(OCResponseResult *responseResult) {
+                    [progressHud hide:YES];
+                 
                     if (responseResult.responseCode==OCCodeStateSuccess) {
+                        [weakSelf.view showHUDMessage:@"上传成功,请保存"];
                         weakSelf.avatarModel.imageUrl=responseResult.responseData;
                         [weakSelf.tableView reloadData];
+                    }else{
+                        [weakSelf.view showHUDMessage:@"上传失败"];
                     }
                 }];
                 [weakSelf addSessionTask:task];

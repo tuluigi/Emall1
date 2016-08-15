@@ -53,6 +53,8 @@
         weakSelf.cursor++;
         [weakSelf getGoodsListWithCursor:weakSelf.cursor goodsName:self.searchBar.text];
     }];
+    self.dataSourceArray=[EMCache em_objectForKey:EMCache_DiscoveryDataSourceKey];
+    [weakSelf.myCollectionView reloadData];
     [self.myCollectionView startPullDownRefresh];
 }
 - (void)getGoodsListWithCursor:(NSInteger )cursor goodsName:(NSString *)goodsName{
@@ -69,6 +71,9 @@
                 [weakSelf.dataSourceArray removeAllObjects];
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+            if (cursor<=2) {
+                [EMCache em_setObject:weakSelf.dataSourceArray forKey:EMCache_DiscoveryDataSourceKey];
+            }
             [weakSelf.myCollectionView reloadData];
         }else{
             if (weakSelf.dataSourceArray.count==0 ) {

@@ -20,6 +20,7 @@
 #import "EMAdModel.h"
 #import "EMCatViewController.h"
 #import "EMGoodsListViewController.h"
+#import "EMWebViewController.h"
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
@@ -62,6 +63,7 @@ EMHomeHeadReusableViewDelegate>
         [weakSelf getHomeData];
         [weakSelf getHomeADList];
     }];
+    [self.myCollectionView startPullDownRefresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,9 +123,9 @@ EMHomeHeadReusableViewDelegate>
             count=1;
         }
     }else if (section==1){
-        count=self.homeModel.hotGoodsArray.count;
-    }else if (section==2){
         count=self.homeModel.greatGoodsArray.count;
+    }else if (section==2){
+        count=self.homeModel.hotGoodsArray.count;
     }
     return count;
 }
@@ -136,11 +138,11 @@ EMHomeHeadReusableViewDelegate>
         aCell=cell;
     }else if(indexPath.section==1){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
+        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.greatGoodsArray];
         aCell=cell;
     }else if (indexPath.section==2){
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
+        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
         aCell=cell;
     }else{
         aCell=[[UICollectionViewCell alloc]  init];
@@ -239,7 +241,9 @@ EMHomeHeadReusableViewDelegate>
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{
     EMAdModel *adModel=[self.adArray objectAtIndex:index];
-    //
+    EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
+    webController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:webController animated:YES];
 }
 
 
