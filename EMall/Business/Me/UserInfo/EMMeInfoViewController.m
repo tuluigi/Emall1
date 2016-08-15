@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoItem) {
     EMMeUserInfoItemGender      ,
     EMMeUserInfoItemBirthday    ,
     EMMeUserInfoItemEmail       ,
+    EMMeUserInfoItemWeChat       ,
 };
 typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     EMMeUserInfoActionSheetTagGender  =200,
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 @property (nonatomic,strong)__block OCTableCellDetialTextModel *genderModel;
 @property (nonatomic,strong)__block OCTableCellDetialTextModel *birthdayModel;
 @property (nonatomic,strong)__block OCTableCellTextFiledModel *emailModel;
+@property (nonatomic,strong)__block OCTableCellTextFiledModel *wechatModel;
 @property (nonatomic,strong)__block NSDate *birthdayDate;
 @end
 
@@ -58,7 +60,9 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     
     _emailModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"邮箱" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemEmail];
     _emailModel.inputText=model.email;
-    self.dataSourceArray=[NSMutableArray arrayWithObjects:_avatarModel,_nickNameModel,_genderModel,_birthdayModel,_emailModel, nil];
+    _wechatModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"微信" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemWeChat];
+    _wechatModel.inputText=model.wechatID;
+    self.dataSourceArray=[NSMutableArray arrayWithObjects:_avatarModel,_nickNameModel,_genderModel,_birthdayModel,_emailModel,_wechatModel, nil];
     [self.tableView reloadData];
     [self getUserInfo];
     UIBarButtonItem *rightButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didRightBarButtonPressed)];
@@ -128,7 +132,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     
     WEAKSELF
     [self.tableView showHUDLoading];
-    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:avatorImageModel.imageUrl gender:gender wechatID:nil oldAvatar:RI.avatar OnCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:avatorImageModel.imageUrl gender:gender wechatID:_wechatModel.inputText oldAvatar:RI.avatar OnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.tableView showHUDMessage:@"修改成功" completionBlock:^{
                 [weakSelf.navigationController popViewControllerAnimated:YES];

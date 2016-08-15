@@ -102,6 +102,7 @@
 		2AB965BF1D61627E0049BE2A /* EMCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965BE1D61627E0049BE2A /* EMCacheHelper.m */; };
 		2AB965C21D618D2B0049BE2A /* OCNUploadNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965C11D618D2B0049BE2A /* OCNUploadNetService.m */; };
 		2AB965C51D61D7F80049BE2A /* EMWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965C41D61D7F80049BE2A /* EMWebViewController.m */; };
+		2AB965C81D61E7FD0049BE2A /* EMOrderGoodsCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965C71D61E7FD0049BE2A /* EMOrderGoodsCommentController.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -371,6 +372,8 @@
 		2AB965C11D618D2B0049BE2A /* OCNUploadNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCNUploadNetService.m; sourceTree = "<group>"; };
 		2AB965C31D61D7F80049BE2A /* EMWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMWebViewController.h; sourceTree = "<group>"; };
 		2AB965C41D61D7F80049BE2A /* EMWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMWebViewController.m; sourceTree = "<group>"; };
+		2AB965C61D61E7FD0049BE2A /* EMOrderGoodsCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderGoodsCommentController.h; sourceTree = "<group>"; };
+		2AB965C71D61E7FD0049BE2A /* EMOrderGoodsCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderGoodsCommentController.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -954,6 +957,8 @@
 				2A99EB781D3BBE7D0024E924 /* EMOrderDetailAddressCell.m */,
 				2A31E8211D5F103500FC73A9 /* EMOrderGoodsCell.h */,
 				2A31E8221D5F103500FC73A9 /* EMOrderGoodsCell.m */,
+				2AB965C61D61E7FD0049BE2A /* EMOrderGoodsCommentController.h */,
+				2AB965C71D61E7FD0049BE2A /* EMOrderGoodsCommentController.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1508,6 +1513,7 @@
 				2A0352011D1A3E2B002BE7B7 /* OCBaseTableViewController.m in Sources */,
 				2ADF604C1D27C59C00DF757B /* UILabel+Category.m in Sources */,
 				2ADF604F1D27C59C00DF757B /* UIViewController+OCTopBarMessage.m in Sources */,
+				2AB965C81D61E7FD0049BE2A /* EMOrderGoodsCommentController.m in Sources */,
 				2ADF60441D27C59C00DF757B /* NSString+Addition.m in Sources */,
 				2A13F7101D5237D00041D2C5 /* OCUTableViewRightImageCell.m in Sources */,
 				2AED6CAD1D4461E5001B5910 /* EMCartSubmitCell.m in Sources */,
@@ -1758,15 +1764,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.opencourses.testhd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d1ddd0a7-39d7-4452-b986-327a8df1e890";
+				PROVISIONING_PROFILE = "d03075b5-4ef5-4c68-9056-00599f6e9863";
 			};
 			name = Debug;
 		};
@@ -1776,15 +1782,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.opencourses.testhd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d1ddd0a7-39d7-4452-b986-327a8df1e890";
+				PROVISIONING_PROFILE = "d03075b5-4ef5-4c68-9056-00599f6e9863";
 			};
 			name = Release;
 		};

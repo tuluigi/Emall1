@@ -167,13 +167,15 @@ UICollectionViewDelegateFlowLayout>
     [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
         make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
-        make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-10)).priorityHigh();
+//        make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(0), OCUISCALE(0)));
+      
     }];
     [_detailButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(weakSelf.reBuyButton);
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
         make.top.mas_equalTo(weakSelf.reBuyButton);
         make.right.mas_equalTo(weakSelf.reBuyButton.mas_left).offset(OCUISCALE(-12));
+          make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-10)).priorityHigh();
     }];
 }
 
@@ -212,6 +214,7 @@ UICollectionViewDelegateFlowLayout>
 
 
 - (void)didReBuyButtonPressed{
+        [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:self.orderModel];
 //    [[self nextResponder]routerEventName:kEMOrderShoudBuyAgainEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
 //    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
 //        [_delegate orderListCellShouldReBuyThisGoods];
@@ -219,7 +222,7 @@ UICollectionViewDelegateFlowLayout>
 }
 
 - (void)didCheckOrderDetailButtonPressed{
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:@{kEMOrderShoudBuyAgainEvent:@(self.orderModel.orderID)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderGotoOrderDetailEvent object:self.orderModel];
 //     [[self nextResponder]routerEventName:kEMOrderGotoOrderDetailEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
 //    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldCheckOrderDetail)]) {
 //        [_delegate orderListCellShouldCheckOrderDetail];

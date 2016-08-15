@@ -44,8 +44,20 @@
     
     WEAKSELF
     [[NSNotificationCenter defaultCenter] addObserverForName:kEMOrderShoudBuyAgainEvent object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        EMOrderModel *order=[note.userInfo objectForKey:kEMOrderShoudBuyAgainEvent];
-        [self orderListControllerDidSelecOrder:order];
+        EMOrderModel *orderModel=note.object;
+        if ([orderModel isKindOfClass:[EMOrderModel class]]) {
+            for (EMOrderGoodsModel *model in orderModel.goodsArray) {
+                [weakSelf addShopCartWithGoodsID:model.goodsID infoID:model.goodsInfoModel.infoID buyCount:1];
+            }
+        }
+        
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:kEMOrderGotoOrderDetailEvent object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        EMOrderModel *orderModel=note.object;
+        if ([orderModel isKindOfClass:[EMOrderModel class]]) {
+            [weakSelf orderListControllerDidSelecOrder:orderModel];
+        }
+        
     }];
 }
 - (NSArray *)titleArrayWithOrderStates:(NSArray *)orderSataArray{
