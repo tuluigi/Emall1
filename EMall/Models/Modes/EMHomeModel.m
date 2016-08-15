@@ -46,7 +46,7 @@
             NSMutableArray *sessions=[[NSMutableArray alloc]  init];
             for (id item in value) {
                 NSError *aError;
-                EMCatModel *catModel=[MTLJSONAdapter modelOfClass:[EMHomeCatModel class] fromJSONDictionary:item error:&aError];
+                EMCatModel *catModel=[MTLJSONAdapter modelOfClass:[EMCatModel class] fromJSONDictionary:item error:&aError];
                 if (catModel&&nil==aError) {
                     [sessions addObject:catModel];
                 }
@@ -59,7 +59,7 @@
                 NSMutableArray *sessions=[[NSMutableArray alloc]  init];
                 for (id item in value) {
                     NSError *aError;
-                    EMHomeGoodsModel *goodModel=[MTLJSONAdapter modelOfClass:[EMHomeGoodsModel class] fromJSONDictionary:item error:&aError];
+                    EMHomeGoodsModel *goodModel=[MTLJSONAdapter modelOfClass:[EMGoodsModel class] fromJSONDictionary:item error:&aError];
                     if (goodModel&&nil==aError) {
                         [sessions addObject:goodModel];
                     }

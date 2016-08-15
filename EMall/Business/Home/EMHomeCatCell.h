@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class EMHomeCatCell;
-@class EMHomeCatModel;
+@class EMCatModel;
 @protocol EMHomeCatCellDelegate <NSObject>
 
-- (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMHomeCatModel *)catModel;
+- (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel;
 
 @end
 

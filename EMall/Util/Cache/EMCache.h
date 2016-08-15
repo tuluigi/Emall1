@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
+static NSString *const EMCache_HomeDataSourceKey    =@"EMCache_HomeDataSourceKey";
+static NSString *const EMCache_HomeADDataSourceKey    =@"EMCache_HomeADDataSourceKey";
+
 @interface EMCache : NSObject
 + (void)em_setObject:(id)value forKey:(NSString *)key;
 + (id)em_objectForKey:(NSString *)key;

@@ -55,7 +55,8 @@ EMHomeHeadReusableViewDelegate>
     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
 //    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
-    
+    self.adArray=[EMCache em_objectForKey:EMCache_HomeADDataSourceKey];
+    self.homeModel=[EMCache em_objectForKey:EMCache_HomeDataSourceKey];
     WEAKSELF
     [self.myCollectionView addOCPullDownResreshHandler:^{
         [weakSelf getHomeData];
@@ -86,29 +87,12 @@ EMHomeHeadReusableViewDelegate>
     WEAKSELF
     NSURLSessionTask *task=[EMHomeNetService getHomeAdListOnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
-//            weakSelf.adArray=responseResult.responseData;
             if (nil==weakSelf.adArray) {
                 weakSelf.adArray=[[NSMutableArray alloc] init];
             }
             [weakSelf.adArray removeAllObjects];
-            for (NSInteger i=0; i<6; i++) {
-                EMAdModel *adModel=[[EMAdModel alloc]  init];
-                [weakSelf.adArray addObject:adModel];
-            }
-            NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
-                                  @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
-                                  @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
-                                  @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
-                                  @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
-                                  @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
-            
-            //暂时为了测试用
-            for (EMAdModel *adModel in weakSelf.adArray) {
-                NSInteger index=[weakSelf.adArray indexOfObject:adModel];
-                index=index%imageArray.count;
-                adModel.adImageUrl=[imageArray objectAtIndex:index];
-            }
-
+            [weakSelf.adArray addObjectsFromArray:responseResult.responseData];
+             [EMCache em_setObject:weakSelf.adArray forKey:EMCache_HomeADDataSourceKey];
             [weakSelf.myCollectionView reloadData];
         }
     }];
@@ -120,7 +104,7 @@ EMHomeHeadReusableViewDelegate>
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.homeModel=responseResult.responseData;
-            [weakSelf.homeModel.catArray addObjectsFromArray:weakSelf.homeModel.catArray];
+            [EMCache em_setObject:weakSelf.homeModel forKey:EMCache_HomeDataSourceKey];
             [weakSelf.myCollectionView reloadData];
         }
     }];
@@ -204,7 +188,7 @@ EMHomeHeadReusableViewDelegate>
     if (indexPath.section==0) {
         
     }else{
-        EMHomeGoodsModel *goodsModel;
+        EMGoodsModel *goodsModel;
         if (indexPath.section==1) {
             goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
         }else if(indexPath.section==2){
@@ -236,7 +220,7 @@ EMHomeHeadReusableViewDelegate>
     if (type==EMHomeHeadReusableViewTypeGreat) {
         catName=@"嗨购精品";
     }else if (type==EMHomeHeadReusableViewTypeHot){
-        catName=@"嗨购商品";
+        catName=@"嗨购热品";
     }
     EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:type catName:catName];
     listController.hidesBottomBarWhenPushed=YES;

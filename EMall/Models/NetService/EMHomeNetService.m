@@ -14,7 +14,8 @@
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"homeSpread"];
 //    NSString *apiPath=@"http://static.duapp.com/app/shopping/api/homeSpread";
-    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+    NSDictionary *postDic=@{@"type":@(1)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMAdModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);

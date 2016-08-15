@@ -7,12 +7,12 @@
 //
 
 #import "EMHomeCatCell.h"
-#import "EMHomeModel.h"
+#import "EMCatModel.h"
 
-typedef void(^EMHomeCatItemViewSelectBlock)(EMHomeCatModel *catModel);
+typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 
 @interface EMHomeCatItemView : UIView
-@property (nonatomic,strong)EMHomeCatModel *catModel;
+@property (nonatomic,strong)EMCatModel *catModel;
 @property (nonatomic,copy)EMHomeCatItemViewSelectBlock selectBlock;
 + (CGSize)homeCatItemViewSize;
 @end
@@ -58,13 +58,9 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMHomeCatModel *catModel);
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
     [self addGestureRecognizer:tapGesture];
 }
-- (void)setCatModel:(EMHomeCatModel *)catModel{
+- (void)setCatModel:(EMCatModel *)catModel{
     _catModel=catModel;
-    NSInteger i=catModel.catID%100;
-    
-    NSString *imageUrl=[NSString stringWithFormat:@"0%ld",i+1];
-//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
-    _iconImageView.image=[UIImage imageNamed:imageUrl];
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_catModel.catImageUrl] placeholderImage:EMDefaultImage];
     self.nameLabel.text=_catModel.catName;
 }
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture{
@@ -124,7 +120,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMHomeCatModel *catModel);
     for (NSInteger i=0; i<self.catModelArray.count; i++) {
         EMHomeCatItemView *itemView=[[EMHomeCatItemView alloc]  init];
         itemView.catModel=[self.catModelArray objectAtIndex:i];
-        itemView.selectBlock= ^(EMHomeCatModel *catModel){
+        itemView.selectBlock= ^(EMCatModel *catModel){
             if (_delegate &&[_delegate respondsToSelector:@selector(homeCatCell:didSelectItem:)]) {
                 [_delegate homeCatCell:weakSelf didSelectItem:catModel];
             }

@@ -7,7 +7,8 @@
 //
 
 #import "OCBaseModel.h"
-
+@class EMGoodsModel;
+@class EMCatModel;
 @interface EMHomeGoodsModel : OCBaseModel
 @property(nonatomic,assign)NSInteger goodsID;
 @property(nonatomic,copy)NSString *goodsName;
@@ -26,8 +27,8 @@
 @end
 
 @interface EMHomeModel : OCBaseModel
-@property (nonatomic,strong)NSMutableArray <EMHomeCatModel *>*catArray;
+@property (nonatomic,strong)NSMutableArray <EMCatModel *>*catArray;
 
-@property (nonatomic,strong)NSMutableArray <EMHomeGoodsModel *>*greatGoodsArray;//精品商品的数组
-@property (nonatomic,strong)NSMutableArray <EMHomeGoodsModel *>*hotGoodsArray;//热销商品数组
+@property (nonatomic,strong)NSMutableArray <EMGoodsModel *>*greatGoodsArray;//精品商品的数组
+@property (nonatomic,strong)NSMutableArray <EMGoodsModel *>*hotGoodsArray;//热销商品数组
 @end
