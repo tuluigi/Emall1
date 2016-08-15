@@ -68,6 +68,8 @@
                                     birthday:(NSString *)birthday
                                       avatar:(NSString *)avatar
                                       gender:(NSString *)gender
+                                    wechatID:(NSString *)weChatID
+                                   oldAvatar:(NSString *)oldAvatar
                            OnCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 
 

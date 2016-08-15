@@ -81,5 +81,13 @@
         return NO;
     }
 }
-
+- (NSString *)convertDateToStringWithFormat:(NSString *)format
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    //    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    //    [dateFormatter setTimeZone:timeZone];
+    NSString *dateStr = [dateFormatter stringFromDate:self];
+    return dateStr;
+}
 @end

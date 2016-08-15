@@ -8,6 +8,7 @@
 
 #import "EMUserModel.h"
 #import "AESCrypt.h"
+#import "EMPersistence.h"
 static NSString *const kUserID      = @"KUserID";
 static NSString *const kUserName    = @"KUserName";
 static NSString *const kUserAvatar  = @"kUserAvatar";
@@ -22,8 +23,32 @@ static NSString *const kUserAvatar  = @"kUserAvatar";
              @"tel":@"telephone",
              @"gender":@"sex",
              @"birtadyDay":@"birthday",
-             @"level":@"level",};
+             @"level":@"level",
+             @"wechatID":@"webchat"};
 }
 
-
++(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
+    if ([key isEqualToString:@"birtadyDay"]) {
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            NSDateFormatter *formmater=[[NSDateFormatter alloc]  init];
+            formmater.dateFormat=@"yyyy-MM-dd HH:mm:ss";
+            NSDate *aDate=[formmater dateFromString:value];
+            return aDate;
+        }];
+    }else{
+        return nil;
+    }
+}
+-(NSString *)genderString{
+    if ([self.gender isEqualToString:@"1"]) {
+        _genderString= @"男";
+    }else{
+        _genderString= @"女";
+    }
+    return _genderString;
+}
++ (EMUserModel *)loginUserModel{
+    EMUserModel *userModel=[EMPersistence localUserModel];
+    return userModel;
+}
 @end

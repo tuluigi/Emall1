@@ -13,21 +13,31 @@ static NSString *const  kUserPersistenceKey  =@"kUserPersistenceKey";
 @implementation EMPersistence
 + (void)persistenceWithUserModel:(EMUserModel *)userModel{
     if (userModel&&[userModel isKindOfClass:[EMUserModel class]]) {
-        RI.userID=userModel.userID;
-        RI.userName=userModel.userName;
-        RI.avatar=userModel.avatar;
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSData * aData=[NSKeyedArchiver archivedDataWithRootObject:userModel];
-            if (aData) {
-                NSError *aError;
-                aData=[aData AES256EncryptedDataUsingKey:kUserPersistenceKey error:&aError];
-                if (aError==nil&&aData) {
-                    [[NSUserDefaults standardUserDefaults ] setObject:aData forKey:[kUserPersistenceKey md5String]];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
+        [self syncRiInfoWithUserModel:userModel ri:RI];
+      
+        if ([userModel isKindOfClass:[EMUserModel class]]) {
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                NSData * aData=[NSKeyedArchiver archivedDataWithRootObject:userModel];
+                if (aData) {
+                    NSError *aError;
+                    aData=[aData AES256EncryptedDataUsingKey:kUserPersistenceKey error:&aError];
+                    if (aError==nil&&aData) {
+                        [[NSUserDefaults standardUserDefaults ] setObject:aData forKey:[kUserPersistenceKey md5String]];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
                 }
-            }
-        });
+            });
+        }
     }
+}
++ (void)syncRiInfoWithUserModel:(EMUserModel *)userModel ri:(RunInfo *)ri{
+    ri.userID=userModel.userID;
+    ri.userName=userModel.userName;
+    ri.avatar=userModel.avatar;
+    ri.nickName=userModel.nickName;
+    ri.wechatID=userModel.wechatID;
+    ri.birthday=userModel.birtadyDay;
+    ri.gender=userModel.gender;
 }
 + (void)userLogou{
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[kUserPersistenceKey md5String]];
@@ -35,7 +45,10 @@ static NSString *const  kUserPersistenceKey  =@"kUserPersistenceKey";
     RI.userID=0;
     RI.userName=nil;
     RI.avatar=nil;
-     [[NSNotificationCenter defaultCenter] postNotificationName:OCLogoutNofication object:nil];
+    RI.nickName=nil;
+    RI.birthday=nil;
+    RI.gender=nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:OCLogoutNofication object:nil];
 }
 + (EMUserModel *)localUserModel{
     EMUserModel *userModel;
@@ -44,7 +57,7 @@ static NSString *const  kUserPersistenceKey  =@"kUserPersistenceKey";
         NSError *aError;
         aData=[aData decryptedAES256DataUsingKey:kUserPersistenceKey error:&aError];
         if (aData) {
-             userModel=[NSKeyedUnarchiver unarchiveObjectWithData:aData];
+            userModel=[NSKeyedUnarchiver unarchiveObjectWithData:aData];
         }
     }
     if (![userModel isKindOfClass:[EMUserModel class]]) {
@@ -52,4 +65,5 @@ static NSString *const  kUserPersistenceKey  =@"kUserPersistenceKey";
     }
     return userModel;
 }
+
 @end

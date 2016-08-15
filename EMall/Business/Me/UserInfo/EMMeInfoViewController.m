@@ -11,6 +11,8 @@
 #import "EMImagePickBrowserHelper.h"
 #import "EMMeNetService.h"
 #import "EMUserModel.h"
+#import "OCNUploadNetService.h"
+#import "NSDate+Category.h"
 typedef NS_ENUM(NSInteger,EMMeUserInfoItem) {
     EMMeUserInfoItemAvtar       ,
     EMMeUserInfoItemNickName    ,
@@ -24,6 +26,17 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 };
 @interface EMMeInfoViewController ()
 @property (nonatomic,strong)__block EMUserModel *userModel;
+@property(nonatomic,strong)UIDatePicker *dataPicker;
+@property(nonatomic,strong)UIView *pickView;
+@property (nonatomic, strong) MASConstraint *pickViewHeightConstraint;
+
+
+@property (nonatomic,strong)__block OCTableCellRightImageModel *avatarModel;
+@property (nonatomic,strong)__block OCTableCellTextFiledModel *nickNameModel;
+@property (nonatomic,strong)__block OCTableCellDetialTextModel *genderModel;
+@property (nonatomic,strong)__block OCTableCellDetialTextModel *birthdayModel;
+@property (nonatomic,strong)__block OCTableCellTextFiledModel *emailModel;
+@property (nonatomic,strong)__block NSDate *birthdayDate;
 @end
 
 @implementation EMMeInfoViewController
@@ -32,28 +45,42 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"个人资料";
+    EMUserModel *model=[EMUserModel loginUserModel];
+    _avatarModel=[[OCTableCellRightImageModel alloc]  initWithTitle:@"头像" imageName:[RI  avatar] accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemAvtar];
+    _avatarModel.placeholderImageUrl=model.avatar;
+    _nickNameModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"昵称" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemNickName];
+    _nickNameModel.inputText=model.nickName;
+   _genderModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"性别" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
+    _genderModel.detailText=model.genderString;
+    _birthdayModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"生日" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemBirthday];
+    _birthdayModel.detailText=[model.birtadyDay convertDateToStringWithFormat:@"yyyy-MM-dd"];
     
-    OCTableCellRightImageModel *avatarModel=[[OCTableCellRightImageModel alloc]  initWithTitle:@"头像" imageName:[RI  avatar] accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemAvtar];
-    avatarModel.placeholderImageUrl=EMDefaultImageName;
-    OCTableCellTextFiledModel *nickNameModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"昵称" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemNickName];
-   OCTableCellDetialTextModel *genderModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"性别" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemGender];
-    genderModel.detailText=@"男";
-    OCTableCellDetialTextModel *birthdayModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"生日" imageName:nil accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMMeUserInfoItemBirthday];
-
-    
-    OCTableCellTextFiledModel *emailModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"邮箱" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemEmail];
-
-    self.dataSourceArray=[NSMutableArray arrayWithObjects:avatarModel,nickNameModel,genderModel,birthdayModel,emailModel, nil];
+    _emailModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"邮箱" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemEmail];
+    _emailModel.inputText=model.email;
+    self.dataSourceArray=[NSMutableArray arrayWithObjects:_avatarModel,_nickNameModel,_genderModel,_birthdayModel,_emailModel, nil];
     [self.tableView reloadData];
     [self getUserInfo];
     UIBarButtonItem *rightButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didRightBarButtonPressed)];
     self.navigationItem.rightBarButtonItem=rightButtonItem;
     self.navigationItem.rightBarButtonItem.enabled=NO;
+     [self.view addSubview:self.pickView];
+    WEAKSELF
+    [self.pickView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(weakSelf.view);
+        make.bottom.equalTo(weakSelf.view).offset(300);
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)setBirthdayDate:(NSDate *)birthdayDate{
+    _birthdayDate=birthdayDate;
+     self.birthdayModel.detailText=[_birthdayDate convertDateToStringWithFormat:@"yyyy-MM-dd"];
+    NSInteger index=[self.dataSourceArray indexOfObject:self.birthdayModel];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (void)getUserInfo{
     WEAKSELF
@@ -61,9 +88,16 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     NSURLSessionTask *task=[EMMeNetService getUserInfoWithUserID:[RI userID] onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissPageLoadView];
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            weakSelf.userModel=responseResult.responseData;
-            weakSelf.navigationItem.rightBarButtonItem.enabled=YES;
-            [weakSelf.tableView reloadData];
+            if ([responseResult.responseData isKindOfClass:[EMUserModel class]]) {
+                weakSelf.userModel=responseResult.responseData;
+                weakSelf.navigationItem.rightBarButtonItem.enabled=YES;
+                weakSelf.nickNameModel.inputText=weakSelf.userModel.nickName;
+                weakSelf.avatarModel.imageUrl=weakSelf.userModel.avatar;
+                weakSelf.genderModel.detailText=weakSelf.userModel.genderString;
+                weakSelf.emailModel.inputText=weakSelf.userModel.email;
+                weakSelf.birthdayDate=weakSelf.userModel.birtadyDay;
+                [weakSelf.tableView reloadData];
+            }
         }else{
             [weakSelf.tableView showPageLoadedMessage:@"获取信息失败" delegate:nil];
         }
@@ -72,11 +106,11 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 }
 - (void)didRightBarButtonPressed{
     [self.view endEditing:YES];
-    OCTableCellRightImageModel *avatorImageModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemAvtar];
-    OCTableCellTextFiledModel *nickNameModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemNickName];
-    OCTableCellDetialTextModel *genderModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemGender];
-    OCTableCellDetialTextModel *birthdayModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemBirthday];
-    OCTableCellTextFiledModel *emailModel=[self.dataSourceArray objectAtIndex:EMMeUserInfoItemEmail];
+    OCTableCellRightImageModel *avatorImageModel=self.avatarModel;
+    OCTableCellTextFiledModel *nickNameModel=self.nickNameModel;
+    OCTableCellDetialTextModel *genderModel=self.genderModel;
+    OCTableCellDetialTextModel *birthdayModel=self.birthdayModel;
+    OCTableCellTextFiledModel *emailModel=self.emailModel;
     NSString *gender=@"1";
     if ([genderModel.detailText isEqualToString:@"男"]) {
         genderModel.detailText=@"1";
@@ -90,9 +124,10 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
         [self.tableView showHUDMessage:@"请输入正确邮箱"];
         return;
     }
+    
     WEAKSELF
     [self.tableView showHUDLoading];
-    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:nil gender:gender OnCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMMeNetService editUserInfoWithUserID:[RI userID] UserName:nickNameModel.inputText email:emailModel.inputText birthday:birthdayModel.detailText avatar:nil gender:gender wechatID:nil oldAvatar:avatorImageModel.imageUrl OnCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.tableView showHUDMessage:@"修改成功" completionBlock:^{
                 [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -176,6 +211,15 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
         UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"修改图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
+               NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 0.5) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+                   CGFloat progress=totalBytesSent/(totalBytesExpectedToSend*1.0);
+                   NSLog(@"上传速度===%.1f",progress);
+                } onCompletionBlock:^(OCResponseResult *responseResult) {
+                    if (responseResult.responseCode==OCCodeStateSuccess) {
+                        
+                    }
+                }];
+                [weakSelf addSessionTask:task];
                 [(OCTableCellRightImageModel *)cellModel setImage:editImage];
                 [weakSelf.tableView reloadData];
             }];
@@ -189,9 +233,99 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
         [self presentViewController:alertController  animated:YES completion:^{
             
         }];
+    }else if (cellModel.type==EMMeUserInfoItemBirthday){
+        [self.view endEditing:YES];
+        WEAKSELF
+        [UIView animateWithDuration:0.2 animations:^{
+            [weakSelf.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(weakSelf.view);
+            }];
+            if (weakSelf.birthdayDate) {
+                [weakSelf.dataPicker setDate:weakSelf.birthdayDate animated:YES];
+            }
+            [weakSelf.pickView layoutIfNeeded];
+        }];
+        return;
     }
 }
-
+-(void)dateChanged:(UIDatePicker *)sender{
+    NSDate*date= sender.date;
+    self.birthdayDate=date;
+}
+-(void)doneButtonPressed:(UIBarButtonItem *)sender{
+    WEAKSELF
+    [UIView animateWithDuration:0.2 animations:^{
+        [weakSelf.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(weakSelf.view).offset(300);
+        }];
+        [weakSelf.pickView layoutIfNeeded];
+        NSDate*date= weakSelf.dataPicker.date;
+        weakSelf.birthdayDate=date;
+    }];
+    return;
+}
+-(void)cancelButtonPressed:(UIBarButtonItem *)sender{
+    WEAKSELF
+    [UIView animateWithDuration:0.2 animations:^{
+        [weakSelf.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(weakSelf.view).offset(300);
+        }];
+        [weakSelf.pickView layoutIfNeeded];
+    }];
+    return;
+    
+}
+-(UIView *)pickView{
+    if (nil==_pickView) {
+        _pickView=[[UIView alloc]  init];
+        [_pickView addSubview:self.dataPicker];
+        
+        UIToolbar *pickerToolbar = [[UIToolbar alloc] init];
+        pickerToolbar.backgroundColor=RGB(240, 240, 240);
+        pickerToolbar.barStyle = UIBarStyleDefault;
+        [pickerToolbar sizeToFit];
+        NSMutableArray *barItems = [[NSMutableArray alloc] init];
+        
+        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]
+                                      
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
+        [barItems addObject:cancelBtn];
+        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        [barItems addObject:flexSpace];
+        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]
+                                    
+                                    initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+        [barItems addObject:doneBtn];
+        [pickerToolbar setItems:barItems animated:YES];
+        [_pickView addSubview:pickerToolbar];
+        
+        
+        
+        [pickerToolbar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(_pickView);
+            make.height.equalTo(@(40));
+        }];
+        
+        [_dataPicker mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(pickerToolbar.mas_bottom);
+            make.left.right.bottom.equalTo(_pickView);
+        }];
+    }
+    return _pickView;
+}
+-(UIDatePicker *)dataPicker{
+    if (nil==_dataPicker) {
+        _dataPicker = [[UIDatePicker alloc] init];
+        _dataPicker.datePickerMode = UIDatePickerModeDate;
+        _dataPicker.hidden = NO;
+        _dataPicker.minimumDate = [[NSDate alloc]  initWithTimeIntervalSince1970:0];
+        _dataPicker.maximumDate= [NSDate date];
+        //响应日期选择事件，自定义dateChanged方法
+        [ _dataPicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged ];
+        
+    }
+    return _dataPicker;
+}
 /*
 #pragma mark - Navigation
 

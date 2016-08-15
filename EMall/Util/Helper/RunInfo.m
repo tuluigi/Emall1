@@ -19,11 +19,7 @@ CC_SYNTHESIZE_SINGLETON_FOR_CLASS(RunInfo)
     self=[super init];
     if (self) {
         EMUserModel *userModel=[EMPersistence localUserModel];
-        if (userModel) {
-            self.userID=userModel.userID;
-            self.userName=userModel.userName;
-            self.avatar=userModel.avatar;
-        }
+        [EMPersistence syncRiInfoWithUserModel:userModel ri:self];
     }
     return self;
 }

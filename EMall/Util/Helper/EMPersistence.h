@@ -15,6 +15,7 @@
  *  @param userModel
  */
 + (void)persistenceWithUserModel:(EMUserModel *)userModel;
++ (void)syncRiInfoWithUserModel:(EMUserModel *)userModel ri:(RunInfo *)ri;
 + (void)userLogou;
 + (EMUserModel *)localUserModel;
 @end

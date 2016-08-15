@@ -100,6 +100,7 @@
 		2AB965B91D5C65250049BE2A /* EMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965B81D5C65250049BE2A /* EMCache.m */; };
 		2AB965BC1D5C7E920049BE2A /* EMGoodsNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */; };
 		2AB965BF1D61627E0049BE2A /* EMCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965BE1D61627E0049BE2A /* EMCacheHelper.m */; };
+		2AB965C21D618D2B0049BE2A /* OCNUploadNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB965C11D618D2B0049BE2A /* OCNUploadNetService.m */; };
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
@@ -365,6 +366,8 @@
 		2AB965BB1D5C7E920049BE2A /* EMGoodsNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsNetService.m; sourceTree = "<group>"; };
 		2AB965BD1D61627E0049BE2A /* EMCacheHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCacheHelper.h; sourceTree = "<group>"; };
 		2AB965BE1D61627E0049BE2A /* EMCacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCacheHelper.m; sourceTree = "<group>"; };
+		2AB965C01D618D2B0049BE2A /* OCNUploadNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCNUploadNetService.h; sourceTree = "<group>"; };
+		2AB965C11D618D2B0049BE2A /* OCNUploadNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCNUploadNetService.m; sourceTree = "<group>"; };
 		2AC6475D1D424F3200521462 /* NSAttributedString+Price.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Price.h"; sourceTree = "<group>"; };
 		2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Price.m"; sourceTree = "<group>"; };
 		2AC647641D43196C00521462 /* EMCartSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCartSubmitViewController.h; sourceTree = "<group>"; };
@@ -731,6 +734,8 @@
 		2A24272C1D12C80B0078240C /* NetService */ = {
 			isa = PBXGroup;
 			children = (
+				2AB965C01D618D2B0049BE2A /* OCNUploadNetService.h */,
+				2AB965C11D618D2B0049BE2A /* OCNUploadNetService.m */,
 				2A2427331D12C8B30078240C /* NetWork */,
 				2A2427301D12C8510078240C /* OCBaseNetService.h */,
 				2A2427311D12C8510078240C /* OCBaseNetService.m */,
@@ -1584,6 +1589,7 @@
 				2A31E8291D607EB900FC73A9 /* EMDiscoveryHeadView.m in Sources */,
 				2A99EB421D3A6C860024E924 /* OCUTableViewTextFieldCell.m in Sources */,
 				2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */,
+				2AB965C21D618D2B0049BE2A /* OCNUploadNetService.m in Sources */,
 				2A0352111D1A3FDA002BE7B7 /* EMDiscoveryViewController.m in Sources */,
 				2ADF60F41D3286CD00DF757B /* UITextField+IndexPath.m in Sources */,
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,

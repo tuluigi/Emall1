@@ -68,16 +68,33 @@
     return task;
 }
 + (NSURLSessionTask *)editUserInfoWithUserID:(NSInteger)userID
-                                    UserName:(NSString *)name
+                                    UserName:(NSString *)nickName
                                        email:(NSString *)email
                                     birthday:(NSString *)birthday
                                       avatar:(NSString *)avatar
                                       gender:(NSString *)gender
+                                    wechatID:(NSString *)weChatID
+                                   oldAvatar:(NSString *)oldAvatar
                            OnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[EMMeNetService urlWithSuffixPath:@"member/update"];
-    NSDictionary *postDic=@{@"member.id":@(userID),@"member.user_name":stringNotNil(name),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday)};
+    NSDictionary *postDic=@{@"member.id":@(userID),@"member.member_name":stringNotNil(nickName),@"member.e_mail":stringNotNil(email),@"member.sex":stringNotNil(gender),@"member.birthday":stringNotNil(birthday),@"member.webchat":stringNotNil(weChatID)};
+    NSMutableDictionary *parmDic=[NSMutableDictionary dictionaryWithDictionary:postDic];
+    if (![NSString isNilOrEmptyForString:avatar]) {
+        [parmDic setObject:stringNotNil(avatar) forKey:@"member.avatar"];
+        [parmDic setObject:stringNotNil(oldAvatar) forKey:@"old.avatar "];
+    }
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                EMUserModel *userModel=[EMPersistence localUserModel];
+                userModel.nickName=nickName;
+                userModel.gender=gender;
+                userModel.wechatID=weChatID;
+                if (![NSString isNilOrEmptyForString:avatar]) {
+                    userModel.avatar=avatar;
+                }
+                [EMPersistence persistenceWithUserModel:userModel];
+            }
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

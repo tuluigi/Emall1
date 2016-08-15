@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self reloadUserInfoData];
     [self getOrderStaetNum];
 }
 - (void)onInitData{
@@ -77,13 +78,13 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
     serviceModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray2=@[serviceModel];
-   
+    
     
     self.dataSourceArray=[NSMutableArray arrayWithObjects:groupArray0,groupArray1,groupArray2, nil];
     
     
-     [self handleUserLogStateChanged];
-    [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
+    [self handleUserLogStateChanged];
+    [self reloadUserInfoData];
     CGSize size=[self.headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     self.headView.frame=CGRectMake(0, 0, size.width, size.height);
     self.tableView.tableHeaderView=self.headView;
@@ -112,16 +113,26 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         quitModel.tableCellStyle=UITableViewCellStyleSubtitle;
         NSArray * groupArray4=@[quitModel];
         [self.dataSourceArray addObject:groupArray4];
-        [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
+  
         [self getOrderStaetNum];
     }else{
-        [self.dataSourceArray removeObjectsInRange:NSMakeRange(self.dataSourceArray.count-2, 2)];
-        [self.headView setUserName:[RI userName] headImageUrl:[RI avatar] level:1];
+        OCTableCellDetialTextModel *qutimodel=[[self.dataSourceArray lastObject] lastObject];
+        if (qutimodel.type==EMUserTableCellModelTypeLogout) {
+             [self.dataSourceArray removeObjectsInRange:NSMakeRange(self.dataSourceArray.count-2, 2)];
+        }
         for (EMOrderStateModel *stateModel in self.orderStateArray) {
             stateModel.badgeNumber=0;
         }
     }
-      [self.tableView reloadData];
+    [self reloadUserInfoData];
+    [self.tableView reloadData];
+}
+- (void)reloadUserInfoData{
+    NSString *nickName=[RI nickName];
+    if ([NSString isNilOrEmptyForString:nickName]) {
+        nickName=[RI userName];
+    }
+   [self.headView setUserName:nickName headImageUrl:[RI avatar] level:1];
 }
 - (void)getOrderStaetNum{
     if ([RI isLogined]) {
@@ -221,7 +232,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     if (cellModel.type==EMUserTableCellModelTypeLogout){
         UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"确定要退出当前账号吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-           
+            
         }];
         UIAlertAction *quitAction=[UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [EMMeNetService userLogoutOnCompletionBlock:^{

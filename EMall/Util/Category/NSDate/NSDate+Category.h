@@ -11,5 +11,5 @@
 @interface NSDate (Category)
 
 - (NSString *)getCommonTimeString;
-
+- (NSString *)convertDateToStringWithFormat:(NSString *)format;
 @end
