@@ -60,9 +60,9 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
     
     _emailModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"邮箱" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemEmail];
     _emailModel.inputText=model.email;
-    _wechatModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"微信" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemWeChat];
-    _wechatModel.inputText=model.wechatID;
-    self.dataSourceArray=[NSMutableArray arrayWithObjects:_avatarModel,_nickNameModel,_genderModel,_birthdayModel,_emailModel,_wechatModel, nil];
+//    _wechatModel=[[OCTableCellTextFiledModel alloc]  initWithTitle:@"微信" imageName:nil accessoryType:UITableViewCellAccessoryNone type:EMMeUserInfoItemWeChat];
+//    _wechatModel.inputText=model.wechatID;
+    self.dataSourceArray=[NSMutableArray arrayWithObjects:_avatarModel,_nickNameModel,_genderModel,_birthdayModel,_emailModel, nil];
     [self.tableView reloadData];
     [self getUserInfo];
     UIBarButtonItem *rightButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(didRightBarButtonPressed)];
