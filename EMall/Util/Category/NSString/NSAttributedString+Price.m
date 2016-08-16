@@ -28,7 +28,7 @@
     if (!pointSize) {
         pointSize=8;
     }
-    NSAttributedString *markAtrr=[[NSAttributedString alloc]  initWithString:@"￥" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(markSize)]}];
+    NSAttributedString *markAtrr=[[NSAttributedString alloc]  initWithString:@"$" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(markSize)]}];
     
     NSInteger priceInteger=(NSInteger)price;
     NSInteger pointeInteger=price-priceInteger;

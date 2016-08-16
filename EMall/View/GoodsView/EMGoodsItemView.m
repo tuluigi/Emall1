@@ -76,7 +76,7 @@
 //    _goodsModel.goodsImageUrl=@"http://m.360buyimg.com/babel/s350x350_jfs/t2530/265/1340818545/115126/2823db05/56c02071N15288acb.jpg!q70.jpg";
     [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     self.nameLabel.text=_goodsModel.goodsName;
-    self.priceLabel.text=[NSString stringWithFormat:@"￥%.1f",_goodsModel.goodsPrice];
+    self.priceLabel.text=[NSString stringWithFormat:@"$%.1f",_goodsModel.goodsPrice];
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%@",[NSString tenThousandUnitString:_goodsModel.saleCount]];
 }
 + (CGSize)goodsItemViewSize{

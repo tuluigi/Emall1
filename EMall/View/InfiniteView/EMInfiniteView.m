@@ -8,7 +8,7 @@
 
 #import "EMInfiniteView.h"
 #import "EMInfiniteViewCell.h"
-static NSInteger const kMaxRowCount     =3;
+static NSInteger const kMaxRowCount     =5;
 @interface EMInfiniteView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong,readwrite) UICollectionView *collectionView;
 @property (nonatomic,strong)UIPageControl *pageControl;

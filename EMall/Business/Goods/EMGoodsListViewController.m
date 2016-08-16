@@ -66,7 +66,7 @@ UICollectionViewDelegateFlowLayout
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
-    [self getGoodsListWithCursor:self.cursor];
+
     WEAKSELF
     [weakSelf.myCollectionView addOCPullDownResreshHandler:^{
         weakSelf.cursor=1;
@@ -76,13 +76,14 @@ UICollectionViewDelegateFlowLayout
         weakSelf.cursor++;
         [weakSelf getGoodsListWithCursor:weakSelf.cursor];
     }];
+    [self.myCollectionView startPullDownRefresh];
 }
 - (void)getGoodsListWithCursor:(NSInteger )cursor{
     WEAKSELF
-    if (self.dataSourceArray.count==0) {
-        [weakSelf.myCollectionView showPageLoadingView];
-    }
-    NSInteger catID,homtType;
+//    if (self.dataSourceArray.count==0) {
+//        [weakSelf.myCollectionView showPageLoadingView];
+//    }
+    NSInteger catID,homtType=0;
     if (self.fromType==EMGoodsListFromTypeHome) {
         homtType=self.catID;
     }else if(self.fromType==EMGoodsListFromTypeCategory){

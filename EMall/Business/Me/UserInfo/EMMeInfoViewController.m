@@ -44,7 +44,8 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 @implementation EMMeInfoViewController
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [MBProgressHUD hideHUDForView:self.view animated:NO];
+    [self.view dismissHUDLoading];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -223,7 +224,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
               progressHud.removeFromSuperViewOnHide=YES;
                 progressHud.mode = MBProgressHUDModeAnnularDeterminate;
                 progressHud.labelText = @"上传中...";
-               NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 1) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+               NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 0.8) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
                    CGFloat progress=totalBytesSent/(totalBytesExpectedToSend*1.0);
                    progressHud.progress=progress;
                 } onCompletionBlock:^(OCResponseResult *responseResult) {
@@ -233,6 +234,7 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
                     if (responseResult.responseCode==OCCodeStateSuccess) {
                         [weakSelf.view showHUDMessage:@"上传成功,请保存"];
                         weakSelf.avatarModel.imageUrl=responseResult.responseData;
+                        [[SDImageCache sharedImageCache] storeImage:editImage forKey: weakSelf.avatarModel.imageUrl toDisk:YES];
                         [weakSelf.tableView reloadData];
                     }else{
                         [weakSelf.view showHUDMessage:@"上传失败"];

@@ -392,7 +392,7 @@
 //    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     _titleLabel.text=stringNotNil(_detailModel.goodsModel.goodsName);
-    _priceLabel.text=[NSString stringWithFormat:@"￥ %.1f",_detailModel.defaultPrice];
+    _priceLabel.text=[NSString stringWithFormat:@"$ %.1f",_detailModel.defaultPrice];
     
     [self.keysArray removeLastObject];
     [self.keysArray addObjectsFromArray:[_detailModel.specDic allKeys]];

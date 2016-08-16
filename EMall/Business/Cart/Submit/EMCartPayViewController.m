@@ -79,7 +79,7 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
         EMCartPayCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayInfollIdenfier forIndexPath:indexPath];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryNone;
-        [(EMCartPayCell *)cell setPayCartName:@"Hi Chi Go" cartID:@"BSB：083153" bankName:@"ACC：908925097"];
+        [(EMCartPayCell *)cell setPayCartName:@"Acc Name：HI CHI GO " cartID:@"BSB：083153" bankName:@"ACC：908925097"];
         aCell=cell;
     }
     return aCell;

@@ -101,7 +101,7 @@
     [self addSessionTask:task];
 }
 - (void)textViewDidChange:(UITextView *)textView{
-    if (textView.text.length>2) {
+    if (textView.text.length>=2) {
         self.navigationItem.rightBarButtonItem.enabled=YES;
     }else{
         self.navigationItem.rightBarButtonItem.enabled=NO;

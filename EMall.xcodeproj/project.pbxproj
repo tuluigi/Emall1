@@ -1779,7 +1779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a9083a-95f6-4010-bd7b-0876438d2fb7";
+				PROVISIONING_PROFILE = "ecb1433a-a748-4454-bb15-06cff77d30c8";
 			};
 			name = Debug;
 		};
@@ -1797,7 +1797,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a9083a-95f6-4010-bd7b-0876438d2fb7";
+				PROVISIONING_PROFILE = "ecb1433a-a748-4454-bb15-06cff77d30c8";
 			};
 			name = Release;
 		};

@@ -45,17 +45,17 @@
     _logoImageView.contentMode=UIViewContentModeCenter;
     [self.contentView addSubview:_logoImageView];
     
-    _cardNameLabel=[UILabel labelWithText:@"账户名：xxx银行" font:font textAlignment:NSTextAlignmentLeft];
+    _cardNameLabel=[UILabel labelWithText:@"Acc Name：HI CHI GO" font:font textAlignment:NSTextAlignmentLeft];
     _cardNameLabel.textColor=color;
     _cardIDLabel.numberOfLines=2;
     [self.contentView addSubview:_cardNameLabel];
     
-    _cardIDLabel=[UILabel labelWithText:@"账号：6828652598631234266" font:font textAlignment:NSTextAlignmentLeft];
+    _cardIDLabel=[UILabel labelWithText:@"Bsb：083153. " font:font textAlignment:NSTextAlignmentLeft];
     _cardIDLabel.textColor=color;
     _cardIDLabel.numberOfLines=2;
     [self.contentView addSubview:_cardIDLabel];
     
-    _bankNameLabel=[UILabel labelWithText:@"开户行：上海市黄浦区行" font:font textAlignment:NSTextAlignmentLeft];
+    _bankNameLabel=[UILabel labelWithText:@"Acc：908925097" font:font textAlignment:NSTextAlignmentLeft];
     _bankNameLabel.textColor=color;
     _bankNameLabel.numberOfLines=2;
    
@@ -105,8 +105,8 @@
     
 }
 - (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName{
-    self.cardNameLabel.text=[NSString stringWithFormat:@"账户名：%@",userName];
-    self.cardIDLabel.text=[NSString stringWithFormat:@"账号：%@",cartID];
-    self.bankNameLabel.text=[NSString stringWithFormat:@"开户行：%@",bankName];
+    self.cardNameLabel.text=[NSString stringWithFormat:@"%@",userName];
+    self.cardIDLabel.text=[NSString stringWithFormat:@"%@",cartID];
+    self.bankNameLabel.text=[NSString stringWithFormat:@"%@",bankName];
 }
 @end
