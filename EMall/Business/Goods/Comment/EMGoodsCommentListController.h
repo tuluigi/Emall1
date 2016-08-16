@@ -9,5 +9,6 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMGoodsCommentListController : OCBaseTableViewController
-- (instancetype)initWithGoodsID:(NSInteger)goodsID;
+- (instancetype)initWithGoodsID:(NSInteger)goodsID star:(NSInteger)star;
+- (void)setGoodsID:(NSInteger)goodsID star:(NSInteger)star;
 @end

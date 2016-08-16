@@ -51,7 +51,7 @@
         make.size.mas_equalTo(OCUISCALE(80),OCUISCALE(60));
     }];
     UIView *lastView=self.goodsImageView;
-    for (NSInteger i=1; i<=5; i++) {
+    for (NSInteger i=1; i<=kTotalStarNum; i++) {
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
         button.selected=YES;
         [button setBackgroundImage:[UIImage imageNamed:@"btn_star"] forState:UIControlStateNormal];
@@ -81,7 +81,7 @@
 - (void)didRightBarButtonPressed{
     WEAKSELF
     NSInteger level=1;
-    for (NSInteger i=5; i>=1; i--) {
+    for (NSInteger i=kTotalStarNum; i>=1; i--) {
         UIButton *button=(UIButton *)[self.view viewWithTag:kStartButtonTag+i];
         if (button.selected) {
             level=i;

@@ -57,6 +57,7 @@
 		2A4AA9621D4878A2008A323A /* EMGoodsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */; };
 		2A4AA9651D4878CD008A323A /* EMGoodsCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4AA9641D4878CD008A323A /* EMGoodsCommentModel.m */; };
 		2A6389A11D51917E0059F350 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6389A01D51917E0059F350 /* NSString+Encrypt.m */; };
+		2A665C6E1D62E52C004C1D09 /* EMGoodsCommentHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A665C6D1D62E52C004C1D09 /* EMGoodsCommentHomeController.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
 		2A7583E21D51E943008E1B57 /* EMPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E11D51E943008E1B57 /* EMPersistence.m */; };
@@ -280,6 +281,8 @@
 		2A63899F1D51917E0059F350 /* NSString+Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encrypt.h"; sourceTree = "<group>"; };
 		2A6389A01D51917E0059F350 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
 		2A6389A51D51B8700059F350 /* CCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSingleton.h; sourceTree = "<group>"; };
+		2A665C6C1D62E52C004C1D09 /* EMGoodsCommentHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsCommentHomeController.h; sourceTree = "<group>"; };
+		2A665C6D1D62E52C004C1D09 /* EMGoodsCommentHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsCommentHomeController.m; sourceTree = "<group>"; };
 		2A6ABB751D2FBAA600DE47B0 /* EMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMLoginViewController.h; sourceTree = "<group>"; };
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				2A4AA95E1D487848008A323A /* EMGoodsCommentListController.m */,
 				2A4AA9601D4878A2008A323A /* EMGoodsCommentCell.h */,
 				2A4AA9611D4878A2008A323A /* EMGoodsCommentCell.m */,
+				2A665C6C1D62E52C004C1D09 /* EMGoodsCommentHomeController.h */,
+				2A665C6D1D62E52C004C1D09 /* EMGoodsCommentHomeController.m */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -1539,6 +1544,7 @@
 				2A13F7161D537C8A0041D2C5 /* EMEdiePwdViewController.m in Sources */,
 				2ADF60561D27C59C00DF757B /* UIScrollView+OCRefresh.m in Sources */,
 				2AB965C51D61D7F80049BE2A /* EMWebViewController.m in Sources */,
+				2A665C6E1D62E52C004C1D09 /* EMGoodsCommentHomeController.m in Sources */,
 				2A13F7131D5238E50041D2C5 /* OCTableCellRightImageModel.m in Sources */,
 				2A99EB451D3A6C860024E924 /* OCTableCellBadgeModel.m in Sources */,
 				2A99EB761D3BB63A0024E924 /* EMOrderInfoCell.m in Sources */,

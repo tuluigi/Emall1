@@ -35,8 +35,8 @@ static NSInteger const kMaxRowCount     =5;
     return self;
 }
 - (void)layoutSubviews{
-    self.collectionView.frame=self.bounds;
-    [self.collectionView reloadData];
+//    self.collectionView.frame=self.bounds;
+//    [self.collectionView reloadData];
 }
 - (void)onInitContentView{
       [self addSubview:self.collectionView];

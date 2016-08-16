@@ -279,7 +279,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         
     }else if (indexPath.section==2) {
         if (indexPath.row==0) {
-            EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.goodsModel.goodsID];
+            EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.detailModel.goodsModel.goodsID star:0];
             commentListController.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:commentListController animated:YES];
         }

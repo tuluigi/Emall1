@@ -9,7 +9,8 @@
 #import "OCBaseModel.h"
 
 @interface EMCommentStarModel : OCBaseModel
-@property (nonatomic,assign)NSInteger star,startNum;
+@property (nonatomic,assign)NSInteger star,startNum,index;
+@property (nonatomic,copy)NSString *starString;
 @end
 
 @interface EMGoodsCommentModel : OCBaseModel

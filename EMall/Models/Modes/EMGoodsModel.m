@@ -92,6 +92,11 @@
              @"userName":@"member_name",
              @"commentContent":@"content",
              @"goodsPrice":@"promotion_price",
+                @"picture_01":@"picture_01",
+                @"picture_02":@"picture_02",
+                @"picture_03":@"picture_03",
+                @"picture_04":@"picture_04",
+                @"picture_05":@"picture_05",
              @"specArray":@"spec",};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
@@ -111,6 +116,7 @@
     if (nil==_goodsImageArray) {
         _goodsImageArray=[[NSMutableArray alloc]  init];
     }
+    [_goodsImageArray removeAllObjects];
     if (!_goodsImageArray.count) {
         if (![NSString isNilOrEmptyForString:self.picture_01]) {
             [_goodsImageArray addObject:self.picture_01];

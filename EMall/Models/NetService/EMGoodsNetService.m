@@ -122,6 +122,8 @@
                                     content:(NSString *)content
                                        star:(NSInteger)star
                           onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    star=MAX(star, 3);
+    star=MIN(1, star);
     NSString *apiPath=[self urlWithSuffixPath:@"order_comment/save"];
     NSDictionary *postDic=@{@"orderComment.mid":@(userID),@"orderComment.oid":@(orderID),@"orderComment.gid":@(goodsID),@"orderComment.star":@(star),@"orderComment.content":stringNotNil(content)};
     
@@ -145,9 +147,16 @@
                                onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"order_comment"];
     cursor=MIN(1, cursor);
-    NSDictionary *postDic=@{@"orderComment.mid":@(userID),@"orderComment.gid":@(goodsID),@"orderComment.star":@(star),@"cusor":@(cursor),@"pageSize":@(pageSize)};
-    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsCommentModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSDictionary *postDic=@{@"orderComment.gid":@(goodsID),@"cusor":@(cursor),@"pageSize":@(pageSize)};
+    NSMutableDictionary *parmDic=[NSMutableDictionary dictionaryWithDictionary:postDic];
+    if (star>0 && star<4) {
+        [parmDic setObject:@(star) forKey:@"orderComment.star"];
+    }
+    if (userID) {
+         [parmDic setObject:@(userID) forKey:@"orderComment.mid"];
+    }
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:parmDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsCommentHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }
