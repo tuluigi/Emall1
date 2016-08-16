@@ -75,9 +75,12 @@
  */
 @interface EMGoodsDetailModel : OCBaseModel
 @property (nonatomic,strong)EMGoodsModel *goodsModel;//商品基本信息
-@property (nonatomic,strong)NSArray *goodsInfoArray;//商品明细
-@property (nonatomic,assign)CGFloat defaultPrice;
+@property (nonatomic,strong)NSMutableArray *goodsInfoArray;//商品明细
+
 @property (nonatomic,strong)NSMutableArray *goodsSpecListArray;//商品规格列表,通过单独接口获取，获取之后，给放到这个数组中
+
+
+@property (nonatomic,strong)EMGoodsInfoModel  *defaultGoodsInfo;//默认的明细《默认的明细是按照最低价来的》
 
 /**
  *  该商品的所有的明细分类

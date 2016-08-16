@@ -171,6 +171,15 @@
         return nil;
     }
 }
+- (EMGoodsInfoModel *)defaultGoodsInfo{
+    NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_promotePrice" ascending:YES];
+    NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
+    if (tempArray&&tempArray.count) {
+      _defaultGoodsInfo=[tempArray firstObject];
+    }
+    return _defaultGoodsInfo;
+}
+
 - (NSMutableDictionary *)specDic{
     if (!_specDic) {
         NSMutableArray *allSpecArray=[[NSMutableArray alloc]  init];
@@ -203,15 +212,7 @@
     
     return _goodsSpecListArray;
 }
--(CGFloat)defaultPrice{
-    if (!_defaultPrice) {
-        if (self.goodsInfoArray.count) {
-            EMGoodsInfoModel *infoModel=self.goodsInfoArray.firstObject;
-            _defaultPrice=infoModel.promotePrice;
-        }
-    }
-    return _defaultPrice;
-}
+
 //- (NSMutableArray *)allSpecArray{
 //    if (nil==_allSpecArray) {
 //        _allSpecArray=[NSMutableArray new];

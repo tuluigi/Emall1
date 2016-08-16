@@ -91,15 +91,6 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if (_detailModel) {
         [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
     }
-    /*
-     NSArray *imageArray=@[@"http://img20.360buyimg.com/da/jfs/t3085/14/190311847/160405/fdbfef46/57a9ac53Neb4a13ae.jpg",
-     @"http://img20.360buyimg.com/da/jfs/t2731/149/4118719199/98908/2dc1fa5c/57ac3fc5N21a6c823.jpg",
-     @"http://img11.360buyimg.com/da/jfs/t3226/172/222213990/121068/a16ae9b8/57ac18a5Na40e5db1.jpg",
-     @"http://img14.360buyimg.com/da/jfs/t2974/351/2380644676/139211/50c2e8b3/57ac2a0cN345414cd.jpg",
-     @"https://img.alicdn.com/tps/i4/TB1DqXdLpXXXXcxXVXXSutbFXXX.jpg_q100.jpg",
-     @"https://aecpm.alicdn.com/simba/img/TB1_JXrLVXXXXbZXVXXSutbFXXX.jpg"];
-     [_detailModel.goodsModel.goodsImageArray addObjectsFromArray:imageArray];
-     */
     self.tableView.tableHeaderView=self.infiniteView;
     [self.tableView reloadData];
 }
@@ -211,11 +202,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
-        CGFloat price=0;
-        if (self.detailModel.goodsInfoArray.count) {
-            EMGoodsInfoModel *infoModel=self.detailModel.goodsInfoArray[0];
-            price=infoModel.promotePrice;
-        }
+        CGFloat price=self.detailModel.defaultGoodsInfo.promotePrice;
         NSString *title=self.detailModel.goodsModel.goodsName;
         [cell setTitle:title price:price saleCount:self.detailModel.goodsModel.saleCount];
         aCell=cell;

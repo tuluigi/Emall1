@@ -9,7 +9,7 @@
 #import "EMCartPayCell.h"
 
 @interface EMCartPayCell ()
-@property (nonatomic,strong)UILabel *titleLable,*cardNameLabel,*cardIDLabel,*bankNameLabel;
+@property (nonatomic,strong)UILabel *titleLable,*cardNameLabel,*cardIDLabel,*bankNameLabel,*messageLabel;
 
 @property (nonatomic,strong)UIImageView *logoImageView;
 @end
@@ -60,6 +60,12 @@
     _bankNameLabel.numberOfLines=2;
    
     [self.contentView addSubview:_bankNameLabel];
+    _messageLabel=[UILabel labelWithText:@"提示：转账description请备注订单号后五位数字" font:font textAlignment:NSTextAlignmentLeft];
+    _messageLabel.textColor=kEM_RedColro;
+    _messageLabel.numberOfLines=0;
+    [self.contentView addSubview:_messageLabel];
+    
+    
     CGFloat requirWidht=OCUISCALE(OCWidth-12-20-12-5);
      _bankNameLabel.preferredMaxLayoutWidth = requirWidht;//要是设置多行Label的话,必须设置此属性
     _cardNameLabel.preferredMaxLayoutWidth=requirWidht;
@@ -72,9 +78,9 @@
     
     WEAKSELF
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
+        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(kEMOffX));
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(24));
-        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-12));
+        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-kEMOffX));
         
     }];
     
@@ -99,8 +105,13 @@
         make.left.mas_equalTo(weakSelf.cardNameLabel);
         make.top.mas_equalTo(weakSelf.cardIDLabel.mas_bottom).offset(OCUISCALE(8));
         make.right.mas_equalTo(weakSelf.cardNameLabel.mas_right);
+    }];
+    _messageLabel.preferredMaxLayoutWidth=OCWidth-kEMOffX*2;
+    [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.cardIDLabel);
+        make.left.mas_equalTo(weakSelf.logoImageView.mas_left);
+        make.top.mas_equalTo(weakSelf.bankNameLabel.mas_bottom).offset(OCUISCALE(15));
         make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-40));
-
     }];
     
 }

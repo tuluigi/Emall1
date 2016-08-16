@@ -73,7 +73,7 @@ static CGFloat const kEMOffX    = 13;
 #define kEM_LightDarkTextColor [UIColor colorWithHexString:@"#5d5c5c"]
 #endif /* EMallHeader_h */
 
-
+#define  kEM_RedColro       (RGB(229, 26, 30))
 
 
 
