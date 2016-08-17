@@ -207,7 +207,7 @@
         if (self.goodsInfoArray.count) {
             _defaultGoodsInfo=self.goodsInfoArray[0];
             if (self.goodsInfoArray.count>1) {
-                NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_discountPrice" ascending:NO];
+                NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_discountPrice" ascending:YES];
                 NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
                 if (tempArray&&tempArray.count) {
                     _defaultGoodsInfo=[tempArray firstObject];

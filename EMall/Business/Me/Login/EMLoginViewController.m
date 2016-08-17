@@ -94,12 +94,12 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     EMLoginHeadView *headView;
     if (self.loginType==EMLoginViewControllerTypeLogin) {
         self.navigationItem.title=@"登录";
-        headView=[EMLoginHeadView loginHeadViewWithTitle:@"登录后即可开始享受海吃生活呦"];
+        headView=[EMLoginHeadView loginHeadViewWithTitle:@"登录后即可开始享受嗨吃生活呦"];
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(gotoRegisterController)];
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backToPreviousController)];
     }else if (self.loginType==EMLoginViewControllerTypeRegister){
         self.navigationItem.title=@"注册";
-        headView=[EMLoginHeadView loginHeadViewWithTitle:@"注册后即可开始享受海吃生活呦"];
+        headView=[EMLoginHeadView loginHeadViewWithTitle:@"注册后即可开始享受嗨吃生活呦"];
     }
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 

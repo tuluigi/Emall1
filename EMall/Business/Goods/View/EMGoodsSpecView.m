@@ -452,9 +452,9 @@
     
     self.enableSpecDic=[[NSMutableDictionary alloc]  initWithDictionary:_detailModel.defaultGoodsInfo.specsDic];
     for (EMSpecModel *specModel in [self.enableSpecDic allValues]) {
-        [self.selectSpecDic setObject:specModel.pName forKey:specModel];
+        [self.selectSpecDic setObject:specModel forKey:specModel.pName];
     }
-//    [self reSetGoodsPriceWithGoodsInfoModel:_detailModel.defaultGoodsInfo];
+    [self reSetGoodsPriceWithGoodsInfoModel:_detailModel.defaultGoodsInfo];
     
     [self.myCollectionView reloadData];
 //    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
@@ -490,7 +490,12 @@
         EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
         
         cell.titleString=specModel.name;
-        BOOL isEnable=[self.selectSpecDic objectForKey:specModel.name];
+        EMSpecModel *selectSpecModel=[self.selectSpecDic objectForKey:specModel.pName];
+
+        BOOL isEnable=NO;
+        if (selectSpecModel&&selectSpecModel.specID==specModel.specID && [selectSpecModel.name isEqualToString:specModel.name]) {
+            isEnable=YES;
+        }
         cell.enable=isEnable;
         aCell=cell;
     }else{
@@ -543,13 +548,12 @@
         NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
         NSArray *valueArray=[specDic allValues];
         EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
-        [self.selectSpecDic setObject:specModel forKey:specModel];
+        [self.selectSpecDic setObject:specModel forKey:specModel.pName];
         NSMutableDictionary *aInfoDic;
         self.enableSpecDic=[EMGoodsSpecView enableSpecDicWithAlreadySelectSpecDic:self.selectSpecDic infoArrays:self.detailModel.goodsInfoArray infoDic:&aInfoDic];
         [self.selectInfoDic removeAllObjects];
         self.selectInfoDic=aInfoDic;
         [collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, collectionView.numberOfSections-1)]];
-//        [collectionView reloadData];
     }
 }
 
