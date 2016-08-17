@@ -38,6 +38,7 @@
 @property (nonatomic,strong)UIButton *titleButton;
 @property (nonatomic,copy)NSString *titleString;
 @property (nonatomic,strong)UILabel *titleLabel;
+@property (nonatomic,assign)BOOL enable;
 @end
 
 @implementation EMGoodsSpecCell
@@ -99,6 +100,18 @@
 //    }
     attributes.size=size;
     return attributes;
+}
+- (void)setEnable:(BOOL)enable{
+    _enable=enable;
+   UIColor *textColor=kEM_LightDarkTextColor;
+    if (_enable) {
+        textColor=kEM_RedColro;
+    }else{
+        textColor=kEM_LightDarkTextColor;
+    }
+    _titleLabel.textColor=textColor;
+    _titleLabel.layer.borderColor=textColor.CGColor;
+    _titleLabel.layer.borderWidth=0.5;
 }
 @end
 
@@ -252,6 +265,10 @@
 @property (nonatomic,strong)NSMutableArray *keysArray;
 @property (nonatomic,strong)NSMutableArray *dataSource;
 @property (nonatomic,assign)NSInteger buyCount;
+
+@property (nonatomic,strong)NSMutableDictionary *enableSpecDic,*selectSpecDic;//所有可以用的规格dic.， 和已选中的specDic
+@property (nonatomic,strong)NSMutableDictionary *selectInfoDic;//所有选中的明细dic
+
 @end
 
 @implementation EMGoodsSpecView
@@ -277,6 +294,24 @@
         _keysArray=[NSMutableArray new];
     }
     return _keysArray;
+}
+-(NSMutableDictionary *)enableSpecDic{
+    if (nil==_enableSpecDic) {
+        _enableSpecDic=[NSMutableDictionary new];
+    }
+    return _enableSpecDic;
+}
+-(NSMutableDictionary *)selectInfoDic{
+    if (nil==_selectInfoDic) {
+        _selectInfoDic=[NSMutableDictionary new];
+    }
+    return _selectInfoDic;
+}
+-(NSMutableDictionary *)selectSpecDic{
+    if (nil==_selectSpecDic) {
+        _selectSpecDic=[NSMutableDictionary new];
+    }
+    return _selectSpecDic;
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
@@ -389,16 +424,18 @@
 
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
     _detailModel=detailModel;
-//    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     _titleLabel.text=stringNotNil(_detailModel.goodsModel.goodsName);
-//    _priceLabel.text=[NSString stringWithFormat:@"$ %.1f",self.detailModel.defaultGoodsInfo.goodsPrice-self.detailModel.defaultGoodsInfo.promotionPrice];
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.detailModel.defaultGoodsInfo.goodsPrice promotePrice:self.detailModel.defaultGoodsInfo.promotionPrice];
     
     [self.keysArray removeLastObject];
     [self.keysArray addObjectsFromArray:[_detailModel.specDic allKeys]];
     [self.keysArray addObject:@"数量"];
+    [self.selectInfoDic setObject:_detailModel.defaultGoodsInfo forKey:@(_detailModel.defaultGoodsInfo.infoID)];
     
+    self.enableSpecDic=[[NSMutableDictionary alloc]  initWithDictionary:_detailModel.defaultGoodsInfo.specsDic];
+    self.selectSpecDic=self.enableSpecDic;
+    [self.myCollectionView reloadData];
 //    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -408,8 +445,8 @@
     NSInteger row=0;
     if (section<self.keysArray.count-1) {
         NSString *key=[self.keysArray objectAtIndex:section];
-        NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
-        row=valueArray.count;
+        NSDictionary *dic=[self.detailModel.specDic objectForKey:key];
+        row=[dic allKeys].count;
     }else{
         row=1;
     }
@@ -418,11 +455,19 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *aCell;
     if (indexPath.section<self.keysArray.count-1) {
-        NSString *key=[self.keysArray objectAtIndex:indexPath.section];
-        NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
+       
+        
         EMGoodsSpecCell *cell=(EMGoodsSpecCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class]) forIndexPath:indexPath];
+        
+         NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+       // NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
+        NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
+        NSArray *valueArray=[specDic allValues];
         EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
+        
         cell.titleString=specModel.name;
+        BOOL isEnable=[self.enableSpecDic objectForKey:specModel.name];
+        cell.enable=isEnable;
         aCell=cell;
     }else{
         EMGoodsSpecCountCell *cell=(EMGoodsSpecCountCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCountCell class]) forIndexPath:indexPath];
@@ -442,6 +487,8 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    size=flowLayout.headerReferenceSize;
     return size;
 }
 
@@ -466,8 +513,42 @@
     return size;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section<collectionView.numberOfSections-1) {
+        NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+        // NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
+        NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
+        NSArray *valueArray=[specDic allValues];
+        EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
+        [self.selectSpecDic setObject:specDic forKey:specModel.name];
+        NSMutableDictionary *aInfoDic;
+        self.enableSpecDic=[EMGoodsSpecView enableSpecDicWithAlreadySelectSpecDic:self.selectSpecDic infoArrays:self.detailModel.goodsInfoArray infoDic:&aInfoDic];
+        self.selectInfoDic=aInfoDic;
+        [collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, collectionView.numberOfSections-1)]];
+//        [collectionView reloadData];
+    }
 }
+
++(NSMutableDictionary *)enableSpecDicWithAlreadySelectSpecDic:(NSMutableDictionary *)alreadyDic infoArrays:(NSArray *)infoArray infoDic:(NSMutableDictionary **)goodsInfoDic{
+    NSMutableDictionary *enableSpecDic=[NSMutableDictionary new];
+    
+    if (nil==*goodsInfoDic) {
+        *goodsInfoDic=[NSMutableDictionary new];
+    }
+    [*goodsInfoDic removeAllObjects];
+    for (EMGoodsInfoModel *infoModel in infoArray) {
+        //按照pame进行逐个比较该明细中是否包含选中的名字
+        NSArray *infoKeyArray=[[infoModel specsDic] allKeys];
+        NSArray *alreadyKeyAary=[alreadyDic allKeys];
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"(SELF in %@)",alreadyKeyAary];
+        NSArray *tempArray=[infoKeyArray filteredArrayUsingPredicate:predicate];
+        if (tempArray.count) {
+            [*goodsInfoDic setObject:infoModel forKey:@(infoModel.infoID)];//添加当条明细
+            [enableSpecDic setValuesForKeysWithDictionary:infoModel.specsDic];//添加该明细中所有的规格
+        }
+    }
+    return enableSpecDic;
+}
+
 #pragma mark - CellCount Delegate
 - (void)goodsSpecCountCellDidBuyCountValueChanged:(NSInteger)buyCount{
     self.buyCount=buyCount;
@@ -477,7 +558,8 @@
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+        flowLayout.estimatedItemSize=CGSizeMake(50, 35);
+        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
         flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
         
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];

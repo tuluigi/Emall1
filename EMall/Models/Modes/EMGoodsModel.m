@@ -68,7 +68,19 @@
         return nil;
     }
 }
-
+-(NSMutableDictionary *)specsDic{
+    if (!_specsDic) {
+        if (nil==_specsDic) {
+            _specsDic=[NSMutableDictionary new];
+        }
+        for (EMSpecListModel *listModel in self.specListArray) {
+            for (EMSpecModel *specModel in listModel.specsArray) {
+                [_specsDic setObject:specModel forKey:specModel.name];
+            }
+        }
+    }
+    return _specsDic;
+}
 @end
 
 
@@ -227,7 +239,12 @@
                 NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_pName=%@",pName];
                 NSArray *tempArray=[allSpecArray filteredArrayUsingPredicate:predicate];
                 if (tempArray.count) {
-                    [resultDic setObject:tempArray forKey:pName];
+                    NSMutableDictionary *specDic=[NSMutableDictionary dictionary];
+                    for (EMSpecModel *specModel in tempArray) {
+                        [specDic setObject:specModel forKey:specModel.name];
+                    }
+                    [resultDic setObject:specDic forKey:pName];
+//                    [resultDic setObject:tempArray forKey:pName];
                 }
             }
             _specDic=resultDic;
@@ -243,15 +260,5 @@
     return _goodsSpecListArray;
 }
 
-//- (NSMutableArray *)allSpecArray{
-//    if (nil==_allSpecArray) {
-//        _allSpecArray=[NSMutableArray new];
-//    }
-//    if (!_allSpecArray.count) {
-//        for (EMSpecListModel *specListModel in self.specListArray) {
-//            [_allSpecArray addObjectsFromArray:specListModel.specsArray];
-//        }
-//    }
-//    return _allSpecArray;
-//}
+
 @end
