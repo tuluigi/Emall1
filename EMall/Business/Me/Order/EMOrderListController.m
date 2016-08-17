@@ -10,7 +10,7 @@
 #import "EMOrderListCell.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "EMOrderNetService.h"
-@interface EMOrderListController ()<EMOrderListCellDelegate,UIGestureRecognizerDelegate>
+@interface EMOrderListController ()<EMOrderListCellDelegate,UIGestureRecognizerDelegate,EMOrderListCellDelegate>
 
 @end
 
@@ -63,6 +63,21 @@
     }];
     [self addSessionTask:task];
 }
+- (void)updateOrderStateWithOrderModel:(EMOrderModel *)orderModel state:(EMOrderState)state{
+    [self.view showHUDLoading];
+    WEAKSELF
+    NSURLSessionTask *task=[EMOrderNetService updateOrderStateWithOrderID:orderModel.orderID state:state onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+            [weakSelf.view dismissHUDLoading];
+            NSInteger row=[weakSelf.dataSourceArray indexOfObject:orderModel];
+            [weakSelf.dataSourceArray removeObject:orderModel];
+            [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [weakSelf.view showHUDMessage:responseResult.responseMessage];
+        }
+    }];
+    [self addSessionTask:task];
+}
 #pragma mark -tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSourceArray.count;
@@ -70,6 +85,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     EMOrderListCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EMOrderListCell class]) forIndexPath:indexPath];
     cell.orderModel=[self.dataSourceArray objectAtIndex:indexPath.row];
+    cell.delegate=self;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,6 +117,9 @@
 //重新购买
 - (void)orderListCellShouldReBuyThisGoods{
     
+}
+- (void)updateOrderState:(EMOrderModel *)orderModel state:(NSInteger)state{
+    [self updateOrderStateWithOrderModel:orderModel state:state];
 }
 //查看订单详情
 - (void)orderListCellShouldCheckOrderDetail{

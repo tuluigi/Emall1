@@ -117,4 +117,18 @@
     }];
     return task;
 }
++ (NSURLSessionTask *)updateOrderStateWithOrderID:(NSInteger)orderID
+                                            state:(EMOrderState)state
+                                onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
+    NSString *apiPath=[self urlWithSuffixPath:@"order/updateState"];
+    NSDictionary *postDic=@{@"id":@(orderID),@"state":@(state)};
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (compleitonBlock) {
+                compleitonBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
 @end

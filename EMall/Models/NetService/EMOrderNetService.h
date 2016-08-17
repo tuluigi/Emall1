@@ -8,6 +8,7 @@
 
 #import "OCBaseNetService.h"
 @class EMShopCartModel;
+#import "EMOrderModel.h"
 @interface EMOrderNetService : OCBaseNetService
 /**
  *  提交订单
@@ -68,4 +69,16 @@
  */
 + (NSURLSessionTask *)getOrderStateNumWithUserID:(NSInteger)userID
                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
+/**
+ *  修改订单状态
+ *
+ *  @param orderID
+ *  @param state
+ *  @param compleitonBlock
+ *
+ *  @return
+ */
++ (NSURLSessionTask *)updateOrderStateWithOrderID:(NSInteger)orderID
+                                            state:(EMOrderState)state
+                               onCompletionBlock:(OCResponseResultBlock)compleitonBlock;
 @end

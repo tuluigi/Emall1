@@ -108,12 +108,13 @@ UICollectionViewDelegateFlowLayout>
     [_bgView addSubview:lineView1];
 
     UIColor *rebuyColor=[UIColor colorWithHexString:@"#e51e0e"];
-    _reBuyButton=[UIButton buttonWithTitle:@"再次购买" titleColor:rebuyColor font:font];
+    _reBuyButton=[UIButton buttonWithTitle:@"  " titleColor:rebuyColor font:font];
     _reBuyButton.layer.cornerRadius=5.0;
     _reBuyButton.layer.masksToBounds=YES;
     _reBuyButton.layer.borderColor=[rebuyColor CGColor];
     _reBuyButton.layer.borderWidth=1.0;
     [_reBuyButton addTarget:self action:@selector(didReBuyButtonPressed ) forControlEvents:UIControlEventTouchUpInside];
+    _reBuyButton.hidden=YES;
     [_bgView addSubview:_reBuyButton];
     
     _detailButton=[UIButton buttonWithTitle:@"查看订单" titleColor:color font:font];
@@ -173,14 +174,28 @@ UICollectionViewDelegateFlowLayout>
     }];
     [_detailButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
-        make.top.mas_equalTo(weakSelf.reBuyButton);
-        make.right.mas_equalTo(weakSelf.reBuyButton.mas_left).offset(OCUISCALE(-12));
+              make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
+            make.right.mas_equalTo(weakSelf.reBuyButton.mas_left).offset(OCUISCALE(-12));
           make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-10)).priorityHigh();
     }];
 }
 
 -(void)setOrderModel:(EMOrderModel *)orderModel{
     _orderModel=orderModel;
+    if (_orderModel.orderState==EMOrderStateUnSigned) {
+        if (_reBuyButton.hidden) {
+            WEAKSELF
+            [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.removeExisting=YES;
+                make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
+                make.top.mas_equalTo(weakSelf.detailButton.mas_top);
+                make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
+//                make.size.mas_equalTo(CGSizeMake(OCUISCALE(0), OCUISCALE(0)));
+            }];
+            [_reBuyButton setTitle:@"确认收获" forState:UIControlStateNormal];
+            _reBuyButton.hidden=NO;
+        }
+    }
     [self.myCollectionView reloadData];
     self.orderNumLabel.text=_orderModel.orderNumber;
     _orderTimeLabel.text=_orderModel.subitTime;
@@ -214,11 +229,14 @@ UICollectionViewDelegateFlowLayout>
 
 
 - (void)didReBuyButtonPressed{
-        [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:self.orderModel];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:self.orderModel];
 //    [[self nextResponder]routerEventName:kEMOrderShoudBuyAgainEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
-//    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
-//        [_delegate orderListCellShouldReBuyThisGoods];
-//    }
+    if (self.orderModel.orderState==EMOrderStateUnSigned) {
+        if (_delegate&&[_delegate respondsToSelector:@selector(updateOrderState:state:)]) {
+            [_delegate updateOrderState:self.orderModel state:EMOrderStateFinished];
+        }
+    }
+  
 }
 
 - (void)didCheckOrderDetailButtonPressed{
