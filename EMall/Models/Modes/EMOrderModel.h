@@ -41,8 +41,9 @@ typedef NS_ENUM(NSInteger,EMOrderLogisticsType) {
 @property(nonatomic,copy)NSString *orderStateString;
 @property(nonatomic,copy)NSString *subitTime,*payTime;
 @property(nonatomic,copy)NSString *remarks;
-@property (nonatomic,assign)CGFloat totalPrice,payPrice,discountPrice;
-
+@property (nonatomic,assign)CGFloat totalPrice;//订单不优惠的总价钱
+@property (nonatomic,assign)CGFloat payPrice;//payPrice=totalPrice-promotionPrice+postage
+@property (nonatomic,assign)CGFloat discountPrice;//针对这个订单，平台给优惠的价钱
 
 @property(nonatomic,copy)NSString *receiver,*receiverTel,*receiverAddresss,*receiverWeChat;
 @property(nonatomic,assign)NSInteger receiverID;

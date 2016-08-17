@@ -9,6 +9,7 @@
 #import "OCUTableViewTextViewCell.h"
 #import "OCTableCellTextViewModel.h"
 #import "UIPlaceHolderTextView.h"
+#import "UITextView+HiddenKeyBoardButton.h"
 @interface OCUTableViewTextViewCell ()<UITextViewDelegate>
 @property (nonatomic,strong,readwrite)UIPlaceHolderTextView *textView;
 @end
@@ -31,6 +32,7 @@
 -(UIPlaceHolderTextView *)textView{
     if (nil==_textView) {
         _textView=[[UIPlaceHolderTextView alloc]  init];
+        [_textView addHiddenKeyBoardInputAccessView];
         _textView.delegate=self;
         _textView.layer.borderWidth=0.5;
         _textView.layer.borderColor=[UIColor lightGrayColor].CGColor;

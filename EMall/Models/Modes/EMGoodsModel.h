@@ -33,8 +33,8 @@
 @interface EMGoodsInfoModel : OCBaseModel
 @property (nonatomic,assign)NSInteger goodsID;//商品ID
 @property (nonatomic,assign)NSInteger infoID;//明细ID
-@property (nonatomic,assign)CGFloat promotePrice;//促销价
-@property (nonatomic,assign)NSInteger amount;//库存
+@property (nonatomic,assign)CGFloat goodsPrice;//原价
+@property (nonatomic,assign)CGFloat promotionPrice;//优惠金额
 @property (nonatomic,strong)NSArray *specListArray;//规格列表array
 @end
 
@@ -47,9 +47,9 @@
 
 @property(nonatomic,copy)NSString *goodsImageUrl;//商品主图
 @property(nonatomic,strong,readonly)NSMutableArray <NSString *>*goodsImageArray;//商品其他图集<通过接口返回的5张图片来拼起来的>
-
+@property (nonatomic,assign)CGFloat postage;//运费
 @property(nonatomic,assign)NSInteger saleCount;//销售数量
-@property(nonatomic,assign)CGFloat goodsPrice;
+@property(nonatomic,assign)CGFloat goodsPrice,promotionPrice;//分别是原价和优惠金额和优惠后的价格
 @property(nonatomic,assign)NSInteger commentCount;//评论数量
 
 @property (nonatomic,copy)NSString *remark;//备注
@@ -61,7 +61,6 @@
 @property (nonatomic,copy)NSString *avatar;//
 @property (nonatomic,copy)NSString *commentContent;//用户的一条评论
 
-@property (nonatomic,assign)NSInteger postage;
 @property (nonatomic,assign)NSInteger state;
 
 

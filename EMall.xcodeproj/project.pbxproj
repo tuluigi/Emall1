@@ -107,6 +107,7 @@
 		2AC6475F1D424F3200521462 /* NSAttributedString+Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6475E1D424F3200521462 /* NSAttributedString+Price.m */; };
 		2AC647661D43196C00521462 /* EMCartSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC647651D43196C00521462 /* EMCartSubmitViewController.m */; };
 		2AD9DC4A1D62132300EEE0C2 /* EMOrderDetailGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9DC491D62132300EEE0C2 /* EMOrderDetailGoodsCell.m */; };
+		2AD9DC4D1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9DC4C1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.m */; };
 		2ADF60091D27C4CC00DF757B /* OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60061D27C4CC00DF757B /* OCUIUtil.m */; };
 		2ADF600A1D27C4CC00DF757B /* UIFont+OCUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF60081D27C4CC00DF757B /* UIFont+OCUIUtil.m */; };
 		2ADF60421D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADF600E1D27C59C00DF757B /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -384,6 +385,8 @@
 		2AC647651D43196C00521462 /* EMCartSubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCartSubmitViewController.m; sourceTree = "<group>"; };
 		2AD9DC481D62132300EEE0C2 /* EMOrderDetailGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOrderDetailGoodsCell.h; sourceTree = "<group>"; };
 		2AD9DC491D62132300EEE0C2 /* EMOrderDetailGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOrderDetailGoodsCell.m; sourceTree = "<group>"; };
+		2AD9DC4B1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HiddenKeyBoardButton.h"; sourceTree = "<group>"; };
+		2AD9DC4C1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HiddenKeyBoardButton.m"; sourceTree = "<group>"; };
 		2ADF60051D27C4CC00DF757B /* OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCUIUtil.h; sourceTree = "<group>"; };
 		2ADF60061D27C4CC00DF757B /* OCUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUIUtil.m; sourceTree = "<group>"; };
 		2ADF60071D27C4CC00DF757B /* UIFont+OCUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+OCUIUtil.h"; sourceTree = "<group>"; };
@@ -1236,6 +1239,8 @@
 				2A87D56D1D3DDBDB00D7DBEA /* UITextField+HiddenKeyBoardButton.m */,
 				2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */,
 				2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */,
+				2AD9DC4B1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.h */,
+				2AD9DC4C1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.m */,
 			);
 			path = UITextField;
 			sourceTree = "<group>";
@@ -1620,6 +1625,7 @@
 				2ADF607D1D28ACE400DF757B /* EMShopCartModel.m in Sources */,
 				2A03520E1D1A3FC9002BE7B7 /* EMCartViewController.m in Sources */,
 				2A99EB601D3B1D8E0024E924 /* UIView+ZJFrame.m in Sources */,
+				2AD9DC4D1D636C1000EEE0C2 /* UITextView+HiddenKeyBoardButton.m in Sources */,
 				2ADF604D1D27C59C00DF757B /* UIViewController+DATracker.m in Sources */,
 				2A31E8201D5EF1AE00FC73A9 /* UIPlaceHolderTextView.m in Sources */,
 				2A99EB631D3B1D8E0024E924 /* ZJCustomLabel.m in Sources */,
@@ -1777,15 +1783,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Xiucheng (B5AQM8PKN4)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ecb1433a-a748-4454-bb15-06cff77d30c8";
+				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
 			};
 			name = Debug;
 		};
@@ -1795,15 +1801,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.videoHD2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ecb1433a-a748-4454-bb15-06cff77d30c8";
+				PROVISIONING_PROFILE = "2e25d823-8fcc-4a45-95c2-2a8ac22addc6";
 			};
 			name = Release;
 		};

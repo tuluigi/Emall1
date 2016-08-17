@@ -145,7 +145,7 @@
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
     self.checkMarkButton.selected=!_shopCartModel.unSelected;
 //    self.priceLabel.text=[NSString stringWithFormat:@"$%.2f",_shopCartModel.goodsPrice];
-    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice];
+    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice-_shopCartModel.promotionPrice];
     [self updateBuyCount:_shopCartModel.buyCount];
 }
 - (void)updateBuyCount:(NSInteger)buyCount{

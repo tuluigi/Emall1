@@ -193,7 +193,7 @@
     for (EMShopCartModel *model in self.dataSourceArray) {
         if (!model.unSelected) {
             count++;
-            totalPrice+=model.goodsPrice*model.buyCount;
+            totalPrice+=(model.goodsPrice-model.promotionPrice)*model.buyCount;
         }
     }
     [self.bottomView updateCartBottomWithSelectItemCount:count totalItems:self.dataSourceArray.count totalPrice:totalPrice];

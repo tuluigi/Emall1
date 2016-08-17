@@ -19,6 +19,8 @@
 #import "EMOrderNetService.h"
 #import "EMMeNetService.h"
 #import "EMOrderModel.h"
+#import "OCUTableCellHeader.h"
+
 #define  kSubmitCellIdenfier  @"KSubmitCellIdenfier"
 #define  kAddressCellIdenfier @"kAddressCellIdenfier"
 #define  kPriceCellIdenfier   @"kPriceCellIdenfier"
@@ -26,11 +28,15 @@
 #define kLogisticsCellIdenfier  @"kLogisticsCellIdenfier"//物流
 #define kRemarksCellIdenfier   @"kRemarksCellIdenfier"//备注
 
+#define kEMCartSubmitRemarkCellType     200
+
 @interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate>
 @property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)CGFloat addressCellheight;
 @property (nonatomic,assign)__block EMOrderLogisticsType logisticType;
+@property (nonatomic,assign)CGFloat postagePrice;//邮费《默认按照商品中最贵的来》
+@property (nonatomic,strong)__block OCTableCellTextViewModel *detailTextViewModel;
 @end
 //xjphsd
 @implementation EMCartSubmitViewController
@@ -42,7 +48,7 @@
 }
 - (UITableView *)tableView{
     if (nil==_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         [_tableView registerClass:[EMCartSubmitCell class] forCellReuseIdentifier:kSubmitCellIdenfier];
@@ -80,27 +86,52 @@
         make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
         make.height.mas_equalTo(OCUISCALE(50));
     }];
-    UIEdgeInsets inset= self.tableView.contentInset;
-    inset.bottom+=OCUISCALE(50);
-    self.tableView.contentInset=inset;
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.removeExisting=YES;
+        make.top.left.right.mas_equalTo(weakSelf.view);
+        make.bottom.mas_equalTo(weakSelf.bottomView.mas_top);
+    }];
+//    UIEdgeInsets inset= self.tableView.contentInset;
+//    inset.bottom+=OCUISCALE(50);
+//    self.tableView.contentInset=inset;
+    
+    _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"备注" imageName:nil accessoryType:UITableViewCellAccessoryNone type:kEMCartSubmitRemarkCellType];
+    _detailTextViewModel.placeHoleder=@"请填写订单备注";
+    
+    
     self.addressModel=[[EMShopAddressModel alloc]  init];
     self.addressModel.userName=@"收货人";
     self.addressModel.userTel=@"收货人电话";
     self.addressModel.wechatID=@"";
     self.addressModel.detailAddresss=@"请选择收货地址";
-    
-    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
-    [self.tableView reloadData];
+    [self reloadData];
     [self getUserDefaultShoppingAddress];
+}
+- (void)reloadData{
+    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]+self.postagePrice];
+    [self.tableView reloadData];
 }
 - (CGFloat)totalPrice{
     CGFloat totalPrice=0;
     for (EMShopCartModel *model in self.dataSourceArray) {
         if (!model.unSelected) {
-            totalPrice+=model.goodsPrice*model.buyCount;
+            totalPrice+=(model.goodsPrice-model.promotionPrice)*model.buyCount;
         }
     }
     return totalPrice;
+}
+- (CGFloat)postagePrice{
+    if (self.logisticType==EMOrderLogisticsTypeExpress) {
+        NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_postage" ascending:NO];
+        NSArray *tempArray = [self.dataSourceArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//默认取最大的
+        if (tempArray&&tempArray.count) {
+            EMShopCartModel *shopCartModel=[tempArray firstObject];
+            _postagePrice=shopCartModel.postage;
+        }
+    }else{
+        _postagePrice=0;
+    }
+    return _postagePrice;
 }
 - (void)getUserDefaultShoppingAddress{
     WEAKSELF
@@ -121,7 +152,7 @@
 }
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger count=0;
@@ -162,7 +193,7 @@
         EMCartSubmitCell *cell=[tableView dequeueReusableCellWithIdentifier:kSubmitCellIdenfier forIndexPath:indexPath];
         cell.shopCartModel=[self.dataSourceArray objectAtIndex:indexPath.row];
         aCell=cell;
-    }else{
+    }else if(indexPath.section==3){
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPriceCellIdenfier];
         if (nil==cell) {
             cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPriceCellIdenfier];
@@ -170,10 +201,22 @@
             cell.accessoryType=UITableViewCellAccessoryNone;
         }
         UIColor *color=[UIColor colorWithHexString:@"#272727"];
-        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",self.dataSourceArray.count] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
-        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]]];
+        NSString *logsticPriceString=@"";
+        if (self.logisticType==EMOrderLogisticsTypeExpress) {
+            logsticPriceString=[NSString stringWithFormat:@"运费:$%.1f，",self.postagePrice];
+        }
+        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，%@合计金额:",self.dataSourceArray.count,logsticPriceString] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]+self.postagePrice]];
         
         cell.detailTextLabel.attributedText=priceAttrStr;
+        aCell=cell;
+    }else{
+        OCUTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:[self.detailTextViewModel reusedCellIdentifer]];
+        if (nil==cell) {
+            cell= [self.detailTextViewModel cellWithReuseIdentifer:[self.detailTextViewModel reusedCellIdentifer]];
+        }
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.cellModel=self.detailTextViewModel;
         aCell=cell;
     }
     return aCell;
@@ -202,6 +245,8 @@
         }];
     }else if(indexPath.section==1){
         height=44;
+    }else if(indexPath.section==4){
+        height=OCUISCALE(80);
     }else{
         height=OCUISCALE(80);
     }
@@ -220,11 +265,11 @@
         alertController.title=@"选择配送方式";
         UIAlertAction *menAction=[UIAlertAction actionWithTitle:@"快递" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             weakSelf.logisticType=EMOrderLogisticsTypeExpress;
-            [weakSelf.tableView reloadData];
+            [weakSelf reloadData];
         }];
         UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"自取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
              weakSelf.logisticType=EMOrderLogisticsTypeSelfPickUp;
-            [weakSelf.tableView reloadData];
+            [weakSelf reloadData];
         }];
         UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
@@ -256,6 +301,8 @@
         title=@"商品列表";
     }else if(section==3){
         title=@"订单总价";
+    }else if (section==4){
+        title=@"订单备注";
     }
    
     headView.textLabel.text=title;
@@ -267,7 +314,9 @@
     NSURLSessionTask *task=[EMOrderNetService submitWithUserID:[RI userID] shopCarts:shopCartArrays addressID:addressID logisticType:type remark:remarks onCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.view dismissHUDLoading];
-            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:[self totalPrice]];
+            EMOrderModel *orderModel=responseResult.responseData;
+            
+            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber];
             payController.hidesBottomBarWhenPushed=YES;
             [weakSelf.navigationController pushViewController:payController animated:YES];
         }else{
@@ -280,7 +329,7 @@
 //提交订单
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
     
-    [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:nil];
+    [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
 }
 #pragma  mark -address
 - (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel{

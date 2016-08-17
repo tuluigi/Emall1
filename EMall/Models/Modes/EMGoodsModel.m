@@ -45,8 +45,8 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"gid",
              @"infoID":@"id",
-             @"promotePrice":@"promotion_price",
-             @"amount":@"amount",
+             @"promotionPrice":@"promotion_price",
+             @"goodsPrice":@"amount",
              @"specListArray":@"spec",
              };
 }
@@ -91,7 +91,8 @@
              @"avatar":@"avatar",
              @"userName":@"member_name",
              @"commentContent":@"content",
-             @"goodsPrice":@"promotion_price",
+             @"goodsPrice":@"amount",
+               @"promotionPrice":@"promotion_price",
                 @"picture_01":@"picture_01",
                 @"picture_02":@"picture_02",
                 @"picture_03":@"picture_03",
@@ -172,12 +173,20 @@
     }
 }
 - (EMGoodsInfoModel *)defaultGoodsInfo{
-    NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_promotePrice" ascending:YES];
-    NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
-    if (tempArray&&tempArray.count) {
-      _defaultGoodsInfo=[tempArray firstObject];
+    if (self.goodsInfoArray.count) {
+        if (self.goodsInfoArray.count>1) {
+            NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"promotePrice" ascending:NO];
+            NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
+            if (tempArray&&tempArray.count) {
+                _defaultGoodsInfo=[tempArray firstObject];
+            } 
+        }else{
+            _defaultGoodsInfo=self.goodsInfoArray[0];
+        }
+    }else{
+        _defaultGoodsInfo=nil;
     }
-    return _defaultGoodsInfo;
+      return _defaultGoodsInfo;
 }
 
 - (NSMutableDictionary *)specDic{

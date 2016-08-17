@@ -62,8 +62,9 @@
         make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-kEMOffX));
     }];
 }
-- (void)setTitle:(NSString *)title price:(CGFloat)price saleCount:(NSInteger)count{
-    self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:13 priceInterFontSize:17 pointInterSize:13 color:[UIColor colorWithHexString:@"#FC4747"]];
+- (void)setTitle:(NSString *)title price:(CGFloat)price promotionPrice:(CGFloat)promotionPrice saleCount:(NSInteger)count{
+//    self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:13 priceInterFontSize:17 pointInterSize:13 color:[UIColor colorWithHexString:@"#FC4747"]];
+    self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price promotePrice:promotionPrice];
     self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%ld件",count];
     self.titleLabel.text=title;
 }

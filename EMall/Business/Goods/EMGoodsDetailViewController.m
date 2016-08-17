@@ -202,9 +202,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
-        CGFloat price=self.detailModel.defaultGoodsInfo.promotePrice;
-        NSString *title=self.detailModel.goodsModel.goodsName;
-        [cell setTitle:title price:price saleCount:self.detailModel.goodsModel.saleCount];
+        CGFloat price=0;
+        if (self.detailModel) {
+              price=self.detailModel.defaultGoodsInfo.goodsPrice;
+            NSString *title=self.detailModel.goodsModel.goodsName;
+            [cell setTitle:title price:price promotionPrice:self.detailModel.defaultGoodsInfo.promotionPrice  saleCount:self.detailModel.goodsModel.saleCount];
+        }
+       
         aCell=cell;
     }
     return aCell;
@@ -214,12 +218,8 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if (indexPath.section==0) {
         WEAKSELF
         CGFloat price=0;
-        if (self.detailModel.goodsInfoArray.count) {
-            EMGoodsInfoModel *infoModel=self.detailModel.goodsInfoArray[0];
-            price=infoModel.promotePrice;
-        }
         height=[tableView fd_heightForCellWithIdentifier:kGoodsInfoCellIdenfier configuration:^(id cell) {
-            [(EMGoodsInfoTableViewCell *)cell setTitle:weakSelf.detailModel.goodsModel.goodsName   price:price saleCount:weakSelf.detailModel.goodsModel.saleCount];
+            [(EMGoodsInfoTableViewCell *)cell setTitle:weakSelf.detailModel.goodsModel.goodsName   price:price promotionPrice:0  saleCount:weakSelf.detailModel.goodsModel.saleCount];
         }];
     }else if (indexPath.section==2){
         if (indexPath.row==1) {

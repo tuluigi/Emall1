@@ -4,18 +4,28 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/Comment/EMGoodsCommentListController.m"
-            timestampString = "493029310.642885"
+            filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
+            timestampString = "493056296.488186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-didSegmentControlSelected:"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/Comment/EMGoodsCommentListController.m"
-            timestampString = "493029310.642885"
+            filePath = "EMall/Business/Goods/View/EMGoodsSpecView.m"
+            timestampString = "493056328.271396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-resetSegmentTitles:"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
+            landmarkName = "-didActionButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/Modes/EMGoodsCommentModel.m"
-            timestampString = "493025767.096219"
+            filePath = "EMall/Business/Goods/View/EMGoodsSpecView.m"
+            timestampString = "493056388.44572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "-starString"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "-setDetailModel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,29 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/Comment/EMGoodsCommentListController.m"
-            timestampString = "493027597.520341"
+            filePath = "EMall/Models/Modes/EMGoodsModel.m"
+            timestampString = "493056406.07173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-starArray"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Util/Category/NSString/NSAttributedString+Price.m"
-            timestampString = "493038380.766474"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "+goodsPriceAttrbuteStringWithPrice:markFontSize:priceInterFontSize:pointInterSize:color:"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-defaultGoodsInfo"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -95,7 +95,7 @@
     self.goodsNameLabel.text=_shopCartModel.goodsName;
     
     self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_shopCartModel.spec),_shopCartModel.buyCount];
-    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice];
+    self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.goodsPrice-_shopCartModel.promotionPrice];
 }
 
 - (void)setOrderGoodsModel:(EMOrderGoodsModel *)orderGoodsModel{

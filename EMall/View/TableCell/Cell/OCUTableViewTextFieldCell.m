@@ -8,7 +8,7 @@
 
 #import "OCUTableViewTextFieldCell.h"
 #import "OCTableCellTextFiledModel.h"
-
+#import "UITextField+HiddenKeyBoardButton.h"
 @interface OCUTableViewTextFieldCell ()<UITextFieldDelegate>
 @property (nonatomic,strong,readwrite)UITextField *textField;
 
@@ -39,6 +39,7 @@
 - (UITextField *)textField{
     if (nil==_textField) {
         _textField=[[UITextField alloc] init];
+        [_textField addHiddenKeyBoardInputAccessView];
         _textField.font=[UIFont oc_systemFontOfSize:14];
         _textField.textAlignment=NSTextAlignmentLeft;
         _textField.delegate=self;

@@ -33,11 +33,11 @@
             buyCountString=[buyCountString stringByAppendingString:@"&"];
         }
     }
-    parmString=[NSString stringWithFormat:@"?mid=%@&aid=%@&logistics_type=%@&remark=%@&%@&%@",@(useID),@(addressID),@(type),stringNotNil(remark),cartIDString,buyCountString];
+    parmString=[NSString stringWithFormat:@"?mid=%@&aid=%@&logistics_type=%@&remark=%@&%@&%@",@(useID),@(addressID),@(type),stringNotNil([remark URLEncodedString]),cartIDString,buyCountString];
     apiPath=[apiPath stringByAppendingString:parmString];
 //    NSDictionary *postDic=@{@"mid":@(useID),@"mid":@(addressID),@"logistics_type":@(type),@"remark":stringNotNil(remark)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
-        [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:error onCompletionBlock:^(OCResponseResult *responseResult) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMOrderModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

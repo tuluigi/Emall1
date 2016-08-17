@@ -12,15 +12,18 @@
 #import "EMCartViewController.h"
 static NSString *const kPayInfollIdenfier = @"kPayInfollIdenfier";
 static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
+static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 @interface EMCartPayViewController ()
 @property (nonatomic,assign)CGFloat totalPrice;
+@property (nonatomic,copy)NSString *orderNum;
 @end
 
 @implementation EMCartPayViewController
-- (instancetype)initWithTotalPrice:(CGFloat)totalPrice{
+- (instancetype)initWithTotalPrice:(CGFloat)totalPrice orderNum:(NSString *)orderNum{
     self=[super init];
     if (self) {
         self.totalPrice=totalPrice;
+        self.orderNum=orderNum;
     }
     return self;
 }
@@ -56,7 +59,7 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
      [self.tableView registerClass:[EMCartPayCell class] forCellReuseIdentifier:kPayInfollIdenfier];
-    NSInteger count=2;
+    NSInteger count=3;
     return count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -67,19 +70,36 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
             cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPayPriceCellIdenfier];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             cell.accessoryType=UITableViewCellAccessoryNone;
+            cell.textLabel.textColor=kEM_LightDarkTextColor;
+            cell.textLabel.font=[UIFont oc_systemFontOfSize:14];
+            cell.textLabel.text=@"订单金额:";
         }
-        UIColor *color=[UIColor colorWithHexString:@"#272727"];
-        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"您的订单金额为:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+//        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+//        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"您的订单金额为:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         NSAttributedString *aStrr=[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.totalPrice markFontSize:13 priceInterFontSize:19 pointInterSize:19 color:nil];
-        [priceAttrStr appendAttributedString:aStrr];
+//        [priceAttrStr appendAttributedString:aStrr];
         
-        cell.textLabel.attributedText=priceAttrStr;
+        cell.detailTextLabel.attributedText=aStrr;
         aCell=cell;
-    }else if (indexPath.row==1){
+    }else if (indexPath.row==2){
         EMCartPayCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayInfollIdenfier forIndexPath:indexPath];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryNone;
         [(EMCartPayCell *)cell setPayCartName:@"Acc Name：HI CHI GO " cartID:@"BSB：083153" bankName:@"ACC：908925097"];
+        aCell=cell;
+    }else if (indexPath.row==1){
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayOrderNumCellIdenfier];
+        if (nil==cell) {
+            cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPayOrderNumCellIdenfier];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.accessoryType=UITableViewCellAccessoryNone;
+            cell.textLabel.textColor=kEM_LightDarkTextColor;
+            cell.textLabel.font=[UIFont oc_systemFontOfSize:14];
+            cell.detailTextLabel.textColor=kEM_LightDarkTextColor;
+            cell.detailTextLabel.font=[UIFont oc_systemFontOfSize:14];
+            cell.textLabel.text=@"订单号：";
+        }
+        cell.detailTextLabel.text=self.orderNum;
         aCell=cell;
     }
     return aCell;
@@ -88,11 +108,13 @@ static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
     CGFloat height;
     if (indexPath.row==0) {
         height=OCUISCALE(60);
-    }else if(indexPath.row==1){
+    }else if(indexPath.row==2){
 
         height=[tableView fd_heightForCellWithIdentifier:kPayInfollIdenfier configuration:^(id cell) {
 //            [(EMCartPayCell *)cell setShopCartModel:cartModel];
         }];
+    }else{
+        height=44;
     }
     return height;
 }

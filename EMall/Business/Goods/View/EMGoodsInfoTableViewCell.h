@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EMGoodsInfoTableViewCell : UITableViewCell
-- (void)setTitle:(NSString *)title price:(CGFloat)price saleCount:(NSInteger)count;
+- (void)setTitle:(NSString *)title price:(CGFloat)price promotionPrice:(CGFloat)promotionPrice saleCount:(NSInteger)count;
 @end

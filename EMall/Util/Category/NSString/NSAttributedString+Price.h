@@ -12,4 +12,9 @@
 //根据price生成attr price 
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price;
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price markFontSize:(CGFloat)markSize priceInterFontSize:(CGFloat)priceIntegerSize pointInterSize:(CGFloat)pointSize color:(UIColor *)color;
+
+
++ (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price promotePrice:(CGFloat)promotePrice;
+
+-(NSAttributedString *)horizontalLineAttrStringWithText:(NSString *)text textColor:(UIColor *)color font:(UIFont *)font;
 @end

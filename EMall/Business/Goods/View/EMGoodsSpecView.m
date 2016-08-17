@@ -9,7 +9,7 @@
 #import "EMGoodsSpecView.h"
 #import "EMGoodsModel.h"
 #import "UITextField+HiddenKeyBoardButton.h"
-
+#import "NSAttributedString+Price.h"
 @interface EMGoodsSepcHeadView : UICollectionReusableView
 @property (nonatomic,strong)UILabel *titleLabel;
 @end
@@ -392,7 +392,8 @@
 //    _detailModel.goodsModel.goodsImageUrl=@"http://img12.360buyimg.com/cms/jfs/t3040/77/579714529/106419/49e07450/57a7db82N076f7c59.jpg";
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_detailModel.goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     _titleLabel.text=stringNotNil(_detailModel.goodsModel.goodsName);
-    _priceLabel.text=[NSString stringWithFormat:@"$ %.1f",self.detailModel.defaultGoodsInfo.promotePrice];
+//    _priceLabel.text=[NSString stringWithFormat:@"$ %.1f",self.detailModel.defaultGoodsInfo.goodsPrice-self.detailModel.defaultGoodsInfo.promotionPrice];
+    _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.detailModel.defaultGoodsInfo.goodsPrice promotePrice:self.detailModel.defaultGoodsInfo.promotionPrice];
     
     [self.keysArray removeLastObject];
     [self.keysArray addObjectsFromArray:[_detailModel.specDic allKeys]];

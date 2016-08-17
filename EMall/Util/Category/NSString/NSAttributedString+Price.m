@@ -10,8 +10,20 @@
 
 @implementation NSAttributedString (Price)
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price{
-    NSAttributedString *resultAttr=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:8 priceInterFontSize:13 pointInterSize:8 color:[UIColor colorWithHexString:@"#e51e0e"]];
+    NSAttributedString *resultAttr=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:13 priceInterFontSize:17 pointInterSize:13 color:[UIColor colorWithHexString:@"#e51e0e"]];
     return resultAttr;
+}
++ (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price promotePrice:(CGFloat)promotePrice{
+    NSAttributedString *attrString=[self goodsPriceAttrbuteStringWithPrice:price-promotePrice];
+    if (promotePrice) {
+          NSAttributedString *att0=[NSAttributedString horizontalLineAttrStringWithText:[NSString stringWithFormat:@"$%.1f",price] textColor:[UIColor colorWithHexString:@"#e51e0e"] font:[UIFont oc_systemFontOfSize:10]];
+        NSMutableAttributedString *mutbleAttr=[[NSMutableAttributedString alloc] initWithAttributedString:attrString];
+        NSAttributedString *spaceAttr=[[NSAttributedString alloc]  initWithString:@"  "];
+        [mutbleAttr appendAttributedString:spaceAttr];
+        [mutbleAttr appendAttributedString:att0];
+        attrString=mutbleAttr;
+    }
+    return attrString;
 }
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price markFontSize:(CGFloat)markSize priceInterFontSize:(CGFloat)priceIntegerSize pointInterSize:(CGFloat)pointSize color:(UIColor *)color{
     UIColor *textColor=color;
@@ -20,13 +32,13 @@
     }
   
     if (!markSize) {
-        markSize=8;
+        markSize=13;
     }
     if (!priceIntegerSize) {
-        priceIntegerSize=13;
+        priceIntegerSize=17;
     }
     if (!pointSize) {
-        pointSize=8;
+        pointSize=13;
     }
     NSAttributedString *markAtrr=[[NSAttributedString alloc]  initWithString:@"$" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(markSize)]}];
     
@@ -42,6 +54,13 @@
     [resultAttr appendAttributedString:pricePointerAttr];
     [resultAttr addAttributes:@{NSForegroundColorAttributeName:textColor} range:NSMakeRange(0, resultAttr.length)];
     return resultAttr;
-
+}
++(NSAttributedString *)horizontalLineAttrStringWithText:(NSString *)text textColor:(UIColor *)color font:(UIFont *)font{
+    NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc]  initWithString:text attributes:@{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleNone)}];
+    NSDictionary *priceDic=@{
+                             NSForegroundColorAttributeName:color,NSFontAttributeName:font,
+                             NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    [priceAttrStr addAttributes:priceDic range:NSMakeRange(0, text.length)];
+    return priceAttrStr;
 }
 @end
