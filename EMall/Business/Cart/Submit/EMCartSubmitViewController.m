@@ -96,6 +96,7 @@
 //    self.tableView.contentInset=inset;
     
     _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"备注" imageName:nil accessoryType:UITableViewCellAccessoryNone type:kEMCartSubmitRemarkCellType];
+    
     _detailTextViewModel.placeHoleder=@"请填写订单备注";
     
     
@@ -311,6 +312,7 @@
 - (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
     WEAKSELF
     [self.view showHUDLoading];
+    remarks=[remarks stringByRemovingEmoji];
     NSURLSessionTask *task=[EMOrderNetService submitWithUserID:[RI userID] shopCarts:shopCartArrays addressID:addressID logisticType:type remark:remarks onCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.view dismissHUDLoading];

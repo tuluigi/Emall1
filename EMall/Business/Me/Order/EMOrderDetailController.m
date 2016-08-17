@@ -16,6 +16,8 @@
 #import "EMOrderInfoCell.h"
 #import "EMOrderDetailGoodsCell.h"
 #import "EMOrderGoodsCommentController.h"
+#import "OCUTableCellHeader.h"
+#import "OCUTableViewTextViewCell.h"
 #define  kSubmitCellIdenfier  @"KSubmitCellIdenfier"
 #define  kAddressCellIdenfier @"kAddressCellIdenfier"
 #define  kPriceCellIdenfier   @"kPriceCellIdenfier"
@@ -23,10 +25,13 @@
 #define kLogisticsCellIdenfier  @"kLogisticsCellIdenfier"//物流
 #define kRemarksCellIdenfier   @"kRemarksCellIdenfier"//备注
 
+
+#define kEMCartSubmitRemarkCellType     200
 @interface EMOrderDetailController ()
 @property (nonatomic,assign)NSInteger orderID;
 @property (nonatomic,strong)EMOrderDetialModel *orderDetailModel;
 @property (nonatomic,strong)__block EMOrderModel *orderModel;
+@property (nonatomic,strong)__block OCTableCellTextViewModel *detailTextViewModel;
 @end
 
 @implementation EMOrderDetailController
@@ -53,6 +58,10 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationItem.title=@"订单详情";
+    _detailTextViewModel=[[OCTableCellTextViewModel alloc] initWithTitle:@"备注" imageName:nil accessoryType:UITableViewCellAccessoryNone type:kEMCartSubmitRemarkCellType];
+    _detailTextViewModel.disableEdit=YES;
+    _detailTextViewModel.placeHoleder=@"请填写订单备注";
+
     [self getOrderDetailWithOrderID:self.orderID];
 }
 -(void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
@@ -79,7 +88,7 @@
 }
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger count=0;
@@ -101,7 +110,7 @@
         addressModel.userTel=self.orderModel.receiverTel;
         addressModel.detailAddresss=self.orderModel.receiverAddresss;
         addressModel.wechatID=self.orderModel.receiverWeChat;
-         cell.accessoryType=UITableViewCellAccessoryNone;
+        cell.accessoryType=UITableViewCellAccessoryNone;
         cell.addresssModel=addressModel;
         aCell=cell;
     }else if (indexPath.section==2){
@@ -122,7 +131,7 @@
         EMOrderDetailGoodsCell *cell=[tableView dequeueReusableCellWithIdentifier:kSubmitCellIdenfier forIndexPath:indexPath];
         cell.orderGoodsModel=[self.orderModel.goodsArray objectAtIndex:indexPath.row];
         aCell=cell;
-    }else{
+    }else if(indexPath.section==0){
         EMOrderInfoCell *cell=[tableView dequeueReusableCellWithIdentifier:kPriceCellIdenfier forIndexPath:indexPath];
         if (nil==cell) {
             cell=[[EMOrderInfoCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPriceCellIdenfier];
@@ -134,29 +143,58 @@
         for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
             buyCount+=goodsModel.buyCount;
         }
-//        UIColor *color=[UIColor colorWithHexString:@"#272727"];
-//        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",buyCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
-//        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.orderModel.totalPrice]];
+        //        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+        //        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",buyCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+        //        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.orderModel.totalPrice]];
         [cell setOrderID:self.orderModel.orderNumber submitTime:self.orderModel.subitTime payTime:self.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:self.orderModel.totalPrice];
-//        cell.detailTextLabel.attributedText=priceAttrStr;
+        //        cell.detailTextLabel.attributedText=priceAttrStr;
         aCell=cell;
+    }else{
+        
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kRemarksCellIdenfier];
+        if (nil==cell) {
+            cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kRemarksCellIdenfier];
+            cell.textLabel.textColor=kEM_LightDarkTextColor;
+            cell.textLabel.font=[UIFont oc_systemFontOfSize:13];
+            cell.detailTextLabel.textColor=kEM_LightDarkTextColor;
+            cell.detailTextLabel.font=[UIFont oc_systemFontOfSize:13];
+            cell.textLabel.text=@"订单备注";
+            cell.detailTextLabel.numberOfLines=0;
+            cell.accessoryType=UITableViewCellAccessoryNone;
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        if (![NSString isNilOrEmptyForString:self.orderModel.remarks]) {
+            cell.detailTextLabel.text=self.orderModel.remarks;
+        }else{
+            cell.detailTextLabel.text=@"无";
+        }
+        
+        aCell=cell;
+    
+        /*
+        OCUTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:[self.detailTextViewModel reusedCellIdentifer]];
+        if (nil==cell) {
+            cell= [self.detailTextViewModel cellWithReuseIdentifer:[self.detailTextViewModel reusedCellIdentifer]];
+        }
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        self.detailTextViewModel.inputText=self.orderModel.remarks;
+        cell.cellModel=self.detailTextViewModel;
+        aCell=cell;
+*/
     }
     return aCell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height;
     if (indexPath.section==1) {
-
-                __block EMShopAddressModel *weadAddressModel=[[EMShopAddressModel alloc]  init];
-                weadAddressModel.userName=self.orderModel.receiver;
-                weadAddressModel.userTel=self.orderModel.receiverTel;
-                weadAddressModel.detailAddresss=self.orderModel.receiverAddresss;
-                [tableView.fd_keyedHeightCache invalidateHeightForKey:kAddressCellIdenfier];
-                height=[tableView fd_heightForCellWithIdentifier:kAddressCellIdenfier configuration:^(id cell) {
-                    [(EMCartAddressCell *)cell setAddresssModel:weadAddressModel];
-                }];
-
-
+        __block EMShopAddressModel *weadAddressModel=[[EMShopAddressModel alloc]  init];
+        weadAddressModel.userName=self.orderModel.receiver;
+        weadAddressModel.userTel=self.orderModel.receiverTel;
+        weadAddressModel.detailAddresss=self.orderModel.receiverAddresss;
+        [tableView.fd_keyedHeightCache invalidateHeightForKey:kAddressCellIdenfier];
+        height=[tableView fd_heightForCellWithIdentifier:kAddressCellIdenfier configuration:^(id cell) {
+            [(EMCartAddressCell *)cell setAddresssModel:weadAddressModel];
+        }];
     }else if(indexPath.section==3){
         __block EMOrderGoodsModel *goodsModel=[self.orderModel.goodsArray objectAtIndex:indexPath.row];
         height=[tableView fd_heightForCellWithIdentifier:kSubmitCellIdenfier configuration:^(id cell) {
@@ -164,7 +202,7 @@
         }];
     }else if(indexPath.section==2){
         height=44;
-    }else{
+    }else if(indexPath.section==3){
         NSInteger buyCount=0;
         for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
             buyCount+=goodsModel.buyCount;
@@ -173,7 +211,8 @@
         height=[tableView fd_heightForCellWithIdentifier:kPriceCellIdenfier configuration:^(id cell) {
             [cell setOrderID:weakSelf.orderModel.orderNumber submitTime:weakSelf.orderModel.subitTime payTime:weakSelf.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:weakSelf.orderModel.totalPrice];
         }];
-//        height=OCUISCALE(80);
+    }else if(indexPath.section==4){
+        height=OCUISCALE(80);
     }
     return height;
 }
@@ -196,6 +235,8 @@
         title=@"商品列表";
     }else if(section==0){
         title=@"订单信息";
+    }else if (section==4){
+        title=@"订单备注";
     }
     
     headView.textLabel.text=title;

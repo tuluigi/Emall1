@@ -35,6 +35,7 @@
 @property (nonatomic,assign)NSInteger infoID;//明细ID
 @property (nonatomic,assign)CGFloat goodsPrice;//原价
 @property (nonatomic,assign)CGFloat promotionPrice;//优惠金额
+@property (nonatomic,assign)CGFloat discountPrice;
 @property (nonatomic,strong)NSArray *specListArray;//规格列表array
 @end
 
@@ -79,7 +80,7 @@
 @property (nonatomic,strong)NSMutableArray *goodsSpecListArray;//商品规格列表,通过单独接口获取，获取之后，给放到这个数组中
 
 
-@property (nonatomic,strong)EMGoodsInfoModel  *defaultGoodsInfo;//默认的明细《默认的明细是按照最低价来的》
+@property (nonatomic,strong,readonly)EMGoodsInfoModel  *defaultGoodsInfo;//默认的明细《默认的明细是按照最低价来的》
 
 /**
  *  该商品的所有的明细分类

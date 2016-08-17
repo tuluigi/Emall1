@@ -10,6 +10,7 @@
 
 @interface OCTableCellTextViewModel : OCTableCellModel
 @property (nonatomic,copy)NSString *placeHoleder;
+@property (nonatomic,assign)BOOL disableEdit;
 
 @property (nonatomic,copy)NSString *inputText;
 @end

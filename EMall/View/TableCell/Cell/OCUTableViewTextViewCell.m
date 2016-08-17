@@ -28,6 +28,10 @@
     OCTableCellTextViewModel *textViewModel = (OCTableCellTextViewModel *)cellModel;
     self.textView.placeholder=textViewModel.placeHoleder;
     self.textView.text=textViewModel.inputText;
+    self.textView.editable=!textViewModel.disableEdit;
+    if (textViewModel.disableEdit) {
+        self.textView.inputView=nil;
+    }
 }
 -(UIPlaceHolderTextView *)textView{
     if (nil==_textView) {

@@ -34,7 +34,7 @@
 #import "UIImage+OCColorImage.h"
 #import "UIScrollView+OCRefresh.h"
 #import "UIResponder+Router.h"
-
+#import "NSString+RemoveEmoji.h"
 
 #import "UIViewController+OpenCourse.h"
 #import "UIViewController+Login.h"

@@ -41,7 +41,12 @@
 }
 @end
 @implementation EMGoodsInfoModel
-
+-(CGFloat)discountPrice{
+    if (!_discountPrice) {
+          _discountPrice=self.goodsPrice-self.promotionPrice;
+    }
+    return _discountPrice;
+}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"gid",
              @"infoID":@"id",
@@ -92,12 +97,12 @@
              @"userName":@"member_name",
              @"commentContent":@"content",
              @"goodsPrice":@"amount",
-               @"promotionPrice":@"promotion_price",
-                @"picture_01":@"picture_01",
-                @"picture_02":@"picture_02",
-                @"picture_03":@"picture_03",
-                @"picture_04":@"picture_04",
-                @"picture_05":@"picture_05",
+             @"promotionPrice":@"promotion_price",
+             @"picture_01":@"picture_01",
+             @"picture_02":@"picture_02",
+             @"picture_03":@"picture_03",
+             @"picture_04":@"picture_04",
+             @"picture_05":@"picture_05",
              @"specArray":@"spec",};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
@@ -141,10 +146,20 @@
 
 @interface EMGoodsDetailModel ()
 @property (nonatomic,strong,readwrite)NSMutableDictionary *specDic;
+@property (nonatomic,strong,readwrite)EMGoodsInfoModel  *defaultGoodsInfo;
+@property (nonatomic,strong)NSLock *lock;
 @end
 
 @implementation EMGoodsDetailModel
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.lock=[[NSLock alloc]  init];
+        self.lock.name=@"defaultGoodsInfo";
+    }
+    return self;
+}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsModel":@"goods",
              @"goodsInfoArray":@"detail",
@@ -172,21 +187,27 @@
         return nil;
     }
 }
+- (void)setGoodsInfoArray:(NSMutableArray *)goodsInfoArray{
+    _goodsInfoArray=goodsInfoArray;
+}
 - (EMGoodsInfoModel *)defaultGoodsInfo{
-    if (self.goodsInfoArray.count) {
-        if (self.goodsInfoArray.count>1) {
-            NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"promotePrice" ascending:NO];
-            NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
-            if (tempArray&&tempArray.count) {
-                _defaultGoodsInfo=[tempArray firstObject];
-            } 
-        }else{
+    if (!_defaultGoodsInfo) {
+        if (self.goodsInfoArray.count) {
             _defaultGoodsInfo=self.goodsInfoArray[0];
-        }
-    }else{
-        _defaultGoodsInfo=nil;
+            if (self.goodsInfoArray.count>1) {
+                NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_discountPrice" ascending:NO];
+                NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
+                if (tempArray&&tempArray.count) {
+                    _defaultGoodsInfo=[tempArray firstObject];
+                }
+            }else{
+                _defaultGoodsInfo=self.goodsInfoArray[0];
+            }
+        }else{
+            _defaultGoodsInfo=nil;
+        } 
     }
-      return _defaultGoodsInfo;
+    return _defaultGoodsInfo;
 }
 
 - (NSMutableDictionary *)specDic{
