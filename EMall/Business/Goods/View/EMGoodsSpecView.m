@@ -93,7 +93,7 @@
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    CGSize size=CGSizeMake(50,35 );
+    CGSize size=CGSizeMake(60,35 );
     /*
     if (![NSString isNilOrEmptyForString:_titleString]) {
         NSString *textString=[_titleString copy];
@@ -597,7 +597,7 @@
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(50, 35);
-        flowLayout.itemSize=CGSizeMake(50, 35);
+        flowLayout.itemSize=CGSizeMake(60, 35);
         flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
         flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
         

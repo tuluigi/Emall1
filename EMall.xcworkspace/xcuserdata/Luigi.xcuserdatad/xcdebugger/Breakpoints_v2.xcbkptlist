@@ -41,7 +41,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "373"
             endingLineNumber = "373"
-            landmarkName = "-didActionButtonPressed:"
+            landmarkName = "-onInitContentView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,7 +57,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "396"
             endingLineNumber = "396"
-            landmarkName = "-setDetailModel:"
+            landmarkName = "-onInitContentView"
             landmarkType = "5">
             <Locations>
                <Location
