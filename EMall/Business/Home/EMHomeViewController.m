@@ -264,6 +264,7 @@ EMHomeHeadReusableViewDelegate>
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
