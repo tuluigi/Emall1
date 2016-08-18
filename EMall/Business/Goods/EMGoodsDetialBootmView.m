@@ -8,8 +8,53 @@
 
 #import "EMGoodsDetialBootmView.h"
 
+static NSString *const EMGoodsDetailBottomItemViewTaped= @"EMGoodsDetailBottomItemViewTaped";
+@interface EMGoodsDetailBottomItemView : UIView
+@property (nonatomic,strong) UIImageView *iconImageView;
+@property (nonatomic,strong)  UILabel *nameLabel;
+
+@end
+@implementation EMGoodsDetailBottomItemView
+- (instancetype)initWithFrame:(CGRect)frame{
+    self=[super initWithFrame:frame];
+    if (self) {
+        [self onInitContentView];
+    }
+    return self;
+}
+- (void)onInitContentView{
+    self.userInteractionEnabled=YES;
+    _iconImageView=[[UIImageView alloc] init];
+    [self addSubview:_iconImageView];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
+    _nameLabel.adjustsFontSizeToFitWidth=YES;
+    _nameLabel.backgroundColor=[UIColor clearColor];
+    _nameLabel.numberOfLines=1;
+    [self addSubview:_nameLabel];
+    UITapGestureRecognizer *tapGestures=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
+    [self addGestureRecognizer:tapGestures];
+    
+    WEAKSELF
+    [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(5));
+        make.centerX.mas_equalTo(weakSelf.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(20), OCUISCALE(20)));
+    }];
+    [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.iconImageView.mas_bottom);
+        make.width.mas_equalTo(weakSelf.mas_width);
+        make.centerX.mas_equalTo(weakSelf.iconImageView);
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).priorityHigh();
+    }];
+}
+- (void)handleTapGesture:(UITapGestureRecognizer *)tag{
+    [[self nextResponder] routerEventName:EMGoodsDetailBottomItemViewTaped userInfo:nil];
+}
+
+@end
 @interface EMGoodsDetialBootmView ()
 @property (nonatomic,strong)UIButton *submitButton;
+@property (nonatomic,strong)EMGoodsDetailBottomItemView *serviceItemView;
 @end
 
 @implementation EMGoodsDetialBootmView
@@ -37,6 +82,11 @@
     UIView *lineView=[UIView new];
     lineView.backgroundColor=RGB(201, 201, 201);
     [self addSubview:lineView];
+    
+    _serviceItemView=[[EMGoodsDetailBottomItemView alloc]  init];
+    _serviceItemView.nameLabel.text=@"联系客服";
+    _serviceItemView.iconImageView.image=[UIImage imageNamed:@"me_service"];
+    [self addSubview:_serviceItemView];
     WEAKSELF
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(weakSelf);
@@ -46,10 +96,22 @@
         make.top.right.bottom.mas_equalTo(weakSelf);
         make.width.mas_equalTo(OCUISCALE(157));
     }];
+    [_serviceItemView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.submitButton.mas_left).offset(-OCUISCALE(20));
+        make.top.bottom.mas_equalTo(weakSelf);
+        make.width.mas_equalTo(weakSelf.serviceItemView.mas_height);
+    }];
 }
 - (void)didSubmitButtonPressed:(UIButton *)sender{
     if (_delegate&&[_delegate respondsToSelector:@selector(goodsDetialBootmViewSubmitButtonPressed)]) {
         [_delegate goodsDetialBootmViewSubmitButtonPressed];
+    }
+}
+- (void)routerEventName:(NSString *)event userInfo:(NSDictionary *)userInfo{
+    if (event==EMGoodsDetailBottomItemViewTaped) {
+        if (_delegate&&[_delegate respondsToSelector:@selector(goodsDetialBootmViewServiceItemPressed)]) {
+            [_delegate goodsDetialBootmViewServiceItemPressed];
+        }
     }
 }
 /*

@@ -174,11 +174,27 @@ MWPhotoBrowserDelegate,UIImagePickerControllerDelegate>
     browser.autoPlayOnAppear = NO;
     [browser setCurrentPhotoIndex:1];
     browser.enableSwipeToDismiss=YES;
+    if (nil==controller) {
+        UIViewController *rootController=[UIApplication sharedApplication].keyWindow.rootViewController;
+        if (rootController&&[rootController isKindOfClass:[UITabBarController class]]) {
+            UINavigationController *rootNav=(UINavigationController *)[(UITabBarController *)rootController selectedViewController];
+            controller=rootNav.topViewController;
+        }
+    }
     // Prsent
-    [controller.navigationController pushViewController:browser animated:YES];
-    browser.navigationController.navigationBar.barTintColor=browser.navigationController.navigationBar.barTintColor;
-    browser.navigationController.navigationBar.tintColor=controller.navigationController.navigationBar.tintColor;
-    // Manipulate
+    if (controller.navigationController) {
+        [controller.navigationController pushViewController:browser animated:YES];
+        browser.navigationController.navigationBar.barTintColor=browser.navigationController.navigationBar.barTintColor;
+        browser.navigationController.navigationBar.tintColor=controller.navigationController.navigationBar.tintColor;
+
+    }else{
+        browser.navigationController.navigationBar.barTintColor=RGB(229, 26, 30);
+        browser.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+     [controller presentViewController:browser animated:YES completion:^{
+         
+     }];
+    }
+       // Manipulate
     [browser showNextPhotoAnimated:YES];
     [browser showPreviousPhotoAnimated:YES];
     [browser setCurrentPhotoIndex:index];

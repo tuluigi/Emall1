@@ -79,7 +79,7 @@
 - (void)onInitContentView{
     self.navigationItem.title=@"确认订单";
     [self.view addSubview:self.bottomView];
-    self.logisticType=EMOrderLogisticsTypeExpress;
+    self.logisticType=EMOrderLogisticsTypeUnKonwn;
     WEAKSELF
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
@@ -105,6 +105,7 @@
     self.addressModel.userTel=@"收货人电话";
     self.addressModel.wechatID=@"";
     self.addressModel.detailAddresss=@"请选择收货地址";
+    self.addressModel.addressID=-1;
     [self reloadData];
     [self getUserDefaultShoppingAddress];
 }
@@ -176,18 +177,20 @@
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kLogisticsCellIdenfier];
         if (nil==cell) {
             cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kLogisticsCellIdenfier];
-            cell.textLabel.textColor=kEM_LightDarkTextColor;
+            cell.textLabel.textColor=kEM_RedColro;
             cell.textLabel.font=[UIFont oc_systemFontOfSize:13];
             cell.detailTextLabel.textColor=kEM_LightDarkTextColor;
             cell.detailTextLabel.font=[UIFont oc_systemFontOfSize:13];
-            cell.textLabel.text=@"配送方式";
+            cell.textLabel.text=@"请选择取货方式";
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         if (self.logisticType==EMOrderLogisticsTypeExpress) {
-              cell.detailTextLabel.text=@"快递";
+              cell.detailTextLabel.text=@"快递送货";
+        }else if(self.logisticType==EMOrderLogisticsTypeSelfPickUp){
+              cell.detailTextLabel.text=@"Box Hill自取";
         }else{
-              cell.detailTextLabel.text=@"自取";
+            cell.detailTextLabel.text=@"";
         }
         aCell=cell;
     }else if (indexPath.section==2){
@@ -263,12 +266,12 @@
     }else if (indexPath.section==1){//配送方式
         WEAKSELF
         UIAlertController *alertController=[[UIAlertController alloc]  init];
-        alertController.title=@"选择配送方式";
-        UIAlertAction *menAction=[UIAlertAction actionWithTitle:@"快递" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        alertController.title=@"选择取货方式";
+        UIAlertAction *menAction=[UIAlertAction actionWithTitle:@"快递送货" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             weakSelf.logisticType=EMOrderLogisticsTypeExpress;
             [weakSelf reloadData];
         }];
-        UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"自取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"Box Hill自取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
              weakSelf.logisticType=EMOrderLogisticsTypeSelfPickUp;
             [weakSelf reloadData];
         }];
@@ -310,6 +313,11 @@
     return headView;
 }
 - (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
+    if (addressID<0) {
+        [self.view showHUDMessage:@"请选择收货地址"];
+    }else if (self.logisticType==EMOrderLogisticsTypeUnKonwn){
+        [self.view showHUDMessage:@"请选择配送方式"];
+    }else{
     WEAKSELF
     [self.view showHUDLoading];
     remarks=[remarks stringByRemovingEmoji];
@@ -326,6 +334,7 @@
         }
     }];
     [self addSessionTask:task];
+    }
 }
 #pragma mark -bottomView select
 //提交订单

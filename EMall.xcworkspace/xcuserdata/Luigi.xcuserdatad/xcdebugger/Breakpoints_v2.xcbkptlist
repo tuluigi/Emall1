@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
-            timestampString = "493056296.488186"
+            timestampString = "493196450.135371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -67,13 +67,13 @@
                   symbolName = "__36-[EMGoodsSpecView onInitContentView]_block_invoke.362"
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493139020.521968"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
+                  timestampString = "493208820.067825"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "396"
                   endingLineNumber = "396"
-                  offsetFromSymbolStart = "605">
+                  offsetFromSymbolStart = "616">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -82,13 +82,13 @@
                   symbolName = "__copy_helper_block_.367"
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493139020.522271"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
+                  timestampString = "493208820.067967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "396"
                   endingLineNumber = "396"
-                  offsetFromSymbolStart = "37">
+                  offsetFromSymbolStart = "52">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -97,13 +97,13 @@
                   symbolName = "__destroy_helper_block_.368"
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xuguojun432/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493139020.522545"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
+                  timestampString = "493208820.068075"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "396"
                   endingLineNumber = "396"
-                  offsetFromSymbolStart = "25">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -130,13 +130,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Me/EMMeViewController.m"
-            timestampString = "493139191.145294"
+            filePath = "EMall/Util/Helper/EMImagePickBrowserHelper.m"
+            timestampString = "493208735.304181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-getOrderStaetNum"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "+showImageBroswerOnController:withImageArray:currentIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Util/Helper/EMImagePickBrowserHelper.m"
+            timestampString = "493208754.695343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "+showImageBroswerOnController:withImageArray:currentIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,8 +8,12 @@
 
 #import "EMServiceController.h"
 #import "QRCodeGenerator.h"
+#import "EMImagePickBrowserHelper.h"
 @interface EMServiceFootView :UIView
 @property(nonatomic,strong)UIImageView *headImageView;
+@property(nonatomic,strong)UILabel *messageLabel;
+@property(nonatomic,copy)NSString *imageUrl;
+
 
 @end
 
@@ -22,29 +26,52 @@
     return self;
 }
 - (void)onInitContentView{
+   
     self.backgroundColor=[UIColor whiteColor];
     _headImageView=[[UIImageView alloc]  init];
     [self addSubview:_headImageView];
     UIImage *image=[QRCodeGenerator qrImageForString:@"https://www.pgyer.com/3Z6K" imageSize:OCUISCALE(100)];
     _headImageView.image=image;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:@"http://45.118.132.56:8081/images/webchat/QR.jpg"] placeholderImage:EMDefaultImage];
+   
+    _messageLabel=[UILabel labelWithText:@"亲！请微信添加客服微信进行咨询" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentCenter];
+    _messageLabel.textColor=kEM_RedColro;
+    [self addSubview:_messageLabel];
+    
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleImageViewTap)];
+    [self.headImageView addGestureRecognizer:tapGesture];
+    self.headImageView.userInteractionEnabled=YES;
     WEAKSELF
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-20));
+       
         make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(20));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(150), OCUISCALE(150)));
         make.centerX.mas_equalTo(weakSelf.mas_centerX);
     }];
+    [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.mas_left).offset(kEMOffX);
+        make.right.mas_equalTo(weakSelf.mas_right).offset(-kEMOffX);
+         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-20));
+        make.height.mas_equalTo(OCUISCALE(30));
+         make.top.mas_equalTo(weakSelf.headImageView.mas_bottom).offset(OCUISCALE(20));
+    }];
+     self.imageUrl=@"http://45.118.132.56:8081/images/webchat/QR.jpg";
 }
-
+- (void)setImageUrl:(NSString *)imageUrl{
+    _imageUrl=imageUrl;
+     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_imageUrl] placeholderImage:EMDefaultImage];
+}
 + (CGFloat)headViewHeight{
-    return OCUISCALE(150+20+20);
+    return OCUISCALE(150+20+20+20+30);
 }
 + (EMServiceFootView *)serviceFootView{
     EMServiceFootView *headView=[[EMServiceFootView alloc]  init];
     CGSize size=[headView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     headView.frame=CGRectMake(0, 0, size.width, size.height);
     return headView;
+}
+- (void)handleImageViewTap{
+    MWPhoto *photo=[MWPhoto photoWithURL:[NSURL URLWithString:self.imageUrl]];
+    [EMImagePickBrowserHelper showImageBroswerOnController:nil withImageArray:@[photo] currentIndex:0];
 }
 @end
 @interface EMServiceController ()

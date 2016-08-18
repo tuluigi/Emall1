@@ -114,6 +114,13 @@
     self.addressLable.text=addresssModel.fullAdderssString;
     self.defaultButton.hidden=!addresssModel.isDefault;
     self.wechatLabel.text=[NSString stringWithFormat:@"微信号：%@",stringNotNil(addresssModel.wechatID)];
+    UIColor *texColor=[UIColor colorWithHexString:@"#272727"];
+    if (!addresssModel.addressID) {
+        texColor=kEM_RedColro;
+    }
+    self.telLabel.textColor=texColor;
+    self.detailTextLabel.textColor=texColor;
+    
 }
 - (void)didEditButtonPressed:(UIButton *)sender{
     if (_delegate&&[_delegate respondsToSelector:@selector(shopAddressListCellDidEditButtonPressed:)]) {

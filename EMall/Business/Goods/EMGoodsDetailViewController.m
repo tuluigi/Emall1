@@ -19,6 +19,7 @@
 #import "EMInfiniteView.h"
 #import "EMImagePickBrowserHelper.h"
 #import "EMShopCartNetService.h"
+#import "EMServiceController.h"
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>
@@ -184,8 +185,10 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         aCell.textLabel.numberOfLines=0;
         if (indexPath.section==1) {
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+                aCell.textLabel.textColor=kEM_RedColro;
             aCell.textLabel.text=@"请选择规格、数量";
         }else if (indexPath.section==2){
+            aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
             if (indexPath.row==0) {
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 aCell.textLabel.text=[NSString stringWithFormat:@"商品评价 (%@)",[NSString tenThousandUnitString:self.detailModel.goodsModel.commentCount]];
@@ -316,6 +319,11 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             [weakSelf goodsDetialBootmViewSubmitButtonPressed];
         }];
     }
+}
+- (void)goodsDetialBootmViewServiceItemPressed{
+    EMServiceController *serviceController=[[EMServiceController alloc]  init];
+    serviceController.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:serviceController animated:YES];
 }
 #pragma  mark - getter setter
 - (void)setGoodsModel:(EMGoodsModel *)goodsModel{

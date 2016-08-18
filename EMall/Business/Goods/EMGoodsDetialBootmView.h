@@ -11,7 +11,10 @@
 @optional
 //购物车
 - (void)goodsDetialBootmViewSubmitButtonPressed;
-
+/**
+ *  联系客服
+ */
+- (void)goodsDetialBootmViewServiceItemPressed;
 @end
 @interface EMGoodsDetialBootmView : UIView
 @property (nonatomic,weak)id <EMGoodsDetialBootmViewDelegate> delegate;

@@ -133,7 +133,11 @@
    
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
+    BOOL enable=YES;
+    if (_delegate) {
+        enable=NO;
+    }
+    return enable;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"删除";

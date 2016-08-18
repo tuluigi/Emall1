@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger,EMOrderState) {
     EMOrderStateFinished          =9,//已完成
 };
 typedef NS_ENUM(NSInteger,EMOrderLogisticsType) {
+    EMOrderLogisticsTypeUnKonwn             =0,//未知
     EMOrderLogisticsTypeExpress             =2,//快递
     EMOrderLogisticsTypeSelfPickUp          =1,//自取
 };
