@@ -90,7 +90,12 @@
 @end
 
 @implementation EMGoodsModel
-
+-(NSString *)videoUrl{
+    if (nil==_videoUrl) {
+        _videoUrl=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
+    }
+    return _videoUrl;
+}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"id",
              @"goodsName":@"name",

@@ -154,7 +154,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     //    self.view.transform=self.view.transform;;
 }
 - (void)playGoodsDetailVideoWithUrl:(NSString *)urlString{
-   urlString=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
+//   urlString=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
     if (![NSString isNilOrEmptyForString:urlString]) {
         NSURL *url=[NSURL URLWithString:urlString];
         AVPlayerViewController *playerController=[[AVPlayerViewController alloc]  init];
@@ -165,7 +165,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             
         }];
     }else{
-        [self.tableView showHUDMessage:@"暂无视频"];
+        [self.tableView showHUDMessage:@"视频无法播放"];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -225,7 +225,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             }
         }else if (indexPath.section==3){
             if (indexPath.row==1) {
-                aCell.textLabel.text=@"商品视频介绍";
+                aCell.textLabel.text=@"视频介绍";
             }else{
                 aCell.textLabel.text=@"商品详情";
             }

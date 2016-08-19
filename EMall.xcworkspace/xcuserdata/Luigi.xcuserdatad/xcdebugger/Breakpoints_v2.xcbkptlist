@@ -73,12 +73,12 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/Order/EMOrderDetailController.m"
-                  timestampString = "493284475.171319"
+                  timestampString = "493296066.832916"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "211"
                   endingLineNumber = "211"
-                  offsetFromSymbolStart = "1840">
+                  offsetFromSymbolStart = "1836">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -88,7 +88,7 @@
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/Order/EMOrderDetailController.m"
-                  timestampString = "493284475.171444"
+                  timestampString = "493296066.83301"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "211"
@@ -111,6 +111,22 @@
             startingLineNumber = "206"
             endingLineNumber = "206"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Business/Goods/EMGoodsDetailViewController.m"
+            timestampString = "493296065.307077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
