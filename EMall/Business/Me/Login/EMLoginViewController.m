@@ -31,7 +31,7 @@
     _imageView.image=[UIImage imageNamed:@"loginheader"];
     [self addSubview:_imageView];
     
-    _label=[UILabel labelWithText:@"登录后即可开始享受海购生活呦" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _label=[UILabel labelWithText:@"登录后即可开始享受嗨吃生活呦" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
     _label.textColor=ColorHexString(@"#5d5c5c");
     [self addSubview:_label];
     

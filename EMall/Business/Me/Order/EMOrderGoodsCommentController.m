@@ -118,7 +118,7 @@
         _textView.layer.borderWidth=0.5;
         _textView.layer.cornerRadius=4;
         _textView.layer.masksToBounds=YES;
-        _textView.placeholder=@"客官，购买的宝贝可还符合您心意？快来告诉海购君~";
+        _textView.placeholder=@"客官，购买的宝贝可还符合您心意？快来告诉嗨吃君~";
         [_textView becomeFirstResponder];
     }
     return _textView;
