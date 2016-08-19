@@ -64,6 +64,7 @@
 @property (nonatomic,copy)NSString *commentContent;//用户的一条评论
 
 @property (nonatomic,assign)NSInteger state;
+@property (nonatomic,copy)NSString *videoUrl;//商品视频url
 
 
 @property (nonatomic,strong)NSArray *specArray;//商品列表中可能用到的规格信息

@@ -109,6 +109,7 @@
              @"userName":@"member_name",
              @"commentContent":@"content",
              @"goodsPrice":@"amount",
+             @"videoUrl":@"video_url",
              @"promotionPrice":@"promotion_price",
              @"picture_01":@"picture_01",
              @"picture_02":@"picture_02",

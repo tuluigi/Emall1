@@ -20,7 +20,7 @@
 #import "EMMeNetService.h"
 #import "EMOrderModel.h"
 #import "OCUTableCellHeader.h"
-
+#import "EMGoodsPostageFootView.h"
 #define  kSubmitCellIdenfier  @"KSubmitCellIdenfier"
 #define  kAddressCellIdenfier @"kAddressCellIdenfier"
 #define  kPriceCellIdenfier   @"kPriceCellIdenfier"
@@ -207,7 +207,7 @@
         UIColor *color=[UIColor colorWithHexString:@"#272727"];
         NSString *logsticPriceString=@"";
         if (self.logisticType==EMOrderLogisticsTypeExpress) {
-            logsticPriceString=[NSString stringWithFormat:@"运费:$%.1f，",self.postagePrice];
+            //logsticPriceString=[NSString stringWithFormat:@"运费:$%.1f，",self.postagePrice];
         }
         NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，%@合计金额:",self.dataSourceArray.count,logsticPriceString] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]+self.postagePrice]];
@@ -311,6 +311,25 @@
    
     headView.textLabel.text=title;
     return headView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    CGFloat height=CGFLOAT_MIN;
+    if (section==1&&self.logisticType==EMOrderLogisticsTypeExpress) {
+        height=35;
+    }
+    return height;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (section==1&&self.logisticType==EMOrderLogisticsTypeExpress) {
+        EMGoodsPostageFootView *headView=[tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([EMGoodsPostageFootView class])];
+        if (nil==headView) {
+            headView=[[EMGoodsPostageFootView alloc]  initWithReuseIdentifier:NSStringFromClass([EMGoodsPostageFootView class])];
+        }
+        return headView;
+    }else{
+        return nil;
+    }
+
 }
 - (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
     if (addressID<0) {

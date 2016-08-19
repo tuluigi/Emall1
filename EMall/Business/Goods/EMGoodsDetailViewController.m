@@ -20,6 +20,9 @@
 #import "EMImagePickBrowserHelper.h"
 #import "EMShopCartNetService.h"
 #import "EMServiceController.h"
+
+#import <MediaPlayer/MPMoviePlayerViewController.h>
+#import <AVKit/AVPlayerViewController.h>
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>
@@ -150,6 +153,18 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                                    self.view.superview.bounds.size.height/2);
     //    self.view.transform=self.view.transform;;
 }
+- (void)playGoodsDetailVideoWithUrl:(NSURL *)url{
+    url=[NSURL URLWithString:@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4"];
+    if (url) {
+        AVPlayerViewController *playerController=[[AVPlayerViewController alloc]  init];
+        AVPlayer *avplayer=[AVPlayer playerWithURL:url];
+        [avplayer play];
+        playerController.player=avplayer;
+        [self presentViewController:playerController animated:YES completion:^{
+            
+        }];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -166,9 +181,9 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger row=0;
-    if (section==0||section==1||section==3) {
+    if (section==0||section==1) {
         row=1;
-    }else if (section==2){
+    }else if (section==2||section==3){
         row=2;
     }
     return row;
@@ -185,7 +200,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         aCell.textLabel.numberOfLines=0;
         if (indexPath.section==1) {
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-                aCell.textLabel.textColor=kEM_RedColro;
+            aCell.textLabel.textColor=kEM_RedColro;
             aCell.textLabel.text=@"请选择规格、数量";
         }else if (indexPath.section==2){
             aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
@@ -200,18 +215,23 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                 aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(self.detailModel.goodsModel.userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
         }else if (indexPath.section==3){
-            aCell.textLabel.text=@"商品详情";
+            if (indexPath.row==0) {
+                aCell.textLabel.text=@"商品视频介绍";
+            }else{
+                aCell.textLabel.text=@"商品详情";
+            }
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            
         }
     }else if(indexPath.section==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
         CGFloat price=0;
         if (self.detailModel) {
-              price=self.detailModel.defaultGoodsInfo.goodsPrice;
+            price=self.detailModel.defaultGoodsInfo.goodsPrice;
             NSString *title=self.detailModel.goodsModel.goodsName;
             [cell setTitle:title price:price promotionPrice:self.detailModel.defaultGoodsInfo.promotionPrice  saleCount:self.detailModel.goodsModel.saleCount];
         }
-       
+        
         aCell=cell;
     }
     return aCell;
@@ -274,9 +294,13 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             [self.navigationController pushViewController:commentListController animated:YES];
         }
     }else if (indexPath.section==3){
-        EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
-        goodsWebController.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:goodsWebController animated:YES];
+        if (indexPath.row==0) {
+            [self playGoodsDetailVideoWithUrl:[NSURL URLWithString:self.detailModel.goodsModel.videoUrl]];
+        }else{
+            EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
+            goodsWebController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:goodsWebController animated:YES];
+        }
     }
 }
 #pragma mark -EMInfiniteVieDelegate
@@ -321,7 +345,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }
 }
 - (void)goodsDetialBootmViewServiceItemPressed{
-    EMServiceController *serviceController=[[EMServiceController alloc]  init];
+    EMServiceController *serviceController=[[EMServiceController alloc]  initWithStyle:UITableViewStyleGrouped];
     serviceController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:serviceController animated:YES];
 }
