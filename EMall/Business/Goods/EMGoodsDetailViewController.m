@@ -153,9 +153,10 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                                    self.view.superview.bounds.size.height/2);
     //    self.view.transform=self.view.transform;;
 }
-- (void)playGoodsDetailVideoWithUrl:(NSURL *)url{
-    url=[NSURL URLWithString:@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4"];
-    if (url) {
+- (void)playGoodsDetailVideoWithUrl:(NSString *)urlString{
+   urlString=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
+    if (![NSString isNilOrEmptyForString:urlString]) {
+        NSURL *url=[NSURL URLWithString:urlString];
         AVPlayerViewController *playerController=[[AVPlayerViewController alloc]  init];
         AVPlayer *avplayer=[AVPlayer playerWithURL:url];
         [avplayer play];
@@ -163,6 +164,8 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         [self presentViewController:playerController animated:YES completion:^{
             
         }];
+    }else{
+        [self.tableView showHUDMessage:@"暂无视频"];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -183,8 +186,14 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     NSInteger row=0;
     if (section==0||section==1) {
         row=1;
-    }else if (section==2||section==3){
+    }else if (section==2){
         row=2;
+    }else if (section==3){
+        if (![NSString isNilOrEmptyForString:self.detailModel.goodsModel.videoUrl]) {//有视频的
+            row=2;
+        }else{
+            row=1;
+        }
     }
     return row;
 }
@@ -215,7 +224,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                 aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(self.detailModel.goodsModel.userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
         }else if (indexPath.section==3){
-            if (indexPath.row==0) {
+            if (indexPath.row==1) {
                 aCell.textLabel.text=@"商品视频介绍";
             }else{
                 aCell.textLabel.text=@"商品详情";
@@ -294,8 +303,8 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             [self.navigationController pushViewController:commentListController animated:YES];
         }
     }else if (indexPath.section==3){
-        if (indexPath.row==0) {
-            [self playGoodsDetailVideoWithUrl:[NSURL URLWithString:self.detailModel.goodsModel.videoUrl]];
+        if (indexPath.row==1) {
+            [self playGoodsDetailVideoWithUrl:self.detailModel.goodsModel.videoUrl];
         }else{
             EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
             goodsWebController.hidesBottomBarWhenPushed=YES;

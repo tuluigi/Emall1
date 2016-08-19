@@ -24,24 +24,29 @@
     UIFont *font=[UIFont oc_systemFontOfSize:14];
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
     _orderIDLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _orderIDLabel.numberOfLines=1;
     [self.contentView addSubview:_orderIDLabel];
     
     _subtimeTimeLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _subtimeTimeLabel.numberOfLines=1;
     [self.contentView addSubview:_subtimeTimeLabel];
     
     _buyTimeLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _buyTimeLabel.numberOfLines=1;
     [self.contentView addSubview:_buyTimeLabel];
     
     _sendTimeLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _sendTimeLabel.numberOfLines=1;
     [self.contentView addSubview:_sendTimeLabel];
     
     _priceLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _priceLabel.numberOfLines=1;
     [self.contentView addSubview:_priceLabel];
 
     
     WEAKSELF
     [_orderIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(OCUISCALE(13));
+        make.left.mas_equalTo(weakSelf.contentView.mas_left).offset(OCUISCALE(kEMOffX));
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(OCUISCALE(20));
         make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-kEMOffX));
     }];
@@ -65,7 +70,7 @@
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.orderIDLabel.mas_left);
         make.right.mas_equalTo(weakSelf.orderIDLabel.mas_right);
-        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-20));
+        make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-20)).priorityHigh();
         make.top.mas_equalTo(weakSelf.buyTimeLabel.mas_bottom).offset(10);
     }];
 }

@@ -202,7 +202,7 @@
         }];
     }else if(indexPath.section==2){
         height=44;
-    }else if(indexPath.section==3){
+    }else if(indexPath.section==0){
         NSInteger buyCount=0;
         for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
             buyCount+=goodsModel.buyCount;

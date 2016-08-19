@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             scope = "0"
@@ -14,80 +14,22 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/View/EMGoodsSpecView.m"
-            timestampString = "493056328.271396"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
-            landmarkName = "-onInitContentView"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Goods/View/EMGoodsSpecView.m"
-            timestampString = "493056388.44572"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
-            landmarkName = "-onInitContentView"
-            landmarkType = "5">
+            symbolName = "UIViewAlertForUnsatisfiableConstraints"
+            moduleName = "">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__36-[EMGoodsSpecView onInitContentView]_block_invoke.362"
-                  moduleName = "EMall"
+                  symbolName = "UIViewAlertForUnsatisfiableConstraints"
+                  moduleName = "UIKit"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493280332.319751"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "396"
-                  endingLineNumber = "396"
-                  offsetFromSymbolStart = "616">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.367"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493280332.31986"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "396"
-                  endingLineNumber = "396"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.368"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Goods/View/EMGoodsSpecView.m"
-                  timestampString = "493280332.319955"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "396"
-                  endingLineNumber = "396"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -98,13 +40,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/Modes/EMGoodsModel.m"
-            timestampString = "493277101.934663"
+            filePath = "EMall/Business/Me/Order/EMOrderInfoCell.m"
+            timestampString = "493284388.377195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "+JSONKeyPathsByPropertyKey"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-setOrderID:submitTime:payTime:sendTime:totalCount:totalPrice:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -114,14 +56,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Util/Helper/EMImagePickBrowserHelper.m"
-            timestampString = "493208735.304181"
+            filePath = "EMall/Business/Me/Order/EMOrderDetailController.m"
+            timestampString = "493284475.160306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "+showImageBroswerOnController:withImageArray:currentIndex:"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EMOrderDetailController tableView:heightForRowAtIndexPath:]"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/Order/EMOrderDetailController.m"
+                  timestampString = "493284475.171319"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "1840">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__61-[EMOrderDetailController tableView:heightForRowAtIndexPath:]_block_invoke.216"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aa/Documents/Luigi/EMall/EMall/EMall/Business/Me/Order/EMOrderDetailController.m"
+                  timestampString = "493284475.171444"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -130,45 +104,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Util/Helper/EMImagePickBrowserHelper.m"
-            timestampString = "493208754.695343"
+            filePath = "EMall/Business/Me/Order/EMOrderDetailController.m"
+            timestampString = "493284503.608091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "+showImageBroswerOnController:withImageArray:currentIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Cart/Submit/EMCartSubmitViewController.m"
-            timestampString = "493279514.73711"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
-            landmarkName = "-tableView:viewForFooterInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Business/Cart/Submit/EMGoodsPostageFootView.m"
-            timestampString = "493280332.139662"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "-initWithReuseIdentifier:"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
