@@ -192,7 +192,7 @@ UICollectionViewDelegateFlowLayout>
                 make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
 //                make.size.mas_equalTo(CGSizeMake(OCUISCALE(0), OCUISCALE(0)));
             }];
-            [_reBuyButton setTitle:@"确认收获" forState:UIControlStateNormal];
+            [_reBuyButton setTitle:@"确认收货" forState:UIControlStateNormal];
             _reBuyButton.hidden=NO;
         }
     }
