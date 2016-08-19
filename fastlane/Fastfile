@@ -21,7 +21,7 @@ platform :ios do
     cocoapods
     
   end
-
+  
   desc "Runs all the tests"
   lane :test do
     scan
@@ -63,9 +63,72 @@ platform :ios do
     #   success: false
     # )
   end
+  lane :uploadPgy do
+  # Build
+  build_app(
+    release:No,
+    # Change the app name
+    app_name:"EMall",
+    # Set the app id
+    app_identifier:"com.tuchaoshi.TestFastlane",
+    # Set the path to the certificate to use in building
+    certificate_path:"./fastlane/certs/inhouse.p12",
+    # Set the password of the p12 certificate file
+    certificate_password:"",
+    # Set the path to the provisioning profile to use (change this!)
+    profile:"./fastlane/certs/EvanDemo.mobileprovision",
+    # What configuration to use, usefull for keeping different API keys etc between environments
+    configuration:"Beta",
+    # Use this codesigning identity (this is the name of the certificate in your keychain)
+    codesigning_identity:"EvanDemo",
+    # Export an enterprise app   ["app-store", "ad-hoc", "package", "enterprise", "development", "developer-id"]
+    export_method:"development",
+    # the projectname, this is the name of the .xcodeproj file and the folder containing your code in the project
+    project_name:"EMall",
+    # the scheme to build
+    scheme:"EMall",
+  )
+  sh "ipa distribute:pgyer -f " + "/Users/Moyun/Desktop/Demo/" + Time.now.strftime("%Y-%m-%d") + "/" + "TestFastlane.ipa" + " -a xxx -u xxx"
+end
 end
 
-
+private_lane :build_app do |options|
+  # Update the app name
+  app_name(
+    plist_path: "#{options[:project_name]}/Info.plist",
+    app_name: options[:app_name]
+  )
+  # Update the app identifier
+  update_app_identifier(
+    xcodeproj: "#{options[:project_name]}.xcodeproj",
+    plist_path: "#{options[:project_name]}/Info.plist",
+    app_identifier: options[:app_identifier]
+  )
+  # Install the certificate
+  import_certificate(
+    certificate_path: options[:certificate_path],
+    certificate_password: options[:certificate_password],
+    keychain_name: "login.keychain"
+  )
+  # Install the provisioning profile
+  update_project_provisioning(
+    xcodeproj: "#{options[:project_name]}.xcodeproj",
+    profile: options[:profile]
+  )
+  # # Version bump
+  # increment_build_number(
+  #   build_number: options[:build_number]
+  # )
+  # Build the app
+  gym(
+    scheme: "#{options[:scheme]}",
+    configuration: options[:configuration],
+    provisioning_profile_path: options[:profile],
+    codesigning_identity: options[:codesigning_identity],
+    export_method: options[:export_method],
+    output_directory: "/Users/Moyun/Desktop/Demo/" + Time.now.strftime("%Y-%m-%d")
+  )
+end
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
 
