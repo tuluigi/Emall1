@@ -14,7 +14,7 @@
 @property(nonatomic,copy)NSString *goodsName;
 @property(nonatomic,copy)NSString *goodsImageUrl;
 
-@property(nonatomic,assign)CGFloat goodsPrice,promotionPrice,discountPrice;//分别是原价和优惠金额和优惠后的价格
+@property(nonatomic,assign)CGFloat goodsPrice,promotionPrice;//分别是原价和优惠金额和优惠后的价格
 @property (nonatomic,assign)NSInteger goodsAmount;//库存数量
 @property (nonatomic,assign)CGFloat postage;//运费
 @property(nonatomic,assign)NSInteger buyCount;

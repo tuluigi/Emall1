@@ -41,12 +41,6 @@
 }
 @end
 @implementation EMGoodsInfoModel
--(CGFloat)discountPrice{
-    if (!_discountPrice) {
-          _discountPrice=self.goodsPrice-self.promotionPrice;
-    }
-    return _discountPrice;
-}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"gid",
              @"infoID":@"id",
@@ -90,12 +84,12 @@
 @end
 
 @implementation EMGoodsModel
--(NSString *)videoUrl{
-    if (nil==_videoUrl) {
-        _videoUrl=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
-    }
-    return _videoUrl;
-}
+//-(NSString *)videoUrl{
+//    if (nil==_videoUrl) {
+//        _videoUrl=@"http://mov.bn.netease.com/open-movie/nos/mp4/2016/08/09/SBT4C26SI_sd.mp4";
+//    }
+//    return _videoUrl;
+//}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"id",
              @"goodsName":@"name",
@@ -213,7 +207,7 @@
         if (self.goodsInfoArray.count) {
             _defaultGoodsInfo=self.goodsInfoArray[0];
             if (self.goodsInfoArray.count>1) {
-                NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_discountPrice" ascending:YES];
+                NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_promotionPrice" ascending:YES];
                 NSArray *tempArray = [self.goodsInfoArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//价钱降序，最小的
                 if (tempArray&&tempArray.count) {
                     _defaultGoodsInfo=[tempArray firstObject];

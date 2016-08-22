@@ -14,7 +14,7 @@
     return resultAttr;
 }
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price promotePrice:(CGFloat)promotePrice{
-    NSAttributedString *attrString=[self goodsPriceAttrbuteStringWithPrice:price-promotePrice];
+    NSAttributedString *attrString=[self goodsPriceAttrbuteStringWithPrice:promotePrice];
     if (promotePrice) {
           NSAttributedString *att0=[NSAttributedString horizontalLineAttrStringWithText:[NSString stringWithFormat:@"$%.1f",price] textColor:[UIColor colorWithHexString:@"#e51e0e"] font:[UIFont oc_systemFontOfSize:10]];
         NSMutableAttributedString *mutbleAttr=[[NSMutableAttributedString alloc] initWithAttributedString:attrString];

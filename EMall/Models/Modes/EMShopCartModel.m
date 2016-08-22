@@ -9,11 +9,6 @@
 #import "EMShopCartModel.h"
 #import "EMGoodsModel.h"
 @implementation EMShopCartModel
--(CGFloat)discountPrice{
-    _discountPrice=self.goodsPrice-self.promotionPrice;
-    _discountPrice= MAX(0, _discountPrice);
-    return _discountPrice;
-}
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"cartID":@"id",
              @"goodsID":@"gid",

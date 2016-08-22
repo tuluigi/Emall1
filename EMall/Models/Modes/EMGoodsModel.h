@@ -35,7 +35,6 @@
 @property (nonatomic,assign)NSInteger infoID;//明细ID
 @property (nonatomic,assign)CGFloat goodsPrice;//原价
 @property (nonatomic,assign)CGFloat promotionPrice;//优惠金额
-@property (nonatomic,assign)CGFloat discountPrice;
 @property (nonatomic,strong)NSArray <EMSpecListModel *>*specListArray;//规格列表array
 @property (nonatomic,strong)NSMutableDictionary *specsDic;//规格array
 @end

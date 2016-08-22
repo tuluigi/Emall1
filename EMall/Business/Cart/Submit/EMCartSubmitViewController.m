@@ -117,7 +117,7 @@
     CGFloat totalPrice=0;
     for (EMShopCartModel *model in self.dataSourceArray) {
         if (!model.unSelected) {
-            totalPrice+=(model.goodsPrice-model.promotionPrice)*model.buyCount;
+            totalPrice+=(model.promotionPrice)*model.buyCount;
         }
     }
     return totalPrice;
