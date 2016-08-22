@@ -146,7 +146,13 @@
     self.checkMarkButton.selected=!_shopCartModel.unSelected;
 //    self.priceLabel.text=[NSString stringWithFormat:@"$%.2f",_shopCartModel.goodsPrice];
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.promotionPrice];
-    [self updateBuyCount:_shopCartModel.buyCount];
+//    [self updateBuyCount:_shopCartModel.buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
+    if (_shopCartModel.buyCount<=1) {
+        self.minusButton.enabled=NO;
+    }else{
+        self.minusButton.enabled=YES;
+    }
 }
 - (void)updateBuyCount:(NSInteger)buyCount{
     self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];

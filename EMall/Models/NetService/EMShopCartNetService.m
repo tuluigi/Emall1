@@ -17,6 +17,9 @@
     NSDictionary *postDic=@{@"goodsCart.mid":@(useID),@"goodsCart.gdid":@(infoID),@"goodsCart.quantity":@(buyCount)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:nil error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kEMShopCartShouldUpdateNotification object:nil];
+            }
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

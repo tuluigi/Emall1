@@ -220,9 +220,9 @@ EMHomeHeadReusableViewDelegate>
 - (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type{
     NSString *catName;
     if (type==EMHomeHeadReusableViewTypeGreat) {
-        catName=@"嗨购精品";
+        catName=@"嗨吃精品";
     }else if (type==EMHomeHeadReusableViewTypeHot){
-        catName=@"嗨购热品";
+        catName=@"嗨吃热品";
     }
     EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithHomeType:type typeName:catName];
     listController.hidesBottomBarWhenPushed=YES;

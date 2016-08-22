@@ -38,6 +38,9 @@
 //    NSDictionary *postDic=@{@"mid":@(useID),@"mid":@(addressID),@"logistics_type":@(type),@"remark":stringNotNil(remark)};
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMOrderModel class] error:error onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kEMShopCartShouldUpdateNotification object:nil];
+            }
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
             }

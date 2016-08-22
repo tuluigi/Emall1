@@ -47,6 +47,7 @@
              @"promotionPrice":@"promotion_price",
              @"goodsPrice":@"amount",
              @"specListArray":@"spec",
+             @"quantity":@"quantity",
              };
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{

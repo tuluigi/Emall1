@@ -91,7 +91,9 @@
     NSArray *controllerArrays=@[homeNavController,catNavController,lessonNavController,meNavController];
     self.viewControllers=controllerArrays;
 
-    
+}
+- (void)updateBadgeValue:(NSInteger)badge{
+
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     UINavigationController *navController=(UINavigationController *)viewController;

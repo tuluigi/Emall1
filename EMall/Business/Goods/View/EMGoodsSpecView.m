@@ -95,20 +95,20 @@
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     CGSize size=CGSizeMake(60,35 );
     /*
-    if (![NSString isNilOrEmptyForString:_titleString]) {
-        NSString *textString=[_titleString copy];
-        CGSize aSize= [textString boundingRectWithSize:CGSizeMake(OCWidth, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont oc_systemFontOfSize:13],NSFontAttributeName, nil] context:nil].size;
-//        CGSize aSize=[textString boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
-//         size=CGSizeMake(aSize.width+20,35 );
-        size=aSize;
-    }
+     if (![NSString isNilOrEmptyForString:_titleString]) {
+     NSString *textString=[_titleString copy];
+     CGSize aSize= [textString boundingRectWithSize:CGSizeMake(OCWidth, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont oc_systemFontOfSize:13],NSFontAttributeName, nil] context:nil].size;
+     //        CGSize aSize=[textString boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
+     //         size=CGSizeMake(aSize.width+20,35 );
+     size=aSize;
+     }
      */
     attributes.size=size;
     return attributes;
 }
 - (void)setEnable:(BOOL)enable{
     _enable=enable;
-   UIColor *textColor=kEM_LightDarkTextColor;
+    UIColor *textColor=kEM_LightDarkTextColor;
     if (_enable) {
         textColor=kEM_RedColro;
     }else{
@@ -202,24 +202,28 @@
     self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
 }
 - (void)updateBuyCount:(NSInteger)buyCount{
+    if (buyCount>=EMGoodsMaxBuyCount) {
+        [self showOverMaxBuyCountMessage];
+        return ;
+    }
     self.countTextField.text=[NSString stringWithFormat:@"%ld",buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{
         self.minusButton.enabled=YES;
     }
-        if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
-            [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
-        }
+    if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
+        [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
+    }
 }
 - (void)showOverMaxBuyCountMessage{
     [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
 }
 - (void)didPlusButtonPressed:(UIButton *)sender{
-    if (self.buyCount>=EMGoodsMaxBuyCount) {
-        [self showOverMaxBuyCountMessage];
-        return ;
-    }
+    //    if (self.buyCount>=EMGoodsMaxBuyCount) {
+    //        [self showOverMaxBuyCountMessage];
+    //        return ;
+    //    }
     self.buyCount++;
     [self updateBuyCount:self.buyCount];
 }
@@ -238,7 +242,10 @@
     BOOL enableChange=YES;
     NSString *value=textField.text;
     value=[textField.text stringByReplacingCharactersInRange:range withString:string];
+    
     NSInteger buyCount=value.integerValue;
+    [self updateBuyCount:buyCount];
+    return YES;
     if (buyCount>EMGoodsMaxBuyCount) {
         buyCount=EMGoodsMaxBuyCount;
         enableChange=NO;
@@ -372,7 +379,7 @@
     _submitButton.titleLabel.font=[UIFont oc_boldSystemFontOfSize:17];
     [_submitButton addTarget:self action:@selector(didActionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-//    _submitButton.enabled=NO;
+    //    _submitButton.enabled=NO;
     [self addSubview:_submitButton];
     
     WEAKSELF
@@ -429,8 +436,12 @@
                 [self showHUDMessage:@"商品数据错误"];
                 return;
             }
+            if (count>infoModel.quantity) {
+                [self showHUDMessage:@"库存不足"];
+                return;
+            }
             if (self.dismissBlock) {
-                self.dismissBlock(weakSelf, YES,weakSelf.detailModel.goodsModel.goodsID,infoModel.infoID ,count);
+                self.dismissBlock(weakSelf, YES,weakSelf.detailModel.goodsModel.goodsID, count,infoModel.infoID);
             }
         }
     }else if (sender==self.closeButton){
@@ -457,11 +468,11 @@
     [self reSetGoodsPriceWithGoodsInfoModel:_detailModel.defaultGoodsInfo];
     
     [self.myCollectionView reloadData];
-//    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
+    //    self.submitButton.enabled=_detailModel.goodsInfoArray.count;
 }
 
 - (void)reSetGoodsPriceWithGoodsInfoModel:(EMGoodsInfoModel *)infoModel{
-
+    
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:infoModel.goodsPrice promotePrice:infoModel.promotionPrice];
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -483,15 +494,15 @@
     if (indexPath.section<self.keysArray.count-1) {
         EMGoodsSpecCell *cell=(EMGoodsSpecCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCell class]) forIndexPath:indexPath];
         
-         NSString *key=[self.keysArray objectAtIndex:indexPath.section];
-       // NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
+        NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+        // NSArray *valueArray=[self.detailModel.specDic objectForKey:key];
         NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
         NSArray *valueArray=[specDic allValues];
         EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
         
         cell.titleString=specModel.name;
         EMSpecModel *selectSpecModel=[self.selectSpecDic objectForKey:specModel.pName];
-
+        
         BOOL isEnable=NO;
         if (selectSpecModel&&selectSpecModel.specID==specModel.specID && [selectSpecModel.name isEqualToString:specModel.name]) {
             isEnable=YES;
@@ -572,15 +583,15 @@
     for (EMGoodsInfoModel *infoModel in infoArray) {
         //按照pame进行逐个比较该明细中是否包含选中的名字
         NSArray *infoKeyArray=[[infoModel specsDic] allKeys];
-//        NSArray *alreadyKeyAary=[alreadyDic allKeys];
+        //        NSArray *alreadyKeyAary=[alreadyDic allKeys];
         NSArray *alreadyKeyAary=selectSpectArray;
         NSPredicate *predicate=[NSPredicate predicateWithFormat:@"(SELF in %@)",alreadyKeyAary];
         NSArray *tempArray=[infoKeyArray filteredArrayUsingPredicate:predicate];
         if (tempArray.count) {
             [*goodsInfoDic setObject:infoModel forKey:@(infoModel.infoID)];//添加当条明细
-//            for (EMSpecModel *specModel in tempArray) {
-//                [enableSpecDic setObject:specModel forKey:specModel.name];
-//            }
+            //            for (EMSpecModel *specModel in tempArray) {
+            //                [enableSpecDic setObject:specModel forKey:specModel.name];
+            //            }
             [enableSpecDic setValuesForKeysWithDictionary:infoModel.specsDic];//添加该明细中所有的规格
         }
     }

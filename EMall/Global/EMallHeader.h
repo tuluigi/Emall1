@@ -64,6 +64,8 @@
 static NSString * const OCLogoutNofication = @"com.EMMall.logout.success";
 static NSString * const OCLoginSuccessNofication = @"com.EMMall.login.success";
 
+static NSString * const kEMShopCartCountChangedNotification = @"EMShopCartCountChangedNotification";//购物车数量变化
+static NSString * const kEMShopCartShouldUpdateNotification= @"kEMShopCartShouldUpdateNotification";//添加购物车，提交订单之后，购物车数量变化
 #define  EMGoodsMaxBuyCount     50 //每件商品最大购买数量
 
 static CGFloat const kEMOffX    = 13;

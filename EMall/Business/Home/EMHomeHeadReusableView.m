@@ -37,7 +37,7 @@
     /*
    
     UIFont *font=[UIFont fontWithName:@"FZZHYJW  Bold" size:OCUISCALE(13)];
-    _titleLable=[UILabel labelWithText:@"嗨购精品" font:font textAlignment:NSTextAlignmentLeft];
+    _titleLable=[UILabel labelWithText:@"嗨吃精品" font:font textAlignment:NSTextAlignmentLeft];
     _titleLable.textColor=ColorHexString(@"#fc4747");
     [self addSubview:_titleLable];
     */
@@ -92,10 +92,10 @@
     _type=type;
     if (_type==EMHomeHeadReusableViewTypeGreat) {
        _imageView.image=[UIImage imageNamed:@"home_greatgood"];
-        self.titleLable.text=@"嗨购精品";
+        self.titleLable.text=@"嗨吃精品";
     }else if (_type==EMHomeHeadReusableViewTypeHot){
         _imageView.image=[UIImage imageNamed:@"home_hotgood"];
-        self.titleLable.text=@"嗨购热品";
+        self.titleLable.text=@"嗨吃热品";
     }
 }
 

@@ -19,6 +19,13 @@
 @end
 
 @implementation EMCartViewController
+- (instancetype)init{
+    self=[super init];
+    if (self) {
+       
+    }
+    return self;
+}
 - (UITableView *)tableView{
     if (nil==_tableView) {
         _tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -81,6 +88,10 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLogoutNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf handleUserLogoutSucceedNotification];
     }];
+    //购物车数量变化
+    [[NSNotificationCenter defaultCenter] addObserverForName:kEMShopCartShouldUpdateNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [self getCartListWithCursor:self.cursor];
+    }];
     [self.tableView addOCPullDownResreshHandler:^{
         weakSelf.cursor=1;
         [weakSelf getCartListWithCursor:weakSelf.cursor];
@@ -108,7 +119,7 @@
         [weakSelf.tableView showPageLoadingView];
         weakSelf.bottomView.hidden=YES;
     }
-    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:cursor pageSize:10 onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:cursor pageSize:1000 onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.tableView dismissPageLoadView];
         [weakSelf.tableView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor==responseResult.totalPage) {
@@ -121,6 +132,7 @@
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.tableView reloadData];
+            [weakSelf calcuteMyShopCart];
             [weakSelf updatePageLoadMesage];
         }else{
             if (cursor<=1) {
@@ -149,6 +161,7 @@
             [weakSelf.tableView dismissHUDLoading];
             [weakSelf.dataSourceArray removeObjectsInArray:array];
             [weakSelf.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationAutomatic];
+            [weakSelf calcuteMyShopCart];
             [weakSelf updatePageLoadMesage];
         }else{
             [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
@@ -193,10 +206,16 @@
     for (EMShopCartModel *model in self.dataSourceArray) {
         if (!model.unSelected) {
             count++;
-            totalPrice+=(model.goodsPrice-model.promotionPrice)*model.buyCount;
+            totalPrice+=(model.promotionPrice)*model.buyCount;
         }
     }
     [self.bottomView updateCartBottomWithSelectItemCount:count totalItems:self.dataSourceArray.count totalPrice:totalPrice];
+    if (self.dataSourceArray.count) {
+        self.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",self.dataSourceArray.count];
+    }else{
+        self.navigationController.tabBarItem.badgeValue=nil;
+    }
+
 }
 - (void)updateAllShopCartModelSelectState:(BOOL)select{
     for (EMShopCartModel *model in self.dataSourceArray) {

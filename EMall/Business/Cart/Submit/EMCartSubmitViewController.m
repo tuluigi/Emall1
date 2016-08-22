@@ -35,7 +35,6 @@
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)CGFloat addressCellheight;
 @property (nonatomic,assign)__block EMOrderLogisticsType logisticType;
-@property (nonatomic,assign)CGFloat postagePrice;//邮费《默认按照商品中最贵的来》
 @property (nonatomic,strong)__block OCTableCellTextViewModel *detailTextViewModel;
 @end
 //xjphsd
@@ -110,7 +109,7 @@
     [self getUserDefaultShoppingAddress];
 }
 - (void)reloadData{
-    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]+self.postagePrice];
+    [self.bottomView updateCartBottomWithSelectItemCount:self.dataSourceArray.count totalItems:self.dataSourceArray.count totalPrice:[self totalPrice]];
     [self.tableView reloadData];
 }
 - (CGFloat)totalPrice{
@@ -121,19 +120,6 @@
         }
     }
     return totalPrice;
-}
-- (CGFloat)postagePrice{
-    if (self.logisticType==EMOrderLogisticsTypeExpress) {
-        NSSortDescriptor *sortDescriptor0 = [NSSortDescriptor sortDescriptorWithKey:@"_postage" ascending:NO];
-        NSArray *tempArray = [self.dataSourceArray sortedArrayUsingDescriptors:@[sortDescriptor0]];//默认取最大的
-        if (tempArray&&tempArray.count) {
-            EMShopCartModel *shopCartModel=[tempArray firstObject];
-            _postagePrice=shopCartModel.postage;
-        }
-    }else{
-        _postagePrice=0;
-    }
-    return _postagePrice;
 }
 - (void)getUserDefaultShoppingAddress{
     WEAKSELF
@@ -210,7 +196,7 @@
             //logsticPriceString=[NSString stringWithFormat:@"运费:$%.1f，",self.postagePrice];
         }
         NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，%@合计金额:",self.dataSourceArray.count,logsticPriceString] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
-        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]+self.postagePrice]];
+        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]]];
         
         cell.detailTextLabel.attributedText=priceAttrStr;
         aCell=cell;

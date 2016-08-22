@@ -42,8 +42,8 @@
 }
 - (NSString *)spec{
     if ([NSString isNilOrEmptyForString:_spec]) {
+        _spec=@"";
         for (EMSpecModel *model in self.specListModel.specsArray) {
-            _spec=[NSString stringWithFormat:@"%@ %@",stringNotNil(_spec),stringNotNil(model.name)];
             _spec=[_spec stringByAppendingString:model.name];
         }
         _spec=[_spec stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

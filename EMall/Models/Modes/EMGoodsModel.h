@@ -33,6 +33,7 @@
 @interface EMGoodsInfoModel : OCBaseModel
 @property (nonatomic,assign)NSInteger goodsID;//商品ID
 @property (nonatomic,assign)NSInteger infoID;//明细ID
+@property (nonatomic,assign)NSInteger quantity;//数量
 @property (nonatomic,assign)CGFloat goodsPrice;//原价
 @property (nonatomic,assign)CGFloat promotionPrice;//优惠金额
 @property (nonatomic,strong)NSArray <EMSpecListModel *>*specListArray;//规格列表array

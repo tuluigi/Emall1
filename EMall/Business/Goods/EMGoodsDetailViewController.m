@@ -337,7 +337,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (void)goodsDetialBootmViewSubmitButtonPressed{
     if ([RI isLogined]) {
         if (self.detailModel.goodsInfoArray.count) {
-            EMGoodsInfoModel *infoModel=[self.detailModel.goodsInfoArray firstObject];
+            EMGoodsInfoModel *infoModel=self.detailModel.defaultGoodsInfo;
             [self addShopCartWithGoodsID:self.goodsID infoID:infoModel.infoID buyCount:1];
         }else{
             [self.view showHUDMessage:@"商品数据错误"];
