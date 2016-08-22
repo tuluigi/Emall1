@@ -33,7 +33,7 @@
     UIImage *image=[QRCodeGenerator qrImageForString:@"https://www.pgyer.com/3Z6K" imageSize:OCUISCALE(100)];
     _headImageView.image=image;
    
-    _messageLabel=[UILabel labelWithText:@"亲！请添加微信客服,微信进行咨询" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentCenter];
+    _messageLabel=[UILabel labelWithText:@"亲！请添加微信客服,微信进行咨询！" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentCenter];
     _messageLabel.textColor=kEM_RedColro;
     [self addSubview:_messageLabel];
     
@@ -106,7 +106,7 @@
         cell.detailTextLabel.text=self.telPhone;
         cell.imageView.image=[UIImage imageNamed:@"service_tel"];
     }else if (indexPath.row==1){
-        cell.textLabel.text=@"扫描二维码，关注嗨吃GO微信公众号";
+        cell.textLabel.text=@"扫描二维码，联系客服咨询";
         cell.detailTextLabel.text=@"";
         cell.imageView.image=[UIImage imageNamed:@"service_wechat"];
     }

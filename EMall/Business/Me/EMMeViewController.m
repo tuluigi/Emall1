@@ -260,9 +260,9 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
                 shoppingAddressListController.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:shoppingAddressListController animated:YES];
             } else if (cellModel.type==EMUserTableCellModelTypeOrder){
-                EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:EMOrderStateNone];
-                orderHomeListController.hidesBottomBarWhenPushed=YES;
-                [self.navigationController pushViewController:orderHomeListController animated:YES];
+                    EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:EMOrderStateNone];
+                    orderHomeListController.hidesBottomBarWhenPushed=YES;
+                    [self.navigationController pushViewController:orderHomeListController animated:YES];
             }
         }else{
             [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
@@ -274,9 +274,14 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
 
 #pragma mark - EMMeOrderCellDelegate
 - (void)orderStateCellDidSelectItem:(EMOrderStateModel *)stateModel{
-    EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:stateModel.state];
-    orderHomeListController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:orderHomeListController animated:YES];
+    if ([RI isLogined]) {
+        EMOrderHomeListController *orderHomeListController=[[EMOrderHomeListController alloc]  initWithOrderState:stateModel.state];
+        orderHomeListController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:orderHomeListController animated:YES];
+    }else{
+        [self showLoginControllerOnCompletionBlock:^(BOOL isSucceed) {
+        }];
+    }
 }
 
 #pragma  mark - getter
