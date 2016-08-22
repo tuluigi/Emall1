@@ -39,7 +39,7 @@
     }
     pid=MIN(1, pid);
     if (pid) {
-        [postDic setObject:@"cursor" forKey:@(pid)];
+        [postDic setObject:@(pid) forKey:@"cursor"];
     }
     if (pageSize) {
         [postDic setObject:@(pageSize) forKey:@"pageSize"];

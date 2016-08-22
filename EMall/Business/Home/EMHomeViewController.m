@@ -224,7 +224,7 @@ EMHomeHeadReusableViewDelegate>
     }else if (type==EMHomeHeadReusableViewTypeHot){
         catName=@"嗨购热品";
     }
-    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:type catName:catName];
+    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithHomeType:type typeName:catName];
     listController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:listController animated:YES];
 }

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger,EMHomeHeadReusableViewType) {
-    EMHomeHeadReusableViewTypeGreat     ,//精品
-    EMHomeHeadReusableViewTypeHot       ,//热品
+typedef NS_ENUM(NSInteger,EMHomeHeadReusableViewType) {//商品接口对应的value
+    EMHomeHeadReusableViewTypeGreat     =1,//精品
+    EMHomeHeadReusableViewTypeHot       =2,//热品
 };
 
 @protocol EMHomeHeadReusableViewDelegate <NSObject>

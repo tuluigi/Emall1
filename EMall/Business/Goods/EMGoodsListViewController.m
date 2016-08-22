@@ -25,23 +25,24 @@ UICollectionViewDelegateFlowLayout
 
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)__block NSMutableArray *dataSourceArray;
-@property (nonatomic,assign)NSInteger catID;
+@property (nonatomic,assign)NSInteger catID,homeType;
 @property (nonatomic,assign)EMGoodsListFromType fromType;
 @end
 
 @implementation EMGoodsListViewController
 - (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName{
     self=[self initWithCatID:catID catName:catName fromType:EMGoodsListFromTypeCategory];
+      self.catID=catID;
     return self;
 }
 - (instancetype)initWithHomeType:(NSInteger )typeID typeName:(NSString *)typeName{
     self=[self initWithCatID:typeID catName:typeName fromType:EMGoodsListFromTypeHome];
+    self.homeType=typeID;
     return self;
 }
 - (instancetype)initWithCatID:(NSInteger )catID catName:(NSString *)catName fromType:(EMGoodsListFromType)fromType{
     self=[super init];
     if (self) {
-        self.catID=catID;
         if ([NSString isNilOrEmptyForString:catName]) {
             self.navigationItem.title=@"商品列表";
         }else{
@@ -83,13 +84,7 @@ UICollectionViewDelegateFlowLayout
 //    if (self.dataSourceArray.count==0) {
 //        [weakSelf.myCollectionView showPageLoadingView];
 //    }
-    NSInteger catID,homtType=0;
-    if (self.fromType==EMGoodsListFromTypeHome) {
-        homtType=self.catID;
-    }else if(self.fromType==EMGoodsListFromTypeCategory){
-        catID=self.catID;
-    }
-    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:catID searchName:nil aesc:0 sortType:0 homeType:homtType pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
+    NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:self.catID searchName:nil aesc:0 sortType:0 homeType:self.homeType pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.myCollectionView dismissPageLoadView];
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor>=responseResult.totalPage) {
