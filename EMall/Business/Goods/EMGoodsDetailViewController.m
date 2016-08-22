@@ -338,6 +338,10 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if ([RI isLogined]) {
         if (self.detailModel.goodsInfoArray.count) {
             EMGoodsInfoModel *infoModel=self.detailModel.defaultGoodsInfo;
+            if (infoModel.quantity<1) {
+                [self.view showHUDMessage:@"库存不足"];
+                return;
+            }
             [self addShopCartWithGoodsID:self.goodsID infoID:infoModel.infoID buyCount:1];
         }else{
             [self.view showHUDMessage:@"商品数据错误"];
