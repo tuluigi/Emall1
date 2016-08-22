@@ -34,6 +34,17 @@
 - (void)setOrderState:(EMOrderState)orderState{
     _orderState=orderState;
 }
+- (void)setOrderState:(EMOrderState )orderState goodsName:(NSString *)goodsName{
+    self.orderState=orderState;
+    self.goodsName=goodsName;
+    if (_tableView&&self.dataSourceArray.count==0) {
+        [self.tableView startPullDownRefresh];
+    }
+}
+- (void)reloadDataWithOrderState:(EMOrderState )orderState goodsName:(NSString *)goodsName{
+    [self setOrderState:orderState goodsName:goodsName];
+   [self.tableView startPullDownRefresh];
+}
 - (void)getOrderListWithOrderState:(NSInteger)orderState{
     WEAKSELF
 //    [self.tableView showPageLoadingView];

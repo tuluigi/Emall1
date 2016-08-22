@@ -21,4 +21,6 @@
 @property (nonatomic,assign)EMOrderState orderState;
 @property (nonatomic,copy)NSString *goodsName;//搜索用
 @property (nonatomic,weak)id<EMOrderListControllerDelegate>delegate;
+- (void)setOrderState:(EMOrderState )orderState goodsName:(NSString *)goodsName;
+- (void)reloadDataWithOrderState:(EMOrderState )orderState goodsName:(NSString *)goodsName;
 @end

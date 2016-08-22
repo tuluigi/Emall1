@@ -52,6 +52,15 @@
         
     }];
 }
+- (NSInteger)currentSelectSegmentInde{
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"_state=%ld",self.currentOrderState];
+        NSArray *tempArray=[self.orderStateArray filteredArrayUsingPredicate:predicate];
+        if (tempArray&&tempArray.count) {
+            NSInteger index=[self.orderStateArray indexOfObject:[tempArray firstObject]];
+            return index;
+        }
+        return 0;
+  }
 - (NSArray *)titleArrayWithOrderStates:(NSArray *)orderSataArray{
     NSMutableArray *titleArray=[[NSMutableArray alloc]  init];
     for (EMOrderStateModel *stateModel in orderSataArray) {
@@ -92,7 +101,13 @@
     }
     EMOrderStateModel *stateModel=self.orderStateArray[index];
     childVc.orderState=stateModel.state;
-    childVc.goodsName=self.searchBar.text;
+    NSString *goodsName=nil;
+    if (index==[self currentOrderState]) {
+        goodsName=self.searchBar.text;
+    }else{
+        self.searchBar.text=nil;
+    }
+    [childVc setOrderState:stateModel.state goodsName:goodsName];
     return childVc;
 }
 - (void)orderListControllerDidSelecOrder:(EMOrderModel *)orderModel{
@@ -105,7 +120,11 @@
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
       [searchBar endEditing:YES];
-    [self.pageScrolView.contentView reloadData];
+    NSInteger index=[self currentSelectSegmentInde];
+  EMOrderListController *listController = (EMOrderListController *)self.pageScrolView.contentView.currentChildVc;
+    [listController reloadDataWithOrderState:self.currentOrderState goodsName:self.searchBar.text];
+
+//    [self.pageScrolView.contentView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
   [searchBar endEditing:YES];

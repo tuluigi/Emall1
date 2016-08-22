@@ -12,7 +12,7 @@
 @class ZJContentView;
 
 @interface ZJContentView : UIView
-
+@property (strong, nonatomic,readonly) UIViewController<ZJScrollPageViewChildVcDelegate> *currentChildVc;
 /** 必须设置代理和实现相关的方法*/
 @property(weak, nonatomic)id<ZJScrollPageViewDelegate> delegate;
 

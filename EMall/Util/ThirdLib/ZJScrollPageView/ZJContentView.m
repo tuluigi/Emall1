@@ -30,7 +30,7 @@
 // 所有的子控制器(需要遵守ZJScrollPageViewChildVcDelegate协议)
 @property (strong, nonatomic) NSMutableDictionary<NSString *, UIViewController<ZJScrollPageViewChildVcDelegate> *> *childVcsDic;
 // 当前控制器
-@property (strong, nonatomic) UIViewController<ZJScrollPageViewChildVcDelegate> *currentChildVc;
+@property (strong, nonatomic,readwrite) UIViewController<ZJScrollPageViewChildVcDelegate> *currentChildVc;
 
 
 @end
