@@ -26,4 +26,13 @@
  *  @return
  */
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock;
+
+/**
+ *  获取系统配置信息接口
+ *
+ *  @param completionBlock
+ *
+ *  @return 
+ */
++ (NSURLSessionTask *)getSystemConfigCompletionBlock:(OCResponseResultBlock)completionBlock;
 @end

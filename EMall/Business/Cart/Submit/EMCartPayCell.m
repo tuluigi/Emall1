@@ -116,8 +116,8 @@
     
 }
 - (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName{
-    self.cardNameLabel.text=[NSString stringWithFormat:@"%@",userName];
-    self.cardIDLabel.text=[NSString stringWithFormat:@"%@",cartID];
-    self.bankNameLabel.text=[NSString stringWithFormat:@"%@",bankName];
+    self.cardNameLabel.text=[NSString stringWithFormat:@"Acc Name：%@",userName];
+    self.cardIDLabel.text=[NSString stringWithFormat:@"BSB：%@",cartID];
+    self.bankNameLabel.text=[NSString stringWithFormat:@"ACC：%@",bankName];
 }
 @end

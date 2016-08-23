@@ -10,6 +10,7 @@
 #import "EMAdModel.h"
 #import "EMGoodsModel.h"
 #import "EMHomeModel.h"
+#import "EMSystemConfigModel.h"
 @implementation EMHomeNetService
 + (NSURLSessionTask *)getHomeAdListOnCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"spread"];
@@ -34,9 +35,24 @@
  */
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"list"];
-//NSString *apiPath=@"http://static.duapp.com/app/shopping/api/home";
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (completionBlock) {
+                completionBlock(responseResult);
+            }
+        }];
+    }];
+    return task;
+}
++ (NSURLSessionTask *)getSystemConfigCompletionBlock:(OCResponseResultBlock)completionBlock{
+    NSString *apiPath=[self urlWithSuffixPath:@"system_config"];
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+        [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMSystemConfigModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
+            if (responseResult.responseCode==OCCodeStateSuccess) {
+                if ([responseResult.responseData isKindOfClass:[EMSystemConfigModel class]]) {
+                      [EMCache em_setObject:responseResult.responseData forKey:EMCache_SystemConfigKey];
+                }
+            }
             if (completionBlock) {
                 completionBlock(responseResult);
             }

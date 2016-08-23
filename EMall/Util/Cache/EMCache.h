@@ -14,6 +14,8 @@ static NSString *const EMCache_HomeADDataSourceKey      =@"EMCache_HomeADDataSou
 
 static NSString *const EMCache_DiscoveryDataSourceKey    =@"EMCache_DiscoveryDataSourceKey";//发现
 
+
+static NSString *const EMCache_SystemConfigKey    =@"EMCache_SystemConfigKey";//系统配置缓存数据
 @interface EMCache : NSObject
 + (void)em_setObject:(id)value forKey:(NSString *)key;
 + (id)em_objectForKey:(NSString *)key;

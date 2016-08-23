@@ -137,11 +137,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EMall/Business/Home/EMHomeViewController.m"
-            timestampString = "493526067.293055"
+            timestampString = "493621925.575969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "-homeHeadReusableViewDidSelect:"
             landmarkType = "5">
          </BreakpointContent>

@@ -7,8 +7,8 @@
 //
 
 #import "EMServiceController.h"
-#import "QRCodeGenerator.h"
 #import "EMImagePickBrowserHelper.h"
+#import "EMSystemConfigModel.h"
 @interface EMServiceFootView :UIView
 @property(nonatomic,strong)UIImageView *headImageView;
 @property(nonatomic,strong)UILabel *messageLabel;
@@ -30,8 +30,7 @@
     self.backgroundColor=[UIColor whiteColor];
     _headImageView=[[UIImageView alloc]  init];
     [self addSubview:_headImageView];
-    UIImage *image=[QRCodeGenerator qrImageForString:@"https://www.pgyer.com/3Z6K" imageSize:OCUISCALE(100)];
-    _headImageView.image=image;
+
    
     _messageLabel=[UILabel labelWithText:@"亲！请添加微信客服,微信进行咨询！" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentCenter];
     _messageLabel.textColor=kEM_RedColro;
@@ -54,7 +53,12 @@
         make.height.mas_equalTo(OCUISCALE(30));
          make.top.mas_equalTo(weakSelf.headImageView.mas_bottom).offset(OCUISCALE(20));
     }];
-     self.imageUrl=@"http://45.118.132.56:8081/images/webchat/QR.jpg";
+    EMSystemConfigModel *configModel=[EMCache em_objectForKey:EMCache_SystemConfigKey];
+    if (configModel&&configModel.qrCodeUrl) {
+        self.imageUrl=configModel.qrCodeUrl;
+    }else{
+         self.imageUrl=@"http://45.118.132.56:8081/images/webchat/QR.jpg";
+    }
 }
 - (void)setImageUrl:(NSString *)imageUrl{
     _imageUrl=imageUrl;

@@ -10,6 +10,7 @@
 #import "NSAttributedString+Price.h"
 #import "EMCartPayCell.h"
 #import "EMCartViewController.h"
+#import "EMSystemConfigModel.h"
 static NSString *const kPayInfollIdenfier = @"kPayInfollIdenfier";
 static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
@@ -85,7 +86,21 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
         EMCartPayCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayInfollIdenfier forIndexPath:indexPath];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryNone;
-        [(EMCartPayCell *)cell setPayCartName:@"Acc Name：HI CHI GO " cartID:@"BSB：083153" bankName:@"ACC：908925097"];
+        EMSystemConfigModel *configModel=[EMCache em_objectForKey:EMCache_SystemConfigKey];
+        NSString *accName=configModel.accName;
+        if ([NSString isNilOrEmptyForString:accName]) {
+            accName=@"HI CHI GO ";
+        }
+        
+        NSString *bsb=configModel.bsb;
+        NSString *acc=configModel.acc;
+        if ([NSString isNilOrEmptyForString:bsb]) {
+            bsb=@"083153";
+        }
+        if ([NSString isNilOrEmptyForString:acc]) {
+            acc=@"908925097";
+        }
+        [(EMCartPayCell *)cell setPayCartName:accName cartID:bsb bankName:acc];
         aCell=cell;
     }else if (indexPath.row==1){
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayOrderNumCellIdenfier];

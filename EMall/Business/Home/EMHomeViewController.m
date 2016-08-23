@@ -64,6 +64,11 @@ EMHomeHeadReusableViewDelegate>
         [weakSelf getHomeADList];
     }];
     [self.myCollectionView startPullDownRefresh];
+    
+    //缓存系统缓存信息
+    [EMHomeNetService getSystemConfigCompletionBlock:^(OCResponseResult *responseResult) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
