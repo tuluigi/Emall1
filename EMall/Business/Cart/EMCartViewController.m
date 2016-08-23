@@ -34,6 +34,8 @@
         _tableView.showsVerticalScrollIndicator=NO;
         _tableView.showsHorizontalScrollIndicator=NO;
         _tableView.tableFooterView=[UIView new];
+        [_tableView registerClass:[EMCartListCell class] forCellReuseIdentifier:NSStringFromClass([EMCartListCell class])];
+
     }
     return _tableView;
 }
@@ -56,8 +58,7 @@
 - (void)onInitData{
     self.automaticallyAdjustsScrollViewInsets=YES;
     self.navigationItem.title=@"购物车";
-    
-    [self.tableView registerClass:[EMCartListCell class] forCellReuseIdentifier:NSStringFromClass([EMCartListCell class])];
+     [self.tableView registerClass:[EMCartListCell class] forCellReuseIdentifier:NSStringFromClass([EMCartListCell class])];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didEditButtonPressed:)];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.bottomView];
@@ -81,7 +82,6 @@
     [self getCartListWithCursor:self.cursor];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:OCLoginSuccessNofication object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        
         [weakSelf handleUserLoginSucceedNotification];
         
     }];
@@ -113,6 +113,21 @@
     [self.tableView reloadData];
 }
 #pragma mark - getCart list
+- (void)syncShopCarts{
+    return;
+    WEAKSELF
+    NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:self.cursor pageSize:1000 onCompletionBlock:^(OCResponseResult *responseResult) {
+        if (responseResult.responseCode==OCCodeStateSuccess) {
+           weakSelf.dataSourceArray=responseResult.responseData;
+            if (weakSelf.dataSourceArray.count) {
+                weakSelf.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",self.dataSourceArray.count];
+            }else{
+                weakSelf.navigationController.tabBarItem.badgeValue=nil;
+            }
+        }
+    }];
+    [weakSelf addSessionTask:task];
+}
 - (void)getCartListWithCursor:(NSInteger )cursor{
     WEAKSELF
     if (self.dataSourceArray.count==0) {

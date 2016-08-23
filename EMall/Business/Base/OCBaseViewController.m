@@ -27,7 +27,10 @@
     [super viewWillAppear:animated];
     
 }
-
+-(NSInteger)cursor{
+    _cursor=MAX(_cursor, 1);
+    return _cursor;
+}
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 }

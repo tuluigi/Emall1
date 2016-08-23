@@ -9,5 +9,8 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMCartViewController : OCBaseTableViewController
-
+/**
+ *  初始化用，更新tabbar上数字
+ */
+- (void)syncShopCarts;
 @end

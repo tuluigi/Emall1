@@ -190,7 +190,6 @@ UICollectionViewDelegateFlowLayout>
                 make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
                 make.top.mas_equalTo(weakSelf.detailButton.mas_top);
                 make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
-//                make.size.mas_equalTo(CGSizeMake(OCUISCALE(0), OCUISCALE(0)));
             }];
             [_reBuyButton setTitle:@"确认收货" forState:UIControlStateNormal];
             _reBuyButton.hidden=NO;
@@ -203,7 +202,11 @@ UICollectionViewDelegateFlowLayout>
     for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
         buyCount+=goodsModel.buyCount;
     }
-    self.priceLabel.text=[NSString stringWithFormat:@"共%ld件商品，合计%.2f元",buyCount,_orderModel.totalPrice];
+    NSString *priceText=[NSString stringWithFormat:@"共%ld件商品，合计$%.1f",buyCount,_orderModel.payPrice-_orderModel.discountPrice];
+    if (orderModel.discountPrice) {
+        priceText=[priceText stringByAppendingString:[NSString stringWithFormat:@"(已优惠$%.1f)",_orderModel.discountPrice]];
+    }
+    self.priceLabel.text=priceText;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=self.orderModel.goodsArray.count;

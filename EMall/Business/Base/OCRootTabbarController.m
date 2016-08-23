@@ -73,6 +73,7 @@
     
     EMCartViewController *lessonViewController=[[EMCartViewController alloc] init];
     UINavigationController *lessonNavController=[[UINavigationController alloc] initWithRootViewController:lessonViewController];
+    [lessonViewController syncShopCarts];
     OCTbabarItem *lessonTabbarItem=[[OCTbabarItem alloc]  initWithTitle:@"购物车" image:[UIImage imageNamed:@"tabbar_shop"] selectedImage:[UIImage   imageNamed:@"tabbar_shop_select"]];
     lessonNavController.tabBarItem=lessonTabbarItem;
     

@@ -8,6 +8,7 @@
 
 #import "EMGoodsInfoTableViewCell.h"
 #import "NSAttributedString+Price.h"
+#import "NSString+VideoDuration.h"
 @interface EMGoodsInfoTableViewCell ()
 @property (nonatomic,strong)UILabel *titleLabel,*priceLabel,*saleCountLabel;
 @end
@@ -65,7 +66,7 @@
 - (void)setTitle:(NSString *)title price:(CGFloat)price promotionPrice:(CGFloat)promotionPrice saleCount:(NSInteger)count{
 //    self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price markFontSize:13 priceInterFontSize:17 pointInterSize:13 color:[UIColor colorWithHexString:@"#FC4747"]];
     self.priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:price promotePrice:promotionPrice];
-    self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%ld件",count];
+    self.saleCountLabel.text=[NSString stringWithFormat:@"销量：%@件",[NSString tenThousandUnitString:count]];
     self.titleLabel.text=title;
 }
 @end

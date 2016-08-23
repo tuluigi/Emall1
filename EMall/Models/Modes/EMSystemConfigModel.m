@@ -12,8 +12,8 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"bsb":@"bsb",
              @"acc":@"acc",
-             @"accName":@"qr",
-             @"serviceTel":@"accName",
-             @"qrCodeUrl":@"customerTel",};
+             @"accName":@"accName",
+             @"serviceTel":@"customerTel",
+             @"qrCodeUrl":@"qr",};
 }
 @end

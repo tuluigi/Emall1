@@ -247,23 +247,6 @@
     NSInteger buyCount=value.integerValue;
     self.buyCount=buyCount;
     return YES;
-    if (buyCount>EMGoodsMaxBuyCount) {
-        buyCount=EMGoodsMaxBuyCount;
-        enableChange=NO;
-    }
-    if (buyCount<=1) {
-        self.minusButton.enabled=NO;
-    }else{
-        self.minusButton.enabled=YES;
-    }
-    if (enableChange) {
-        if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
-            [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
-        }
-    }else{
-        [self showOverMaxBuyCountMessage];
-    }
-    return enableChange;
 }
 
 @end
@@ -483,7 +466,9 @@
 - (void)reSetGoodsPriceWithGoodsInfoModel:(EMGoodsInfoModel *)infoModel{
     
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:infoModel.goodsPrice promotePrice:infoModel.promotionPrice];
-    if (infoModel.quantity<20) {//小于20件才有提示
+    if (infoModel.quantity<=0) {
+          _quantityLabel.text=@"无货";
+    }else if (infoModel.quantity<10) {//小于20件才有提示
        _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",infoModel.quantity];
     }else{
         _quantityLabel.text=@"";

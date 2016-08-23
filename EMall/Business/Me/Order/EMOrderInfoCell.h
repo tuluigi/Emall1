@@ -14,5 +14,5 @@
            payTime:(NSString *)payTime
           sendTime:(NSString *)sendTime
         totalCount:(NSInteger)totalCount
-        totalPrice:(NSInteger)totoalPrice;
+        totalPrice:(CGFloat)totoalPrice;
 @end

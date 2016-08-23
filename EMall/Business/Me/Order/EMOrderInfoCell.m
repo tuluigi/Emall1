@@ -79,7 +79,7 @@
            payTime:(NSString *)payTime
           sendTime:(NSString *)sendTime
         totalCount:(NSInteger)totalCount
-        totalPrice:(NSInteger)totoalPrice{
+        totalPrice:(CGFloat)totoalPrice{
     
     self.orderIDLabel.text=[NSString stringWithFormat:@"订单编号：%@",orderID];
     self.subtimeTimeLabel.text=[NSString stringWithFormat:@"提交时间：%@",stringNotNil(subTime)];

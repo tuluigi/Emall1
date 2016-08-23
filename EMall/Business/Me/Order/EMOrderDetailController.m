@@ -146,7 +146,7 @@
         //        UIColor *color=[UIColor colorWithHexString:@"#272727"];
         //        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",buyCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         //        [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.orderModel.totalPrice]];
-        [cell setOrderID:self.orderModel.orderNumber submitTime:self.orderModel.subitTime payTime:self.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:self.orderModel.totalPrice];
+        [cell setOrderID:self.orderModel.orderNumber submitTime:self.orderModel.subitTime payTime:self.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:self.orderModel.payPrice-self.orderModel.discountPrice];
         //        cell.detailTextLabel.attributedText=priceAttrStr;
         aCell=cell;
     }else{
@@ -209,7 +209,7 @@
         }
         WEAKSELF
         height=[tableView fd_heightForCellWithIdentifier:kPriceCellIdenfier configuration:^(id cell) {
-            [cell setOrderID:weakSelf.orderModel.orderNumber submitTime:weakSelf.orderModel.subitTime payTime:weakSelf.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:weakSelf.orderModel.totalPrice];
+            [cell setOrderID:weakSelf.orderModel.orderNumber submitTime:weakSelf.orderModel.subitTime payTime:weakSelf.orderModel.payTime sendTime:nil totalCount:buyCount totalPrice:weakSelf.orderModel.payPrice-weakSelf.orderModel.discountPrice];
         }];
     }else if(indexPath.section==4){
         height=OCUISCALE(80);
