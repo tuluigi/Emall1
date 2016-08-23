@@ -22,7 +22,7 @@
 - (instancetype)init{
     self=[super init];
     if (self) {
-       
+        
     }
     return self;
 }
@@ -128,9 +128,21 @@
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.bottomView.hidden=NO;
             if (cursor<=1) {
+                NSArray *shopCartArray=responseResult.responseData;
+                
+                for (EMShopCartModel *shopCart in shopCartArray) {
+                    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"cartID=%ld",shopCart.cartID];
+                    NSArray *tempArray0=[weakSelf.dataSourceArray filteredArrayUsingPredicate:predicate];
+                    if (tempArray0.count) {
+                        EMShopCartModel *oldShopCart=[tempArray0 firstObject];
+                        shopCart.unSelected=oldShopCart.unSelected;
+                    }
+                }
                 [weakSelf.dataSourceArray removeAllObjects];
+                [weakSelf.dataSourceArray addObjectsFromArray:shopCartArray];
+            }else{
+                [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             }
-            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
             [weakSelf.tableView reloadData];
             [weakSelf calcuteMyShopCart];
             [weakSelf updatePageLoadMesage];
@@ -215,7 +227,7 @@
     }else{
         self.navigationController.tabBarItem.badgeValue=nil;
     }
-
+    
 }
 - (void)updateAllShopCartModelSelectState:(BOOL)select{
     for (EMShopCartModel *model in self.dataSourceArray) {

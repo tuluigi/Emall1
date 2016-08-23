@@ -198,8 +198,20 @@
     return attributes;
 }
 - (void)setBuyCount:(NSInteger)buyCount{
+    if (buyCount>=EMGoodsMaxBuyCount) {
+        [self showOverMaxBuyCountMessage];
+        return ;
+    }
     _buyCount=buyCount;
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",buyCount];
+    if (buyCount<=1) {
+        self.minusButton.enabled=NO;
+    }else{
+        self.minusButton.enabled=YES;
+    }
+    if (_delegate &&[_delegate respondsToSelector:@selector(goodsSpecCountCellDidBuyCountValueChanged:)]) {
+        [_delegate goodsSpecCountCellDidBuyCountValueChanged:self.buyCount];
+    }
 }
 - (void)updateBuyCount:(NSInteger)buyCount{
     if (buyCount>=EMGoodsMaxBuyCount) {
@@ -220,21 +232,10 @@
     [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
 }
 - (void)didPlusButtonPressed:(UIButton *)sender{
-    //    if (self.buyCount>=EMGoodsMaxBuyCount) {
-    //        [self showOverMaxBuyCountMessage];
-    //        return ;
-    //    }
-    self.buyCount++;
-    [self updateBuyCount:self.buyCount];
+    self.buyCount=self.buyCount+1;
 }
 - (void)didMinuseButtonPressed:(UIButton *)sender{
-    self.buyCount--;
-    if (self.buyCount<=1) {
-        sender.enabled=NO;
-    }else{
-        sender.enabled=YES;
-    }
-    [self updateBuyCount:self.buyCount];
+    self.buyCount=self.buyCount-1;
 }
 
 #pragma mark -textFieldDelegate
@@ -244,7 +245,7 @@
     value=[textField.text stringByReplacingCharactersInRange:range withString:string];
     
     NSInteger buyCount=value.integerValue;
-    [self updateBuyCount:buyCount];
+    self.buyCount=buyCount;
     return YES;
     if (buyCount>EMGoodsMaxBuyCount) {
         buyCount=EMGoodsMaxBuyCount;
@@ -269,7 +270,7 @@
 
 @interface EMGoodsSpecView ()<EMGoodsSpecCountCellDelegage,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic,strong)UIImageView *goodsImageView;
-@property (nonatomic,strong)UILabel *titleLabel,*priceLabel;
+@property (nonatomic,strong)UILabel *titleLabel,*priceLabel,*quantityLabel;
 @property (nonatomic,strong)UIButton *submitButton,*closeButton;
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)EMGoodsSpecViewDismissBlock dismissBlock;
@@ -359,6 +360,10 @@
     _priceLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
     _priceLabel.textColor=[UIColor colorWithHexString:@"#e51e0e"];
     [self addSubview:_priceLabel];
+    _quantityLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
+    _quantityLabel.textColor=textColor;
+    _quantityLabel.adjustsFontSizeToFitWidth=YES;
+    [self addSubview:_quantityLabel];
     
     UIView *lineView0=[UIView new];
     lineView0.backgroundColor=RGB(201, 201, 201);
@@ -401,7 +406,11 @@
         make.left.mas_equalTo(weakSelf.titleLabel);
         make.bottom.mas_equalTo(weakSelf.goodsImageView.mas_bottom);
     }];
-    
+    [_quantityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(weakSelf.mas_right).offset(OCUISCALE(-10));
+        make.top.mas_equalTo(weakSelf.priceLabel);
+        make.width.mas_lessThanOrEqualTo(OCUISCALE(120));
+    }];
     [lineView0 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf);
         make.top.mas_equalTo(weakSelf.goodsImageView.mas_bottom).offset(kEMOffX);
@@ -474,6 +483,12 @@
 - (void)reSetGoodsPriceWithGoodsInfoModel:(EMGoodsInfoModel *)infoModel{
     
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:infoModel.goodsPrice promotePrice:infoModel.promotionPrice];
+    if (infoModel.quantity<20) {//小于20件才有提示
+       _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",infoModel.quantity];
+    }else{
+        _quantityLabel.text=@"";
+    }
+   
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.keysArray.count;
@@ -583,15 +598,11 @@
     for (EMGoodsInfoModel *infoModel in infoArray) {
         //按照pame进行逐个比较该明细中是否包含选中的名字
         NSArray *infoKeyArray=[[infoModel specsDic] allKeys];
-        //        NSArray *alreadyKeyAary=[alreadyDic allKeys];
         NSArray *alreadyKeyAary=selectSpectArray;
         NSPredicate *predicate=[NSPredicate predicateWithFormat:@"(SELF in %@)",alreadyKeyAary];
         NSArray *tempArray=[infoKeyArray filteredArrayUsingPredicate:predicate];
         if (tempArray.count) {
             [*goodsInfoDic setObject:infoModel forKey:@(infoModel.infoID)];//添加当条明细
-            //            for (EMSpecModel *specModel in tempArray) {
-            //                [enableSpecDic setObject:specModel forKey:specModel.name];
-            //            }
             [enableSpecDic setValuesForKeysWithDictionary:infoModel.specsDic];//添加该明细中所有的规格
         }
     }
