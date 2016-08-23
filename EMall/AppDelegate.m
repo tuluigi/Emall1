@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "OCRootTabbarController.h"
+#import <PgyUpdate/PgyUpdateManager.h>
 @interface AppDelegate ()
 
 @end
@@ -34,6 +35,7 @@
     OCRootTabbarController *rootTarbarController=[[OCRootTabbarController alloc]  init];
     self.window.rootViewController=rootTarbarController;
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -52,6 +54,10 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+#ifdef DEBUG
+    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"6a271d25f617904f9162f3f0ef032fc9"];
+    [[PgyUpdateManager sharedPgyManager] checkUpdate];
+#endif
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
