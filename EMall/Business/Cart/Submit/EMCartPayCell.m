@@ -35,7 +35,7 @@
 - (void)onInitContentView{
     UIFont *font=[UIFont oc_systemFontOfSize:15] ;
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
-    _titleLable=[UILabel labelWithText:@"清将货款汇入以下账户，付款之后立即发货哦~" font:font textAlignment:NSTextAlignmentLeft];
+    _titleLable=[UILabel labelWithText:@"请将货款汇入以下账户，付款之后立即发货哦~" font:font textAlignment:NSTextAlignmentLeft];
     _titleLable.textColor=color;
     _titleLable.numberOfLines=2;
     [self.contentView addSubview:_titleLable];
