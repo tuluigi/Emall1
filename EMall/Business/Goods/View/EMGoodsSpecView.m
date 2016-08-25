@@ -336,7 +336,7 @@
     _goodsImageView.clipsToBounds=YES;
     [self addSubview:_goodsImageView];
     
-    _titleLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _titleLabel=[UILabel labelWithText:@"" font:[UIFont oc_boldSystemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
     _titleLabel.textColor=textColor;
     [self addSubview:_titleLabel];
     

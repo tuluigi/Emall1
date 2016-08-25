@@ -34,7 +34,7 @@
     // Configure the view for the selected state
 }
 - (void)onInitContentView{
-    _titleLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:14] textAlignment:NSTextAlignmentLeft];
+    _titleLabel=[UILabel labelWithText:@"" font:[UIFont oc_boldSystemFontOfSize:15] textAlignment:NSTextAlignmentLeft];
     _titleLabel.textColor=[UIColor colorWithHexString:@"#272727"];
     _titleLabel.numberOfLines=0;
     _titleLabel.preferredMaxLayoutWidth=OCWidth-kEMOffX*2;

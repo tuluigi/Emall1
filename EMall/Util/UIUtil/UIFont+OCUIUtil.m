@@ -11,7 +11,7 @@
 + (nullable UIFont *)oc_systemFontOfSize:(CGFloat)fontSize{
     UIFont *font;
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.2) {
-         font=[UIFont systemFontOfSize:OCUIScaleFontSize(fontSize) weight:UIFontWeightThin];
+         font=[UIFont systemFontOfSize:OCUIScaleFontSize(fontSize) weight:UIFontWeightRegular];
     }else{
         font=[UIFont systemFontOfSize:OCUIScaleFontSize(fontSize)];
     }

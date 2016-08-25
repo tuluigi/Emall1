@@ -71,7 +71,14 @@
 - (void)setGoodsCommentModel:(EMGoodsCommentModel *)goodsCommentModel{
     _goodsCommentModel=goodsCommentModel;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_goodsCommentModel.userAvatar] placeholderImage:EMDefaultImage];
-    [self.nameLabel setText:_goodsCommentModel.nickName];
+    NSString *userName=@"";
+    if (_goodsCommentModel.nickName.length>1) {
+//        userName=_goodsCommentModel.nickName;
+//        userName=[userName stringByReplacingCharactersInRange:NSMakeRange(1, _goodsCommentModel.nickName.length-1) withString:@"*"];
+        userName=[_goodsCommentModel.nickName substringWithRange:NSMakeRange(0, 1)];
+        userName=[userName stringByAppendingString:@"**"];
+    }
+    [self.nameLabel setText:stringNotNil(userName)];
     self.levelLabel.text=[NSString stringWithFormat:@"评价：%@",_goodsCommentModel.levelString ];
     self.contentLabel.text=_goodsCommentModel.content;
     self.timeLabel.text=_goodsCommentModel.commentTime;

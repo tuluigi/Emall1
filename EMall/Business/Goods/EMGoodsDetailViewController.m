@@ -202,7 +202,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if (indexPath.section==2||indexPath.section==1||indexPath.section==3) {
         aCell=[tableView dequeueReusableCellWithIdentifier:kGoodsCommonCellIdenfier forIndexPath:indexPath];
         aCell.selectionStyle=UITableViewCellSelectionStyleNone;
-        aCell.textLabel.font=[UIFont oc_systemFontOfSize:14];
+        aCell.textLabel.font=[UIFont oc_boldSystemFontOfSize:15];
         aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
         aCell.textLabel.textAlignment=NSTextAlignmentLeft;
         aCell.accessoryType=UITableViewCellAccessoryNone;
@@ -225,7 +225,12 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                 aCell.textLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
                 
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(self.detailModel.goodsModel.userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
+                NSString *userName=@"";
+                if (self.detailModel.goodsModel.userName.length>1) {
+                    userName=[self.detailModel.goodsModel.userName substringWithRange:NSMakeRange(0, 1)];
+                    userName=[userName stringByAppendingString:@"**"];
+                }
+                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
         }else if (indexPath.section==3){
             aCell.textLabel.text=@"商品详情";
@@ -297,11 +302,9 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
         
     }else if (indexPath.section==2) {
-        if (indexPath.row==0) {
-            EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.detailModel.goodsModel.goodsID star:0];
-            commentListController.hidesBottomBarWhenPushed=YES;
-            [self.navigationController pushViewController:commentListController animated:YES];
-        }
+        EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.detailModel.goodsModel.goodsID star:0];
+        commentListController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:commentListController animated:YES];
     }else if (indexPath.section==3){
         EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
         goodsWebController.hidesBottomBarWhenPushed=YES;

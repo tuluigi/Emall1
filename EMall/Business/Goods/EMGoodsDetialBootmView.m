@@ -26,7 +26,7 @@ static NSString *const EMGoodsDetailBottomItemViewTaped= @"EMGoodsDetailBottomIt
     self.userInteractionEnabled=YES;
     _iconImageView=[[UIImageView alloc] init];
     [self addSubview:_iconImageView];
-    _nameLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(11)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
+    _nameLabel=[UILabel labelWithText:@"" font:[UIFont oc_boldSystemFontOfSize:OCUISCALE(12)] textColor:ColorHexString(@"#5d5c5c") textAlignment:NSTextAlignmentCenter];
     _nameLabel.adjustsFontSizeToFitWidth=YES;
     _nameLabel.backgroundColor=[UIColor clearColor];
     _nameLabel.numberOfLines=1;
