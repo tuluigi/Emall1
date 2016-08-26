@@ -246,9 +246,11 @@ EMHomeHeadReusableViewDelegate>
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{
     EMAdModel *adModel=[self.adArray objectAtIndex:index];
-    EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
-    webController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:webController animated:YES];
+    if (![NSString isNilOrEmptyForString:adModel.adUrl]) {
+        EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
+        webController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:webController animated:YES];
+    }
 }
 
 
