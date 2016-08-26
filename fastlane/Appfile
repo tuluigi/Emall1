@@ -3,6 +3,5 @@ apple_id "jojin1009@gmail.com" # Your Apple email address
 
 team_id "NDDKUXYDGE"  # Developer Portal Team ID
 
-
 # you can even provide different app identifiers, Apple IDs and team names per lane:
 # More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
