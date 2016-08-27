@@ -30,17 +30,17 @@
      _lineSpaceView.backgroundColor=ColorHexString(@"#f1f3f0");
     [self addSubview:_lineSpaceView];
     
-    _imageView=[[UIImageView alloc]  init];
-    _imageView.image=[UIImage imageNamed:@"home_greatgood"];
-    [self addSubview:_imageView];
+//    _imageView=[[UIImageView alloc]  init];
+//    _imageView.image=[UIImage imageNamed:@"home_greatgood"];
+//    [self addSubview:_imageView];
     
-    /*
+    
    
-    UIFont *font=[UIFont fontWithName:@"FZZHYJW  Bold" size:OCUISCALE(13)];
+    UIFont *font=[UIFont oc_boldSystemFontOfSize:OCUISCALE(13)];
     _titleLable=[UILabel labelWithText:@"嗨吃精品" font:font textAlignment:NSTextAlignmentLeft];
     _titleLable.textColor=ColorHexString(@"#fc4747");
     [self addSubview:_titleLable];
-    */
+    
     _moreButton=[UIButton buttonWithTitle:@"更多" titleColor:ColorHexString(@"#5d5c5c") font:[UIFont oc_systemFontOfSize:12]];
     _moreButton.contentVerticalAlignment=UIControlContentVerticalAlignmentCenter;
     UIImage *btnImage=[UIImage imageNamed:@"arror_right"];
@@ -56,20 +56,21 @@
         make.top.left.right.mas_equalTo(weakSelf);
         make.height.mas_equalTo(OCUISCALE(5));
     }];
-//    [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
-//        make.top.mas_equalTo(weakSelf.lineSpaceView.mas_bottom).offset(OCUISCALE(5));
-//        make.bottom.mas_equalTo(weakSelf.mas_bottom);
-//    }];
-    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
         make.top.mas_equalTo(weakSelf.lineSpaceView.mas_bottom).offset(OCUISCALE(5));
         make.bottom.mas_equalTo(weakSelf.mas_bottom);
     }];
+//    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
+//        make.top.mas_equalTo(weakSelf.lineSpaceView.mas_bottom).offset(OCUISCALE(5));
+//        make.bottom.mas_equalTo(weakSelf.mas_bottom);
+//    }];
     
     [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(weakSelf.mas_right).offset(OCUISCALE(-12));
-        make.centerY.mas_equalTo(weakSelf.imageView.mas_centerY);
+//        make.centerY.mas_equalTo(weakSelf.imageView.mas_centerY);
+        make.centerY.mas_equalTo(weakSelf.titleLable.mas_centerY);
     }];
     self.userInteractionEnabled=YES;
     
@@ -95,7 +96,7 @@
         self.titleLable.text=@"嗨吃精品";
     }else if (_type==EMHomeHeadReusableViewTypeHot){
         _imageView.image=[UIImage imageNamed:@"home_hotgood"];
-        self.titleLable.text=@"嗨吃热品";
+        self.titleLable.text=@"嗨吃特卖";
     }
 }
 

@@ -29,7 +29,6 @@
 		2A13F7101D5237D00041D2C5 /* OCUTableViewRightImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F70F1D5237D00041D2C5 /* OCUTableViewRightImageCell.m */; };
 		2A13F7131D5238E50041D2C5 /* OCTableCellRightImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7121D5238E50041D2C5 /* OCTableCellRightImageModel.m */; };
 		2A13F7161D537C8A0041D2C5 /* EMEdiePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */; };
-		2A1679A81D6FF11E007C7171 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1679A71D6FF11E007C7171 /* SnapshotHelper.swift */; };
 		2A1E4AAA1D3E025500A405B7 /* UITextField+DisablePast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */; };
 		2A1E4AB01D3E069B00A405B7 /* UIDisablePastTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AAF1D3E069B00A405B7 /* UIDisablePastTextField.m */; };
 		2A1E4AB31D3E091000A405B7 /* EMCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E4AB21D3E091000A405B7 /* EMCartBottomView.m */; };
@@ -228,7 +227,6 @@
 		2A13F7121D5238E50041D2C5 /* OCTableCellRightImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTableCellRightImageModel.m; sourceTree = "<group>"; };
 		2A13F7141D537C8A0041D2C5 /* EMEdiePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMEdiePwdViewController.h; sourceTree = "<group>"; };
 		2A13F7151D537C8A0041D2C5 /* EMEdiePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMEdiePwdViewController.m; sourceTree = "<group>"; };
-		2A1679A71D6FF11E007C7171 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 		2A1E4AA81D3E025500A405B7 /* UITextField+DisablePast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisablePast.h"; sourceTree = "<group>"; };
 		2A1E4AA91D3E025500A405B7 /* UITextField+DisablePast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisablePast.m"; sourceTree = "<group>"; };
 		2A1E4AAE1D3E069B00A405B7 /* UIDisablePastTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDisablePastTextField.h; sourceTree = "<group>"; };
@@ -660,7 +658,6 @@
 		2A2426E71D12C4670078240C = {
 			isa = PBXGroup;
 			children = (
-				2A1679A71D6FF11E007C7171 /* SnapshotHelper.swift */,
 				2A2426F21D12C4670078240C /* EMall */,
 				2A24270C1D12C4670078240C /* EMallTests */,
 				2A2427171D12C4670078240C /* EMallUITests */,
@@ -1699,7 +1696,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A1679A81D6FF11E007C7171 /* SnapshotHelper.swift in Sources */,
 				2A2427191D12C4670078240C /* EMallUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
