@@ -225,7 +225,7 @@ EMHomeHeadReusableViewDelegate>
 - (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type{
     NSString *catName;
     if (type==EMHomeHeadReusableViewTypeGreat) {
-        catName=@"嗨吃精品";
+        catName=@"嗨吃新品";
     }else if (type==EMHomeHeadReusableViewTypeHot){
         catName=@"嗨吃特卖";
     }

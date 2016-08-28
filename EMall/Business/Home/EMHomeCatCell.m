@@ -78,6 +78,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
 
 @interface EMHomeCatCell ()
 @property (nonatomic,strong)UIScrollView *myScorllView;
+@property (nonatomic,strong)NSTimer *myTimer;
 
 @end
 
@@ -94,12 +95,35 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     [self.myScorllView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    [self addTimer];
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     
     attributes.size=CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
     return attributes;
+}
+- (void)addTimer{
+    if (nil==self.myTimer) {
+        NSTimer *timer=[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(handleTimer:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        self.myTimer=timer;
+    }
+}
+- (void)handleTimer:(NSTimer *)timer{
+    CGSize contentSize=self.myScorllView.contentSize;
+    CGPoint offSet=self.myScorllView.contentOffset;
+    CGSize itemSize=[EMHomeCatItemView homeCatItemViewSize];
+    CGPoint offset0=offSet;
+    
+    if (offset0.x<=0){
+        offset0=CGPointMake(itemSize.width, 0);
+    }else if(fabsf(offSet.x)+CGRectGetWidth(self.myScorllView.bounds)+itemSize.width >=contentSize.width){
+        offset0=CGPointMake(0, 0);
+    }else  {
+         offset0=CGPointMake(offSet.x+itemSize.width, 0);
+    }
+    [self.myScorllView setContentOffset:offset0 animated:YES];
 }
 #pragma mark - getter  settter
 - (void)setCatModelArray:(NSArray *)catModelArray{

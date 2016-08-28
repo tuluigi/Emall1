@@ -27,13 +27,16 @@
     if (![NSString isNilOrEmptyForString:name]) {
         [postDic setObject:name forKey:@"goods.name"];
     }
+    /*
     NSString *aescString=@"asc";
     if (aesc) {
         aescString=@"asc";
     }else{
         aescString=@"desc";
     }
+     
     [postDic setObject:aescString forKey:@"order_direction"];
+     */
     if (sortType) {
         [postDic setObject:@(sortType) forKey:@"order_field"];
     }
