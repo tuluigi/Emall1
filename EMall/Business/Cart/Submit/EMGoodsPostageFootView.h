@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "EMOrderModel.h"
 @interface EMGoodsPostageFootView : UITableViewHeaderFooterView
-
+@property (nonatomic,assign) EMOrderLogisticsType logisticType;
 @end

@@ -16,7 +16,7 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
     self=[super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        _titleLabel=[UILabel labelWithText:@"邮费：不同区域请联系客服确认" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
+        _titleLabel=[UILabel labelWithText:@"配送费：提交订单后,联系微信客服确认\n" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
 
         _titleLabel.textColor=kEM_RedColro;
         _titleLabel.tag=1000;
@@ -27,5 +27,14 @@
     }
     return self;
 }
-
+-(void)setLogisticType:(EMOrderLogisticsType)logisticType{
+    _logisticType=logisticType;
+    if (_logisticType==EMOrderLogisticsTypeExpress) {
+        self.titleLabel.text=@"配送费：提交订单后,联系微信客服确认";
+    }else if (_logisticType==EMOrderLogisticsTypeSelfPickUp){
+        self.titleLabel.text=@"自取时间地址：提交订单后，联系微信客服确认";
+    }else{
+        self.titleLabel.text=@"";
+    }
+}
 @end

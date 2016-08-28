@@ -300,17 +300,18 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     CGFloat height=CGFLOAT_MIN;
-    if (section==1&&self.logisticType==EMOrderLogisticsTypeExpress) {
+    if (section==1&&self.logisticType!=EMOrderLogisticsTypeUnKonwn) {
         height=35;
     }
     return height;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    if (section==1&&self.logisticType==EMOrderLogisticsTypeExpress) {
+    if (section==1&&self.logisticType!=EMOrderLogisticsTypeUnKonwn) {
         EMGoodsPostageFootView *headView=[tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([EMGoodsPostageFootView class])];
         if (nil==headView) {
             headView=[[EMGoodsPostageFootView alloc]  initWithReuseIdentifier:NSStringFromClass([EMGoodsPostageFootView class])];
         }
+        headView.logisticType=self.logisticType;
         return headView;
     }else{
         return nil;
