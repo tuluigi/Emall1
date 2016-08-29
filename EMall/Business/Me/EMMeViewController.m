@@ -19,12 +19,14 @@
 #import "EMMeInfoViewController.h"
 #import "EMEdiePwdViewController.h"
 #import "EMOrderNetService.h"
+#import "EMWebViewController.h"
 typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     EMUserTableCellModelTypeOrder           =100,//订单
     EMUserTableCellModelTypeOrderState          ,//订单状态
     EMUserTableCellModelTypeShoppingAddress     ,//收货地址
     EMUserTableCellModelTypeServices            ,//联系客服
     EMUserTableCellModelTypeEditPwd           ,//修改买吗
+    EMUserTableCellModelTypeDisclaimer           ,//免责声明
     EMUserTableCellModelTypeLogout              ,//退出登录
     
 };
@@ -77,7 +79,9 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     
     OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
     serviceModel.tableCellStyle=UITableViewCellStyleSubtitle;
-    groupArray2=@[serviceModel];
+    OCTableCellDetialTextModel *statmentModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"免责声明" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeDisclaimer];
+    statmentModel.tableCellStyle=UITableViewCellStyleSubtitle;
+    groupArray2=@[serviceModel,statmentModel];
     
     
     self.dataSourceArray=[NSMutableArray arrayWithObjects:groupArray0,groupArray1,groupArray2, nil];
@@ -248,7 +252,12 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         EMServiceController *serviceController=[[EMServiceController alloc]  initWithStyle:UITableViewStyleGrouped];
         serviceController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:serviceController animated:YES];
-    }else if (cellModel.type==EMUserTableCellModelTypeEditPwd){
+    }else if (cellModel.type==EMUserTableCellModelTypeDisclaimer){
+        NSString *url=[OCBaseNetService urlWithSuffixPath:@"/statement.html"];
+        EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:url title:@"免责声明"];
+        webController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:webController animated:YES];
+    } else if (cellModel.type==EMUserTableCellModelTypeEditPwd){
         EMEdiePwdViewController *editPwdController=[[EMEdiePwdViewController alloc]  init];
         editPwdController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:editPwdController animated:YES];

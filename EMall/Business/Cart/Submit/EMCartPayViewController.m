@@ -95,10 +95,10 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
         NSString *bsb=configModel.bsb;
         NSString *acc=configModel.acc;
         if ([NSString isNilOrEmptyForString:bsb]) {
-            bsb=@"083153";
+            bsb=@"033172";
         }
         if ([NSString isNilOrEmptyForString:acc]) {
-            acc=@"908925097";
+            acc=@"838740";
         }
         [(EMCartPayCell *)cell setPayCartName:accName cartID:bsb bankName:acc];
         aCell=cell;

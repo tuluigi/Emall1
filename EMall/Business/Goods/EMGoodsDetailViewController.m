@@ -23,6 +23,8 @@
 
 #import <MediaPlayer/MPMoviePlayerViewController.h>
 #import <AVKit/AVPlayerViewController.h>
+
+
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>

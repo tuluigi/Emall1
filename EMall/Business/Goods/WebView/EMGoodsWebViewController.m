@@ -8,9 +8,13 @@
 
 #import "EMGoodsWebViewController.h"
 
+
+
+
 @interface EMGoodsWebViewController ()<UIWebViewDelegate,OCPageLoadViewDelegate>
 @property (nonatomic,strong)NSString *url,*htmlString;
 @property (nonatomic,strong)UIWebView *webView;
+
 @end
 
 @implementation EMGoodsWebViewController
