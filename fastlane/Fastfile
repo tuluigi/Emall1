@@ -68,7 +68,16 @@ platform :ios do
 
   desc "upload to pgy"
   lane :pgy do
-
+    ipa_Path = "App/EMall.ipa"
+    ipa(
+        clean:true,
+        scheme: "EMall",
+        destination: "App/",
+        embed:"Cer/HaiChiGoDevelopmentProfile.mobileprovision",
+        configuration:"Debug",
+        identity:"com.haichigo.iphone"
+      )
+     sh "ipa distribute:pgyer -u 0a31e3ff7d412422089710e07d2b2902 -a 6a271d25f617904f9162f3f0ef032fc9  -f " +ipa_Path
   end
   # You can define as many lanes as you want
 
