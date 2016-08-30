@@ -39,12 +39,17 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
 @property (nonatomic,strong)__block OCTableCellTextFiledModel *emailModel;
 @property (nonatomic,strong)__block OCTableCellTextFiledModel *wechatModel;
 @property (nonatomic,strong)__block NSDate *birthdayDate;
+
+@property (nonatomic,strong)__block MBProgressHUD *progressHud;
 @end
 
 @implementation EMMeInfoViewController
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.view dismissHUDLoading];
+    [_progressHud hide:YES];
+    [_progressHud removeFromSuperview];
+
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 - (void)viewDidLoad {
@@ -220,16 +225,16 @@ typedef NS_ENUM(NSInteger,EMMeUserInfoActionSheetTag) {
         UIAlertAction *womenAction=[UIAlertAction actionWithTitle:@"修改图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
           [EMImagePickBrowserHelper showImagePickerOnController:self takeType:EMTakePictureTypeAll  onCompletionBlock:^(UIImage *editImage, UIImage *originImage, NSURL *fileUrl) {
-                __block   MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-              progressHud.removeFromSuperViewOnHide=YES;
-                progressHud.mode = MBProgressHUDModeAnnularDeterminate;
-                progressHud.labelText = @"上传中...";
+                _progressHud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+              _progressHud.removeFromSuperViewOnHide=YES;
+                _progressHud.mode = MBProgressHUDModeAnnularDeterminate;
+                _progressHud.labelText = @"上传中...";
                NSURLSessionTask *task= [OCNUploadNetService uploadPhotoWithData:UIImageJPEGRepresentation(editImage, 0.8) parmDic:nil fileType:@"jpeg" didSendData:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
                    CGFloat progress=totalBytesSent/(totalBytesExpectedToSend*1.0);
-                   progressHud.progress=progress;
+                   _progressHud.progress=progress;
                 } onCompletionBlock:^(OCResponseResult *responseResult) {
-                    [progressHud hide:YES];
-                    [progressHud removeFromSuperview];
+                    [_progressHud hide:YES];
+                    [_progressHud removeFromSuperview];
                  
                     if (responseResult.responseCode==OCCodeStateSuccess) {
                         [weakSelf.view showHUDMessage:@"上传成功,请保存"];
