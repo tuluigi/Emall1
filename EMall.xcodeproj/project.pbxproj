@@ -163,6 +163,7 @@
 		2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */; };
 		2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */; };
 		8C0D062E3F521222CCF7F434 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */; };
+		E60972841D784C190052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972831D784C190052928D /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -505,6 +506,7 @@
 		4572D58B230EE5E14B01750D /* Pods-EMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.debug.xcconfig"; sourceTree = "<group>"; };
 		45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC62C06126C80684E0FA600 /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
+		E60972831D784C190052928D /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -658,6 +660,7 @@
 		2A2426E71D12C4670078240C = {
 			isa = PBXGroup;
 			children = (
+				E60972831D784C190052928D /* SnapshotHelper.swift */,
 				2A2426F21D12C4670078240C /* EMall */,
 				2A24270C1D12C4670078240C /* EMallTests */,
 				2A2427171D12C4670078240C /* EMallUITests */,
@@ -1397,6 +1400,7 @@
 				2A2427101D12C4670078240C /* Sources */,
 				2A2427111D12C4670078240C /* Frameworks */,
 				2A2427121D12C4670078240C /* Resources */,
+				E60972821D784B310052928D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1507,6 +1511,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMall/Pods-EMall-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E60972821D784B310052928D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
 		F37F0ED3457CBA4A9F1E3166 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1696,6 +1713,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60972841D784C190052928D /* SnapshotHelper.swift in Sources */,
 				2A2427191D12C4670078240C /* EMallUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1748,6 +1766,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1765,6 +1784,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_PRIVATE_FILE = EMall;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1792,6 +1812,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1803,6 +1824,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_PRIVATE_FILE = EMall;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -42,6 +42,8 @@
 #import "UIView+OCPageLoad.h"
 #import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
 #import <UICollectionViewLeftAlignedLayout.h>
+
+
 #pragma mark --Maroc
 #define WEAKSELF typeof(self) __weak weakSelf = self;
 #define OCWidth ([UIScreen mainScreen].bounds.size.width)
