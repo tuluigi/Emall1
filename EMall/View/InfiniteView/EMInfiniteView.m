@@ -41,6 +41,7 @@ static NSInteger const kMaxRowCount     =5;
 - (void)onInitContentView{
       [self addSubview:self.collectionView];
     [self addSubview:self.pageControl];
+    [self bringSubviewToFront:self.pageControl];
     WEAKSELF
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);

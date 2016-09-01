@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-
 @interface EMallUITests : XCTestCase
 
 @end

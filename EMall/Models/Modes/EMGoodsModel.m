@@ -91,7 +91,6 @@
              @"goodsName":@"name",
              @"goodsImageUrl":@"picture",
              @"saleCount":@"sales_num",
-             @"goodsImageUrl":@"postage",
              @"state":@"state",
              @"postage":@"postage",
              @"commentCount":@"comment_num",
@@ -132,6 +131,9 @@
     }
     [_goodsImageArray removeAllObjects];
     if (!_goodsImageArray.count) {
+        if (![NSString isNilOrEmptyForString:self.goodsImageUrl]) {
+            [_goodsImageArray addObject:self.goodsImageUrl];
+        }
         if (![NSString isNilOrEmptyForString:self.picture_01]) {
             [_goodsImageArray addObject:self.picture_01];
         }

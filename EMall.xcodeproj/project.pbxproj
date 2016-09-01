@@ -64,6 +64,7 @@
 		2A665C711D64175D004C1D09 /* NSString+RemoveEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A665C701D64175D004C1D09 /* NSString+RemoveEmoji.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
+		2A73B5951D78668F00ACD5CD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */; };
 		2A7583E21D51E943008E1B57 /* EMPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E11D51E943008E1B57 /* EMPersistence.m */; };
 		2A7583E51D51FAC4008E1B57 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E31D51FAC4008E1B57 /* RunInfo.m */; };
 		2A7583E81D52008C008E1B57 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */; };
@@ -163,7 +164,6 @@
 		2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */; };
 		2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */; };
 		8C0D062E3F521222CCF7F434 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */; };
-		E60972841D784C190052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972831D784C190052928D /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +301,7 @@
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
+		2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		2A7583E01D51E943008E1B57 /* EMPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMPersistence.h; sourceTree = "<group>"; };
 		2A7583E11D51E943008E1B57 /* EMPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMPersistence.m; sourceTree = "<group>"; };
 		2A7583E31D51FAC4008E1B57 /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
@@ -506,7 +507,6 @@
 		4572D58B230EE5E14B01750D /* Pods-EMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.debug.xcconfig"; sourceTree = "<group>"; };
 		45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC62C06126C80684E0FA600 /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
-		E60972831D784C190052928D /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -660,7 +660,6 @@
 		2A2426E71D12C4670078240C = {
 			isa = PBXGroup;
 			children = (
-				E60972831D784C190052928D /* SnapshotHelper.swift */,
 				2A2426F21D12C4670078240C /* EMall */,
 				2A24270C1D12C4670078240C /* EMallTests */,
 				2A2427171D12C4670078240C /* EMallUITests */,
@@ -719,6 +718,7 @@
 		2A2427171D12C4670078240C /* EMallUITests */ = {
 			isa = PBXGroup;
 			children = (
+				2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */,
 				2A2427181D12C4670078240C /* EMallUITests.m */,
 				2A24271A1D12C4670078240C /* Info.plist */,
 			);
@@ -1713,7 +1713,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60972841D784C190052928D /* SnapshotHelper.swift in Sources */,
+				2A73B5951D78668F00ACD5CD /* SnapshotHelper.swift in Sources */,
 				2A2427191D12C4670078240C /* EMallUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

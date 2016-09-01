@@ -203,7 +203,10 @@
         return ;
     }
     _buyCount=buyCount;
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",buyCount];
+    if (_buyCount<=0) {
+        _buyCount=1;
+    }
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{
@@ -246,7 +249,7 @@
     
     NSInteger buyCount=value.integerValue;
     self.buyCount=buyCount;
-    return YES;
+    return NO;
 }
 
 @end

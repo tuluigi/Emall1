@@ -98,6 +98,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
     }
     self.tableView.tableHeaderView=self.infiniteView;
+    self.infiniteView.totalNumber=_detailModel.goodsModel.goodsImageArray.count;
     [self.tableView reloadData];
 }
 - (void)getGoodsDetailWithGoodsID:(NSInteger)goodsID{

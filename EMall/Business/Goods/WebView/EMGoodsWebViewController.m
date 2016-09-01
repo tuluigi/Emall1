@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"商品介绍";
     [self.view addSubview:self.webView];
-    _url=@"https://item.jd.com/10122988596.html";
+//    _url=@"https://item.jd.com/10122988596.html";
     
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
