@@ -203,9 +203,6 @@
         return ;
     }
     _buyCount=buyCount;
-    if (_buyCount<=0) {
-        _buyCount=1;
-    }
     self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
@@ -243,7 +240,6 @@
 
 #pragma mark -textFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    BOOL enableChange=YES;
     NSString *value=textField.text;
     value=[textField.text stringByReplacingCharactersInRange:range withString:string];
     
@@ -421,6 +417,10 @@
 - (void)didActionButtonPressed:(UIButton *)sender{
     WEAKSELF
     if (sender==self.submitButton) {
+        if (self.buyCount<=0) {
+            [self showHUDMessage:@"请填写购买数量"];
+            return;
+        }
         if (self.selectInfoDic.allValues.count>1 ||self.selectInfoDic.allValues.count<1 ) {
             [self showHUDMessage:@"请先选择其他规格哦"];
         }else{
