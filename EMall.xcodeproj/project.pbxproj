@@ -37,7 +37,6 @@
 		2A2426FE1D12C4670078240C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FC1D12C4670078240C /* Main.storyboard */; };
 		2A2427001D12C4670078240C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2426FF1D12C4670078240C /* Assets.xcassets */; };
 		2A24270E1D12C4670078240C /* EMallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24270D1D12C4670078240C /* EMallTests.m */; };
-		2A2427191D12C4670078240C /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427181D12C4670078240C /* EMallUITests.m */; };
 		2A24272F1D12C81E0078240C /* OCBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A24272E1D12C81E0078240C /* OCBaseModel.m */; };
 		2A2427321D12C8510078240C /* OCBaseNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427311D12C8510078240C /* OCBaseNetService.m */; };
 		2A2427361D12C8C50078240C /* OCResponseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2427351D12C8C50078240C /* OCResponseResult.m */; };
@@ -64,7 +63,6 @@
 		2A665C711D64175D004C1D09 /* NSString+RemoveEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A665C701D64175D004C1D09 /* NSString+RemoveEmoji.m */; };
 		2A6ABB771D2FBAA600DE47B0 /* EMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */; };
 		2A6ABB7A1D2FBAD600DE47B0 /* EMRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */; };
-		2A73B5951D78668F00ACD5CD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */; };
 		2A7583E21D51E943008E1B57 /* EMPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E11D51E943008E1B57 /* EMPersistence.m */; };
 		2A7583E51D51FAC4008E1B57 /* RunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E31D51FAC4008E1B57 /* RunInfo.m */; };
 		2A7583E81D52008C008E1B57 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A7583E71D52008C008E1B57 /* NSData+CommonCrypto.m */; };
@@ -164,6 +162,8 @@
 		2AED6CBC1D44C995001B5910 /* EMGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBB1D44C995001B5910 /* EMGoodsDetailViewController.m */; };
 		2AED6CBF1D44CA2B001B5910 /* EMGoodsDetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AED6CBE1D44CA2B001B5910 /* EMGoodsDetailHeadView.m */; };
 		8C0D062E3F521222CCF7F434 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */; };
+		E609729D1D791A9D0052928D /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E609729C1D791A9D0052928D /* EMallUITests.m */; };
+		E60972A61D791AAF0052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972A51D791AAF0052928D /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,7 +174,7 @@
 			remoteGlobalIDString = 2A2426EF1D12C4670078240C;
 			remoteInfo = EMall;
 		};
-		2A2427151D12C4670078240C /* PBXContainerItemProxy */ = {
+		E609729F1D791A9D0052928D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A2426E81D12C4670078240C /* Project object */;
 			proxyType = 1;
@@ -244,9 +244,6 @@
 		2A2427091D12C4670078240C /* EMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A24270D1D12C4670078240C /* EMallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallTests.m; sourceTree = "<group>"; };
 		2A24270F1D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A2427141D12C4670078240C /* EMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A2427181D12C4670078240C /* EMallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallUITests.m; sourceTree = "<group>"; };
-		2A24271A1D12C4670078240C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A24272D1D12C81E0078240C /* OCBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseModel.h; sourceTree = "<group>"; };
 		2A24272E1D12C81E0078240C /* OCBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCBaseModel.m; sourceTree = "<group>"; };
 		2A2427301D12C8510078240C /* OCBaseNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCBaseNetService.h; sourceTree = "<group>"; };
@@ -301,7 +298,6 @@
 		2A6ABB761D2FBAA600DE47B0 /* EMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMLoginViewController.m; sourceTree = "<group>"; };
 		2A6ABB781D2FBAD600DE47B0 /* EMRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMRegisterViewController.h; sourceTree = "<group>"; };
 		2A6ABB791D2FBAD600DE47B0 /* EMRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMRegisterViewController.m; sourceTree = "<group>"; };
-		2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		2A7583E01D51E943008E1B57 /* EMPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMPersistence.h; sourceTree = "<group>"; };
 		2A7583E11D51E943008E1B57 /* EMPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMPersistence.m; sourceTree = "<group>"; };
 		2A7583E31D51FAC4008E1B57 /* RunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInfo.m; sourceTree = "<group>"; };
@@ -507,6 +503,12 @@
 		4572D58B230EE5E14B01750D /* Pods-EMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.debug.xcconfig"; sourceTree = "<group>"; };
 		45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EMall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC62C06126C80684E0FA600 /* Pods-EMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMall/Pods-EMall.release.xcconfig"; sourceTree = "<group>"; };
+		E60972851D7917750052928D /* EMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMall-Bridging-Header.h"; sourceTree = "<group>"; };
+		E609729A1D791A9D0052928D /* EMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E609729C1D791A9D0052928D /* EMallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMallUITests.m; sourceTree = "<group>"; };
+		E609729E1D791A9D0052928D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E60972A41D791AAE0052928D /* EMallUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMallUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		E60972A51D791AAF0052928D /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,7 +527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2A2427111D12C4670078240C /* Frameworks */ = {
+		E60972971D791A9D0052928D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -662,7 +664,7 @@
 			children = (
 				2A2426F21D12C4670078240C /* EMall */,
 				2A24270C1D12C4670078240C /* EMallTests */,
-				2A2427171D12C4670078240C /* EMallUITests */,
+				E609729B1D791A9D0052928D /* EMallUITests */,
 				2A2426F11D12C4670078240C /* Products */,
 				4EB2B575834C41C296FA3AB4 /* Pods */,
 				6BD36D5AAD3E59372AF10D58 /* Frameworks */,
@@ -674,7 +676,7 @@
 			children = (
 				2A2426F01D12C4670078240C /* EMall.app */,
 				2A2427091D12C4670078240C /* EMallTests.xctest */,
-				2A2427141D12C4670078240C /* EMallUITests.xctest */,
+				E609729A1D791A9D0052928D /* EMallUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -694,6 +696,7 @@
 				2A2427041D12C4670078240C /* Info.plist */,
 				2A2426F31D12C4670078240C /* Supporting Files */,
 				2A24273A1D12C9410078240C /* PrefixHeader.pch */,
+				E60972851D7917750052928D /* EMall-Bridging-Header.h */,
 			);
 			path = EMall;
 			sourceTree = "<group>";
@@ -713,16 +716,6 @@
 				2A24270F1D12C4670078240C /* Info.plist */,
 			);
 			path = EMallTests;
-			sourceTree = "<group>";
-		};
-		2A2427171D12C4670078240C /* EMallUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2A73B5931D78667400ACD5CD /* SnapshotHelper.swift */,
-				2A2427181D12C4670078240C /* EMallUITests.m */,
-				2A24271A1D12C4670078240C /* Info.plist */,
-			);
-			path = EMallUITests;
 			sourceTree = "<group>";
 		};
 		2A2427291D12C80B0078240C /* Models */ = {
@@ -1352,6 +1345,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E609729B1D791A9D0052928D /* EMallUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E60972A51D791AAF0052928D /* SnapshotHelper.swift */,
+				E609729C1D791A9D0052928D /* EMallUITests.m */,
+				E609729E1D791A9D0052928D /* Info.plist */,
+				E60972A41D791AAE0052928D /* EMallUITests-Bridging-Header.h */,
+			);
+			path = EMallUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1393,23 +1397,22 @@
 			productReference = 2A2427091D12C4670078240C /* EMallTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2A2427131D12C4670078240C /* EMallUITests */ = {
+		E60972991D791A9D0052928D /* EMallUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A2427231D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallUITests" */;
+			buildConfigurationList = E60972A11D791A9D0052928D /* Build configuration list for PBXNativeTarget "EMallUITests" */;
 			buildPhases = (
-				2A2427101D12C4670078240C /* Sources */,
-				2A2427111D12C4670078240C /* Frameworks */,
-				2A2427121D12C4670078240C /* Resources */,
-				E60972821D784B310052928D /* ShellScript */,
+				E60972961D791A9D0052928D /* Sources */,
+				E60972971D791A9D0052928D /* Frameworks */,
+				E60972981D791A9D0052928D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2A2427161D12C4670078240C /* PBXTargetDependency */,
+				E60972A01D791A9D0052928D /* PBXTargetDependency */,
 			);
 			name = EMallUITests;
 			productName = EMallUITests;
-			productReference = 2A2427141D12C4670078240C /* EMallUITests.xctest */;
+			productReference = E609729A1D791A9D0052928D /* EMallUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1429,7 +1432,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = 2A2426EF1D12C4670078240C;
 					};
-					2A2427131D12C4670078240C = {
+					E60972991D791A9D0052928D = {
 						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = 2A2426EF1D12C4670078240C;
 					};
@@ -1450,7 +1453,7 @@
 			targets = (
 				2A2426EF1D12C4670078240C /* EMall */,
 				2A2427081D12C4670078240C /* EMallTests */,
-				2A2427131D12C4670078240C /* EMallUITests */,
+				E60972991D791A9D0052928D /* EMallUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1472,7 +1475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2A2427121D12C4670078240C /* Resources */ = {
+		E60972981D791A9D0052928D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1511,19 +1514,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EMall/Pods-EMall-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E60972821D784B310052928D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "";
 		};
 		F37F0ED3457CBA4A9F1E3166 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1709,12 +1699,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2A2427101D12C4670078240C /* Sources */ = {
+		E60972961D791A9D0052928D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A73B5951D78668F00ACD5CD /* SnapshotHelper.swift in Sources */,
-				2A2427191D12C4670078240C /* EMallUITests.m in Sources */,
+				E609729D1D791A9D0052928D /* EMallUITests.m in Sources */,
+				E60972A61D791AAF0052928D /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1726,10 +1716,10 @@
 			target = 2A2426EF1D12C4670078240C /* EMall */;
 			targetProxy = 2A24270A1D12C4670078240C /* PBXContainerItemProxy */;
 		};
-		2A2427161D12C4670078240C /* PBXTargetDependency */ = {
+		E60972A01D791A9D0052928D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2A2426EF1D12C4670078240C /* EMall */;
-			targetProxy = 2A2427151D12C4670078240C /* PBXContainerItemProxy */;
+			targetProxy = E609729F1D791A9D0052928D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1837,15 +1827,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c3f2fa6a-3f9e-47c9-b0cb-1920bd926482";
+				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1855,15 +1848,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EMall/PrefixHeader.pch";
 				INFOPLIST_FILE = EMall/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c3f2fa6a-3f9e-47c9-b0cb-1920bd926482";
+				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1891,26 +1886,35 @@
 			};
 			name = Release;
 		};
-		2A2427241D12C4670078240C /* Debug */ = {
+		E60972A21D791A9D0052928D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = EMallUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.EMallUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c3f2fa6a-3f9e-47c9-b0cb-1920bd926482";
+				SWIFT_OBJC_BRIDGING_HEADER = "EMallUITests/EMallUITests-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = EMall;
 			};
 			name = Debug;
 		};
-		2A2427251D12C4670078240C /* Release */ = {
+		E60972A31D791A9D0052928D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = EMallUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.EMallUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.EMallUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c3f2fa6a-3f9e-47c9-b0cb-1920bd926482";
+				SWIFT_OBJC_BRIDGING_HEADER = "EMallUITests/EMallUITests-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				TEST_TARGET_NAME = EMall;
 			};
 			name = Release;
@@ -1945,14 +1949,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2A2427231D12C4670078240C /* Build configuration list for PBXNativeTarget "EMallUITests" */ = {
+		E60972A11D791A9D0052928D /* Build configuration list for PBXNativeTarget "EMallUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2A2427241D12C4670078240C /* Debug */,
-				2A2427251D12C4670078240C /* Release */,
+				E60972A21D791A9D0052928D /* Debug */,
+				E60972A31D791A9D0052928D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

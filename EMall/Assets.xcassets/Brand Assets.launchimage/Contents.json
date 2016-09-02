@@ -19,12 +19,11 @@
       "scale" : "2x"
     },
     {
-      "extent" : "full-screen",
+      "orientation" : "portrait",
       "idiom" : "iphone",
       "filename" : "LaunchImage4@2x.png",
+      "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
-      "unassigned" : true,
       "scale" : "2x"
     },
     {
@@ -34,7 +33,6 @@
       "filename" : "LaunchImage5@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
-      "unassigned" : true,
       "scale" : "2x"
     }
   ],

@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A2427131D12C4670078240C"
+               BlueprintIdentifier = "E60972991D791A9D0052928D"
                BuildableName = "EMallUITests.xctest"
                BlueprintName = "EMallUITests"
                ReferencedContainer = "container:EMall.xcodeproj">
@@ -85,7 +85,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"

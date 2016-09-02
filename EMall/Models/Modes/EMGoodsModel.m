@@ -85,7 +85,6 @@
 @end
 
 @implementation EMGoodsModel
-
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"goodsID":@"id",
              @"goodsName":@"name",

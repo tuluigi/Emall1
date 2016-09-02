@@ -21,6 +21,8 @@
 #import "EMCatViewController.h"
 #import "EMGoodsListViewController.h"
 #import "EMWebViewController.h"
+#import "EMGoodsListCell.h"
+
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
@@ -69,6 +71,7 @@ EMHomeHeadReusableViewDelegate>
     [EMHomeNetService getSystemConfigCompletionBlock:^(OCResponseResult *responseResult) {
         
     }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,12 +145,22 @@ EMHomeHeadReusableViewDelegate>
         cell.delegate=self;
         aCell=cell;
     }else if(indexPath.section==1){
+        /*
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
         [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.greatGoodsArray];
+        */
+        
+        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
+        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row]];
         aCell=cell;
     }else if (indexPath.section==2){
+        /*
         EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
         [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
+         */
+        
+        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
+        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row]];
         aCell=cell;
     }else{
         aCell=[[UICollectionViewCell alloc]  init];
@@ -282,6 +295,7 @@ EMHomeHeadReusableViewDelegate>
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
         [_myCollectionView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
+        [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class])];
         [_myCollectionView registerClass:[EMHomeHeadReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class])];
         [_myCollectionView registerClass:[EMInfiniteView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
         

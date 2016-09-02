@@ -59,7 +59,7 @@
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
         make.top.mas_equalTo(weakSelf.lineSpaceView.mas_bottom).offset(OCUISCALE(5));
-        make.bottom.mas_equalTo(weakSelf.mas_bottom);
+        make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-5));
     }];
 //    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
@@ -101,7 +101,6 @@
 }
 
 + (CGFloat)homeHeadReusableViewHeight{
-    UIImage *image= [UIImage imageNamed:@"home_greatgood"];
-    return OCUISCALE(10+image.size.height);
+    return OCUISCALE(30);
 }
 @end
