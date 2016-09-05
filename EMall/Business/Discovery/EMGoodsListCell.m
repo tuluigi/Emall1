@@ -14,6 +14,10 @@
 @end
 
 @implementation EMGoodsListCell
+- (instancetype)init{
+    self=[self initWithFrame:CGRectZero];
+    return self;
+}
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];
     if (self) {

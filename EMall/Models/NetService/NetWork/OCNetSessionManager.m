@@ -11,7 +11,7 @@
 ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 ) )
 #import "OCNetSessionManager.h"
 #import "AFHTTPSessionManager.h"
-
+#import "AFNetworkActivityIndicatorManager.h"
 
 
 static OCNetSessionManager *sharedSessionManager;
@@ -28,9 +28,10 @@ static OCNetSessionManager *sharedSessionManager;
 -(AFHTTPSessionManager *)afSessionManager{
     if (nil==_afSessionManager) {
         _afSessionManager=[AFHTTPSessionManager manager];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled=YES;
         [[_afSessionManager requestSerializer] setTimeoutInterval:20];
 //        _afSessionManager.responseSerializer=[AFHTTPResponseSerializer serializer];
-              _afSessionManager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+        _afSessionManager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
          _afSessionManager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/html charset=utf-8", nil ];
  
     }

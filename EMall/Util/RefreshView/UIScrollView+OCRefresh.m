@@ -26,7 +26,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
 }
 #pragma mark -getter setter
 - (void)addRefreshHeadViewWithTitle:(NSString *)title onHandler:(OpenCourseRefreshBlock)refreshBlock{
-    OCNRefreshHeadView *headView=(OCNRefreshHeadView *)self.header;
+    OCNRefreshHeadView *headView=(OCNRefreshHeadView *)self.mj_header;
     if (nil==headView) {
         UIColor *circleColor = RGB(229, 26, 30);
         CGFloat width=CGRectGetWidth(self.frame);
@@ -38,7 +38,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
                 refreshBlock();
             }
         }];
-        self.header=headView;
+        self.mj_header=headView;
     }
 }
 /**
@@ -58,54 +58,54 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
     
 }
 - (UIView *)refreshHeadView{
-    return self.header;
+    return self.mj_header;
 }
 - (void)startPullDownRefresh{
-    if (self.footer.isRefreshing) {
-        [self.footer endRefreshing];
+    if (self.mj_footer.isRefreshing) {
+        [self.mj_footer endRefreshing];
     }
-    [self.header beginRefreshing];
+    [self.mj_header beginRefreshing];
 }
 - (void)stopPullDownRefresh{
-    [self.header endRefreshing];
-    [self.footer endRefreshing];
+    [self.mj_header endRefreshing];
+    [self.mj_footer endRefreshing];
     
 }
 #pragma mark - 上拉
 - (void)startInfiniteScrolling{
-    [self.footer beginRefreshing];
-    if (self.header.isRefreshing) {
-        [self.header endRefreshing];
+    [self.mj_footer beginRefreshing];
+    if (self.mj_header.isRefreshing) {
+        [self.mj_header endRefreshing];
     }
 }
 - (void)stopInfiniteScrolling{
-     [self.header endRefreshing];
-    [self.footer endRefreshing];
+     [self.mj_header endRefreshing];
+    [self.mj_footer endRefreshing];
 }
 - (void)enableInfiniteScrolling:(BOOL)enable{
     if (!enable) {
-        [self.footer endRefreshing];
-        [self.footer endRefreshingWithNoMoreData];
+        [self.mj_footer endRefreshing];
+        [self.mj_footer endRefreshingWithNoMoreData];
     }else{
-        [self.footer resetNoMoreData];
+        [self.mj_footer resetNoMoreData];
     }
 }
 - (void)endRefreshingWithMessage:(NSString *)msg eanbleRetry:(BOOL)enableRetry{
-     [(OCNRefresheFootView *)self.footer endRefreshingWithMessage:msg eanbleRetry:enableRetry];
+     [(OCNRefresheFootView *)self.mj_footer endRefreshingWithMessage:msg eanbleRetry:enableRetry];
 }
 
 - (void)endRefreshingWithNoData {
-//    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + CGRectGetHeight(self.footer.frame)); //无效
+//    self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height + CGRectGetHeight(self.mj_footer.frame)); //无效
     [self endRefreshingWithMessage:@"没有更多内容了" eanbleRetry:YES];
     UIEdgeInsets currentInsets = self.contentInset;
-    currentInsets.bottom = - CGRectGetHeight(self.footer.frame);
+    currentInsets.bottom = - CGRectGetHeight(self.mj_footer.frame);
     self.contentInset = currentInsets;
 
 }
 - (void)addOCPullInfiniteScrollingHandler:(OpenCourseRefreshBlock)handle{
-    if (!self.footer) {
+    if (!self.mj_footer) {
         [self setPullInfiniteScrollingHandler:handle];
-        self.footer=[OCNRefresheFootView footerWithRefreshingBlock:^{
+        self.mj_footer=[OCNRefresheFootView footerWithRefreshingBlock:^{
             if (handle) {
                 handle();
             }
@@ -113,7 +113,7 @@ static const void *kOpenCourseInfonitionScrollHandleBlcok = &kOpenCourseInfoniti
     }
 }
 - (UIView *)infiniteFootView{
-    return self.footer;
+    return self.mj_footer;
 }
 
 /**

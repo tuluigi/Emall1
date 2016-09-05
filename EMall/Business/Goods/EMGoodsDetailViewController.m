@@ -94,9 +94,9 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 }
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
     _detailModel=detailModel;
-    if (_detailModel) {
-        [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
-    }
+//    if (_detailModel) {
+//        [self getGoodsSpecListWithGoodsID:_detailModel.goodsModel.goodsID];
+//    }
     self.tableView.tableHeaderView=self.infiniteView;
     self.infiniteView.totalNumber=_detailModel.goodsModel.goodsImageArray.count;
     [self.tableView reloadData];
@@ -190,7 +190,11 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     if (section==0||section==3) {
         row=1;
     }else if (section==2){
-        row=2;
+        if (self.detailModel.goodsModel.commentCount>0) {
+            row=2;
+        }else{
+            row=1;
+        }
     }else if (section==1){
         if (![NSString isNilOrEmptyForString:self.detailModel.goodsModel.videoUrl]) {//有视频的
             row=2;
@@ -222,7 +226,11 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
             if (indexPath.row==0) {
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-                aCell.textLabel.text=[NSString stringWithFormat:@"商品评价 (%@)",[NSString tenThousandUnitString:self.detailModel.goodsModel.commentCount]];
+                aCell.textLabel.text=@"商品评价 ";
+                if (self.detailModel.goodsModel.commentCount>0) {
+                     aCell.textLabel.text=[NSString stringWithFormat:@"%@ (%@)",aCell.textLabel.text,[NSString tenThousandUnitString:self.detailModel.goodsModel.commentCount]];
+                }
+              
             }else if (indexPath.row ==1){
                 aCell.textLabel.font=[UIFont oc_systemFontOfSize:12];
                 aCell.textLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
@@ -233,7 +241,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
                     userName=[self.detailModel.goodsModel.userName substringWithRange:NSMakeRange(0, 1)];
                     userName=[userName stringByAppendingString:@"**"];
                 }
-                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"好评",stringNotNil(userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
+                aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"",stringNotNil(userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
         }else if (indexPath.section==3){
             aCell.textLabel.text=@"商品详情";

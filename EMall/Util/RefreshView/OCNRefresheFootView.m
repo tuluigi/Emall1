@@ -93,6 +93,9 @@
   
 }
 - (void)endRefreshing{
+    if (self.isRefreshing) {
+        return;
+    }
     [super endRefreshing];
 //    [self.animationImageView stopAnimating];
 //    self.animationImageView.hidden=YES;

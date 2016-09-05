@@ -205,8 +205,10 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     [super setPullingPercent:pullingPercent];
 }
 -(void)endRefreshing{
-    [self stopLoadingAnimation];
-    [super endRefreshing];
+    if (self.isRefreshing) {
+        [self stopLoadingAnimation];
+        [super endRefreshing];
+    }
 }
 
 

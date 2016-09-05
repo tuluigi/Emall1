@@ -83,20 +83,27 @@ UICollectionViewDelegateFlowLayout
     WEAKSELF
     NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:self.catID searchName:nil aesc:0 sortType:0 homeType:self.homeType pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
-        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
-        if (responseResult.cursor>=responseResult.totalPage) {
-            [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
-        }else{
-            [weakSelf.myCollectionView enableInfiniteScrolling:YES];
-        }
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            if (cursor<2) {
-                [weakSelf.dataSourceArray removeAllObjects];
+            NSArray *resultArray=(NSArray *)responseResult.responseData;
+            if (resultArray.count) {
+                if (cursor<=1) {
+                    [weakSelf.dataSourceArray removeAllObjects];
+                }
+                NSInteger index=weakSelf.dataSourceArray.count-1;
+                [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+                if (cursor<=1) {
+                    [EMCache em_setObject:weakSelf.dataSourceArray forKey:EMCache_DiscoveryDataSourceKey];
+                }
+                [weakSelf.myCollectionView reloadData];
+                if (index>0) {
+                    [weakSelf performSelector:@selector(scrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:index inSection:0] afterDelay:0.1];
+                }
+                
             }
-            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-            [weakSelf.myCollectionView reloadData];
-            if (weakSelf.dataSourceArray.count==0) {
-                 [weakSelf.myCollectionView showPageLoadedMessage:@"暂无商品" delegate:nil];
+            if (responseResult.cursor>=responseResult.totalPage) {
+                [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
+            }else{
+                [weakSelf.myCollectionView enableInfiniteScrolling:YES];
             }
         }else{
             if (weakSelf.dataSourceArray.count==0 ) {
@@ -107,6 +114,11 @@ UICollectionViewDelegateFlowLayout
         }
     }];
     [self addSessionTask:task];
+}
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row>0&& indexPath.row<[self.myCollectionView numberOfItemsInSection:0]) {
+        [self.myCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
 }
 -(void)ocPageLoadedViewOnTouced{
     [self getGoodsListWithCursor:self.cursor];

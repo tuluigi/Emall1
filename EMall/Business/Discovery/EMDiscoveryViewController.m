@@ -13,11 +13,14 @@
 #import "EMGoodsNetService.h"
 #import "EMDiscoveryHeadView.h"
 #import "UITextField+HiddenKeyBoardButton.h"
+
+#define EMDismissCollectionCellIdentifer  @"EMDismissCollectionCellIdentifer"
+
 @interface EMDiscoveryViewController ()<
-            UICollectionViewDelegate,
-            UICollectionViewDataSource,
-            UICollectionViewDelegateFlowLayout,UISearchBarDelegate
-                >
+UICollectionViewDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout,UISearchBarDelegate
+>
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 @property (nonatomic,strong)__block NSMutableArray *dataSourceArray;
 @property (nonatomic,strong)UISearchBar *searchBar;
@@ -34,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"发现";
-   self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets=NO;
     // Do any additional setup after loading the view.
     [self.view addSubview:self.searchBar];
@@ -58,25 +61,38 @@
     [weakSelf.myCollectionView reloadData];
     [self.myCollectionView startPullDownRefresh];
 }
+- (void)addData{
+    [self.dataSourceArray addObjectsFromArray:self.dataSourceArray];
+    [self.myCollectionView reloadData];
+    [self performSelector:@selector(addData) withObject:nil afterDelay:4];
+}
 - (void)getGoodsListWithCursor:(NSInteger )cursor goodsName:(NSString *)goodsName{
     WEAKSELF
-   NSURLSessionTask *task= [EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0 searchName:goodsName aesc:0 sortType:0 homeType:0 pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
-        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
-        if (responseResult.cursor>=responseResult.totalPage) {
-            [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
-        }else{
-            [weakSelf.myCollectionView enableInfiniteScrolling:YES];
-        }
+    NSURLSessionTask *task= [EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0 searchName:goodsName aesc:0 sortType:0 homeType:0 pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
         weakSelf.totalCount=responseResult.totalRow;
+          [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            if (cursor<=1) {
-                [weakSelf.dataSourceArray removeAllObjects];
+            NSArray *resultArray=(NSArray *)responseResult.responseData;
+            if (resultArray.count) {
+                if (cursor<=1) {
+                    [weakSelf.dataSourceArray removeAllObjects];
+                }
+                NSInteger index=weakSelf.dataSourceArray.count-1;
+                [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
+                if (cursor<=1) {
+                    [EMCache em_setObject:weakSelf.dataSourceArray forKey:EMCache_DiscoveryDataSourceKey];
+                }
+                [weakSelf.myCollectionView reloadData];
+                if (index>0) {
+                    [weakSelf performSelector:@selector(scrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:index inSection:0] afterDelay:0.1];
+                }
+                
             }
-            [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-            if (cursor<=1) {
-                [EMCache em_setObject:weakSelf.dataSourceArray forKey:EMCache_DiscoveryDataSourceKey];
+            if (responseResult.cursor>=responseResult.totalPage) {
+                [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
+            }else{
+                [weakSelf.myCollectionView enableInfiniteScrolling:YES];
             }
-            [weakSelf.myCollectionView reloadData];
         }else{
             if (weakSelf.dataSourceArray.count==0 ) {
                 [weakSelf.myCollectionView showPageLoadedMessage:@"获取数据失败，点击重试" delegate:self];
@@ -84,8 +100,13 @@
                 [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
             }
         }
-    }];
+      }];
     [self addSessionTask:task];
+}
+- (void)scrollToIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row>0&& indexPath.row<[self.myCollectionView numberOfItemsInSection:0]) {
+        [self.myCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
 }
 -(void)ocPageLoadedViewOnTouced{
     [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
@@ -99,12 +120,15 @@
     return count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
+    EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:EMDismissCollectionCellIdentifer forIndexPath:indexPath];
+    if (nil==cell) {
+        cell=[[EMGoodsListCell alloc]  initWithFrame:CGRectZero];
+    }
     cell.goodsModel=[self.dataSourceArray  objectAtIndex:indexPath.row];
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    UICollectionViewLeftAlignedLayout *flowLayout = (UICollectionViewLeftAlignedLayout *)collectionView.collectionViewLayout;
     CGSize size = flowLayout.itemSize;
     return size;
 }
@@ -141,7 +165,7 @@
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
-   [self.myCollectionView startPullDownRefresh];
+    [self.myCollectionView startPullDownRefresh];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
@@ -165,8 +189,8 @@
         mainView.dataSource = self;
         mainView.delegate = self;
         _myCollectionView=mainView;
-        [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class])];
-         [_myCollectionView registerClass:[EMDiscoveryHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMDiscoveryHeadView class])];
+        [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:EMDismissCollectionCellIdentifer];
+        [_myCollectionView registerClass:[EMDiscoveryHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMDiscoveryHeadView class])];
     }
     return _myCollectionView;
 }
@@ -193,7 +217,7 @@
         searchField.leftView = iconView;
         //设置背景图片
         [_searchBar setBackgroundImage:[[UIImage imageNamed:@"search_result_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(3, 3, 3, 3)]];
-          [_searchBar setSearchFieldBackgroundImage:searchBgImage forState:UIControlStateNormal];
+        [_searchBar setSearchFieldBackgroundImage:searchBgImage forState:UIControlStateNormal];
         //设置背景色
         [_searchBar setBackgroundColor:[UIColor whiteColor]];
     }
