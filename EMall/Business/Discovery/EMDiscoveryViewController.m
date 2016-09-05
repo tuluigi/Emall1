@@ -60,18 +60,19 @@
 - (void)getGoodsListWithCursor:(NSInteger )cursor goodsName:(NSString *)goodsName{
     WEAKSELF
    NSURLSessionTask *task= [EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:0 searchName:goodsName aesc:0 sortType:0 homeType:0 pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
-        [weakSelf.myCollectionView dismissPageLoadView];
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor>=responseResult.totalPage) {
-            [weakSelf.myCollectionView enableInfiniteScrolling:NO];
+            [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
+        }else{
+            [weakSelf.myCollectionView enableInfiniteScrolling:YES];
         }
         weakSelf.totalCount=responseResult.totalRow;
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            if (cursor<2) {
+            if (cursor<=1) {
                 [weakSelf.dataSourceArray removeAllObjects];
             }
             [weakSelf.dataSourceArray addObjectsFromArray:responseResult.responseData];
-            if (cursor<=2) {
+            if (cursor<=1) {
                 [EMCache em_setObject:weakSelf.dataSourceArray forKey:EMCache_DiscoveryDataSourceKey];
             }
             [weakSelf.myCollectionView reloadData];
@@ -82,7 +83,6 @@
                 [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
             }
         }
-        weakSelf.cursor=responseResult.cursor;
     }];
     [self addSessionTask:task];
 }
@@ -160,7 +160,7 @@
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
-        mainView.showsVerticalScrollIndicator = NO;
+        mainView.showsVerticalScrollIndicator = YES;
         mainView.dataSource = self;
         mainView.delegate = self;
         _myCollectionView=mainView;

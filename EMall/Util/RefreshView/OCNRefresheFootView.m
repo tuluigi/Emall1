@@ -174,8 +174,8 @@
     if (_enableLoadingMoreData!=enableLoadingMoreData) {
         _enableLoadingMoreData=enableLoadingMoreData;
         if (!_enableLoadingMoreData) {
+            [self.activitIndicatorView stopAnimating];;
             self.animationImageView.hidden=YES;
-            self.activitIndicatorView.hidden=YES;
             self.titleLable.hidden=YES;
             self.hidden=YES;
             WEAKSELF
@@ -193,7 +193,7 @@
             }];
         }else{
 //            self.animationImageView.hidden=NO;
-            self.activitIndicatorView.hidden=NO;
+            [self.activitIndicatorView stopAnimating];
             self.titleLable.hidden=NO;
             self.hidden=NO;
             self.titleLable.text=@"";
@@ -236,8 +236,9 @@
     }
     NSString *restryMessage=message;
     self.hidden=NO;
-    self.animationImageView.hidden=YES;
+    
     [self.activitIndicatorView stopAnimating];
+    self.activitIndicatorView.hidden=YES;
     self.titleLable.hidden=NO;
 //    WEAKSELF
 //    [_animationImageView mas_makeConstraints:^(MASConstraintMaker *make) {

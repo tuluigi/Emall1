@@ -40,7 +40,6 @@
     if (sortType) {
         [postDic setObject:@(sortType) forKey:@"order_field"];
     }
-    pid=MIN(1, pid);
     if (pid) {
         [postDic setObject:@(pid) forKey:@"cursor"];
     }

@@ -106,7 +106,6 @@ UICollectionViewDelegateFlowLayout
                 [weakSelf.myCollectionView showHUDMessage:responseResult.responseMessage];
             }
         }
-        weakSelf.cursor=responseResult.cursor;
     }];
     [self addSessionTask:task];
 }
