@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
     
     OCTableCellDetialTextModel *serviceModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"联系客服" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeServices];
     serviceModel.tableCellStyle=UITableViewCellStyleSubtitle;
-    OCTableCellDetialTextModel *statmentModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"免责声明" imageName:@"me_service" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeDisclaimer];
+    OCTableCellDetialTextModel *statmentModel=[[OCTableCellDetialTextModel alloc]  initWithTitle:@"免责声明" imageName:@"me_statement" accessoryType:UITableViewCellAccessoryDisclosureIndicator type:EMUserTableCellModelTypeDisclaimer];
     statmentModel.tableCellStyle=UITableViewCellStyleSubtitle;
     groupArray2=@[serviceModel,statmentModel];
     
