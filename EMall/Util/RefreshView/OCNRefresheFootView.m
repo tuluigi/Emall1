@@ -101,6 +101,9 @@
 }
 - (void)beginRefreshing{
 //    self.animationImageView.hidden=NO;
+    if (!self.enableLoadingMoreData) {
+        return;
+    }
     self.titleLable.hidden=NO;
     if (self.isRefreshing) {
         return;

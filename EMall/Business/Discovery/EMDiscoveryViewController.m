@@ -35,6 +35,7 @@
     [super viewDidLoad];
     self.navigationItem.title=@"发现";
    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets=NO;
     // Do any additional setup after loading the view.
     [self.view addSubview:self.searchBar];
     [self.view addSubview:self.myCollectionView];

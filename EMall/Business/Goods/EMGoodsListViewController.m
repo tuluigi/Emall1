@@ -81,14 +81,13 @@ UICollectionViewDelegateFlowLayout
 }
 - (void)getGoodsListWithCursor:(NSInteger )cursor{
     WEAKSELF
-//    if (self.dataSourceArray.count==0) {
-//        [weakSelf.myCollectionView showPageLoadingView];
-//    }
     NSURLSessionTask *task=[EMGoodsNetService getGoodsListWithSearchGoodsID:0 catID:self.catID searchName:nil aesc:0 sortType:0 homeType:self.homeType pid:cursor pageSize:20 onCompletionBlock:^(OCResponseResult *responseResult) {
-        [weakSelf.myCollectionView dismissPageLoadView];
+        [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         [weakSelf.myCollectionView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor>=responseResult.totalPage) {
-            [weakSelf.myCollectionView enableInfiniteScrolling:NO];
+            [weakSelf.myCollectionView endRefreshingWithMessage:@"没有更多数据" eanbleRetry:NO];
+        }else{
+            [weakSelf.myCollectionView enableInfiniteScrolling:YES];
         }
         if (responseResult.responseCode==OCCodeStateSuccess) {
             if (cursor<2) {
@@ -146,7 +145,7 @@ UICollectionViewDelegateFlowLayout
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
-        mainView.showsVerticalScrollIndicator = NO;
+        mainView.showsVerticalScrollIndicator = YES;
         mainView.dataSource = self;
         mainView.delegate = self;
         _myCollectionView=mainView;
