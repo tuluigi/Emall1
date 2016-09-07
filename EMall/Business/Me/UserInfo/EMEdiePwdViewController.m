@@ -80,6 +80,7 @@ typedef NS_ENUM(NSInteger,EMEditPwdType) {
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     [((OCUTableViewTextFieldCell *)cell).textField setTextAlignment:NSTextAlignmentLeft];
+    [((OCUTableViewTextFieldCell *)cell).textField setSecureTextEntry:YES];
     [(OCUTableViewCell *)cell setCellModel:cellModel];
     return cell;
 }
