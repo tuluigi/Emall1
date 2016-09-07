@@ -30,6 +30,9 @@
     // Do any additional setup after loading the view.
 }
 - (UITableView *)tableView{
+    if (![self isViewLoaded]) {
+        return nil;
+    }
     if (nil==_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
         _tableView.dataSource = self;

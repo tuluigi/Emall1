@@ -41,7 +41,6 @@
     [self.contentView addSubview:_titleLabel];
     _priceLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:14] textAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:_priceLabel];
-
     
     _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
     _saleCountLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];

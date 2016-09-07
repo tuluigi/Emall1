@@ -71,6 +71,7 @@
         make.left.mas_equalTo(weakSelf.priceLabel.mas_right);
         make.right.mas_equalTo(weakSelf.iconImageView.mas_right);
     }];
+    
 }
 - (void)setGoodsModel:(EMGoodsModel *)goodsModel{
     _goodsModel=goodsModel;
