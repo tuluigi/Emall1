@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A2427131D12C4670078240C"
+               BlueprintIdentifier = "E60972991D791A9D0052928D"
                BuildableName = "EMallUITests.xctest"
                BlueprintName = "EMallUITests"
                ReferencedContainer = "container:EMall.xcodeproj">
@@ -62,7 +62,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"

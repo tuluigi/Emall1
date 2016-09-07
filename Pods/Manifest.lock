@@ -36,7 +36,6 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
-  - PgyUpdate (1.2)
   - QRCodeGenerator-hicool (0.0.1):
     - QRCodeGenerator-hicool/qrcode (= 0.0.1)
   - QRCodeGenerator-hicool/qrcode (0.0.1)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9)
   - MJRefresh (~> 3.1.12)
   - MWPhotoBrowser (~> 2.1.2)
-  - PgyUpdate
   - QRCodeGenerator-hicool (~> 0.0.1)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.1)
@@ -83,7 +81,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
-  PgyUpdate: a42e82cec5ad4e992af390e9d494f6fc62db65e4
   QRCodeGenerator-hicool: 9b0f116e6c6ef0756d81ff182987b581a600e36b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
@@ -93,6 +90,6 @@ SPEC CHECKSUMS:
   UICollectionViewLeftAlignedLayout: 830bf6fa5bab9f9b464f62e3384f9d2e00b3c0f6
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
-PODFILE CHECKSUM: 1bfb4560975ba5b9a88cec3085252448c6a68a74
+PODFILE CHECKSUM: 051801b7b9b031026f7f89114f4847d6690dceef
 
 COCOAPODS: 1.0.1

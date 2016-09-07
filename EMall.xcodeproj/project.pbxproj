@@ -1958,6 +1958,7 @@
 				E60972A31D791A9D0052928D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

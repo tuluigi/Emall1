@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 target "EMall"  do
 pod 'AFNetworking', '~> 3.1.0'
@@ -19,5 +19,5 @@ pod 'MWPhotoBrowser', '~> 2.1.2'
 pod 'QRCodeGenerator-hicool', '~> 0.0.1'
 pod 'TMCache', '~> 2.1.0'
 pod 'UICollectionViewLeftAlignedLayout', '~> 1.0.2'
-pod 'PgyUpdate'
+#pod 'PgyUpdate'
 end
