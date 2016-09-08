@@ -12,4 +12,6 @@
 @class  EMGoodsModel;
 @interface EMGoodsListCell : UICollectionViewCell
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
+
++ (CGSize)goodsListCellEstmitSize;
 @end

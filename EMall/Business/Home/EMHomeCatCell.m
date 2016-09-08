@@ -103,6 +103,9 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     attributes.size=CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
     return attributes;
 }
++ (CGSize)homeCatCellSize{
+    return CGSizeMake(OCWidth, [EMHomeCatItemView homeCatItemViewSize].height);
+}
 - (void)addTimer{
     if (nil==self.myTimer) {
         NSTimer *timer=[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(handleTimer:) userInfo:nil repeats:YES];

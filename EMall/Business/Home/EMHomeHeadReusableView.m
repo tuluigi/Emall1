@@ -77,12 +77,12 @@
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(didHeadMoreButtonPressed)];
     [self addGestureRecognizer:tapGesture];
 }
-//- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
-//    UICollectionViewLayoutAttributes *attrs=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-//    CGSize size=[self systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    size.width=OCWidth;
-//    return attrs;
-//}
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+    UICollectionViewLayoutAttributes *attrs=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    CGSize size=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);
+    attrs.size=size;
+    return attrs;
+}
 
 - (void)didHeadMoreButtonPressed{
     if (_delegate && [_delegate respondsToSelector:@selector(homeHeadReusableViewDidSelect:)]) {

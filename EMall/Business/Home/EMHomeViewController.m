@@ -60,6 +60,7 @@ EMHomeHeadReusableViewDelegate>
 //    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
     self.adArray=[EMCache em_objectForKey:EMCache_HomeADDataSourceKey];
     self.homeModel=[EMCache em_objectForKey:EMCache_HomeDataSourceKey];
+    [self.myCollectionView reloadData];
     WEAKSELF
     [self.myCollectionView addOCPullDownResreshHandler:^{
         [weakSelf getHomeData];
@@ -169,10 +170,17 @@ EMHomeHeadReusableViewDelegate>
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    if (indexPath.section==0) {
+        return [EMHomeCatCell homeCatCellSize];
+    }else{
+        return [EMGoodsListCell goodsListCellEstmitSize];
+    }
+    /*
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
     
     CGSize size = flowLayout.itemSize;
     return size;
+     */
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     CGSize size=CGSizeZero;
@@ -273,7 +281,7 @@ EMHomeHeadReusableViewDelegate>
 #pragma mark - getter
 -(EMInfiniteView *)infiniteView{
     if (nil==_infiniteView) {
-        _infiniteView=[[EMInfiniteView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(170))];
+        _infiniteView=[EMInfiniteView InfiniteViewWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(170))];
         _infiniteView.delegate=self;
     }
     return _infiniteView;
@@ -283,9 +291,11 @@ EMHomeHeadReusableViewDelegate>
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
-        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);
+//        flowLayout.estimatedItemSize=[EMGoodsListCell goodsListCellEstmitSize];////添加之后iOS8 会crash
+//        flowLayout.itemSize=[EMGoodsListCell goodsListCellEstmitSize];
+//        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);//添加之后iOS8 会crash
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;

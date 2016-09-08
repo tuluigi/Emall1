@@ -152,7 +152,7 @@ UICollectionViewDelegateFlowLayout
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+       flowLayout.itemSize=[EMGoodsListCell goodsListCellEstmitSize];
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;

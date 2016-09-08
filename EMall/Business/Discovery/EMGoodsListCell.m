@@ -46,10 +46,21 @@
 }
 -(UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+    /*
     CGSize size=[EMGoodsItemView goodsItemViewSize];
     size.width=OCWidth/2.0;
     size.height+=10;
+    */
+    
+    CGSize size=[EMGoodsListCell goodsListCellEstmitSize];
+    
     attributes.size=size;
     return attributes;
+}
++ (CGSize)goodsListCellEstmitSize{
+    CGSize size=[EMGoodsItemView goodsItemViewSize];
+    size.width=OCWidth/2.0;
+    size.height+=10;
+    return size;
 }
 @end

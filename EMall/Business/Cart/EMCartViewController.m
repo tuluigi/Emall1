@@ -64,17 +64,18 @@
     [self.view addSubview:self.bottomView];
     CGRect tabarBounds= self.tabBarController.tabBar.bounds;
     WEAKSELF
+    CGFloat kBottomViewHeight = OCUISCALE(50);
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(weakSelf.view);
         make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-tabarBounds.size.height);
-        make.height.mas_equalTo(OCUISCALE(50));
+        make.height.mas_equalTo(kBottomViewHeight);
     }];
     
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.removeExisting=YES;
         make.top.mas_equalTo(weakSelf.view.mas_top);
         make.left.right.mas_equalTo(weakSelf.view);
-        make.bottom.mas_equalTo(weakSelf.view.mas_bottom);
+        make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(-kBottomViewHeight);
     }];
     
     [self.tableView reloadData];

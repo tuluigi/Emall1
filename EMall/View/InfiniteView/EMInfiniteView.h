@@ -16,10 +16,12 @@
 - (NSInteger)numberOfInfiniteViewCellsInInfiniteView:(EMInfiniteView *)infiniteView;
 - (EMInfiniteViewCell *)infiniteView:(EMInfiniteView *)infiniteView cellForRowAtIndex:(NSInteger)index;
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index;
+
 @end
 
 
 @interface EMInfiniteView : UICollectionReusableView
++ (EMInfiniteView *)InfiniteViewWithFrame:(CGRect)frame;
 @property (nonatomic,strong,readonly) UICollectionView *collectionView;
 @property (nonatomic,assign,readwrite)NSInteger totalNumber;
 @property (nonatomic,weak)id <EMInfiniteViewDelegate> delegate;

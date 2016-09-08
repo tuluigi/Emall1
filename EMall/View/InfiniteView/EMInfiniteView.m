@@ -23,6 +23,10 @@ static NSInteger const kMaxRowCount     =5;
 
 @implementation EMInfiniteView
 @synthesize totalNumber=_totalNumber;
++ (EMInfiniteView *)InfiniteViewWithFrame:(CGRect)frame{
+   EMInfiniteView *infiniteView=[[EMInfiniteView alloc]  initWithFrame:frame];
+    return infiniteView;
+}
 - (instancetype)init{
     self=[self initWithFrame:CGRectZero];
     return self;
@@ -33,10 +37,6 @@ static NSInteger const kMaxRowCount     =5;
         [self onInitContentView];
     }
     return self;
-}
-- (void)layoutSubviews{
-//    self.collectionView.frame=self.bounds;
-//    [self.collectionView reloadData];
 }
 - (void)onInitContentView{
       [self addSubview:self.collectionView];
@@ -196,6 +196,7 @@ static NSInteger const kMaxRowCount     =5;
         flowLayout.minimumInteritemSpacing=0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+        flowLayout.itemSize=self.bounds.size;
         mainView.backgroundColor = [UIColor clearColor];
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;

@@ -176,11 +176,14 @@ UICollectionViewDelegateFlowLayout,UISearchBarDelegate
     [self getGoodsListWithCursor:self.cursor goodsName:self.searchBar.text];
 }
 - (UICollectionView *)myCollectionView{
+    if (!self.isViewLoaded) {
+        return nil;
+    }
     if (nil==_myCollectionView) {
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+        flowLayout.itemSize=[EMGoodsListCell goodsListCellEstmitSize];
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
