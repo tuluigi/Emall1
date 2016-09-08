@@ -20,6 +20,7 @@
 #import "OCUIUtil.h"
 #import "RunInfo.h"
 #import "EMCache.h"
+#import "EMCommonInfo.h"
 
 #pragma mark --category
 #import "UIFont+OCUIUtil.h"

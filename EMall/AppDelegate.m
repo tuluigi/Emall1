@@ -36,6 +36,7 @@
     self.window.rootViewController=rootTarbarController;
     [self.window makeKeyAndVisible];
     UMConfigInstance.appKey = @"57d0208e67e58ef9110030fa";
+    [MobClick setAppVersion:[EMCommonInfo appVersion]];
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     return YES;
 }

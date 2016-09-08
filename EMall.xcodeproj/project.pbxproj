@@ -164,6 +164,7 @@
 		8C0D062E3F521222CCF7F434 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */; };
 		E609729D1D791A9D0052928D /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E609729C1D791A9D0052928D /* EMallUITests.m */; };
 		E60972A61D791AAF0052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972A51D791AAF0052928D /* SnapshotHelper.swift */; };
+		E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -509,6 +510,8 @@
 		E609729E1D791A9D0052928D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E60972A41D791AAE0052928D /* EMallUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMallUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		E60972A51D791AAF0052928D /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E65EAE0E1D816BA6002DB59D /* EMCommonInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCommonInfo.h; sourceTree = "<group>"; };
+		E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCommonInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -873,6 +876,8 @@
 				2A7583E11D51E943008E1B57 /* EMPersistence.m */,
 				2A0FD4141D52E5A800D575E3 /* EMImagePickBrowserHelper.h */,
 				2A0FD4151D52E5A800D575E3 /* EMImagePickBrowserHelper.m */,
+				E65EAE0E1D816BA6002DB59D /* EMCommonInfo.h */,
+				E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1553,6 +1558,7 @@
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
+				E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */,
 				2A31E8101D5CC4BD00FC73A9 /* EMCatItemCell.m in Sources */,
 				2A99EB731D3B64D20024E924 /* EMOrderDetailController.m in Sources */,
 				2A99EB651D3B1D8E0024E924 /* ZJScrollSegmentView.m in Sources */,
