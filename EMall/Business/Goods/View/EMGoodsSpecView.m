@@ -91,18 +91,22 @@
     self.titleLabel.text=_titleString;
     //    [self.titleButton setTitle:_titleString forState:UIControlStateNormal];
 }
++ (CGSize)itemCellSizeWithTitle:(NSString *)title{
+    CGSize aSize=[title boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
+    aSize=CGSizeMake(OCUISCALE(aSize.width+30),OCUISCALE(35) );
+    return aSize;
+}
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     CGSize size=CGSizeMake(60,35 );
-    /*
+   
      if (![NSString isNilOrEmptyForString:_titleString]) {
      NSString *textString=[_titleString copy];
      CGSize aSize= [textString boundingRectWithSize:CGSizeMake(OCWidth, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont oc_systemFontOfSize:13],NSFontAttributeName, nil] context:nil].size;
-     //        CGSize aSize=[textString boundingRectWithfont:[UIFont oc_systemFontOfSize:13] maxTextSize:CGSizeMake(OCWidth, 20)];
-     //         size=CGSizeMake(aSize.width+20,35 );
+         
      size=aSize;
      }
-     */
+  
     attributes.size=size;
     return attributes;
 }
@@ -524,16 +528,24 @@
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+    NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
+    NSArray *valueArray=[specDic allValues];
+    EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
+    
+
+    CGSize aSize=[EMGoodsSpecCell itemCellSizeWithTitle:specModel.name];
+    return aSize;
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     CGSize size = flowLayout.itemSize;
     return size;
 }
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-//    CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
 //    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
 //    size=flowLayout.headerReferenceSize;
-//    return size;
-//}
+    return size;
+}
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *reusableView;
@@ -589,7 +601,7 @@
         NSArray *alreadyKeyAary=selectSpectArray;
         NSPredicate *predicate=[NSPredicate predicateWithFormat:@"(SELF in %@)",alreadyKeyAary];
         NSArray *tempArray=[infoKeyArray filteredArrayUsingPredicate:predicate];
-        if (tempArray.count) {
+        if (tempArray.count==infoKeyArray.count) {
             [*goodsInfoDic setObject:infoModel forKey:@(infoModel.infoID)];//添加当条明细
             [enableSpecDic setValuesForKeysWithDictionary:infoModel.specsDic];//添加该明细中所有的规格
         }
@@ -606,9 +618,9 @@
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-        flowLayout.estimatedItemSize=CGSizeMake(50, 35);
-        flowLayout.itemSize=CGSizeMake(60, 35);
-        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
+//        flowLayout.estimatedItemSize=CGSizeMake(50, 35);
+//        flowLayout.itemSize=CGSizeMake(1, 1);
+//        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
         flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
         
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];

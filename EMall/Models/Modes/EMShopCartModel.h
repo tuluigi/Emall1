@@ -20,6 +20,6 @@
 @property(nonatomic,assign)NSInteger buyCount;
 @property (nonatomic,assign)CGFloat totalPrice;
 @property (nonatomic,copy)NSString *spec;//尺寸
-@property (nonatomic,strong)EMSpecListModel *specListModel;
+@property (nonatomic,strong)NSArray *specListArray;
 @property (nonatomic,assign)BOOL unSelected;//default is no
 @end
