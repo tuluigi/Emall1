@@ -140,6 +140,8 @@
         [weakSelf.tableView stopRefreshAndInfiniteScrolling];
         if (responseResult.cursor==responseResult.totalPage) {
             [weakSelf.tableView enableInfiniteScrolling:NO];
+        }else{
+            [weakSelf.tableView enableInfiniteScrolling:YES];
         }
         if (responseResult.responseCode==OCCodeStateSuccess) {
             weakSelf.bottomView.hidden=NO;
@@ -183,16 +185,16 @@
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:index inSection:0];
         [indexPathArray addObject:indexPath];
     }
-    [self.tableView showHUDLoading];
+    [self.view showHUDLoading];
     NSURLSessionTask *task=[EMShopCartNetService deleteShopCartWithCartIDs:cartIDArray onCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
-            [weakSelf.tableView dismissHUDLoading];
+            [weakSelf.view dismissHUDLoading];
             [weakSelf.dataSourceArray removeObjectsInArray:array];
             [weakSelf.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationAutomatic];
             [weakSelf calcuteMyShopCart];
             [weakSelf updatePageLoadMesage];
         }else{
-            [weakSelf.tableView showHUDMessage:responseResult.responseMessage];
+            [weakSelf.view showHUDMessage:responseResult.responseMessage];
         }
     }];
     [self addSessionTask:task];

@@ -137,6 +137,8 @@ static NSInteger kStarNumber    =4;
         weakSelf.cursor=responseResult.cursor;
         if (responseResult.cursor>=responseResult.totalPage) {
             [weakSelf.tableView enableInfiniteScrolling:NO];
+        }else{
+            [weakSelf.tableView enableInfiniteScrolling:YES];
         }
         [weakSelf.tableView stopRefreshAndInfiniteScrolling];
         if (responseResult.responseCode==OCCodeStateSuccess) {
