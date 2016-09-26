@@ -168,6 +168,7 @@
     _minusButton.frame=CGRectMake(0, 0, OCUISCALE(30), OCUISCALE(30));
     [_minusButton setTitle:@"-" forState:UIControlStateNormal];
     [_minusButton setTitleColor:color forState:UIControlStateNormal];
+    _minusButton.userInteractionEnabled=YES;
     [_minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _minusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     _minusButton.layer.borderWidth=0.5;
@@ -176,6 +177,7 @@
     _countTextField.textAlignment=NSTextAlignmentCenter;
     
     UIButton *plusButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    plusButton.userInteractionEnabled=YES;
     plusButton.frame=CGRectMake(0, 0, OCUISCALE(30), OCUISCALE(30));
     [plusButton setTitle:@"+" forState:UIControlStateNormal];
     [plusButton setTitleColor:color forState:UIControlStateNormal];

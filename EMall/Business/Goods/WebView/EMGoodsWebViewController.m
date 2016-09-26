@@ -67,7 +67,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [self.webView dismissPageLoadView];
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:( NSError *)error{
     [self.webView showPageLoadedMessage:@"加载失败,点击重试" delegate:self];
 }
 
