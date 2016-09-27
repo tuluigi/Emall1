@@ -99,14 +99,14 @@
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
     CGSize size=CGSizeMake(60,35 );
-   
-     if (![NSString isNilOrEmptyForString:_titleString]) {
-     NSString *textString=[_titleString copy];
-     CGSize aSize= [textString boundingRectWithSize:CGSizeMake(OCWidth, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont oc_systemFontOfSize:13],NSFontAttributeName, nil] context:nil].size;
-         
-     size=aSize;
-     }
-  
+    
+    if (![NSString isNilOrEmptyForString:_titleString]) {
+        NSString *textString=[_titleString copy];
+        CGSize aSize= [textString boundingRectWithSize:CGSizeMake(OCWidth, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont oc_systemFontOfSize:13],NSFontAttributeName, nil] context:nil].size;
+        
+        size=aSize;
+    }
+    
     attributes.size=size;
     return attributes;
 }
@@ -136,6 +136,7 @@
 @property (nonatomic,strong)UIButton *plusButton, *minusButton;//选择按钮
 @property (nonatomic,assign)NSInteger buyCount;
 @property (nonatomic,weak)id <EMGoodsSpecCountCellDelegage>delegate;
++ (CGSize)specCountCellSize;
 @end
 
 @implementation EMGoodsSpecCountCell
@@ -169,7 +170,7 @@
     [_minusButton setTitle:@"-" forState:UIControlStateNormal];
     [_minusButton setTitleColor:color forState:UIControlStateNormal];
     _minusButton.userInteractionEnabled=YES;
-    [_minusButton addTarget:self action:@selector(didMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_minusButton addTarget:self action:@selector(didSpecMinuseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _minusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     _minusButton.layer.borderWidth=0.5;
     _countTextField.leftView=_minusButton;
@@ -183,10 +184,12 @@
     [plusButton setTitleColor:color forState:UIControlStateNormal];
     plusButton.layer.borderColor=[[UIColor colorWithHexString:@"#e5e5e5"] CGColor];
     plusButton.layer.borderWidth=0.8;
-    [plusButton addTarget:self action:@selector(didPlusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [plusButton addTarget:self action:@selector(didSpecPlusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     _plusButton=plusButton;
     _countTextField.rightView=plusButton;
     _countTextField.rightViewMode=UITextFieldViewModeAlways;
+    _countTextField.userInteractionEnabled=YES;
+    self.contentView.userInteractionEnabled=YES;
     WEAKSELF
     [_countTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.contentView.mas_top).offset(5);
@@ -199,9 +202,13 @@
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes{
     UICollectionViewLayoutAttributes *attributes=[super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    CGSize size=CGSizeMake(150,40 );
+    CGSize size=[EMGoodsSpecCountCell specCountCellSize];
     attributes.size=size;
     return attributes;
+}
++ (CGSize)specCountCellSize{
+    CGSize size=CGSizeMake(150,40 );
+    return size;
 }
 - (void)setBuyCount:(NSInteger)buyCount{
     if (buyCount>=EMGoodsMaxBuyCount) {
@@ -237,10 +244,10 @@
 - (void)showOverMaxBuyCountMessage{
     [[UIApplication sharedApplication].keyWindow showHUDMessage:[NSString stringWithFormat:@"最多只能购买%d件",EMGoodsMaxBuyCount] yOffset:(0)];
 }
-- (void)didPlusButtonPressed:(UIButton *)sender{
+- (void)didSpecPlusButtonPressed:(UIButton *)sender{
     self.buyCount=self.buyCount+1;
 }
-- (void)didMinuseButtonPressed:(UIButton *)sender{
+- (void)didSpecMinuseButtonPressed:(UIButton *)sender{
     self.buyCount=self.buyCount-1;
 }
 
@@ -476,13 +483,13 @@
     
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:infoModel.goodsPrice promotePrice:infoModel.promotionPrice];
     if (infoModel.quantity<=0) {
-          _quantityLabel.text=@"无货";
+        _quantityLabel.text=@"无货";
     }else if (infoModel.quantity<10) {//小于20件才有提示
-       _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",infoModel.quantity];
+        _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",infoModel.quantity];
     }else{
         _quantityLabel.text=@"";
     }
-   
+    
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.keysArray.count;
@@ -520,6 +527,7 @@
         aCell=cell;
     }else{
         EMGoodsSpecCountCell *cell=(EMGoodsSpecCountCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsSpecCountCell class]) forIndexPath:indexPath];
+        cell.userInteractionEnabled=YES;
         cell.delegate=self;
         cell.buyCount=self.buyCount;
         aCell=cell;
@@ -530,22 +538,24 @@
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *key=[self.keysArray objectAtIndex:indexPath.section];
-    NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
-    NSArray *valueArray=[specDic allValues];
-    EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
-    
-
-    CGSize aSize=[EMGoodsSpecCell itemCellSizeWithTitle:specModel.name];
-    return aSize;
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
-    CGSize size = flowLayout.itemSize;
-    return size;
+    if (indexPath.section<collectionView.numberOfSections-1) {
+        NSString *key=[self.keysArray objectAtIndex:indexPath.section];
+        NSDictionary *specDic=[self.detailModel.specDic objectForKey:key];
+        NSArray *valueArray=[specDic allValues];
+        EMSpecModel *specModel=[valueArray objectAtIndex:indexPath.row];
+        
+        
+        CGSize aSize=[EMGoodsSpecCell itemCellSizeWithTitle:specModel.name];
+        return aSize;
+    }else{
+        CGSize size=[EMGoodsSpecCountCell specCountCellSize];
+        return size;
+    }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     CGSize size=CGSizeMake(OCWidth, OCUISCALE(30));
-//    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
-//    size=flowLayout.headerReferenceSize;
+    //    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
+    //    size=flowLayout.headerReferenceSize;
     return size;
 }
 
@@ -620,9 +630,9 @@
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
-//        flowLayout.estimatedItemSize=CGSizeMake(50, 35);
-//        flowLayout.itemSize=CGSizeMake(1, 1);
-//        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
+        //        flowLayout.estimatedItemSize=CGSizeMake(50, 35);
+        //        flowLayout.itemSize=CGSizeMake(1, 1);
+        //        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, OCUISCALE(30));
         flowLayout.scrollDirection=UICollectionViewScrollDirectionVertical;
         
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
