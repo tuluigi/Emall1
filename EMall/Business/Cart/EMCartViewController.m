@@ -27,6 +27,9 @@
     return self;
 }
 - (UITableView *)tableView{
+    if (!self.isViewLoaded) {
+        return nil;
+    }
     if (nil==_tableView) {
         _tableView=[[TPKeyboardAvoidingTableView alloc]  initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.delegate=self;
@@ -115,13 +118,15 @@
 }
 #pragma mark - getCart list
 - (void)syncShopCarts{
-    return;
+    if (![RI isLogined]) {
+        return;
+    }
     WEAKSELF
     NSURLSessionTask *task=[EMShopCartNetService getShopCartListWithUserID:[RI userID] pid:self.cursor pageSize:1000 onCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
-           weakSelf.dataSourceArray=responseResult.responseData;
-            if (weakSelf.dataSourceArray.count) {
-                weakSelf.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",self.dataSourceArray.count];
+           NSArray *array=responseResult.responseData;
+            if (array.count) {
+                weakSelf.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",array.count];
             }else{
                 weakSelf.navigationController.tabBarItem.badgeValue=nil;
             }
@@ -165,7 +170,7 @@
             [weakSelf calcuteMyShopCart];
             [weakSelf updatePageLoadMesage];
         }else{
-            if (cursor<=1) {
+            if (weakSelf.dataSourceArray.count==0) {
                 [weakSelf.tableView showPageLoadedMessage:@"获取数据失败" delegate:self];
             }else{
                 [weakSelf.tableView showHUDMessage:@"获取数据失败"];

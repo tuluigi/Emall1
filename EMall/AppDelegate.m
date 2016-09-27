@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "OCRootTabbarController.h"
 #import <UMMobClick/MobClick.h>
+#import <JSPatch/JSPatch.h>
 @interface AppDelegate ()
 
 @end
@@ -16,10 +17,12 @@
 @implementation AppDelegate
 
 - (void)customeApperance{
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
     NSDictionary *titleAttibutes = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [UIFont oc_boldSystemFontOfSize:18],NSFontAttributeName,
                                     [UIColor whiteColor],NSForegroundColorAttributeName,
-                                    [UIColor clearColor],UITextAttributeTextShadowColor,
+                                     shadow,NSShadowAttributeName,
                                     nil];
     
     [[UINavigationBar appearance] setTitleTextAttributes:titleAttibutes];
@@ -31,6 +34,10 @@
     // Override point for customization after application launch.
     [self customeApperance];
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [JSPatch startWithAppKey:@"52e17c323a124e6a"];
+    [JSPatch setupHttps];
+    [JSPatch sync];
+    
     sleep(4);//客户觉得启动页太快了，所以就等了2秒
     OCRootTabbarController *rootTarbarController=[[OCRootTabbarController alloc]  init];
     self.window.rootViewController=rootTarbarController;

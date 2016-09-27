@@ -26,6 +26,7 @@ PODS:
   - DACircularProgress (2.3.1)
   - FXBlurView (1.6.4)
   - JSBadgeView (1.4.1)
+  - JSPatchSDKPod (1.6)
   - Mantle (2.0.7):
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - CocoaLumberjack (~> 2.3.0)
   - FXBlurView (~> 1.6.4)
   - JSBadgeView (~> 1.4.1)
+  - JSPatchSDKPod (~> 1.6)
   - Mantle (~> 2.0.2)
   - Masonry (~> 0.5.3)
   - MBProgressHUD (~> 0.9)
@@ -78,6 +80,7 @@ SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
+  JSPatchSDKPod: c9348d0c27c77a97a73ec93df18df4da7908e85b
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
   Masonry: 9f515466afe48632562342a40a1c224071a1a022
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -93,6 +96,6 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
 
-PODFILE CHECKSUM: e27b6a2ee6e3a38945f6ae63485edfaad1d42552
+PODFILE CHECKSUM: 24ce150ffd743386900e54c47bf356ed9478e673
 
 COCOAPODS: 1.0.1

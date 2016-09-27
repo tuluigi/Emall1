@@ -222,9 +222,12 @@ UICollectionViewDelegateFlowLayout>
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     CGSize size = flowLayout.itemSize;
-    return size;
+     */
+    CGSize aSize =[EMOrderListGoodsItemCell orderGoodsListItemCellSize];
+    return aSize;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -255,7 +258,7 @@ UICollectionViewDelegateFlowLayout>
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing=0;
         
-        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
+//        flowLayout.estimatedItemSize=CGSizeMake(1, 1);
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 100, 20) collectionViewLayout:flowLayout];
         mainView.backgroundColor = [UIColor clearColor];
         mainView.pagingEnabled = NO;
