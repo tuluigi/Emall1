@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1004</string>
+	<string>1009</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -40,12 +40,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>嗨吃GO将要访问您的相机</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>嗨吃GO将要访问您的相册</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

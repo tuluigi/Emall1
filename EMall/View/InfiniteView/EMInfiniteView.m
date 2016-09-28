@@ -8,7 +8,7 @@
 
 #import "EMInfiniteView.h"
 #import "EMInfiniteViewCell.h"
-static NSInteger const kMaxRowCount     =5;
+static NSInteger const kMaxRowCount     =3;
 @interface EMInfiniteView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong,readwrite) UICollectionView *collectionView;
 @property (nonatomic,strong)UIPageControl *pageControl;
@@ -146,7 +146,7 @@ static NSInteger const kMaxRowCount     =5;
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
     NSInteger offsetX = scrollView.contentOffset.x;
     self.offx=offsetX;
-
+    scrollView.userInteractionEnabled=NO;
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
@@ -156,6 +156,7 @@ static NSInteger const kMaxRowCount     =5;
 //手动滑动
 -(void)scrollViewDidEndDecelerating:(nonnull UIScrollView *)scrollView
 {
+    scrollView.userInteractionEnabled=YES;
     if (self.totalNumber) {
         NSInteger offsetX = scrollView.contentOffset.x;
         NSInteger viewW = scrollView.bounds.size.width;
