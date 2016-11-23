@@ -21,23 +21,48 @@
 #import "EMOrderModel.h"
 #import "OCUTableCellHeader.h"
 #import "EMGoodsPostageFootView.h"
+#import "EMCartChoosePayView.h"
+#import "AppDelegate.h"
+#import "AFHTTPSessionManager.h"
+
 #define  kSubmitCellIdenfier  @"KSubmitCellIdenfier"
 #define  kAddressCellIdenfier @"kAddressCellIdenfier"
 #define  kPriceCellIdenfier   @"kPriceCellIdenfier"
 
 #define kLogisticsCellIdenfier  @"kLogisticsCellIdenfier"//物流
 #define kRemarksCellIdenfier   @"kRemarksCellIdenfier"//备注
+// Set the environment:
+// - For live charges, use PayPalEnvironmentProduction (default).
+// - To use the PayPal sandbox, use PayPalEnvironmentSandbox.
+// - For testing, use PayPalEnvironmentNoNetwork.
+
+//#define kPayPalEnvironment PayPalEnvironmentNoNetwork
+#define kPayPalEnvironment PayPalEnvironmentSandbox
+//#define kPayPalEnvironment PayPalEnvironmentProduction
 
 #define kEMCartSubmitRemarkCellType     200
 
-@interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate>
+#define WIDTH  [[UIScreen mainScreen]bounds].size.width
+#define HEIGHT [[UIScreen mainScreen]bounds].size.height
+#define ChoosePayViewHeight HEIGHT/2
+
+@interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate,ChoosePayViewDelegate,PayPalPaymentDelegate>
+{
+    EMOrderModel *orderModel ;
+}
 @property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)EMCartBottomView *bottomView;
 @property (nonatomic,assign)CGFloat addressCellheight;
 @property (nonatomic,assign)__block EMOrderLogisticsType logisticType;
 @property (nonatomic,strong)__block OCTableCellTextViewModel *detailTextViewModel;
+@property (nonatomic,strong)EMCartChoosePayView *choosePayView ;
+
+@property (nonatomic,strong, readwrite) PayPalConfiguration *payPalConfig ;
+@property (nonatomic,strong) NSString *PayEnvironment ;
+@property (nonatomic,strong) NSString *PayResulText ;
+@property (nonatomic,strong) UIView *successView ;
+
 @end
-//xjphsd
 @implementation EMCartSubmitViewController
 
 - (void)setCartArray:(NSArray *)cartArray{
@@ -65,10 +90,76 @@
     return _bottomView;
 }
 
+- (PayPalConfiguration *)payPalConfig
+{
+    if (nil == _payPalConfig) {
+        _payPalConfig = [[PayPalConfiguration alloc] init] ;
+        _payPalConfig.acceptCreditCards = NO ;
+        _payPalConfig.merchantName = @"E-STAR(AUST)PTY LTD" ;
+        _payPalConfig.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.paypal.com/webapps/mpp/ua/privacy-full"];
+        _payPalConfig.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.paypal.com/webapps/mpp/ua/useragreement-full"];
+        _payPalConfig.languageOrLocale = [NSLocale preferredLanguages][0];
+        _payPalConfig.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal ;
+        self.PayEnvironment = kPayPalEnvironment ;
+        self.successView.hidden = YES ;
+        NSLog(@"PayPal iOS SDK version: %@", [PayPalMobile libraryVersion]);
+    }
+    return _payPalConfig ;
+}
+
+- (UIView *)successView
+{
+    if (nil==_successView) {
+        _successView = [[UIView alloc] init] ;
+    }
+    return _successView ;
+}
+
+#pragma mark - 初始化选择支付界面
+- (EMCartChoosePayView *)createChoosePayView
+{
+    if (!_choosePayView) {
+        self.choosePayView = [[EMCartChoosePayView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, ChoosePayViewHeight) withTitle:@"请选择支付方式"] ;
+        CGFloat totlePrice = [self totalPrice] ;
+        self.choosePayView.totalPrice = totlePrice ;
+        self.choosePayView.delegate = self ;
+    }
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate ;
+    [delegate.window addSubview:_choosePayView] ;
+    return _choosePayView ;
+}
+
+#pragma mark - 显示支付选择弹窗
+- (void)showChoosePayView
+{
+    __weak EMCartSubmitViewController *weakSelf = self ;
+    self.choosePayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0] ;
+    [UIView animateWithDuration:0.5 animations:^{
+        [weakSelf.choosePayView setFrame:CGRectMake(0, 0, WIDTH, HEIGHT)] ;
+    } completion:^(BOOL finished) {
+        weakSelf.choosePayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] ;
+    }] ;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self onInitContentView];
+    [self createChoosePayView] ;//初始化选择支付界面
+    [self payPalConfig] ;//初始化PayPal配置
+}
+
+//预先开启支付环境
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES] ;
+    [self setPayPalEnvironment:self.PayEnvironment] ;
+}
+
+- (void)setPayPalEnvironment:(NSString *)environment
+{
+    self.PayEnvironment = environment ;
+    [PayPalMobile preconnectWithEnvironment:environment] ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +168,10 @@
 }
 - (void)onInitContentView{
     self.navigationItem.title=@"确认订单";
+    [self successView] ;
+    orderModel = [[EMOrderModel alloc] init] ;
     [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.successView] ;
     self.logisticType=EMOrderLogisticsTypeUnKonwn;
     WEAKSELF
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,6 +184,27 @@
         make.top.left.right.mas_equalTo(weakSelf.view);
         make.bottom.mas_equalTo(weakSelf.bottomView.mas_top);
     }];
+    
+    [self.successView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.view.mas_left).offset(OCUISCALE(kEMOffX)) ;
+        make.right.mas_equalTo(weakSelf.view.mas_right).offset(OCUISCALE(-kEMOffX)) ;
+        make.bottom.mas_equalTo(weakSelf.view.mas_bottom).offset(OCUISCALE(-100)) ;
+        make.height.mas_equalTo(OCUISCALE(200)) ;
+    }] ;
+    UIImageView *checkImageView = [[UIImageView alloc] init] ;
+    [checkImageView setImage:[UIImage imageNamed:@"check"]] ;
+    UILabel *successLabel = [UILabel labelWithText:@"Your transaction was successful!" font:[UIFont oc_systemFontOfSize:14] textAlignment:NSTextAlignmentLeft] ;
+    [self.successView addSubview:checkImageView] ;
+    [self.successView addSubview:successLabel] ;
+    [checkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.successView.mas_centerX) ;
+        make.top.mas_equalTo(self.successView.mas_top).offset(20) ;
+    }] ;
+    [successLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.successView.mas_centerX) ;
+        make.top.mas_equalTo(checkImageView.mas_bottom).offset(20) ;
+    }] ;
+    
 //    UIEdgeInsets inset= self.tableView.contentInset;
 //    inset.bottom+=OCUISCALE(50);
 //    self.tableView.contentInset=inset;
@@ -318,6 +433,8 @@
     }
 
 }
+
+#pragma mark - 提交订单
 - (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
     if (addressID<0) {
         [self.view showHUDMessage:@"请选择收货地址"];
@@ -330,11 +447,15 @@
     NSURLSessionTask *task=[EMOrderNetService submitWithUserID:[RI userID] shopCarts:shopCartArrays addressID:addressID logisticType:type remark:remarks onCompletionBlock:^(OCResponseResult *responseResult) {
         if (responseResult.responseCode==OCCodeStateSuccess) {
             [weakSelf.view dismissHUDLoading];
-            EMOrderModel *orderModel=responseResult.responseData;
+//            [self showChoosePayView] ;
+            orderModel=responseResult.responseData;
+            NSLog(@"====================================订单的ID：%ld===============================",(long)orderModel.orderID) ;
             
-            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber];
-            payController.hidesBottomBarWhenPushed=YES;
-            [weakSelf.navigationController pushViewController:payController animated:YES];
+            [self showChoosePayView] ;
+            
+//            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber];
+//            payController.hidesBottomBarWhenPushed=YES;
+//            [weakSelf.navigationController pushViewController:payController animated:YES];
         }else{
             [weakSelf.view showHUDMessage:responseResult.responseMessage];
         }
@@ -342,17 +463,192 @@
     [self addSessionTask:task];
     }
 }
+
+#pragma mark - PayPal支付提交
+- (void)submitOrderWithPayPal
+{
+    //[self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
+    self.PayResulText = nil ;
+    NSMutableArray *itemsArray = [NSMutableArray array] ;
+    for (int i = 0; i < self.dataSourceArray.count; i++) {
+        EMShopCartModel *model = self.dataSourceArray[i] ;
+        PayPalItem *item = [PayPalItem itemWithName:model.goodsName withQuantity:model.buyCount withPrice:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",model.promotionPrice]] withCurrency:@"USD" withSku:[NSString stringWithFormat:@"%ld-%ld",(long)[RI userID],(long)model.cartID]] ;
+        [itemsArray addObject:item] ;
+    }
+    NSDecimalNumber *subTotal = [PayPalItem totalPriceForItems:itemsArray] ;
+    NSDecimalNumber *shipping = [NSDecimalNumber decimalNumberWithString:@"0.00"] ;
+    CGFloat totlePrice = [self totalPrice] ;
+    CGFloat feePrice = totlePrice * 0.015 + 0.3 ;
+    NSString *fee = [NSString stringWithFormat:@"%.2f",feePrice] ;
+    // totlePrice = totlePrice + [fee floatValue] ;
+    NSDecimalNumber *tax = [NSDecimalNumber decimalNumberWithString:fee] ;
+    
+    PayPalPaymentDetails *paymentDetails = [PayPalPaymentDetails paymentDetailsWithSubtotal:subTotal withShipping:shipping withTax:tax] ;
+    NSDecimalNumber *total = [[subTotal decimalNumberByAdding:shipping] decimalNumberByAdding:tax] ;
+    
+    PayPalPayment *payment = [[PayPalPayment alloc] init] ;
+    payment.amount = total ;
+    payment.currencyCode = @"USD" ;
+    payment.shortDescription = @"嗨吃Go购物" ;
+    payment.items = itemsArray ;
+    payment.paymentDetails = paymentDetails ;
+    
+    if (!payment.processable) {
+        
+    }
+    
+    PayPalPaymentViewController *paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment configuration:self.payPalConfig delegate:self] ;
+    
+    [self presentViewController:paymentViewController animated:YES completion:nil] ;
+}
+
 #pragma mark -bottomView select
 //提交订单
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
-    
+    NSLog(@"点击了提交订单按钮") ;
     [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
+    //[self showChoosePayView] ;
+    
 }
-#pragma  mark -address
+
+#pragma mark - ChoosePayViewDelegate
+- (void)choosePayBtn:(UIButton *)button indexRow:(NSInteger)index totalPrice:(CGFloat)totalprice
+{
+    
+    if (index == 0) {
+        NSLog(@"选择了PayPal支付 支付了：%.2f",totalprice) ;
+        [self submitOrderWithPayPal] ;
+    }
+    else if (index == 1)
+    {
+        NSLog(@"选择了微信支付 支付了：%.2f",totalprice) ;
+    }else
+    {
+        WEAKSELF
+        NSLog(@"选择了转账汇款 支付了：%.2f",totalprice) ;
+        EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber titleLabel:@"" index:2];
+        payController.hidesBottomBarWhenPushed=YES;
+        [weakSelf.navigationController pushViewController:payController animated:YES];
+    }
+}
+
+#pragma mark - PayPalPaymentDelegate
+- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController didCompletePayment:(PayPalPayment *)completedPayment
+{
+    NSLog(@"PayPal Payment Success") ;
+    self.PayResulText = [completedPayment description] ;
+    NSLog(@"PayPal resulttext:%@",self.PayResulText) ;
+    [self showSuccess] ;
+    [self sendCompletedPaymentToServer:completedPayment] ;
+    [self dismissViewControllerAnimated:YES completion:nil] ;
+}
+
+- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController
+{
+    NSLog(@"PayPal Payment Canceled");
+    self.PayResulText = nil;
+    self.successView.hidden = YES;
+    [self showChoosePayView] ;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Helpers
+- (void)showSuccess {
+    self.successView.hidden = NO;
+    self.successView.alpha = 1.0f;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:2.0];
+    self.successView.alpha = 0.0f;
+    [UIView commitAnimations];
+}
+
+#pragma mark Proof of payment validation
+
+- (void)sendCompletedPaymentToServer:(PayPalPayment *)completedPayment {
+    // TODO: Send completedPayment.confirmation to server
+    NSLog(@"Here is your proof of payment:\n\n%@\n\nSend this to your server for confirmation and fulfillment.", completedPayment.confirmation);
+    
+    [self paypalWithOrderID:orderModel.orderID Confirmation:completedPayment.confirmation] ;
+}
+
+
+#pragma mark -address
 - (void)shopAddressListControlerDidSelectAddress:(EMShopAddressModel *)addressModel{
     
-    self.addressModel=addressModel;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    self.addressModel = addressModel ;
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic] ;
+}
+
+- (void)paypalWithOrderID:(NSInteger)orderID Confirmation:(NSDictionary *)confirmation
+{
+    NSData *data = [NSJSONSerialization dataWithJSONObject:confirmation options:NSJSONWritingPrettyPrinted error:nil] ;
+    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+    
+    NSString *oid = [NSString stringWithFormat:@"%ld",orderID] ;
+    
+    CGFloat totlePrice = [self totalPrice] ;
+    CGFloat feePrice = totlePrice * 0.015 + 0.3 ;
+    NSString *fee = [NSString stringWithFormat:@"%.2f",feePrice] ;
+    
+    NSDictionary *parameters = @{@"item":jsonStr,
+                                 @"oid":oid,
+                                 @"fee":fee} ;
+    NSLog(@"parameters:%@",parameters) ;
+    
+    NSString *getAppJson = @"http://www.tulip.city:7080/shop_server/paypal" ;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager] ;
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer] ;
+    
+    WEAKSELF
+    [self.view showHUDLoading];
+    [manager POST:getAppJson parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf.view dismissHUDLoading] ;
+        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] ;
+       // 获取字典中的值
+        if ([result isKindOfClass:[NSDictionary class]])
+        {
+            NSDictionary *dic = result ;
+            NSLog(@"通知:%@",dic) ;
+            NSInteger code = [dic[@"code"] integerValue] ;
+            NSString *titlelable = dic[@"message"] ;
+            if (code == 100) {
+                titlelable = dic[@"data"] ;
+            }
+            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber titleLabel:titlelable index:0];
+            payController.hidesBottomBarWhenPushed=YES;
+            [weakSelf.navigationController pushViewController:payController animated:YES];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         NSLog(@"Error: %@", error);
+        [weakSelf.view dismissHUDLoading] ;
+        [weakSelf.view showHUDMessage:[NSString stringWithFormat:@"%@",error]] ;
+    }] ;
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    
+//    NSString *getAppJson = @"http://www.tulip.city:8090/paypal" ;
+//    
+//    [manager POST:getAppJson parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+//     {
+//         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] ;
+//         //获取字典中的值
+//         if ([result isKindOfClass:[NSDictionary class]])
+//         {
+//             NSDictionary *dic = result ;
+//             NSLog(@"通知:%@",dic) ;
+//         }
+//         
+//     }
+//          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+//     {
+//         NSLog(@"Error: %@", error);
+//     }];
+//
 }
 /*
  #pragma mark - Navigation

@@ -66,6 +66,8 @@
 @property (nonatomic,assign)NSInteger state;
 @property (nonatomic,copy)NSString *videoUrl;//商品视频url
 
+@property (nonatomic,copy)NSString *jason_say;//Jason哥说内容
+@property (nonatomic,copy)NSString *jason_imageUrl;//Jason哥头像图片
 
 @property (nonatomic,strong)NSArray *specArray;//商品列表中可能用到的规格信息
 @end

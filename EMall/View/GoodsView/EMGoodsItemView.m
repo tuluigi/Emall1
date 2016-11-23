@@ -40,8 +40,10 @@
     
     _priceLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#fd4747"] textAlignment:NSTextAlignmentLeft];
     [self addSubview:_priceLabel];
-    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentRight];
-    [self addSubview:_saleCountLabel];
+    
+    //商品数量不显示
+//    _saleCountLabel=[UILabel labelWithText:@"" font:[UIFont systemFontOfSize:OCUISCALE(13)] textColor:[UIColor colorWithHexString:@"#5d5c5c"] textAlignment:NSTextAlignmentRight];
+   // [self addSubview:_saleCountLabel];
     
     WEAKSELF
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {

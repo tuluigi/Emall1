@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EMCartPayCell : UITableViewCell
-- (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName;
+- (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName titleLabel:(NSString *)titleLabel index:(NSInteger) index;
 @end

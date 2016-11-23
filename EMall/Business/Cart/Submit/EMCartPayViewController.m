@@ -17,14 +17,18 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 @interface EMCartPayViewController ()
 @property (nonatomic,assign)CGFloat totalPrice;
 @property (nonatomic,copy)NSString *orderNum;
+@property (nonatomic,copy)NSString *titleLabel;
+@property (nonatomic,assign)NSInteger index;
 @end
 
 @implementation EMCartPayViewController
-- (instancetype)initWithTotalPrice:(CGFloat)totalPrice orderNum:(NSString *)orderNum{
+- (instancetype)initWithTotalPrice:(CGFloat)totalPrice orderNum:(NSString *)orderNum titleLabel:(NSString *)titleLabel index:(NSInteger)index{
     self=[super init];
     if (self) {
         self.totalPrice=totalPrice;
         self.orderNum=orderNum;
+        self.titleLabel=titleLabel;
+        self.index=index ;
     }
     return self;
 }
@@ -100,7 +104,7 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
         if ([NSString isNilOrEmptyForString:acc]) {
             acc=@"838740";
         }
-        [(EMCartPayCell *)cell setPayCartName:accName cartID:bsb bankName:acc];
+        [(EMCartPayCell *)cell setPayCartName:accName cartID:bsb bankName:acc titleLabel:self.titleLabel index:self.index];
         aCell=cell;
     }else if (indexPath.row==1){
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayOrderNumCellIdenfier];

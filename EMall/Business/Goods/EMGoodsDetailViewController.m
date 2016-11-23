@@ -21,15 +21,23 @@
 #import "EMShopCartNetService.h"
 #import "EMServiceController.h"
 
+#import "EMGoodsJasonBrotherTableViewCell.h"//jason哥cell
+
 #import <MediaPlayer/MPMoviePlayerViewController.h>
 #import <AVKit/AVPlayerViewController.h>
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 
 
 static NSString *const kGoodsCommonCellIdenfier = @"kGoodsCommonCellIdenfier";
 static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
+static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
 @interface EMGoodsDetailViewController ()<EMGoodsDetialBootmViewDelegate,OCPageLoadViewDelegate,EMInfiniteViewDelegate>
 @property (nonatomic,strong)UIButton *backButton;
+@property (nonatomic,strong)UIButton *shareButton;
 @property (nonatomic,strong)UIImageView *headImageView;
+@property (nonatomic,strong)UIImageView *shareimageView;
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
 
 @property (nonatomic,strong)EMGoodsModel *goodsModel;
@@ -52,25 +60,38 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }
     return self;
 }
+
 - (instancetype)initWithGoodsModel:(EMGoodsModel * )goodsModel{
     self=[self initWithGoodsID:goodsModel.goodsID];
     self.goodsModel=goodsModel;
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     // Do any additional setup after loading the view.
+    
     self.fd_prefersNavigationBarHidden=YES;
     [self.view addSubview:self.backButton];
     [self.view bringSubviewToFront:self.backButton];
+    //分享按钮加入视图
+    [self.view addSubview:self.shareButton];
+    [self.view bringSubviewToFront:self.shareButton];
     
     WEAKSELF
+    //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32));
         make.left.mas_equalTo(weakSelf.view.mas_left).offset(OCUISCALE(kEMOffX));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(37), OCUISCALE(37)));
     }];
+    //分享按钮
+    [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32)) ;
+        make.right.mas_equalTo(weakSelf.view.mas_right).offset(OCUISCALE(-kEMOffX)) ;
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(37), OCUISCALE(37)));
+    }] ;
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(weakSelf.view);
@@ -178,15 +199,95 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (void)didBackButtonPressed:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+#pragma mark - 分享按钮点击操作
+- (void)didShareButtonPressed:(UIButton *)sender{
+    
+    if (self.detailModel) {
+        //1.创建分享参数
+        NSString *imageStr = self.detailModel.goodsModel.goodsImageUrl ;
+        NSString *nameStr = self.detailModel.goodsModel.goodsName ;
+//        NSString *shareStr = [NSString stringWithFormat:@"http://45.118.132.56:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+        NSString *shareStr = [NSString stringWithFormat:@"http://www.hichigo.com.au:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+        shareStr = [shareStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+        NSLog(@"分享的url：%@",shareStr) ;
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary] ;
+        [shareParams SSDKSetupShareParamsByText:self.detailModel.goodsModel.goodsName
+                                         images:@[imageStr]
+                                            url:[NSURL URLWithString:shareStr]
+                                          title:self.detailModel.goodsModel.goodsName
+                                           type:SSDKContentTypeAuto] ;
+        
+
+        //2.分享菜单
+        [ShareSDK showShareActionSheet:_shareButton
+                                 items:nil
+                           shareParams:shareParams
+                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                       switch (state) {
+                           case SSDKResponseStateSuccess:
+                           {
+                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                                   message:nil
+                                                                                  delegate:nil
+                                                                         cancelButtonTitle:@"确定"
+                                                                         otherButtonTitles:nil,nil] ;
+                               [alertView show] ;
+                               break;
+                           }
+                           case SSDKResponseStateFail:
+                           {
+                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                                   message:[NSString stringWithFormat:@"%@",error]
+                                                                                  delegate:nil
+                                                                         cancelButtonTitle:@"确定"
+                                                                         otherButtonTitles:nil,nil] ;
+                               [alertView show] ;
+                               break;
+                           }
+                           default:
+                               break;
+                       }
+                   }] ;
+
+    }
+    
+}
+
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kGoodsCommonCellIdenfier];
     [self.tableView registerClass:[EMGoodsInfoTableViewCell class] forCellReuseIdentifier:kGoodsInfoCellIdenfier];
-    
+    [self.tableView registerClass:[EMGoodsJasonBrotherTableViewCell class] forCellReuseIdentifier:kGoodsJasonCellIdnfier] ;
     return 4;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger row=0;
+    if (section==0) {
+        if (self.detailModel.goodsModel.jason_say.length == 0) {
+            row = 1 ;
+        }
+        else{
+            row = 2 ;
+        }
+    }else if (section==2){
+        if (self.detailModel.goodsModel.commentCount>0) {
+            row=2;
+        }else{
+            row=1;
+        }
+    }else if (section==1){
+        if (![NSString isNilOrEmptyForString:self.detailModel.goodsModel.videoUrl]) {//有视频的
+            row=2;
+        }else{
+            row=1;
+        }
+    }else if (section==3)
+    {
+        row=1 ;
+    }
+
+    /*
     if (section==0||section==3) {
         row=1;
     }else if (section==2){
@@ -202,11 +303,14 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
             row=1;
         }
     }
+     */
     return row;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *aCell;
-    if (indexPath.section==2||indexPath.section==1||indexPath.section==3) {
+    if (indexPath.section==2||indexPath.section==1||indexPath.section==3)
+    {
         aCell=[tableView dequeueReusableCellWithIdentifier:kGoodsCommonCellIdenfier forIndexPath:indexPath];
         aCell.selectionStyle=UITableViewCellSelectionStyleNone;
         aCell.textLabel.font=[UIFont oc_boldSystemFontOfSize:15];
@@ -214,41 +318,51 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         aCell.textLabel.textAlignment=NSTextAlignmentLeft;
         aCell.accessoryType=UITableViewCellAccessoryNone;
         aCell.textLabel.numberOfLines=0;
-        if (indexPath.section==1) {
+        if (indexPath.section==1)
+        {
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-            if (indexPath.row==0) {
+            if (indexPath.row==0)
+            {
                 aCell.textLabel.textColor=kEM_RedColro;
                 aCell.textLabel.text=@"请选择规格、数量";
-            }else{
+            }else
+            {
                 aCell.textLabel.text=@"分享视频";
+                [aCell.imageView setImage:[UIImage imageNamed:@"text_03"]] ;
             }
-        }else if (indexPath.section==2){
+        }else if (indexPath.section==2)
+        {
             aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
-            if (indexPath.row==0) {
+            if (indexPath.row==0)
+            {
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 aCell.textLabel.text=@"商品评价 ";
-                if (self.detailModel.goodsModel.commentCount>0) {
+                if (self.detailModel.goodsModel.commentCount>0)
+                {
                      aCell.textLabel.text=[NSString stringWithFormat:@"%@ (%@)",aCell.textLabel.text,[NSString tenThousandUnitString:self.detailModel.goodsModel.commentCount]];
                 }
               
-            }else if (indexPath.row ==1){
+            }else if (indexPath.row ==1)
+            {
                 aCell.textLabel.font=[UIFont oc_systemFontOfSize:12];
                 aCell.textLabel.textColor=[UIColor colorWithHexString:@"#5d5c5c"];
                 
                 aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 NSString *userName=@"";
-                if (self.detailModel.goodsModel.userName.length>1) {
+                if (self.detailModel.goodsModel.userName.length>1)
+                {
                     userName=[self.detailModel.goodsModel.userName substringWithRange:NSMakeRange(0, 1)];
                     userName=[userName stringByAppendingString:@"**"];
                 }
                 aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"",stringNotNil(userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
-        }else if (indexPath.section==3){
+        }else if (indexPath.section==3)
+        {
             aCell.textLabel.text=@"商品详情";
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             
         }
-    }else if(indexPath.section==0){
+    }else if(indexPath.section==0 && indexPath.row==0){
         EMGoodsInfoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kGoodsInfoCellIdenfier forIndexPath:indexPath];
         CGFloat price=0;
         if (self.detailModel) {
@@ -258,17 +372,34 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
         }
         
         aCell=cell;
+    }else if (indexPath.section==0 && indexPath.row==1){
+        EMGoodsJasonBrotherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kGoodsJasonCellIdnfier forIndexPath:indexPath] ;
+        if (self.detailModel) {
+            NSString *jasonStr = [NSString stringWithFormat:@"Jason哥说：%@",self.detailModel.goodsModel.jason_say] ;
+            NSString *jasonImageUrl = self.detailModel.goodsModel.jason_imageUrl ;
+            NSLog(@"%@",jasonStr) ;
+            NSLog(@"jason哥说：%@",jasonImageUrl) ;
+            [cell setJasonImage:jasonImageUrl JasonStr:jasonStr] ;
+        }
+        aCell = cell ;
     }
     return aCell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height=OCUISCALE(50);
-    if (indexPath.section==0) {
+    if (indexPath.section==0 && indexPath.row == 0) {
         WEAKSELF
         CGFloat price=0;
         height=[tableView fd_heightForCellWithIdentifier:kGoodsInfoCellIdenfier configuration:^(id cell) {
             [(EMGoodsInfoTableViewCell *)cell setTitle:weakSelf.detailModel.goodsModel.goodsName   price:price promotionPrice:0  saleCount:weakSelf.detailModel.goodsModel.saleCount];
         }];
+    }else if (indexPath.section==0 && indexPath.row == 1){
+//        WEAKSELF
+//        height=[tableView fd_heightForCellWithIdentifier:kGoodsJasonCellIdnfier configuration:^(id cell) {
+//            [(EMGoodsJasonBrotherTableViewCell *)cell setJasonImage:weakSelf.detailModel.goodsModel.jason_imageUrl JasonStr:weakSelf.detailModel.goodsModel.jason_say] ;
+//        }] ;
+        height=OCUISCALE(150) ;
     }
     return height;
 }
@@ -283,7 +414,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     return height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSLog(@"===================%@====================",self.detailModel.goodsSpecListArray) ;
     if (indexPath.section==1) {
         if (indexPath.row==0) {
             WEAKSELF
@@ -376,6 +507,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
 - (void)setGoodsModel:(EMGoodsModel *)goodsModel{
     _goodsModel=goodsModel;
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_goodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
+    
     [self.tableView reloadData];
 }
 - (UIButton *)backButton{
@@ -387,6 +519,17 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }
     return _backButton;
 }
+- (UIButton *)shareButton{
+    if (nil==_shareButton) {
+        _shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [_shareButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_shareButton setImage:[UIImage imageNamed:@"goods_shareBtn"] forState:UIControlStateNormal];
+
+       // [_shareButton setImageEdgeInsets:UIEdgeInsetsMake(25, 25, 25, 25)] ;
+        [_shareButton addTarget:self action:@selector(didShareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _shareButton;
+}
 - (UIImageView *)headImageView{
     if (nil==_headImageView) {
         _headImageView=[[UIImageView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(333))];
@@ -395,6 +538,7 @@ static NSString *const kGoodsInfoCellIdenfier = @"kGoodsInfoCellIdenfier";
     }
     return _headImageView;
 }
+
 - (EMGoodsDetialBootmView *)bottomView{
     if (nil==_bottomView) {
         _bottomView=[[EMGoodsDetialBootmView alloc]  init];

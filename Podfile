@@ -1,6 +1,8 @@
+
 platform :ios, '8.0'
 
 target "EMall"  do
+pod 'PayPal-iOS-SDK'
 pod 'AFNetworking', '~> 3.1.0'
 pod 'Mantle', '~> 2.0.2’
 pod 'Masonry', '~> 0.5.3'

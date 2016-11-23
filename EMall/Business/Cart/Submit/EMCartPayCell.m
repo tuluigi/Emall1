@@ -115,7 +115,10 @@
     }];
     
 }
-- (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName{
+- (void)setPayCartName:(NSString *)userName cartID:(NSString *)cartID bankName:(NSString *)bankName titleLabel:(NSString *)titleLabel index:(NSInteger) index{
+    if (index == 0) {
+        self.titleLable.text = titleLabel ;
+    }
     self.cardNameLabel.text=[NSString stringWithFormat:@"Acc Name：%@",userName];
     self.cardIDLabel.text=[NSString stringWithFormat:@"BSB：%@",cartID];
     self.bankNameLabel.text=[NSString stringWithFormat:@"ACC：%@",bankName];

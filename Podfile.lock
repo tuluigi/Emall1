@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - CardIO (5.4.1)
   - CocoaLumberjack (2.3.0):
     - CocoaLumberjack/Default (= 2.3.0)
     - CocoaLumberjack/Extensions (= 2.3.0)
@@ -37,6 +38,12 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
+  - PayPal-iOS-SDK (2.16.1):
+    - PayPal-iOS-SDK/CardIO (= 2.16.1)
+    - PayPal-iOS-SDK/Core (= 2.16.1)
+  - PayPal-iOS-SDK/CardIO (2.16.1):
+    - CardIO (~> 5.4.1)
+  - PayPal-iOS-SDK/Core (2.16.1)
   - QRCodeGenerator-hicool (0.0.1):
     - QRCodeGenerator-hicool/qrcode (= 0.0.1)
   - QRCodeGenerator-hicool/qrcode (0.0.1)
@@ -63,6 +70,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9)
   - MJRefresh (~> 3.1.12)
   - MWPhotoBrowser (~> 2.1.2)
+  - PayPal-iOS-SDK
   - QRCodeGenerator-hicool (~> 0.0.1)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.1)
@@ -76,6 +84,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
@@ -86,6 +95,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
+  PayPal-iOS-SDK: 774ac7de2d7c3b0ee7e8a35f8b347fd07787321b
   QRCodeGenerator-hicool: 9b0f116e6c6ef0756d81ff182987b581a600e36b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
@@ -96,6 +106,6 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
 
-PODFILE CHECKSUM: 24ce150ffd743386900e54c47bf356ed9478e673
+PODFILE CHECKSUM: 3286f5def0a2b83b24e9f0d9cb51b4b7cb973f8a
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

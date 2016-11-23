@@ -92,7 +92,7 @@
     if (goodsID) {
         [postDic setObject:@(goodsID) forKey:@"id"];
     }
-       NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
+    NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:postDic method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMGoodsDetailModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (compleitonBlock) {
                 compleitonBlock(responseResult);
@@ -101,6 +101,7 @@
     }];
     return task;
 }
+
 + (NSURLSessionTask *)getGoodsSpeListWithGoodsID:(NSInteger )goodsID
                                onCompletionBlock:(OCResponseResultBlock)compleitonBlock{
     NSString *apiPath=[self urlWithSuffixPath:@"goods/spec"];

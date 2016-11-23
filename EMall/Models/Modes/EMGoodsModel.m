@@ -109,7 +109,9 @@
              @"picture_03":@"picture_03",
              @"picture_04":@"picture_04",
              @"picture_05":@"picture_05",
-             @"specArray":@"spec",};
+             @"specArray":@"spec",
+             @"jason_say":@"jason_say",
+             @"jason_imageUrl":@"jason_avator"};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
     if ([key isEqualToString:@"specArray"]) {

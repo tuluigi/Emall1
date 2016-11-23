@@ -152,6 +152,7 @@
     }
     return self;
 }
+
 - (void)onInitContentView{
     
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
@@ -436,7 +437,11 @@
         }
         if (self.selectInfoDic.allValues.count>1 ||self.selectInfoDic.allValues.count<1 ) {
             [self showHUDMessage:@"请先选择其他规格哦"];
-        }else{
+        }
+//        if (self.selectInfoDic.allValues.count>100) {
+//            [self showHUDMessage:@"请先选择其他规格哦"];
+//        }
+        else{
             EMGoodsInfoModel *infoModel=[self.selectInfoDic.allValues firstObject];
             NSInteger count=self.buyCount;
             if (nil==infoModel) {

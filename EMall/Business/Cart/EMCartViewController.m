@@ -337,7 +337,6 @@
             [alertController addAction:cancleAction];
             [alertController addAction:quitAction];
             [self presentViewController:alertController animated:YES completion:^{
-                
             }];
         }
     }else{//提交购物车

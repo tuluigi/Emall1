@@ -9,5 +9,5 @@
 #import "OCBaseTableViewController.h"
 
 @interface EMCartPayViewController : OCBaseTableViewController
-- (instancetype)initWithTotalPrice:(CGFloat)totalPrice orderNum:(NSString *)orderNum;
+- (instancetype)initWithTotalPrice:(CGFloat)totalPrice orderNum:(NSString *)orderNum titleLabel:(NSString *)titleLabel index:(NSInteger) index;
 @end

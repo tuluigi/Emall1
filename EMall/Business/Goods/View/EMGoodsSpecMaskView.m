@@ -50,6 +50,7 @@
 }
 - (EMGoodsSpecView *)specView{
     if (nil==_specView) {
+        NSLog(@"商品规格明细：%@",self.detailModel.goodsInfoArray) ;
         _specView=[EMGoodsSpecView specGoodsViewWithGoodInfo:self.detailModel onDismsiBlock:^(EMGoodsSpecView *specView, BOOL addCart, NSInteger goodsID, NSInteger buyCount, NSInteger sepecID) {
             if (self.dismissBlock) {
                 self.dismissBlock(self,sepecID,buyCount);

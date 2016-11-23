@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "CocoaLumberjack.h"
 #import "CCSingleton.h"
+#import "PayPalMobile.h"
 
 #pragma mark --Util
 #import "OCUIUtil.h"
@@ -42,7 +43,7 @@
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UIView+OCPageLoad.h"
 #import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
-#import <UICollectionViewLeftAlignedLayout.h>
+#import "UICollectionViewLeftAlignedLayout.h"
 
 
 #pragma mark --Maroc

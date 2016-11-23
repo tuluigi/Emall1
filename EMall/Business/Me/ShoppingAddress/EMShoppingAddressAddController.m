@@ -94,6 +94,8 @@ typedef NS_ENUM(NSInteger,EMShopAddressItemType) {
         [self.tableView showHUDMessage:@"请输入收货人电话"];
     }else if ([ NSString isNilOrEmptyForString:self.telFieldModel.inputText]){
        [self.tableView showHUDMessage:@"请输入正确电话号码"];
+    }else if ([NSString isNilOrEmptyForString:self.wechatDeitalModel.inputText]){
+        [self.tableView showHUDMessage:@"请输入微信号"] ;
     }
     /*
     else if ([NSString isNilOrEmptyForString:self.provienceDeitalModel.detailText]){
