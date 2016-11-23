@@ -98,4 +98,5 @@ UICollectionViewDelegateFlowLayout>
     }
     return _myCollectionView;
 }
+
 @end

@@ -68,10 +68,10 @@
 
 - (BOOL)isSameYearByDate:(NSDate *)date {
     
-    NSDateComponents *nowComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents *nowComponents = [[NSCalendar currentCalendar] components: NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     NSInteger nowYear= [nowComponents year];
     
-    NSDateComponents *timeComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
+    NSDateComponents *timeComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
     NSInteger timeYear= [timeComponents year];
     
     if (timeYear == nowYear) {

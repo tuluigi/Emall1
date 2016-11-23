@@ -120,7 +120,7 @@
 #pragma mark -searchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
       [searchBar endEditing:YES];
-    NSInteger index=[self currentSelectSegmentInde];
+  //  NSInteger index=[self currentSelectSegmentInde];
   EMOrderListController *listController = (EMOrderListController *)self.pageScrolView.contentView.currentChildVc;
     [listController reloadDataWithOrderState:self.currentOrderState goodsName:self.searchBar.text];
 

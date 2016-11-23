@@ -218,13 +218,12 @@ placeholderImageName:(NSString *)placeholderImageName
     }
     */
     imageNewName=imageName;
-   WEAKSELF
+   
     [self sd_setImageWithURL:[NSURL URLWithString:imageNewName]
             placeholderImage:placeHolderImage
                      options:option
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
-         WEAKSELF
          if (image) {
              UIImage * toImage = image;
              if (autoReplace) {

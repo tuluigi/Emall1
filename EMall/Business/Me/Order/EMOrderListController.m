@@ -121,7 +121,7 @@
     if (isFirstTime) {
         self.tableView.frame=self.view.bounds;
     }
-    EMOrderState state=[EMOrderStateModel orderStateWithStateName:title];
+  //  EMOrderState state=[EMOrderStateModel orderStateWithStateName:title];
     
 }
 

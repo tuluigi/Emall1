@@ -78,9 +78,9 @@ NSString *identifer=@"EMShopProvicenCityCellIdenfier";
     if (self.provienceID) {
         
     }else{
-        NSString *provience=[self.dataSourceArray objectAtIndex:indexPath.row];
+   //     NSString *provience=[self.dataSourceArray objectAtIndex:indexPath.row];
         EMShopProvienceCityController *citysViewController=[[EMShopProvienceCityController alloc] initWithProvienceID:[NSString stringWithFormat:@"%ld",areaModel.areaID] provienceName:areaModel.areaName];
-        citysViewController.delegate=self;
+        citysViewController.delegate = self;
         citysViewController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:citysViewController animated:YES];
     }
