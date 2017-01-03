@@ -45,9 +45,9 @@
     NSInteger priceInteger=(NSInteger)price;
 //    NSInteger pointeInteger=(price-priceInteger)*10;
     NSDecimalNumber *priceDecimal=[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.1f",price]];
-    NSDecimalNumber *priceIntegerDecimal=[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",priceInteger]];
+    NSDecimalNumber *priceIntegerDecimal=[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",(long)priceInteger]];
     NSDecimalNumber *poinIntegerDecimal=[priceDecimal decimalNumberBySubtracting:priceIntegerDecimal];
-    poinIntegerDecimal=[poinIntegerDecimal decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",10]]];
+    poinIntegerDecimal=[poinIntegerDecimal decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d",10]]];
     
 //    NSAttributedString *priceIntegerAttr=[[NSAttributedString alloc]  initWithString:[NSString stringWithFormat:@"%ld",priceInteger] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(priceIntegerSize)]}];
 //    NSAttributedString *pricePointerAttr=[[NSAttributedString alloc]  initWithString:[NSString stringWithFormat:@".%.1ld",pointeInteger] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(pointSize)]}];

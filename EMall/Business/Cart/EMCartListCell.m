@@ -142,12 +142,12 @@
     _shopCartModel=shopCartModel;
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_shopCartModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     self.goodsNameLabel.text=_shopCartModel.goodsName;
-    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,_shopCartModel.buyCount];
+    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",_shopCartModel.spec,(long)_shopCartModel.buyCount];
     self.checkMarkButton.selected=!_shopCartModel.unSelected;
 //    self.priceLabel.text=[NSString stringWithFormat:@"$%.2f",_shopCartModel.goodsPrice];
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.promotionPrice];
 //    [self updateBuyCount:_shopCartModel.buyCount];
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",(long)_shopCartModel.buyCount];
     if (_shopCartModel.buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{
@@ -155,7 +155,7 @@
     }
 }
 - (void)updateBuyCount:(NSInteger)buyCount{
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",_shopCartModel.buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",(long)_shopCartModel.buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{

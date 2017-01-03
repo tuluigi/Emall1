@@ -23,10 +23,10 @@
     NSString *cartIDString=@"";
     for (NSInteger i=0; i<shopCartArray.count; i++) {
         EMShopCartModel *cartModel=shopCartArray[i];
-        NSString *aString=[NSString stringWithFormat:@"%@=%ld",@"gcid",cartModel.cartID];
+        NSString *aString=[NSString stringWithFormat:@"%@=%ld",@"gcid",(long)cartModel.cartID];
         cartIDString=[cartIDString stringByAppendingString:aString];
         
-        NSString *bString=[NSString stringWithFormat:@"%@=%ld",@"quantity",cartModel.buyCount];
+        NSString *bString=[NSString stringWithFormat:@"%@=%ld",@"quantity",(long)cartModel.buyCount];
         buyCountString=[buyCountString stringByAppendingString:bString];
         if (i<shopCartArray.count-1) {
             cartIDString=[cartIDString stringByAppendingString:@"&"];

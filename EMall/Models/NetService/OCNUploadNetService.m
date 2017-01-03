@@ -197,7 +197,7 @@
     //图片 imageArray里面为image的Data数据
     [imageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSDictionary *imageDic = (NSDictionary *)obj;
-        NSDictionary *fileDic = @{@"data":imageDic[@"imageData"], @"name":imageDic[@"name"], @"mimetype":@"application/octet-stream", @"filename":[NSString stringWithFormat:@"file%ld.png",idx]};
+        NSDictionary *fileDic = @{@"data":imageDic[@"imageData"], @"name":imageDic[@"name"], @"mimetype":@"application/octet-stream", @"filename":[NSString stringWithFormat:@"file%ld.png",(unsigned long)idx]};
         NSArray *fileBePostArray = [NSArray arrayWithObject:fileDic];
         [fileBePostArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSDictionary *thisDataObject = (NSDictionary *)obj;

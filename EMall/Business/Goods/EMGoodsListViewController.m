@@ -115,38 +115,46 @@ UICollectionViewDelegateFlowLayout
     }];
     [self addSessionTask:task];
 }
+
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row>0&& indexPath.row<[self.myCollectionView numberOfItemsInSection:0]) {
         [self.myCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
     }
 }
+
 -(void)ocPageLoadedViewOnTouced{
     [self getGoodsListWithCursor:self.cursor];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     NSInteger count=self.dataSourceArray.count;
     return count;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
     cell.goodsModel=[self.dataSourceArray  objectAtIndex:indexPath.row];
     return cell;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
     CGSize size = flowLayout.itemSize;
     return size;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     EMGoodsModel *goodsModel=[self.dataSourceArray objectAtIndex:indexPath.row];
     EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc] initWithGoodsID:goodsModel.goodsID];
     detailController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:detailController animated:YES];
 }
+
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
@@ -165,6 +173,7 @@ UICollectionViewDelegateFlowLayout
     }
     return _myCollectionView;
 }
+
 -(NSMutableArray *)dataSourceArray{
     if (nil==_dataSourceArray) {
         _dataSourceArray=[[NSMutableArray alloc]  init];

@@ -31,14 +31,15 @@
 
 #define kLogisticsCellIdenfier  @"kLogisticsCellIdenfier"//物流
 #define kRemarksCellIdenfier   @"kRemarksCellIdenfier"//备注
+
 // Set the environment:
 // - For live charges, use PayPalEnvironmentProduction (default).
 // - To use the PayPal sandbox, use PayPalEnvironmentSandbox.
 // - For testing, use PayPalEnvironmentNoNetwork.
 
 //#define kPayPalEnvironment PayPalEnvironmentNoNetwork
-#define kPayPalEnvironment PayPalEnvironmentSandbox
-//#define kPayPalEnvironment PayPalEnvironmentProduction
+//#define kPayPalEnvironment PayPalEnvironmentSandbox
+#define kPayPalEnvironment PayPalEnvironmentProduction
 
 #define kEMCartSubmitRemarkCellType     200
 
@@ -310,7 +311,7 @@
         if (self.logisticType==EMOrderLogisticsTypeExpress) {
             //logsticPriceString=[NSString stringWithFormat:@"运费:$%.1f，",self.postagePrice];
         }
-        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，%@合计金额:",self.dataSourceArray.count,logsticPriceString] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，%@合计金额:",(unsigned long)self.dataSourceArray.count,logsticPriceString] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:[self totalPrice]]];
         
         cell.detailTextLabel.attributedText=priceAttrStr;
@@ -586,7 +587,7 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:confirmation options:NSJSONWritingPrettyPrinted error:nil] ;
     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
     
-    NSString *oid = [NSString stringWithFormat:@"%ld",orderID] ;
+    NSString *oid = [NSString stringWithFormat:@"%ld",(long)orderID] ;
     
     CGFloat totlePrice = [self totalPrice] ;
     CGFloat feePrice = totlePrice * 0.015 + 0.3 ;
@@ -597,7 +598,16 @@
                                  @"fee":fee} ;
     NSLog(@"parameters:%@",parameters) ;
     
-    NSString *getAppJson = @"http://www.tulip.city:7080/shop_server/paypal" ;
+    
+    NSString *getAppJson = [[NSString alloc] init] ;
+    if ([kPayPalEnvironment isEqualToString:@"PayPalEnvironmentNoNetwork"]) {
+        getAppJson = @"http://www.tulip.city:7080/shop_server/paypal" ;
+    }
+    else
+    {
+        getAppJson = @"http://www.hichigo.com.au:8081/paypal" ;
+    }
+    
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager] ;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer] ;

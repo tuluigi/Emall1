@@ -328,7 +328,14 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
             }else
             {
                 aCell.textLabel.text=@"分享视频";
-                [aCell.imageView setImage:[UIImage imageNamed:@"text_03"]] ;
+                NSDictionary *attrs = @{NSFontAttributeName:aCell.textLabel.font} ;
+                CGSize size1 = [aCell.textLabel.text sizeWithAttributes:attrs] ;
+                CGSize size2 = [@"好" sizeWithAttributes:attrs] ;
+                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(aCell.textLabel.frame.origin.x + size1.width + size2.width, 8, aCell.contentView.frame.size.height - 16, aCell.contentView.frame.size.height - 16)] ;
+                [image setImage:[UIImage imageNamed:@"text_03"]] ;
+                
+                [aCell.contentView addSubview:image] ;
+                
             }
         }else if (indexPath.section==2)
         {

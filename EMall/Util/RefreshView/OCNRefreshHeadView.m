@@ -66,7 +66,7 @@ static const int kNumberOfCircles = 4;  //实际可以看到的个数是kNumberO
     _animationImageView=[[UIImageView alloc]  init];
     NSMutableArray *imageArray=[[NSMutableArray alloc]  init];
     for (NSInteger i=1; i<=5; i++) {
-        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"global0%ld",i]];
+        UIImage *image=[UIImage imageNamed:[NSString stringWithFormat:@"global0%ld",(long)i]];
         if (image) {
             [imageArray addObject:image];
         }

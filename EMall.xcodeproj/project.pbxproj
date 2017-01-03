@@ -2050,8 +2050,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EMall/EMall.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = NDDKUXYDGE;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2072,8 +2072,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6d8075e1-aa59-4640-9c7f-f6ee7889f6ec";
-				PROVISIONING_PROFILE_SPECIFIER = haichigoDeveloperTest;
+				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
+				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
@@ -2088,8 +2088,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EMall/EMall.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = NDDKUXYDGE;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2110,8 +2110,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6d8075e1-aa59-4640-9c7f-f6ee7889f6ec";
-				PROVISIONING_PROFILE_SPECIFIER = haichigoDeveloperTest;
+				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
+				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};

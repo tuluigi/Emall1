@@ -126,7 +126,7 @@
         if (responseResult.responseCode==OCCodeStateSuccess) {
            NSArray *array=responseResult.responseData;
             if (array.count) {
-                weakSelf.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",array.count];
+                weakSelf.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",(unsigned long)array.count];
             }else{
                 weakSelf.navigationController.tabBarItem.badgeValue=nil;
             }
@@ -246,7 +246,7 @@
     }
     [self.bottomView updateCartBottomWithSelectItemCount:count totalItems:self.dataSourceArray.count totalPrice:totalPrice];
     if (self.dataSourceArray.count) {
-        self.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",self.dataSourceArray.count];
+        self.navigationController.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld",(unsigned long)self.dataSourceArray.count];
     }else{
         self.navigationController.tabBarItem.badgeValue=nil;
     }

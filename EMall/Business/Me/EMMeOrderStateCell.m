@@ -65,7 +65,7 @@
     self.nameLabel.text=_stateModel.stateName;
     if (_stateModel.badgeNumber) {
         self.badgeView.hidden=NO;
-        self.badgeView.badgeText=[NSString stringWithFormat:@"%ld",_stateModel.badgeNumber];
+        self.badgeView.badgeText=[NSString stringWithFormat:@"%ld",(long)_stateModel.badgeNumber];
     }else{
         self.badgeView.hidden=YES;
         self.badgeView.badgeText=@"";

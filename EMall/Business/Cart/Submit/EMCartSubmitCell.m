@@ -96,7 +96,7 @@
     
     self.goodsNameLabel.text=_shopCartModel.goodsName;
     
-    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_shopCartModel.spec),_shopCartModel.buyCount];
+    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_shopCartModel.spec),(long)_shopCartModel.buyCount];
     
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_shopCartModel.promotionPrice];
 }
@@ -108,7 +108,7 @@
    
     self.goodsNameLabel.text=_orderGoodsModel.goodsName;
     
-    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_orderGoodsModel.spec),_orderGoodsModel.buyCount];
+    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_orderGoodsModel.spec),(long)_orderGoodsModel.buyCount];
     
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_orderGoodsModel.goodsPrice];
 }

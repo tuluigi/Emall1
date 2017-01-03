@@ -113,7 +113,7 @@
     if (self.isDelete) {
         NSString *titleStr=@"删除";
         if (count) {
-            titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+            titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,(long)count];
         }
         [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
     }else{
@@ -122,7 +122,7 @@
         }else{
             NSString *titleStr=@"去结算";
             if (count) {
-                titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,count];
+                titleStr=[NSString stringWithFormat:@"%@(%ld)",titleStr,(long)count];
             }
             [self.submitButton setTitle:titleStr forState:UIControlStateNormal];
         }

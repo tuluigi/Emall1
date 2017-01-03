@@ -202,7 +202,7 @@ UICollectionViewDelegateFlowLayout>
     for (EMOrderGoodsModel *goodsModel in _orderModel.goodsArray) {
         buyCount+=goodsModel.buyCount;
     }
-    NSString *priceText=[NSString stringWithFormat:@"共%ld件商品，合计$%.1f",buyCount,_orderModel.payPrice-_orderModel.discountPrice];
+    NSString *priceText=[NSString stringWithFormat:@"共%ld件商品，合计$%.1f",(long)buyCount,_orderModel.payPrice-_orderModel.discountPrice];
     if (orderModel.discountPrice) {
         priceText=[priceText stringByAppendingString:[NSString stringWithFormat:@"(已优惠$%.1f)",_orderModel.discountPrice]];
     }

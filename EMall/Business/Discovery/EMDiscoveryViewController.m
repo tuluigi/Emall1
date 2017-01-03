@@ -151,7 +151,7 @@ UICollectionViewDelegateFlowLayout,UISearchBarDelegate
     if (kind==UICollectionElementKindSectionHeader) {
         reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMDiscoveryHeadView class]) forIndexPath:indexPath];
         EMDiscoveryHeadView *specHeadView=(EMDiscoveryHeadView *)reusableView;
-        specHeadView.title=[NSString stringWithFormat:@"为您搜索到%ld条结果",self.totalCount];
+        specHeadView.title=[NSString stringWithFormat:@"为您搜索到%ld条结果",(long)self.totalCount];
     }else if (kind==UICollectionElementKindSectionFooter){
         reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([UICollectionReusableView class]) forIndexPath:indexPath];
     }

@@ -148,7 +148,7 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
                     NSArray *allKeys=[dic allKeys];
                     NSArray *allValues=[dic allValues];
                     for (EMOrderStateModel *stateModel in weakSelf.orderStateArray) {
-                        NSString *key=[NSString stringWithFormat:@"%ld",stateModel.state];
+                        NSString *key=[NSString stringWithFormat:@"%ld",(long)stateModel.state];
                         if ([allKeys containsObject:key]) {
                             NSInteger index=[allKeys indexOfObject:key];
                             id value=[allValues objectAtIndex:index];

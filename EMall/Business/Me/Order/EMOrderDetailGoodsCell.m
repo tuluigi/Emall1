@@ -129,7 +129,7 @@
     [_goodsImageView sd_setImageWithURL:[NSURL URLWithString:_orderGoodsModel.goodsImageUrl] placeholderImage:EMDefaultImage];
     self.goodsNameLabel.text=_orderGoodsModel.goodsName;
     
-    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_orderGoodsModel.spec),_orderGoodsModel.buyCount];
+    self.descLabel.text=[NSString stringWithFormat:@"%@  %ld件",stringNotNil(_orderGoodsModel.spec),(long)_orderGoodsModel.buyCount];
     self.priceLabel.attributedText=[NSAttributedString  goodsPriceAttrbuteStringWithPrice:_orderGoodsModel.discountPrice];
 }
 

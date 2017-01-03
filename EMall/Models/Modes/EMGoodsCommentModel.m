@@ -16,7 +16,7 @@
 -(NSString *)starString{
     _starString=[EMCommentStarModel starStringWithStar:self.star];
     if (self.startNum) {
-        _starString=[NSString stringWithFormat:@"%@(%ld)",_starString,self.startNum];
+        _starString=[NSString stringWithFormat:@"%@(%ld)",_starString,(long)self.startNum];
     }
     return _starString;
 }

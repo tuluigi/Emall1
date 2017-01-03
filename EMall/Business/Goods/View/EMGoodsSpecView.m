@@ -217,7 +217,7 @@
         return ;
     }
     _buyCount=buyCount;
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",_buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",(long)_buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{
@@ -232,7 +232,7 @@
         [self showOverMaxBuyCountMessage];
         return ;
     }
-    self.countTextField.text=[NSString stringWithFormat:@"%ld",buyCount];
+    self.countTextField.text=[NSString stringWithFormat:@"%ld",(long)buyCount];
     if (buyCount<=1) {
         self.minusButton.enabled=NO;
     }else{
@@ -490,7 +490,7 @@
     if (infoModel.quantity<=0) {
         _quantityLabel.text=@"无货";
     }else if (infoModel.quantity<10) {//小于20件才有提示
-        _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",infoModel.quantity];
+        _quantityLabel.text=[NSString stringWithFormat:@"库存:%ld件",(long)infoModel.quantity];
     }else{
         _quantityLabel.text=@"";
     }

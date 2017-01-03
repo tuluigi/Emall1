@@ -86,7 +86,7 @@
     self.buyTimeLabel.text=[NSString stringWithFormat:@"支付时间：%@",stringNotNil(payTime)];
     self.sendTimeLabel.text=[NSString stringWithFormat:@"发货时间：%@",stringNotNil(sendTime)];
     UIColor *color=[UIColor colorWithHexString:@"#272727"];
-    NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",totalCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+    NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"共%ld件商品，合计金额:",(long)totalCount] attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
     [priceAttrStr appendAttributedString:[NSAttributedString goodsPriceAttrbuteStringWithPrice:totoalPrice]];
     
     self.priceLabel.attributedText=priceAttrStr;

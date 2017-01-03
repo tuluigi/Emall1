@@ -41,10 +41,11 @@
         });
     }
 }
-//
-//static NSString const *DomainHost  = @"http://www.tulip.city:8090/";
-static NSString const *DomainHost  = @"http://www.tulip.city:7080/shop_server/";
-//static NSString const *DomainHost  = @"http://www.hichigo.com.au:8081/";
+#pragma mark - 测试服务器
+//static NSString const *DomainHost  = @"http://www.tulip.city:7080/shop_server/";
+
+#pragma mark - 正式服务器
+static NSString const *DomainHost  = @"http://www.hichigo.com.au:8081/";
 +(NSString *)urlWithSuffixPath:(NSString *)str{
     if (str&&str.length) {
         if ([str hasPrefix:@"http://"]||[str hasPrefix:@"https://"]||[str hasPrefix:@"www."]) {
