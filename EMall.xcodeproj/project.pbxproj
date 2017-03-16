@@ -2110,8 +2110,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "232721e0-24ad-47f2-82c9-a715b12fa681";
-				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDevelopementProfile;
+				PROVISIONING_PROFILE = "d43abd4a-afd2-4288-a2f1-dba76d2eaf64";
+				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDistributionProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
