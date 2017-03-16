@@ -57,9 +57,10 @@
     if (configModel&&configModel.qrCodeUrl) {
         self.imageUrl=configModel.qrCodeUrl;
     }else{
-         self.imageUrl=@"http://45.118.132.56:8081/images/webchat/QR.jpg";
+        self.imageUrl=@"http://45.118.132.56:8081/images/webchat/QR.jpg";
     }
 }
+
 - (void)setImageUrl:(NSString *)imageUrl{
     _imageUrl=imageUrl;
      [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_imageUrl] placeholderImage:EMDefaultImage];

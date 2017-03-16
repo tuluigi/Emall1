@@ -10,6 +10,7 @@
 #import "NSAttributedString+Price.h"
 @interface EMOrderInfoCell ()
 @property (nonatomic,strong)UILabel *orderIDLabel,*buyTimeLabel,*subtimeTimeLabel,*sendTimeLabel,*priceLabel;
+@property (nonatomic,strong)UIButton *reBuyButton ;
 @end
 
 @implementation EMOrderInfoCell
@@ -43,6 +44,14 @@
     _priceLabel.numberOfLines=1;
     [self.contentView addSubview:_priceLabel];
 
+    UIColor *rebuyColor=[UIColor colorWithHexString:@"#e51e0e"] ;
+    _reBuyButton=[UIButton buttonWithTitle:@"继续支付" titleColor:rebuyColor font:font] ;
+    _reBuyButton.layer.cornerRadius=5.0  ;
+    _reBuyButton.layer.masksToBounds=YES ;
+    _reBuyButton.layer.borderColor=[rebuyColor CGColor] ;
+    _reBuyButton.layer.borderWidth=1.0 ;
+    [_reBuyButton addTarget:self action:@selector(ReBuyButtonPressed) forControlEvents:UIControlEventTouchUpInside] ;
+    [self.contentView addSubview:_reBuyButton] ;
     
     WEAKSELF
     [_orderIDLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,6 +82,15 @@
         make.bottom.mas_equalTo(weakSelf.contentView.mas_bottom).offset(OCUISCALE(-20)).priorityHigh();
         make.top.mas_equalTo(weakSelf.buyTimeLabel.mas_bottom).offset(10);
     }];
+    
+    [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(100), OCUISCALE(40)));
+        
+        make.right.mas_equalTo(weakSelf.contentView.mas_right).offset(OCUISCALE(-20)) ;
+        make.centerY.mas_equalTo(weakSelf.contentView.mas_centerY) ;
+        
+    }] ;
 }
 - (void)setOrderID:(NSString *)orderID
         submitTime:(NSString *)subTime
@@ -91,4 +109,12 @@
     
     self.priceLabel.attributedText=priceAttrStr;
 }
+
+- (void)ReBuyButtonPressed
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(reBuyButtonDidClick)]) {
+        [self.delegate reBuyButtonDidClick] ;
+    }
+}
+
 @end

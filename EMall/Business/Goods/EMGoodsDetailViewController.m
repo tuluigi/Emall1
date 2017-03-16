@@ -206,8 +206,9 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         //1.创建分享参数
         NSString *imageStr = self.detailModel.goodsModel.goodsImageUrl ;
         NSString *nameStr = self.detailModel.goodsModel.goodsName ;
-//        NSString *shareStr = [NSString stringWithFormat:@"http://45.118.132.56:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
-        NSString *shareStr = [NSString stringWithFormat:@"http://www.hichigo.com.au:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+
+       // NSString *shareStr = [NSString stringWithFormat:@"http://www.hichigo.com.au:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+        NSString *shareStr = [NSString stringWithFormat:@"http://www.ukelaila.com:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
         shareStr = [shareStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
         NSLog(@"分享的url：%@",shareStr) ;
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary] ;

@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol reBuyButtonDelegate <NSObject>
+
+- (void)reBuyButtonDidClick;
+
+@end
+
 @interface EMOrderInfoCell : UITableViewCell
+
+@property(nonatomic,strong) id<reBuyButtonDelegate> delegate ;
+
 - (void)setOrderID:(NSString *)orderID
         submitTime:(NSString *)subTime
            payTime:(NSString *)payTime

@@ -71,7 +71,8 @@
     }
     else if (index == 1)
     {
-        self.remarkLabel.text = @"暂不支持，敬请期待" ;
+        self.remarkLabel.text = @"人民币支付，汇率5.5" ;
+        //self.chooseBtn.hidden = YES ;
     }
 }
 

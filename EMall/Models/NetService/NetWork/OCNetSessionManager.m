@@ -100,6 +100,9 @@ static OCNetSessionManager *sharedSessionManager;
             id resultValue ;
             if (error) {
                 resultValue=error;
+//                if([error code] == NSURLErrorCancelled)  {
+//                    return;
+//                }
             }else{
                  resultValue=[NSString stringWithFormat:@"%@",responseObject];
                 /*

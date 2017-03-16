@@ -50,6 +50,7 @@
 @interface EMCartSubmitViewController ()<EMCartBottomViewDelegate,EMShoppingAddressListControllerDelegate,ChoosePayViewDelegate,PayPalPaymentDelegate>
 {
     EMOrderModel *orderModel ;
+    NSString *getAppJson ;
 }
 @property (nonatomic,strong)__block EMShopAddressModel *addressModel;
 @property (nonatomic,strong)EMCartBottomView *bottomView;
@@ -102,6 +103,7 @@
         _payPalConfig.languageOrLocale = [NSLocale preferredLanguages][0];
         _payPalConfig.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal ;
         self.PayEnvironment = kPayPalEnvironment ;
+        NSLog(@"PayPal environment = %@",self.PayEnvironment) ;
         self.successView.hidden = YES ;
         NSLog(@"PayPal iOS SDK version: %@", [PayPalMobile libraryVersion]);
     }
@@ -120,7 +122,7 @@
 - (EMCartChoosePayView *)createChoosePayView
 {
     if (!_choosePayView) {
-        self.choosePayView = [[EMCartChoosePayView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, ChoosePayViewHeight) withTitle:@"请选择支付方式"] ;
+        self.choosePayView = [[EMCartChoosePayView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, ChoosePayViewHeight) withTitle:@"请选择支付方式" withType:1] ;
         CGFloat totlePrice = [self totalPrice] ;
         self.choosePayView.totalPrice = totlePrice ;
         self.choosePayView.delegate = self ;
@@ -454,9 +456,6 @@
             
             [self showChoosePayView] ;
             
-//            EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber];
-//            payController.hidesBottomBarWhenPushed=YES;
-//            [weakSelf.navigationController pushViewController:payController animated:YES];
         }else{
             [weakSelf.view showHUDMessage:responseResult.responseMessage];
         }
@@ -468,20 +467,18 @@
 #pragma mark - PayPal支付提交
 - (void)submitOrderWithPayPal
 {
-    //[self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
     self.PayResulText = nil ;
     NSMutableArray *itemsArray = [NSMutableArray array] ;
     for (int i = 0; i < self.dataSourceArray.count; i++) {
         EMShopCartModel *model = self.dataSourceArray[i] ;
-        PayPalItem *item = [PayPalItem itemWithName:model.goodsName withQuantity:model.buyCount withPrice:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",model.promotionPrice]] withCurrency:@"USD" withSku:[NSString stringWithFormat:@"%ld-%ld",(long)[RI userID],(long)model.cartID]] ;
+        PayPalItem *item = [PayPalItem itemWithName:model.goodsName withQuantity:model.buyCount withPrice:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",model.promotionPrice]] withCurrency:@"AUD" withSku:[NSString stringWithFormat:@"%ld-%ld",(long)[RI userID],(long)model.cartID]] ;
         [itemsArray addObject:item] ;
     }
     NSDecimalNumber *subTotal = [PayPalItem totalPriceForItems:itemsArray] ;
     NSDecimalNumber *shipping = [NSDecimalNumber decimalNumberWithString:@"0.00"] ;
     CGFloat totlePrice = [self totalPrice] ;
-    CGFloat feePrice = totlePrice * 0.015 + 0.3 ;
+    CGFloat feePrice = totlePrice * 0.026 + 0.3 ;
     NSString *fee = [NSString stringWithFormat:@"%.2f",feePrice] ;
-    // totlePrice = totlePrice + [fee floatValue] ;
     NSDecimalNumber *tax = [NSDecimalNumber decimalNumberWithString:fee] ;
     
     PayPalPaymentDetails *paymentDetails = [PayPalPaymentDetails paymentDetailsWithSubtotal:subTotal withShipping:shipping withTax:tax] ;
@@ -489,7 +486,7 @@
     
     PayPalPayment *payment = [[PayPalPayment alloc] init] ;
     payment.amount = total ;
-    payment.currencyCode = @"USD" ;
+    payment.currencyCode = @"AUD" ;
     payment.shortDescription = @"嗨吃Go购物" ;
     payment.items = itemsArray ;
     payment.paymentDetails = paymentDetails ;
@@ -509,20 +506,23 @@
     NSLog(@"点击了提交订单按钮") ;
     [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
     //[self showChoosePayView] ;
-    
 }
 
 #pragma mark - ChoosePayViewDelegate
 - (void)choosePayBtn:(UIButton *)button indexRow:(NSInteger)index totalPrice:(CGFloat)totalprice
 {
-    
+    [self upOrderOfOrderID:orderModel.orderID type:index+1] ;
     if (index == 0) {
         NSLog(@"选择了PayPal支付 支付了：%.2f",totalprice) ;
         [self submitOrderWithPayPal] ;
     }
     else if (index == 1)
     {
+        WEAKSELF
         NSLog(@"选择了微信支付 支付了：%.2f",totalprice) ;
+        EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber titleLabel:@"微信支付" index:1];
+        payController.hidesBottomBarWhenPushed=YES;
+        [weakSelf.navigationController pushViewController:payController animated:YES];
     }else
     {
         WEAKSELF
@@ -582,6 +582,8 @@
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic] ;
 }
 
+
+#pragma mark - 提交PayPal订单
 - (void)paypalWithOrderID:(NSInteger)orderID Confirmation:(NSDictionary *)confirmation
 {
     NSData *data = [NSJSONSerialization dataWithJSONObject:confirmation options:NSJSONWritingPrettyPrinted error:nil] ;
@@ -590,7 +592,7 @@
     NSString *oid = [NSString stringWithFormat:@"%ld",(long)orderID] ;
     
     CGFloat totlePrice = [self totalPrice] ;
-    CGFloat feePrice = totlePrice * 0.015 + 0.3 ;
+    CGFloat feePrice = totlePrice * 0.026 + 0.3 ;
     NSString *fee = [NSString stringWithFormat:@"%.2f",feePrice] ;
     
     NSDictionary *parameters = @{@"item":jsonStr,
@@ -599,15 +601,20 @@
     NSLog(@"parameters:%@",parameters) ;
     
     
-    NSString *getAppJson = [[NSString alloc] init] ;
-    if ([kPayPalEnvironment isEqualToString:@"PayPalEnvironmentNoNetwork"]) {
-        getAppJson = @"http://www.tulip.city:7080/shop_server/paypal" ;
+    getAppJson = [[NSString alloc] init] ;
+    
+    NSLog(@"%@",self.PayEnvironment) ;
+    if ([self.PayEnvironment isEqualToString:@"sandbox"])
+    {
+        NSLog(@"yes!") ;
+        getAppJson = @"http://www.tulip.city:82/shop_server/paypal" ;
     }
     else
     {
+        NSLog(@"NO!") ;
         getAppJson = @"http://www.hichigo.com.au:8081/paypal" ;
     }
-    
+    NSLog(@"%@",getAppJson) ;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager] ;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer] ;
@@ -623,9 +630,9 @@
             NSDictionary *dic = result ;
             NSLog(@"通知:%@",dic) ;
             NSInteger code = [dic[@"code"] integerValue] ;
-            NSString *titlelable = dic[@"message"] ;
+            NSString *titlelable = [NSString stringWithFormat:@"PayPal:%@",dic[@"message"]];
             if (code == 100) {
-                titlelable = dic[@"data"] ;
+                titlelable =[NSString stringWithFormat:@"PayPal:%@",dic[@"data"]] ;
             }
             EMCartPayViewController *payController=[[EMCartPayViewController alloc]  initWithTotalPrice:orderModel.payPrice-orderModel.discountPrice  orderNum:orderModel.orderNumber titleLabel:titlelable index:0];
             payController.hidesBottomBarWhenPushed=YES;
@@ -637,28 +644,54 @@
         [weakSelf.view dismissHUDLoading] ;
         [weakSelf.view showHUDMessage:[NSString stringWithFormat:@"%@",error]] ;
     }] ;
+}
+
+#pragma mark - 确定订单型号
+- (void)upOrderOfOrderID:(NSInteger)orderID type:(NSInteger)type
+{
+    NSString *oid = [NSString stringWithFormat:@"%ld",(long)orderID] ;
+    NSString *typeStr = [NSString stringWithFormat:@"%ld",(long)type] ;
+    NSDictionary *parameters = @{@"payType":typeStr,
+                                 @"oid":oid
+                                 } ;
+    NSLog(@"parameters:%@",parameters) ;
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    
-//    NSString *getAppJson = @"http://www.tulip.city:8090/paypal" ;
-//    
-//    [manager POST:getAppJson parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
-//     {
-//         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] ;
-//         //获取字典中的值
-//         if ([result isKindOfClass:[NSDictionary class]])
-//         {
-//             NSDictionary *dic = result ;
-//             NSLog(@"通知:%@",dic) ;
-//         }
-//         
-//     }
-//          failure:^(AFHTTPRequestOperation *operation, NSError *error)
-//     {
-//         NSLog(@"Error: %@", error);
-//     }];
-//
+    NSLog(@"%@",self.PayEnvironment) ;
+    NSString *requestUrl = [NSString string] ;
+    if ([self.PayEnvironment isEqualToString:@"sandbox"])
+    {
+        NSLog(@"yes!") ;
+        requestUrl = @"http://180.153.58.144:8081/payment/updatePayType" ;
+    }
+    else
+    {
+        NSLog(@"NO!") ;
+        requestUrl = @"http://www.hichigo.com.au:8081/payment/updatePayType" ;
+    }
+    NSLog(@"%@",requestUrl) ;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager] ;
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer] ;
+    
+    WEAKSELF
+    [self.view showHUDLoading];
+    [manager POST:requestUrl parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf.view dismissHUDLoading] ;
+        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil] ;
+        // 获取字典中的值
+        if ([result isKindOfClass:[NSDictionary class]])
+        {
+            NSDictionary *dic = result ;
+            NSLog(@"通知:%@",dic) ;
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error: %@", error);
+        [weakSelf.view dismissHUDLoading] ;
+        [weakSelf.view showHUDMessage:[NSString stringWithFormat:@"%@",error]] ;
+
+    }] ;
+
+
 }
 /*
  #pragma mark - Navigation

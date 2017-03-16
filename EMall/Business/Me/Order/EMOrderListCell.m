@@ -51,7 +51,7 @@ UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong)UIView *bgView;
 @property (nonatomic,strong)UIImageView *checkImageView;
 //goodsNameLabel,*countLabel,*goodsImageView,
-@property (nonatomic,strong)UILabel *priceLabel,*orderNumLabel,*orderTimeLabel;
+@property (nonatomic,strong)UILabel *priceLabel,*orderNumLabel,*orderTimeLabel,*payTypeLabel;
 @property (nonatomic,strong)UIButton *reBuyButton,*detailButton;
 @property (nonatomic,strong)UICollectionView *myCollectionView;
 
@@ -101,29 +101,33 @@ UICollectionViewDelegateFlowLayout>
     [_bgView addSubview:lineView0];
     
     _priceLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentRight];
-    [_bgView addSubview:_priceLabel];
+    [_bgView addSubview:_priceLabel] ;
+    
+    _payTypeLabel=[UILabel labelWithText:@"" font:font textColor:color textAlignment:NSTextAlignmentLeft];
+    _payTypeLabel.adjustsFontSizeToFitWidth=YES;
+    [_bgView addSubview:_payTypeLabel] ;
     
     UIView *lineView1=[UIView new];
     lineView1.backgroundColor=RGB(225, 225, 225);
     [_bgView addSubview:lineView1];
 
-    UIColor *rebuyColor=[UIColor colorWithHexString:@"#e51e0e"];
-    _reBuyButton=[UIButton buttonWithTitle:@"  " titleColor:rebuyColor font:font];
-    _reBuyButton.layer.cornerRadius=5.0;
-    _reBuyButton.layer.masksToBounds=YES;
-    _reBuyButton.layer.borderColor=[rebuyColor CGColor];
-    _reBuyButton.layer.borderWidth=1.0;
-    [_reBuyButton addTarget:self action:@selector(didReBuyButtonPressed ) forControlEvents:UIControlEventTouchUpInside];
-    _reBuyButton.hidden=YES;
-    [_bgView addSubview:_reBuyButton];
-    
-    _detailButton=[UIButton buttonWithTitle:@"查看订单" titleColor:color font:font];
-    _detailButton.layer.cornerRadius=5.0;
-    _detailButton.layer.masksToBounds=YES;
-    _detailButton.layer.borderColor=[color CGColor];
-    _detailButton.layer.borderWidth=1.0;
-    [_detailButton addTarget:self action:@selector(didCheckOrderDetailButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [_bgView addSubview:_detailButton];
+    UIColor *rebuyColor=[UIColor colorWithHexString:@"#e51e0e"] ;
+    _reBuyButton=[UIButton buttonWithTitle:@"继续支付" titleColor:rebuyColor font:font] ;
+    _reBuyButton.layer.cornerRadius=5.0  ;
+    _reBuyButton.layer.masksToBounds=YES ;
+    _reBuyButton.layer.borderColor=[rebuyColor CGColor] ;
+    _reBuyButton.layer.borderWidth=1.0 ;
+    [_reBuyButton addTarget:self action:@selector(didReBuyButtonPressed) forControlEvents:UIControlEventTouchUpInside] ;
+    _reBuyButton.hidden=YES ;
+    [_bgView addSubview:_reBuyButton] ;
+
+    _detailButton=[UIButton buttonWithTitle:@"查看订单" titleColor:color font:font] ;
+    _detailButton.layer.cornerRadius=5.0 ;
+    _detailButton.layer.masksToBounds=YES ;
+    _detailButton.layer.borderColor=[color CGColor] ;
+    _detailButton.layer.borderWidth=1.0 ;
+    [_detailButton addTarget:self action:@selector(didCheckOrderDetailButtonPressed) forControlEvents:UIControlEventTouchUpInside] ;
+    [_bgView addSubview:_detailButton] ;
     
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, OCUISCALE(5), 0));
@@ -134,12 +138,13 @@ UICollectionViewDelegateFlowLayout>
         make.left.mas_equalTo(weakSelf.bgView.mas_left).offset(kEMOffX);
         make.right.mas_equalTo(weakSelf.bgView.mas_centerX);
     }];
+    
     [_orderTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.orderNumLabel.mas_right);
         make.top.mas_equalTo(weakSelf.orderNumLabel.mas_top);
         make.right.mas_equalTo(weakSelf.bgView.mas_right).offset(-kEMOffX);
     }];
-    [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.orderNumLabel.mas_left);
         make.top.mas_equalTo(weakSelf.orderNumLabel.mas_bottom).offset(10);
         make.right.mas_equalTo(weakSelf.checkImageView.mas_left).offset(-10);
@@ -165,23 +170,47 @@ UICollectionViewDelegateFlowLayout>
         make.top.mas_equalTo(weakSelf.priceLabel.mas_bottom).offset(OCUISCALE(10));
         make.height.mas_equalTo(0.5);
     }];
-    [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
+    
+    [_payTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
-//        make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
-        make.size.mas_equalTo(CGSizeMake(OCUISCALE(0), OCUISCALE(0)));
-      
+        make.left.mas_equalTo(weakSelf.bgView.mas_left).offset(kEMOffX);
+        make.right.mas_equalTo(weakSelf.bgView.mas_centerX);
+    }] ;
+    
+    [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
+        make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
+       // make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
+        make.right.mas_equalTo(weakSelf.detailButton.mas_left).offset(OCUISCALE(-12));
+        
     }];
     [_detailButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(66), OCUISCALE(21)));
-              make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
-            make.right.mas_equalTo(weakSelf.reBuyButton.mas_left).offset(OCUISCALE(-12));
-          make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-10)).priorityHigh();
+        make.top.mas_equalTo(lineView1.mas_bottom).offset(OCUISCALE(10));
+        make.right.mas_equalTo(weakSelf.checkImageView.mas_right);
+        make.bottom.mas_equalTo(weakSelf.bgView.mas_bottom).offset(OCUISCALE(-10)).priorityHigh();
     }];
 }
 
 -(void)setOrderModel:(EMOrderModel *)orderModel{
     _orderModel=orderModel;
+    NSLog(@"======type1:%@=====",_orderModel.pay_type) ;
+    if ([_orderModel.pay_type isEqualToString:@"PAY_PAL"]) {
+        NSLog(@"========type2:%@=======",_orderModel.pay_type) ;
+       // _reBuyButton.hidden = NO ;
+        _payTypeLabel.text = @"PayPal支付" ;
+    }
+    else if ([_orderModel.pay_type isEqualToString:@"PAY_WX"])
+    {
+        _payTypeLabel.text = @"微信支付" ;
+    }
+    else if ([_orderModel.pay_type isEqualToString:@"BANK_CARD"]){
+        _payTypeLabel.text = @"转账汇款" ;
+    }
+    else{
+        _payTypeLabel.text = nil ;
+    }
+
     if (_orderModel.orderState==EMOrderStateUnSigned) {
         if (_reBuyButton.hidden) {
             WEAKSELF
@@ -195,6 +224,7 @@ UICollectionViewDelegateFlowLayout>
             _reBuyButton.hidden=NO;
         }
     }
+    
     [self.myCollectionView reloadData];
     self.orderNumLabel.text=_orderModel.orderNumber;
     _orderTimeLabel.text=_orderModel.subitTime;
@@ -235,14 +265,16 @@ UICollectionViewDelegateFlowLayout>
 
 
 - (void)didReBuyButtonPressed{
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kEMOrderShoudBuyAgainEvent object:self.orderModel];
-//    [[self nextResponder]routerEventName:kEMOrderShoudBuyAgainEvent userInfo:@{kEMOrderShoudBuyAgainEvent:self.orderModel}];
     if (self.orderModel.orderState==EMOrderStateUnSigned) {
         if (_delegate&&[_delegate respondsToSelector:@selector(updateOrderState:state:)]) {
             [_delegate updateOrderState:self.orderModel state:EMOrderStateFinished];
         }
     }
-  
+    
+//    if (_delegate&&[_delegate respondsToSelector:@selector(orderListCellShouldReBuyThisGoods)]) {
+//        <#statements#>
+//    }
+    
 }
 
 - (void)didCheckOrderDetailButtonPressed{

@@ -168,7 +168,8 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset{
     MBProgressHUD *hudView=[self hudView];
     hudView.mode=MBProgressHUDModeText;
-    [hudView setLabelText:message];
+    //[hudView setLabelText:message];
+    [hudView setDetailsLabelText:message] ;
     hudView.yOffset=yOffset;
     [hudView show:YES];
     [hudView hide:YES afterDelay:1.5];
@@ -182,7 +183,7 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
 -(void)showHUDLoadingWithMessage:(NSString *)message{
     MBProgressHUD *hudView=[self hudView];
     hudView.mode=MBProgressHUDModeIndeterminate;
-    hudView.labelText=message;
+    hudView.detailsLabelText=message;
     [hudView show:YES];
 }
 -(void)dismissHUDLoading{

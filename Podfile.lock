@@ -27,7 +27,6 @@ PODS:
   - DACircularProgress (2.3.1)
   - FXBlurView (1.6.4)
   - JSBadgeView (1.4.1)
-  - JSPatchSDKPod (1.6)
   - Mantle (2.0.7):
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
@@ -56,7 +55,7 @@ PODS:
   - TPKeyboardAvoiding (1.3)
   - UICollectionViewLeftAlignedLayout (1.0.2)
   - UITableView+FDTemplateLayoutCell (1.4)
-  - UMengAnalytics-NO-IDFA (4.1.1)
+  - UMengAnalytics-NO-IDFA (4.2.5)
 
 DEPENDENCIES:
   - AESCrypt (~> 0.0.1)
@@ -64,7 +63,6 @@ DEPENDENCIES:
   - CocoaLumberjack (~> 2.3.0)
   - FXBlurView (~> 1.6.4)
   - JSBadgeView (~> 1.4.1)
-  - JSPatchSDKPod (~> 1.6)
   - Mantle (~> 2.0.2)
   - Masonry (~> 0.5.3)
   - MBProgressHUD (~> 0.9)
@@ -79,7 +77,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.3)
   - UICollectionViewLeftAlignedLayout (~> 1.0.2)
   - UITableView+FDTemplateLayoutCell (~> 1.3)
-  - UMengAnalytics-NO-IDFA (~> 4.1.1)
+  - UMengAnalytics-NO-IDFA (~> 4.2.5)
 
 SPEC CHECKSUMS:
   AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
@@ -89,7 +87,6 @@ SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
-  JSPatchSDKPod: c9348d0c27c77a97a73ec93df18df4da7908e85b
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
   Masonry: 9f515466afe48632562342a40a1c224071a1a022
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -104,8 +101,8 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UICollectionViewLeftAlignedLayout: 830bf6fa5bab9f9b464f62e3384f9d2e00b3c0f6
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
-  UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
 
-PODFILE CHECKSUM: 3286f5def0a2b83b24e9f0d9cb51b4b7cb973f8a
+PODFILE CHECKSUM: e2ec11fee51de8c8613369db6cca446aa86743db
 
 COCOAPODS: 1.1.1

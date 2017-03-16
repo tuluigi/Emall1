@@ -19,6 +19,7 @@
              @"orderState":@"state",
              @"subitTime":@"create_time",
              @"payTime":@"pay_time",
+             @"pay_type":@"pay_type",
              @"remarks":@"remark",
              @"totalPrice":@"total_amount",
              @"payPrice":@"actual_pay_amounts",

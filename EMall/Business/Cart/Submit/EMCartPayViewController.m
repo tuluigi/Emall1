@@ -19,6 +19,7 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 @property (nonatomic,copy)NSString *orderNum;
 @property (nonatomic,copy)NSString *titleLabel;
 @property (nonatomic,assign)NSInteger index;
+@property (nonatomic,assign)CGFloat cellHeight;
 @end
 
 @implementation EMCartPayViewController
@@ -40,7 +41,22 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     [self.navigationItem setHidesBackButton:YES];;
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didDoneBarButtonPress)];
     [self.tableView reloadData];
+    if (self.index != 0) {
+        UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QRImage"]] ;
+        [self.view addSubview:qrcodeImageView] ;
+        WEAKSELF
+        [qrcodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(weakSelf.view.mas_centerX) ;
+            if (self.index == 1) {
+                make.top.mas_equalTo(weakSelf.tableView.mas_top).offset(_cellHeight-80) ;
+            }
+            else{
+                make.top.mas_equalTo(weakSelf.tableView.mas_top).offset(_cellHeight-160) ;
+            }
+        }] ;
+    }
 }
+
 - (void)didDoneBarButtonPress{
     NSArray *viewControlelrs=self.navigationController.viewControllers;
     UIViewController *targetController;
@@ -56,6 +72,7 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
          [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,6 +84,7 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     NSInteger count=3;
     return count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *aCell;
     if (indexPath.row==0) {
@@ -128,13 +146,19 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     if (indexPath.row==0) {
         height=OCUISCALE(60);
     }else if(indexPath.row==2){
-
-        height=[tableView fd_heightForCellWithIdentifier:kPayInfollIdenfier configuration:^(id cell) {
-//            [(EMCartPayCell *)cell setShopCartModel:cartModel];
-        }];
+        if (self.index == 1) {
+            height = 80 ;
+        }
+        else{
+//            height=[tableView fd_heightForCellWithIdentifier:kPayInfollIdenfier configuration:^(id cell) {
+////            [(EMCartPayCell *)cell setShopCartModel:cartModel];
+//        }];
+            height = 160 ;
+        }
     }else{
         height=44;
     }
+    _cellHeight += height ;
     return height;
 }
 

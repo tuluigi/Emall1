@@ -18,13 +18,14 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
 
 @implementation EMCartChoosePayView
 
-- (UIView *)initWithFrame:(CGRect)frame withTitle:(NSString *)title
+- (UIView *)initWithFrame:(CGRect)frame withTitle:(NSString *)title withType:(NSInteger)type
 {
     self = [super initWithFrame:frame] ;
     if (self) {
         self.backgroundColor = [UIColor clearColor] ;
         
         [self layOutUIWith:title] ;
+        _type = type ;
     }
     return self ;
 }
@@ -50,10 +51,10 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
     
     UILabel *headTitleLabel = [UILabel labelWithText:title font:[UIFont oc_systemFontOfSize:14.0f] textAlignment:NSTextAlignmentLeft];
     
-//    headTitleLabel.font = [UIFont systemFontOfSize:14.0f];
-//    headTitleLabel.textColor = [UIColor redColor];
-//    headTitleLabel.text = title;
-//    headTitleLabel.textAlignment = NSTextAlignmentLeft;
+    //    headTitleLabel.font = [UIFont systemFontOfSize:14.0f];
+    //    headTitleLabel.textColor = [UIColor redColor];
+    //    headTitleLabel.text = title;
+    //    headTitleLabel.textAlignment = NSTextAlignmentLeft;
     [_backgroundView addSubview:headTitleLabel];
     
     [headTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,13 +76,13 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
 
 - (void)submitChoose:(UIButton *)sender
 {
-    if (self.indexPathRow == 1) {
-        [self showHUDMessage:@"暂不支持微信支付！"] ;
-    }else
-    {
-        [self upDownSelf] ;
-    }
-    
+    //    if (self.indexPathRow == 1) {
+    //       // [self showHUDMessage:@"暂不支持微信支付！"] ;
+    //    }else
+    //    {
+    //        [self upDownSelf] ;
+    //    }
+    [self upDownSelf] ;
     if (self.delegate && [self.delegate respondsToSelector:@selector(choosePayBtn:indexRow:totalPrice:)]) {
         [self.delegate choosePayBtn:sender indexRow:self.indexPathRow totalPrice:submitPrice] ;
     }
@@ -96,13 +97,15 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
     }] ;
 }
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch = [touches anyObject] ;
-//    if (touch.view.frame.origin.y < ChoosePayViewHeight) {
-//        [self upDownSelf] ;
-//    }
-//}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (_type != 1) {
+        UITouch *touch = [touches anyObject] ;
+        if (touch.view.frame.origin.y < ChoosePayViewHeight) {
+            [self upDownSelf] ;
+        }
+    }
+}
 
 #pragma mark - tableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -118,29 +121,30 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *chooseCell;
+    UITableViewCell *chooseCell ;
     EMCartChoosePayCell *cell = [tableView dequeueReusableCellWithIdentifier:ChoosePayCellIdenfier] ;
     cell.delegate = self ;
-    if (self.indexPathRow == indexPath.row) {
+    if (self.indexPathRow == indexPath.row)
+    {
         cell.chooseBtn.selected = YES ;
     }
     else
     {
         cell.chooseBtn.selected = NO ;
     }
- 
+    
     if (self.indexPathRow == 0) {
-       
         
         
-        CGFloat myFee = self.totalPrice * 0.015 + 0.3 ;
-       // myFee = [self roundFloat:myFee] ;
+        
+        CGFloat myFee = self.totalPrice * 0.026 + 0.3 ;
+        // myFee = [self roundFloat:myFee] ;
         fee = [NSString stringWithFormat:@"%.2f",myFee] ;
         
         submitPrice = self.totalPrice + [fee floatValue] ;
         NSLog(@"========================支付一%f=======================",submitPrice) ;
         NSLog(@"========================支付二%.2f=======================",submitPrice) ;
-
+        
     }
     else
     {
@@ -151,23 +155,23 @@ static NSString *const ChoosePayCellIdenfier = @"ChoosePayCellIdenfier";
     switch (indexPath.row) {
         case 0:
             [cell setIconImage:@"cart_paypal_icon" withTitle:@"PayPal支付" forIndex:indexPath.row withFee:fee] ;
-            break;
+            break ;
         case 1:
             [cell setIconImage:@"cart_weixin_icon" withTitle:@"微信支付" forIndex:indexPath.row withFee:fee] ;
-            break;
+            break ;
         case 2:
             [cell setIconImage:@"cart_huikuan_icon" withTitle:@"转账汇款" forIndex:indexPath.row withFee:fee] ;
-            break;
+            break ;
             
         default:
-            break;
+            break ;
     }
     chooseCell = cell ;
     return chooseCell ;
 }
 
 -(CGFloat)roundFloat:(CGFloat)price{
-    return (price*100 + 0.5)/100;
+    return (price*100 + 0.5)/100 ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -19,6 +19,7 @@
 {
     CGFloat submitPrice ;
     NSString *fee ;
+    NSInteger _type;
 }
 @property(nonatomic, strong) id<ChoosePayViewDelegate> delegate ;
 @property(nonatomic, strong) UIView *backgroundView ;
@@ -27,6 +28,7 @@
 @property(nonatomic, assign) CGFloat totalPrice ;
 @property(nonatomic, assign) NSInteger indexPathRow ;
 
-- (UIView *)initWithFrame:(CGRect)frame withTitle:(NSString *)title ;
+- (UIView *)initWithFrame:(CGRect)frame withTitle:(NSString *)title withType:(NSInteger)type ;
+
 
 @end

@@ -16,6 +16,7 @@
 - (void)orderListCellShouldCheckOrderDetail;
 
 - (void)updateOrderState:(EMOrderModel *)orderModel state:(NSInteger)state;
+
 @end
 
 @interface EMOrderListCell : UITableViewCell

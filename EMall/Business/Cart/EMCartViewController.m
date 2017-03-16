@@ -323,7 +323,8 @@
     NSArray *selectArray=[self.dataSourceArray filteredArrayUsingPredicate:preicate];
     
     WEAKSELF
-    if (bottomView.isDelete) {//删除购物车
+    if (bottomView.isDelete) {
+        //删除购物车
         if (selectArray.count) {
             UIAlertController *alertController=[UIAlertController alertControllerWithTitle:@"确定要删除选中的商品么？" message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -339,7 +340,8 @@
             [self presentViewController:alertController animated:YES completion:^{
             }];
         }
-    }else{//提交购物车
+    }else{
+        //提交购物车
         if (selectArray.count) {
             EMCartSubmitViewController *submitController=[[EMCartSubmitViewController alloc]  init];
             submitController.cartArray=selectArray;

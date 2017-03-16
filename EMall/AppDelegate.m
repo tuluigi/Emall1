@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "OCRootTabbarController.h"
 #import <UMMobClick/MobClick.h>
-#import <JSPatch/JSPatch.h>
 
 //ShareSDK
 #import <ShareSDK/ShareSDK.h>
@@ -57,10 +56,10 @@
     //先获取当前工程项目版本号
     NSDictionary *infoDic=[[NSBundle mainBundle] infoDictionary];
     NSString *currentVersion=infoDic[@"CFBundleShortVersionString"];
-    
     //从网络获取appStore版本号
     NSError *error;
-    NSData *response = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",STOREAPPID]]] returningResponse:nil error:nil];
+    NSData *response = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",STOREAPPID]]] returningResponse:nil error:nil];
+    
     if (response == nil) {
         NSLog(@"你没有连接网络哦");
         return;
@@ -79,32 +78,42 @@
     //当前版本号小于商店版本号,就更新
     if([currentVersion floatValue] < [appStoreVersion floatValue])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",appStoreVersion] delegate:self cancelButtonTitle:@"取消"otherButtonTitles:@"更新",nil];
-        [alert show];
+        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",appStoreVersion] preferredStyle:UIAlertControllerStyleAlert] ;
+        
+        [alter addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"取消") ;
+        }]] ;
+        [alter addAction:[UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //此处加入应用在app store的地址，方便用户去更新：
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?ls=1&mt=8", STOREAPPID]];
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }]] ;
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alter animated:YES completion:nil] ;
+       // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",appStoreVersion] delegate:self cancelButtonTitle:@"取消"otherButtonTitles:@"更新",nil];
+        //[alert show];
     }else{
         NSLog(@"版本号好像比商店大噢!检测到不需要更新");
     }
     
 }
-//更新选择器
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    //实现跳转到应用商店进行更新
-    if(buttonIndex==1)
-    {
-        //此处加入应用在app store的地址，方便用户去更新：
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/us/app/id%@?ls=1&mt=8", STOREAPPID]];
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
+////更新选择器
+//- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    //实现跳转到应用商店进行更新
+//    if(buttonIndex==1)
+//    {
+//        //此处加入应用在app store的地址，方便用户去更新：
+//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?ls=1&mt=8", STOREAPPID]];
+//        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+//    }
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self customeApperance];
     self.window=[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [JSPatch startWithAppKey:@"52e17c323a124e6a"];
-    [JSPatch setupHttps];
-    [JSPatch sync];
+
     
     
 /*

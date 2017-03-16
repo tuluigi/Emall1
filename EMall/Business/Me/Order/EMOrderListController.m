@@ -10,13 +10,16 @@
 #import "EMOrderListCell.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "EMOrderNetService.h"
+
 @interface EMOrderListController ()<EMOrderListCellDelegate,UIGestureRecognizerDelegate,EMOrderListCellDelegate>
 
 @end
 
 @implementation EMOrderListController
+
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
     self.tableView.separatorStyle=UITableViewCellSelectionStyleNone;
     [self.tableView registerClass:[EMOrderListCell class] forCellReuseIdentifier:NSStringFromClass([EMOrderListCell class])];
 
@@ -31,6 +34,8 @@
     }];
     [self.tableView startPullDownRefresh];
 }
+
+
 - (void)setOrderState:(EMOrderState)orderState{
     _orderState=orderState;
 }
@@ -130,7 +135,8 @@
 - (void)orderListCellShouldReBuyThisGoods{
     
 }
-- (void)updateOrderState:(EMOrderModel *)orderModel state:(NSInteger)state{
+- (void)updateOrderState:(EMOrderModel *)orderModel state:(NSInteger)state
+{
     [self updateOrderStateWithOrderModel:orderModel state:state];
 }
 //查看订单详情
