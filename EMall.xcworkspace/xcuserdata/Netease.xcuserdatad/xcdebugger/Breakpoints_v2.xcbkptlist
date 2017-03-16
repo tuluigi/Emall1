@@ -13,5 +13,101 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Models/NetService/EMOrderNetService.m"
+            timestampString = "511348350.435214"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "+getOrderStateNumWithUserID:onCompletionBlock:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
+                  timestampString = "511348350.702249"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "280">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
+                  timestampString = "511348350.703531"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EMall/Models/NetService/EMOrderNetService.m"
+            timestampString = "511348351.499314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "+getOrderStateNumWithUserID:onCompletionBlock:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
+                  timestampString = "511348351.72759"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke_2"
+                  moduleName = "EMall"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
+                  timestampString = "511348351.729341"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -210,8 +210,9 @@ UICollectionViewDelegateFlowLayout>
     else{
         _payTypeLabel.text = nil ;
     }
-
+    _detailButton.hidden=NO;
     if (_orderModel.orderState==EMOrderStateUnSigned) {
+        _detailButton.hidden=YES;
         if (_reBuyButton.hidden) {
             WEAKSELF
             [_reBuyButton mas_makeConstraints:^(MASConstraintMaker *make) {

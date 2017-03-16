@@ -359,6 +359,8 @@
     _quantityLabel=[UILabel labelWithText:@"" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentRight];
     _quantityLabel.textColor=textColor;
     _quantityLabel.adjustsFontSizeToFitWidth=YES;
+    //V1.9库存不显示
+    _quantityLabel.hidden=YES;
     [self addSubview:_quantityLabel];
     
     UIView *lineView0=[UIView new];
@@ -487,6 +489,7 @@
 - (void)reSetGoodsPriceWithGoodsInfoModel:(EMGoodsInfoModel *)infoModel{
     
     _priceLabel.attributedText=[NSAttributedString goodsPriceAttrbuteStringWithPrice:infoModel.goodsPrice promotePrice:infoModel.promotionPrice];
+    /*
     if (infoModel.quantity<=0) {
         _quantityLabel.text=@"无货";
     }else if (infoModel.quantity<10) {//小于20件才有提示
@@ -494,7 +497,7 @@
     }else{
         _quantityLabel.text=@"";
     }
-    
+    */
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.keysArray.count;

@@ -8,7 +8,7 @@
 
 #import "OCUIUtil.h"
 
-static CGFloat OCUISCALE =0;
+static CGFloat OCUISCALE =1;
 
 @implementation OCUIUtil
 /**
@@ -43,16 +43,6 @@ static CGFloat OCUISCALE =0;
 }
 + (CGFloat)ocCommentScale{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        if ((!OCUISCALE)||(0.5>OCUISCALE)||(OCUISCALE>2)) {
-            CGFloat scale=1;
-            UIInterfaceOrientation interfaceOrientataion = [[UIApplication sharedApplication] statusBarOrientation];
-            if (interfaceOrientataion== UIInterfaceOrientationLandscapeLeft || interfaceOrientataion == UIInterfaceOrientationLandscapeRight) {
-                scale=([UIScreen mainScreen].bounds.size.height)/375.0f;
-            }else{
-                scale=([UIScreen mainScreen].bounds.size.width)/375.0f;
-            }
-            OCUISCALE=scale;
-        }
         return OCUISCALE;
     }else{
         return 1;

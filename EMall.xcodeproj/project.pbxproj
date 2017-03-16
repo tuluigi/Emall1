@@ -1968,7 +1968,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1992,7 +1992,7 @@
 				MODULEMAP_PRIVATE_FILE = EMall;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
+				PROVISIONING_PROFILE = "1e3f7a26-a854-446a-8ef7-1fea90e8374a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2035,7 +2035,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULEMAP_PRIVATE_FILE = EMall;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
+				PROVISIONING_PROFILE = "232721e0-24ad-47f2-82c9-a715b12fa681";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -2050,8 +2050,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EMall/EMall.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ping Jin (NDDKUXYDGE)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ping Jin (THYCA9F3W3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ping Jin (THYCA9F3W3)";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = NDDKUXYDGE;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2072,8 +2072,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
-				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDistribution;
+				PROVISIONING_PROFILE = "1e3f7a26-a854-446a-8ef7-1fea90e8374a";
+				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDevelopementProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
@@ -2110,8 +2110,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.haichigo.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ff798cc-d871-4593-a4b9-afae3d903b48";
-				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDistribution;
+				PROVISIONING_PROFILE = "232721e0-24ad-47f2-82c9-a715b12fa681";
+				PROVISIONING_PROFILE_SPECIFIER = HaiChiGoDevelopementProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "EMall/EMall-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
