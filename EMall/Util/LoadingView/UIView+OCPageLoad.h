@@ -81,6 +81,7 @@
 -(void)showHUDMessage:(NSString *)message completionBlock:(void (^)())completionBlock;
 -(void)showHUDMessage:(NSString *)message;
 -(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset;
+-(void)showHUDMessage:(NSString *)message yOffset:(CGFloat)yOffset duration:(CGFloat)duration;
 -(void)showHUDLoading;
 -(void)showHUDLoadingWithMessage:(NSString *)message;
 -(void)dismissHUDLoading;

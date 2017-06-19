@@ -19,92 +19,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMOrderNetService.m"
-            timestampString = "511348350.435214"
+            filePath = "EMall/Business/Cart/Submit/EMCartPayViewController.m"
+            timestampString = "519550701.622947"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "+getOrderStateNumWithUserID:onCompletionBlock:"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]"
+                  symbolName = "-[EMCartPayViewController viewDidLoad]"
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
-                  timestampString = "511348350.702249"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Business/Cart/Submit/EMCartPayViewController.m"
+                  timestampString = "519551223.358613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "280">
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "763">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke"
+                  symbolName = "__38-[EMCartPayViewController viewDidLoad]_block_invoke"
                   moduleName = "EMall"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
-                  timestampString = "511348350.703531"
+                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Business/Cart/Submit/EMCartPayViewController.m"
+                  timestampString = "519551223.361478"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EMall/Models/NetService/EMOrderNetService.m"
-            timestampString = "511348351.499314"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "+getOrderStateNumWithUserID:onCompletionBlock:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
-                  timestampString = "511348351.72759"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "114"
-                  endingLineNumber = "114"
-                  offsetFromSymbolStart = "128">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66+[EMOrderNetService getOrderStateNumWithUserID:onCompletionBlock:]_block_invoke_2"
-                  moduleName = "EMall"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Netease/Documents/Luigi/%E5%97%A8%E5%90%83/EMall/EMall/Models/NetService/EMOrderNetService.m"
-                  timestampString = "511348351.729341"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "114"
-                  endingLineNumber = "114"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>
