@@ -11,6 +11,8 @@
 #import "EMCartPayCell.h"
 #import "EMCartViewController.h"
 #import "EMSystemConfigModel.h"
+#import "EMImagePickBrowserHelper.h"
+
 static NSString *const kPayInfollIdenfier = @"kPayInfollIdenfier";
 static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
@@ -20,6 +22,8 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 @property (nonatomic,copy)NSString *titleLabel;
 @property (nonatomic,assign)NSInteger index;
 @property (nonatomic,assign)CGFloat cellHeight;
+
+@property (nonatomic,strong)UIView *footView;
 @end
 
 @implementation EMCartPayViewController
@@ -41,8 +45,17 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     [self.navigationItem setHidesBackButton:YES];;
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didDoneBarButtonPress)];
     [self.tableView reloadData];
+  
+    //V1.9 添加，微信支付添加图片
+    if (self.index==1) {
+       self.tableView.tableFooterView=self.footView;
+    }
+    
+    
+    /*
     if (self.index != 0) {
-        UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QRImage"]] ;
+        UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wechat_pay_qr"]] ;\
+        self.tableView.tableFooterView=qrcodeImageView;
         [self.view addSubview:qrcodeImageView] ;
         WEAKSELF
         [qrcodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,8 +68,31 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
             }
         }] ;
     }
+     */
 }
-
+- (UIView *)footView{
+    if (_footView) {
+        return _footView;
+    }
+    
+    _footView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, OCWidth, OCWidth)];
+    
+    CGFloat qrWidht =300;
+    UIImage *qrImg = [UIImage imageNamed:@"wechat_pay_qr"];
+    CGFloat qrHeight = (qrWidht/qrImg.size.width*1.0)*qrImg.size.height;
+    UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:qrImg];
+    qrcodeImageView.frame=CGRectMake((OCWidth-qrWidht)/2.0, (OCWidth-qrHeight)/2.0, qrWidht, qrHeight);
+    [_footView addSubview:qrcodeImageView];
+    UITapGestureRecognizer *tapGesture =[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
+    [_footView addGestureRecognizer:tapGesture];
+    
+    return _footView;
+}
+- (void)handleTapGesture:(UITapGestureRecognizer *)tap{
+    UIImage *qrImg = [UIImage imageNamed:@"wechat_pay_qr"];
+    MWPhoto *photo = [MWPhoto photoWithImage:qrImg];
+    [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:@[photo] currentIndex:0];
+}
 - (void)didDoneBarButtonPress{
     NSArray *viewControlelrs=self.navigationController.viewControllers;
     UIViewController *targetController;
@@ -161,7 +197,36 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     _cellHeight += height ;
     return height;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==1) {//订单cell 点击copy
+        UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+        [self showCopyMenuItemInView:cell];
+    }
+}
+- (void)showCopyMenuItemInView:(UIView *)aView{
+    [self becomeFirstResponder];
+    //    UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@""
+    //                                                          action:@selector(copy:)];
+    [[UIMenuController sharedMenuController] setMenuItems:nil];
+    [[UIMenuController sharedMenuController] setTargetRect:aView.bounds inView:aView];
+    [[UIMenuController sharedMenuController] setMenuVisible:YES animated: YES];
+}
 
+#pragma mark - Menu Actions
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return (action == @selector(copy:));
+}
+- (void)copy:(id)sender {
+    UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+    
+    NSString *content  = self.orderNum;
+    
+    pboard.string= content;
+    [[UIApplication sharedApplication].keyWindow showHUDMessage:@"订单号已复制到粘贴板，可直接粘贴结果使用"];
+}
 /*
 #pragma mark - Navigation
 

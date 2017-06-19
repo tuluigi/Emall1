@@ -281,14 +281,16 @@
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kLogisticsCellIdenfier];
         if (nil==cell) {
             cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kLogisticsCellIdenfier];
-            cell.textLabel.textColor=kEM_RedColro;
+//            cell.textLabel.textColor=kEM_RedColro;
             cell.textLabel.font=[UIFont oc_systemFontOfSize:13];
             cell.detailTextLabel.textColor=kEM_LightDarkTextColor;
             cell.detailTextLabel.font=[UIFont oc_systemFontOfSize:13];
-            cell.textLabel.text=@"请选择取货方式";
-            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text=@"发货方式:";
+            cell.accessoryType=UITableViewCellAccessoryNone;
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.detailTextLabel.text = @"送货到门";
         }
+        /*
         if (self.logisticType==EMOrderLogisticsTypeExpress) {
               cell.detailTextLabel.text=@"快递送货";
         }else if(self.logisticType==EMOrderLogisticsTypeSelfPickUp){
@@ -296,6 +298,7 @@
         }else{
             cell.detailTextLabel.text=@"";
         }
+         */
         aCell=cell;
     }else if (indexPath.section==2){
         EMCartSubmitCell *cell=[tableView dequeueReusableCellWithIdentifier:kSubmitCellIdenfier forIndexPath:indexPath];
@@ -367,7 +370,10 @@
         addressController.delegate=self;
         addressController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:addressController animated:YES];
-    }else if (indexPath.section==1){//配送方式
+    }
+    //V1.9 取消配送方式选项
+    /*
+    else if (indexPath.section==1){//配送方式
         WEAKSELF
         UIAlertController *alertController=[[UIAlertController alloc]  init];
         alertController.title=@"选择取货方式";
@@ -389,6 +395,7 @@
             
         }];
     }
+     */
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 35;
@@ -416,6 +423,7 @@
     headView.textLabel.text=title;
     return headView;
 }
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     CGFloat height=CGFLOAT_MIN;
     if (section==1&&self.logisticType!=EMOrderLogisticsTypeUnKonwn) {
@@ -436,14 +444,14 @@
     }
 
 }
-
+*/
 #pragma mark - 提交订单
 - (void)submitOrderWithShopCartModels:(NSArray *)shopCartArrays addressID:(NSInteger)addressID logiticType:(NSInteger)type remarks:(NSString *)remarks{
     if (addressID<0) {
         [self.view showHUDMessage:@"请选择收货地址"];
-    }else if (self.logisticType==EMOrderLogisticsTypeUnKonwn){
-        [self.view showHUDMessage:@"请选择配送方式"];
-    }else{
+    }else if([NSString isNilOrEmptyForString:self.addressModel.fullAdderssString ]){
+        [self.view showHUDMessage:@"请填写完整收货地址"];
+    } else{
     WEAKSELF
     [self.view showHUDLoading];
     remarks=[remarks stringByRemovingEmoji];
@@ -504,7 +512,8 @@
 //提交订单
 - (void)cartBottomViewSubmitButtonPressed:(EMCartBottomView *)bottomView{
     NSLog(@"点击了提交订单按钮") ;
-    [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:self.logisticType remarks:self.detailTextViewModel.inputText];
+    //默认只有快递方式了
+    [self submitOrderWithShopCartModels:self.dataSourceArray addressID:self.addressModel.addressID logiticType:EMOrderLogisticsTypeExpress remarks:self.detailTextViewModel.inputText];
     //[self showChoosePayView] ;
 }
 
