@@ -403,7 +403,7 @@
         make.bottom.mas_equalTo(weakSelf.goodsImageView.mas_bottom);
     }];
     [_quantityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(weakSelf.mas_right).offset(OCUISCALE(-10));
+        make.right.mas_equalTo(weakSelf.mas_right).offset(OCUISCALE(-15));
         make.top.mas_equalTo(weakSelf.priceLabel);
         make.width.mas_lessThanOrEqualTo(OCUISCALE(120));
     }];

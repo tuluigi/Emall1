@@ -105,13 +105,11 @@ static OCNetSessionManager *sharedSessionManager;
 //                }
             }else{
                  resultValue=[NSString stringWithFormat:@"%@",responseObject];
-                /*
                 if ([resultValue isKindOfClass:[NSData class]]) {
                    resultValue=[NSString stringWithFormat:@"%@",responseObject];
                 }else{
                     resultValue=responseObject;
                 }
-                 */
             }
             if ([task.currentRequest.HTTPMethod isEqualToString:@"POST"]) {
                 NSLog(@"\n 网络请求接口地址:\n%@\n参数\n%@\n返回值\n%@",url,[[NSString alloc]  initWithData:task.originalRequest.HTTPBody encoding:4],resultValue);

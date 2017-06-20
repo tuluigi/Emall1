@@ -75,8 +75,9 @@
     
     //打印版本号
     NSLog(@"当前版本号:%@\n商店版本号:%@",currentVersion,appStoreVersion);
+    BOOL hasNewVersion = [EMCommonInfo compareOldVersion:currentVersion withNewVersion:appStoreVersion];
     //当前版本号小于商店版本号,就更新
-    if([currentVersion floatValue] < [appStoreVersion floatValue])
+    if(hasNewVersion)
     {
         UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",appStoreVersion] preferredStyle:UIAlertControllerStyleAlert] ;
         
