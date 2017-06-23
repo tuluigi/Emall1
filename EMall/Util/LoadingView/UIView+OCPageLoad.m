@@ -146,7 +146,7 @@ static NSString * const OCPageLoadingViewPropertyKey = @"__OCPageLoadingViewProp
         hud =  [[MBProgressHUD alloc]  initWithView:self];
         hud.removeFromSuperViewOnHide = YES;
         hud.margin=10;
-        hud.color=RGBA(52, 53, 55, 0.8);
+        hud.color=RGBA(52, 53, 55, 0.9);
         hud.labelFont=[UIFont oc_systemFontOfSize:15];
         [self addSubview:hud];
     }

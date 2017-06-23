@@ -16,14 +16,24 @@
 static NSString *const kPayInfollIdenfier = @"kPayInfollIdenfier";
 static NSString *const kPayPriceCellIdenfier = @"kPayPriceCellIdenfier";
 static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
+
+static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
+
+
+#define kWeChatQRImageWidth 120
 @interface EMCartPayViewController ()
 @property (nonatomic,assign)CGFloat totalPrice;
 @property (nonatomic,copy)NSString *orderNum;
 @property (nonatomic,copy)NSString *titleLabel;
+
+/**
+ 0:paypal
+ 1:微信
+ 2:转账汇款
+ */
 @property (nonatomic,assign)NSInteger index;
 @property (nonatomic,assign)CGFloat cellHeight;
 
-@property (nonatomic,strong)UIView *footView;
 @end
 
 @implementation EMCartPayViewController
@@ -45,54 +55,8 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     [self.navigationItem setHidesBackButton:YES];;
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didDoneBarButtonPress)];
     [self.tableView reloadData];
-  
-    //V1.9 添加，微信支付添加图片
-    if (self.index==1) {
-       self.tableView.tableFooterView=self.footView;
-    }
-    
-    
-    /*
-    if (self.index != 0) {
-        UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wechat_pay_qr"]] ;\
-        self.tableView.tableFooterView=qrcodeImageView;
-        [self.view addSubview:qrcodeImageView] ;
-        WEAKSELF
-        [qrcodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(weakSelf.view.mas_centerX) ;
-            if (self.index == 1) {
-                make.top.mas_equalTo(weakSelf.tableView.mas_top).offset(_cellHeight-80) ;
-            }
-            else{
-                make.top.mas_equalTo(weakSelf.tableView.mas_top).offset(_cellHeight-160) ;
-            }
-        }] ;
-    }
-     */
 }
-- (UIView *)footView{
-    if (_footView) {
-        return _footView;
-    }
-    
-    _footView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, OCWidth, OCWidth)];
-    
-    CGFloat qrWidht =300;
-    UIImage *qrImg = [UIImage imageNamed:@"wechat_pay_qr"];
-    CGFloat qrHeight = (qrWidht/qrImg.size.width*1.0)*qrImg.size.height;
-    UIImageView *qrcodeImageView = [[UIImageView alloc] initWithImage:qrImg];
-    qrcodeImageView.frame=CGRectMake((OCWidth-qrWidht)/2.0, (OCWidth-qrHeight)/2.0, qrWidht, qrHeight);
-    [_footView addSubview:qrcodeImageView];
-    UITapGestureRecognizer *tapGesture =[[UITapGestureRecognizer alloc]  initWithTarget:self action:@selector(handleTapGesture:)];
-    [_footView addGestureRecognizer:tapGesture];
-    
-    return _footView;
-}
-- (void)handleTapGesture:(UITapGestureRecognizer *)tap{
-    UIImage *qrImg = [UIImage imageNamed:@"wechat_pay_qr"];
-    MWPhoto *photo = [MWPhoto photoWithImage:qrImg];
-    [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:@[photo] currentIndex:0];
-}
+
 - (void)didDoneBarButtonPress{
     NSArray *viewControlelrs=self.navigationController.viewControllers;
     UIViewController *targetController;
@@ -118,6 +82,11 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
      [self.tableView registerClass:[EMCartPayCell class] forCellReuseIdentifier:kPayInfollIdenfier];
     NSInteger count=3;
+    if (self.index==1) {//微信支付
+        count=5;
+    }else if (self.index==2){
+        count=4;
+    }
     return count;
 }
 
@@ -174,6 +143,34 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
         }
         cell.detailTextLabel.text=self.orderNum;
         aCell=cell;
+    }else if (indexPath.row==3|| indexPath.row==4){
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:kPayWeChatCellIdenfier];
+        if (nil==cell) {
+            cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kPayWeChatCellIdenfier];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.accessoryType=UITableViewCellAccessoryNone;
+            cell.textLabel.textColor=kEM_LightDarkTextColor;
+            cell.textLabel.font=[UIFont oc_systemFontOfSize:14];
+            UIImageView *imgView=[UIImageView new];
+            imgView.tag=2000;
+//            imgView.contentMode=UIViewContentModeCenter;
+            [cell.contentView addSubview:imgView];
+            
+            [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-40);
+                make.size.mas_equalTo(CGSizeMake(kWeChatQRImageWidth, kWeChatQRImageWidth));
+                make.centerY.mas_equalTo(cell.contentView.mas_centerY);
+            }];
+        }
+        UIImageView *imgView=[cell.contentView viewWithTag:2000];
+        if (indexPath.row==3) {
+             cell.textLabel.text=@"客服：";
+            imgView.image=[UIImage imageNamed:@"wechat_service_qr"];
+        }else if (indexPath.row==4){
+            cell.textLabel.text=@"扫码付款：";
+            imgView.image =[UIImage imageNamed:@"wechat_pay_qr"];
+        }
+        aCell=cell;
     }
     return aCell;
 }
@@ -191,6 +188,8 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 //        }];
             height = 160 ;
         }
+    }else if ((indexPath.row==3)||(indexPath.row==4)){
+        height=kWeChatQRImageWidth+13*2;
     }else{
         height=44;
     }
@@ -201,6 +200,17 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
     if (indexPath.row==1) {//订单cell 点击copy
         UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
         [self showCopyMenuItemInView:cell];
+    }else if (indexPath.row==3 || indexPath.row==4){
+        //客服
+        //微信扫码转账
+        UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+        UIImageView *imgView =[cell.contentView viewWithTag:2000];
+        UIImage *qrImg = imgView.image;
+        if (nil==qrImg) {
+            return;
+        }
+        MWPhoto *photo = [MWPhoto photoWithImage:qrImg];
+        [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:@[photo] currentIndex:0];
     }
 }
 - (void)showCopyMenuItemInView:(UIView *)aView{

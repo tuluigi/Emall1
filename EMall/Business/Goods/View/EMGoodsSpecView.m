@@ -450,7 +450,7 @@
                 return;
             }
             if (count>infoModel.quantity) {
-                [self showHUDMessage:@"库存不足" yOffset:0 duration:2.5];
+                [self showHUDMessage:@"库存不足" yOffset:0 duration:10];
                 return;
             }
             if (self.dismissBlock) {
