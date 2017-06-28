@@ -113,7 +113,7 @@
     }else if (indexPath.row==1){
         cell.textLabel.text=@"扫描二维码，联系客服咨询";
         cell.detailTextLabel.text=@"";
-        cell.imageView.image=[UIImage imageNamed:@"wechat_service_qr"];
+        cell.imageView.image=[UIImage imageNamed:@"service_wechat"];
     }
     return cell;
 }

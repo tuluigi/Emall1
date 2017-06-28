@@ -20,7 +20,8 @@ static NSString *const kPayOrderNumCellIdenfier = @"kPayOrderNumCellIdenfier";
 static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
 
 
-#define kWeChatQRImageWidth 120
+#define kWeChatQRImageWidth 140
+#define kWeChatQRImageHeight 150
 @interface EMCartPayViewController ()
 @property (nonatomic,assign)CGFloat totalPrice;
 @property (nonatomic,copy)NSString *orderNum;
@@ -69,7 +70,7 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
     if (targetController) {
         [self.navigationController popToViewController:targetController animated:YES];
     }else{
-         [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
@@ -80,10 +81,10 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
 #pragma mark - tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-     [self.tableView registerClass:[EMCartPayCell class] forCellReuseIdentifier:kPayInfollIdenfier];
+    [self.tableView registerClass:[EMCartPayCell class] forCellReuseIdentifier:kPayInfollIdenfier];
     NSInteger count=3;
     if (self.index==1) {//微信支付
-        count=5;
+        count=4;
     }else if (self.index==2){
         count=4;
     }
@@ -102,10 +103,10 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
             cell.textLabel.font=[UIFont oc_systemFontOfSize:14];
             cell.textLabel.text=@"订单金额:";
         }
-//        UIColor *color=[UIColor colorWithHexString:@"#272727"];
-//        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"您的订单金额为:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
+        //        UIColor *color=[UIColor colorWithHexString:@"#272727"];
+        //        NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc] initWithString:@"您的订单金额为:" attributes:@{NSFontAttributeName:[UIFont oc_systemFontOfSize:OCUISCALE(13)],NSForegroundColorAttributeName:color}];
         NSAttributedString *aStrr=[NSAttributedString goodsPriceAttrbuteStringWithPrice:self.totalPrice markFontSize:13 priceInterFontSize:19 pointInterSize:19 color:nil];
-//        [priceAttrStr appendAttributedString:aStrr];
+        //        [priceAttrStr appendAttributedString:aStrr];
         
         cell.detailTextLabel.attributedText=aStrr;
         aCell=cell;
@@ -153,22 +154,42 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
             cell.textLabel.font=[UIFont oc_systemFontOfSize:14];
             UIImageView *imgView=[UIImageView new];
             imgView.tag=2000;
-//            imgView.contentMode=UIViewContentModeCenter;
             [cell.contentView addSubview:imgView];
             
+            if (self.index==1) {
             [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(cell.contentView.mas_right).offset(-40);
-                make.size.mas_equalTo(CGSizeMake(kWeChatQRImageWidth, kWeChatQRImageWidth));
+                make.right.mas_equalTo(cell.contentView.mas_centerX).offset(-20);
+                make.size.mas_equalTo(CGSizeMake(kWeChatQRImageWidth, kWeChatQRImageHeight));
+                //                make.centerX.mas_equalTo(cell.contentView.mas_centerX).offset(20);
                 make.centerY.mas_equalTo(cell.contentView.mas_centerY);
             }];
+            
+            UIImageView *imgView1=[UIImageView new];
+            imgView1.tag=2001;
+            [cell.contentView addSubview:imgView1];
+            
+            [imgView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(cell.contentView.mas_centerX).offset(20);
+                make.size.mas_equalTo(CGSizeMake(kWeChatQRImageWidth, kWeChatQRImageHeight));
+                make.centerY.mas_equalTo(cell.contentView.mas_centerY);
+            }];
+            }else{
+                [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(kWeChatQRImageWidth, kWeChatQRImageHeight));
+                    make.centerX.mas_equalTo(cell.contentView.mas_centerX);
+                    make.centerY.mas_equalTo(cell.contentView.mas_centerY);
+                }];
+            }
         }
         UIImageView *imgView=[cell.contentView viewWithTag:2000];
+        UIImageView *imgView1=[cell.contentView viewWithTag:2001];
         if (indexPath.row==3) {
-             cell.textLabel.text=@"客服：";
-            imgView.image=[UIImage imageNamed:@"wechat_service_qr"];
-        }else if (indexPath.row==4){
-            cell.textLabel.text=@"扫码付款：";
-            imgView.image =[UIImage imageNamed:@"wechat_pay_qr"];
+            imgView.image = [UIImage imageNamed:@"wechat_service_qr"];
+            if (self.index==1) {
+                imgView1.image  = [UIImage imageNamed:@"wechat_pay_qr"];
+            }else{
+                imgView1.image = nil;
+            }
         }
         aCell=cell;
     }
@@ -183,13 +204,13 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
             height = 80 ;
         }
         else{
-//            height=[tableView fd_heightForCellWithIdentifier:kPayInfollIdenfier configuration:^(id cell) {
-////            [(EMCartPayCell *)cell setShopCartModel:cartModel];
-//        }];
+            //            height=[tableView fd_heightForCellWithIdentifier:kPayInfollIdenfier configuration:^(id cell) {
+            ////            [(EMCartPayCell *)cell setShopCartModel:cartModel];
+            //        }];
             height = 160 ;
         }
     }else if ((indexPath.row==3)||(indexPath.row==4)){
-        height=kWeChatQRImageWidth+13*2;
+        height=kWeChatQRImageHeight+13*2;
     }else{
         height=44;
     }
@@ -203,14 +224,24 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
     }else if (indexPath.row==3 || indexPath.row==4){
         //客服
         //微信扫码转账
+        NSMutableArray *photoArray =[NSMutableArray new];
+        
         UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
         UIImageView *imgView =[cell.contentView viewWithTag:2000];
         UIImage *qrImg = imgView.image;
-        if (nil==qrImg) {
-            return;
-        }
         MWPhoto *photo = [MWPhoto photoWithImage:qrImg];
-        [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:@[photo] currentIndex:0];
+        if (qrImg && photo) {
+            [photoArray addObject:photo];
+        }
+        
+        UIImageView *imgView1 =[cell.contentView viewWithTag:2001];
+        UIImage *qrImg1 = imgView1.image;
+         MWPhoto *photo1 = [MWPhoto photoWithImage:qrImg1];
+        if (qrImg1 && photo1) {
+            [photoArray addObject:photo1];
+        }
+        
+        [EMImagePickBrowserHelper showImageBroswerOnController:self withImageArray:photoArray currentIndex:0];
     }
 }
 - (void)showCopyMenuItemInView:(UIView *)aView{
@@ -238,13 +269,13 @@ static NSString *const kPayWeChatCellIdenfier = @"kPayWeChatCellIdenfier";
     [[UIApplication sharedApplication].keyWindow showHUDMessage:@"订单号已复制到粘贴板，可直接粘贴结果使用"];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
