@@ -64,8 +64,10 @@
 +(NSAttributedString *)horizontalLineAttrStringWithText:(NSString *)text textColor:(UIColor *)color font:(UIFont *)font{
     NSMutableAttributedString *priceAttrStr=[[NSMutableAttributedString alloc]  initWithString:text attributes:@{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleNone)}];
     NSDictionary *priceDic=@{
-                             NSForegroundColorAttributeName:color,NSFontAttributeName:font,
-                             NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+                             NSForegroundColorAttributeName:color,
+                             NSFontAttributeName:font,
+                              NSBaselineOffsetAttributeName : @(0),
+                             NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle )};
     [priceAttrStr addAttributes:priceDic range:NSMakeRange(0, text.length)];
     return priceAttrStr;
 }
