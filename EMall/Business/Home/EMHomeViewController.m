@@ -189,7 +189,18 @@ EMHomeHeadReusableViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==EMHomeHeadReusableViewTypeGreat) {
-        
+        EMHomeHeadReusableViewType type = EMHomeHeadReusableViewTypeHot;
+        NSString *catString = @"";
+        if (indexPath.row==0) {
+            type = EMHomeHeadReusableViewTypeHot;
+            catString = @"嗨吃特卖";
+        }else if (type==1){
+            type = EMHomeHeadReusableViewTypeGreat;
+            catString = @"嗨吃精品";
+        }
+        EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithHomeType:type typeName:catString];
+        listController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:listController animated:YES];
     }
 }
 #pragma mark - EMHomeCatCell Delegate
