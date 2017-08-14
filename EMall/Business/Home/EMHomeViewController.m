@@ -22,6 +22,15 @@
 #import "EMGoodsListViewController.h"
 #import "EMWebViewController.h"
 #import "EMGoodsListCell.h"
+#import "EMHomeImageCell.h"
+
+
+typedef NS_ENUM(NSInteger , EMHomeColllecionSection) {
+    EMHomeColllecionSectionShop             =0,//店铺介绍
+    EMHomeColllecionSectionAnnouncement     =1,//公告
+    EMHomeColllecionSectionCat              =2,//分类
+    EMHomeColllecionSectionHotAndGreat      =3,//精品&特卖
+};
 
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
@@ -51,13 +60,12 @@ EMHomeHeadReusableViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title=@"嗨吃GO";
+    self.navigationItem.title=@"嗨吃嗨GO";
     [self.view addSubview:self.myCollectionView];
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
-//    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
     self.adArray=[EMCache em_objectForKey:EMCache_HomeADDataSourceKey];
     self.homeModel=[EMCache em_objectForKey:EMCache_HomeDataSourceKey];
     [self.myCollectionView reloadData];
@@ -123,108 +131,65 @@ EMHomeHeadReusableViewDelegate>
 }
 #pragma mark - UICollectionView Delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return EMHomeColllecionSectionHotAndGreat+1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSInteger count=0;
-    if (section==0) {
+    NSInteger count=1;
+    if (section==EMHomeColllecionSectionCat) {
         if (self.homeModel.catArray.count) {
             count=1;
+        }else{
+            count =0;
         }
-    }else if (section==1){
-        count=self.homeModel.greatGoodsArray.count;
-    }else if (section==2){
-        count=self.homeModel.hotGoodsArray.count;
+    }else if (section == EMHomeColllecionSectionHotAndGreat){
+        count = 2;
     }
     return count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *aCell;
-    if (indexPath.section==0) {
+    if (indexPath.section==EMHomeColllecionSectionCat) {
         EMHomeCatCell *cell=(EMHomeCatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
         cell.catModelArray=self.homeModel.catArray;
         cell.delegate=self;
         aCell=cell;
-    }else if(indexPath.section==1){
-        /*
-        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.greatGoodsArray];
-        */
-        
-        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row]];
-        aCell=cell;
-    }else if (indexPath.section==2){
-        /*
-        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
-         */
-        
-        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row]];
-        aCell=cell;
     }else{
-        aCell=[[UICollectionViewCell alloc]  init];
+        EMHomeImageCell *cell=(EMHomeImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeImageCell class]) forIndexPath:indexPath];
+        [cell setImageUrl:@"http://pic49.nipic.com/file/20140927/19617624_230415502002_2.jpg"];
+        aCell=cell;
     }
     return aCell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
+    if (indexPath.section==EMHomeColllecionSectionShop) {
         return [EMHomeCatCell homeCatCellSize];
     }else{
-        return [EMGoodsListCell goodsListCellEstmitSize];
+        return CGSizeMake(OCWidth, 100);
     }
-    /*
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
-    
-    CGSize size = flowLayout.itemSize;
-    return size;
-     */
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     CGSize size=CGSizeZero;
-    if (section==1||section==2) {
-        size=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);
-    }else if (section==0){
-        size=CGSizeMake(OCWidth, OCUISCALE(170));
+    if (section==EMHomeColllecionSectionShop){
+        size=CGSizeMake(OCWidth, OCUISCALE(200));
     }
     return size;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *reusableView;
-    if (indexPath.section==0) {
+    if (indexPath.section==EMHomeColllecionSectionShop) {
         reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMInfiniteView class]) forIndexPath:indexPath];
         [(EMInfiniteView *)reusableView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
         [(EMInfiniteView *)reusableView setTotalNumber:self.adArray.count];
         [(EMInfiniteView *)reusableView setDelegate:self];
-    }else if (indexPath.section==1||indexPath.section==2){
-        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class]) forIndexPath:indexPath];
-      
-        if (indexPath.section==1) {
-            [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeGreat];
-        }else if(indexPath.section==2){
-            [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeHot];
-        }
-          ((EMHomeHeadReusableView *)reusableView).delegate=self;
     }
     return reusableView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
+    if (indexPath.section==EMHomeHeadReusableViewTypeGreat) {
         
-    }else{
-        EMGoodsModel *goodsModel;
-        if (indexPath.section==1) {
-            goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
-        }else if(indexPath.section==2){
-            goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
-        }
-        EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:goodsModel.goodsID];
-        detailController.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:detailController animated:YES];
     }
 }
 #pragma mark - EMHomeCatCell Delegate
@@ -304,11 +269,8 @@ EMHomeHeadReusableViewDelegate>
         mainView.delegate = self;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
-        [_myCollectionView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
-        [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class])];
-        [_myCollectionView registerClass:[EMHomeHeadReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class])];
-        [_myCollectionView registerClass:[EMInfiniteView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
-        
+        [_myCollectionView registerClass:[EMInfiniteView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
+        [_myCollectionView registerClass:[EMHomeImageCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeImageCell class])];
     }
     return _myCollectionView;
 }

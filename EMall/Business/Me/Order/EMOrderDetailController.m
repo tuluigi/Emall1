@@ -131,7 +131,7 @@
     PayPalPayment *payment = [[PayPalPayment alloc] init] ;
     payment.amount = total ;
     payment.currencyCode = @"AUD" ;
-    payment.shortDescription = @"嗨吃Go购物" ;
+    payment.shortDescription = @"嗨吃嗨GO购物" ;
     payment.items = itemsArray ;
     payment.paymentDetails = paymentDetails ;
     

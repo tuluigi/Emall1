@@ -190,6 +190,7 @@
 		E609729D1D791A9D0052928D /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E609729C1D791A9D0052928D /* EMallUITests.m */; };
 		E60972A61D791AAF0052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972A51D791AAF0052928D /* SnapshotHelper.swift */; };
 		E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */; };
+		E6D269B61F4182A100E8922C /* EMHomeImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D269B51F4182A100E8922C /* EMHomeImageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -580,6 +581,8 @@
 		E65EAE0E1D816BA6002DB59D /* EMCommonInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCommonInfo.h; sourceTree = "<group>"; };
 		E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCommonInfo.m; sourceTree = "<group>"; };
 		E69A18E11D9A54C000019AB7 /* EMall.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EMall.entitlements; sourceTree = "<group>"; };
+		E6D269B41F4182A100E8922C /* EMHomeImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeImageCell.h; sourceTree = "<group>"; };
+		E6D269B51F4182A100E8922C /* EMHomeImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeImageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -676,6 +679,8 @@
 				2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */,
 				2AB965C31D61D7F80049BE2A /* EMWebViewController.h */,
 				2AB965C41D61D7F80049BE2A /* EMWebViewController.m */,
+				E6D269B41F4182A100E8922C /* EMHomeImageCell.h */,
+				E6D269B51F4182A100E8922C /* EMHomeImageCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1759,6 +1764,7 @@
 				2A31E82D1D60BC9900FC73A9 /* UIResponder+Router.m in Sources */,
 				2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
+				E6D269B61F4182A100E8922C /* EMHomeImageCell.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
 				E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */,
