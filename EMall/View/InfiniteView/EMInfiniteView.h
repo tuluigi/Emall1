@@ -20,7 +20,7 @@
 @end
 
 
-@interface EMInfiniteView : UICollectionReusableView
+@interface EMInfiniteView : UICollectionViewCell
 + (EMInfiniteView *)InfiniteViewWithFrame:(CGRect)frame;
 @property (nonatomic,strong,readonly) UICollectionView *collectionView;
 @property (nonatomic,assign,readwrite)NSInteger totalNumber;

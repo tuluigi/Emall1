@@ -109,6 +109,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
         make.centerX.mas_equalTo(weakSelf.iconImageView);
         make.bottom.mas_equalTo(weakSelf.iconImageView.mas_bottom).offset(OCUISCALE(-5));
     }];
+    _nameLabel.hidden=YES;
 
 }
 /*
