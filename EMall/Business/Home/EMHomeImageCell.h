@@ -12,4 +12,5 @@
 
 @interface EMHomeImageCell : UICollectionViewCell
 - (void)setImageUrl:(NSString *)url;
+- (void)setImage:(UIImage *)image;
 @end

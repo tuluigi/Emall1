@@ -89,12 +89,12 @@
         [_delegate homeHeadReusableViewDidSelect:self.type];
     }
 }
-- (void)setType:(EMHomeHeadReusableViewType)type{
+- (void)setType:(EMHomeReusableViewType)type{
     _type=type;
-    if (_type==EMHomeHeadReusableViewTypeGreat) {
+    if (_type==EMHomeReusableViewTypeGreat) {
        _imageView.image=[UIImage imageNamed:@"home_greatgood"];
         self.titleLable.text=@"嗨吃新品";
-    }else if (_type==EMHomeHeadReusableViewTypeHot){
+    }else if (_type==EMHomeReusableViewTypeHot){
         _imageView.image=[UIImage imageNamed:@"home_hotgood"];
         self.titleLable.text=@"嗨吃特卖";
     }

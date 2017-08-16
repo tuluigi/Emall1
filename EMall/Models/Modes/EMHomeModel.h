@@ -28,7 +28,6 @@
 
 @interface EMHomeModel : OCBaseModel
 @property (nonatomic,strong)NSMutableArray <EMCatModel *>*catArray;
-
-@property (nonatomic,strong)NSMutableArray <EMGoodsModel *>*greatGoodsArray;//精品商品的数组
-@property (nonatomic,strong)NSMutableArray <EMGoodsModel *>*hotGoodsArray;//热销商品数组
+@property (nonatomic, copy) NSString *signageImgUrl;//门店图片
+@property (nonatomic, copy) NSString *announcementImgUrl;//公告声明
 @end

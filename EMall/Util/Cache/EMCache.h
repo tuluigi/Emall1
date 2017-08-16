@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-static NSString *const EMCache_HomeDataSourceKey        =@"EMCache_HomeDataSourceKey";//首页数据
+static NSString *const EMCache_HomeDataSourceKey        =@"EMCache_HomeDataSourceKey_v1";//首页数据
 static NSString *const EMCache_HomeADDataSourceKey      =@"EMCache_HomeADDataSourceKey";//首页广告
 
 static NSString *const EMCache_DiscoveryDataSourceKey    =@"EMCache_DiscoveryDataSourceKey";//发现
