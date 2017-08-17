@@ -37,8 +37,7 @@ typedef NS_ENUM(NSInteger , EMHomeColllecionSection) {
 UICollectionViewDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
-EMHomeCatCellDelegate,
-EMHomeHeadReusableViewDelegate>
+EMHomeCatCellDelegate>
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
 @property (nonatomic,strong)__block NSMutableArray *adArray;
 @property (nonatomic,strong)__block EMHomeModel *homeModel;
@@ -160,6 +159,9 @@ EMHomeHeadReusableViewDelegate>
         [(EMInfiniteView *)reusableView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
         [(EMInfiniteView *)reusableView setTotalNumber:self.adArray.count];
         [(EMInfiniteView *)reusableView setDelegate:self];
+        EMInfiniteView *infiniteView = (EMInfiniteView *)reusableView;
+        infiniteView.layer.borderWidth=2;
+        infiniteView.layer.borderColor=[UIColor whiteColor].CGColor;
         aCell= reusableView;
     }else{
         EMHomeImageCell *cell=(EMHomeImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeImageCell class]) forIndexPath:indexPath];
@@ -200,22 +202,11 @@ EMHomeHeadReusableViewDelegate>
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     CGSize size=CGSizeZero;
-    if (section==EMHomeColllecionSectionShop){
-//        size=CGSizeMake(OCWidth- kOffPadding*2, OCUISCALE(190));
-    }
     return size;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     return nil;
-    UICollectionReusableView *reusableView;
-    if (indexPath.section==EMHomeColllecionSectionShop) {
-        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMInfiniteView class]) forIndexPath:indexPath];
-        [(EMInfiniteView *)reusableView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
-        [(EMInfiniteView *)reusableView setTotalNumber:self.adArray.count];
-        [(EMInfiniteView *)reusableView setDelegate:self];
-    }
-    return reusableView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -245,12 +236,6 @@ EMHomeHeadReusableViewDelegate>
     EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID catName:catModel.catName];
     listController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:listController animated:YES];
-    
-    /*
-    EMCatViewController *catController=[[EMCatViewController alloc]  init];
-    catController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:catController animated:YES];
-     */
 }
 #pragma mark -EMInfiniteVieDelegate
 - (NSInteger)numberOfInfiniteViewCellsInInfiniteView:(EMInfiniteView *)infiniteView{
@@ -279,11 +264,11 @@ EMHomeHeadReusableViewDelegate>
 #pragma mark - getter
 -(EMInfiniteView *)infiniteView{
     if (nil==_infiniteView) {
-        _infiniteView=[EMInfiniteView InfiniteViewWithFrame:CGRectMake(0, 0, OCWidth-2*kOffPadding, 190)];
+        _infiniteView=[EMInfiniteView InfiniteViewWithFrame:CGRectMake(0, 0, OCWidth-2*kOffPadding, 180)];
         _infiniteView.delegate=self;
-        _infiniteView.layer.borderWidth=2.0;
-        _infiniteView.clipsToBounds= YES;
-        _infiniteView.layer.borderColor=[UIColor whiteColor].CGColor;
+//        _infiniteView.collectionView.layer.borderWidth=2.0;
+//        _infiniteView.collectionView.clipsToBounds= YES;
+//        _infiniteView.collectionView.layer.borderColor=[UIColor whiteColor].CGColor;
     }
     return _infiniteView;
 }
