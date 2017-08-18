@@ -87,7 +87,7 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     return self;
 }
 - (void)onInitContentView{
-    self.contentView.backgroundColor=[UIColor whiteColor];
+//    self.contentView.backgroundColor=[UIColor whiteColor];
     _iconImageView=[[UIImageView alloc] init];
     _iconImageView.contentMode=UIViewContentModeScaleAspectFit;
     _iconImageView.clipsToBounds=YES;
@@ -103,8 +103,6 @@ typedef void(^EMHomeCatItemViewSelectBlock)(EMCatModel *catModel);
     [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
-    _iconImageView.layer.cornerRadius=OCUISCALE(40/2.0);
-    _iconImageView.layer.masksToBounds=YES;
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(weakSelf.iconImageView);
         make.bottom.mas_equalTo(weakSelf.iconImageView.mas_bottom).offset(OCUISCALE(-5));
