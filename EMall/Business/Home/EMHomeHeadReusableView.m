@@ -37,7 +37,7 @@
     
    
     UIFont *font=[UIFont oc_boldSystemFontOfSize:OCUISCALE(13)];
-    _titleLable=[UILabel labelWithText:@"嗨吃新品" font:font textAlignment:NSTextAlignmentLeft];
+    _titleLable=[UILabel labelWithText:@"嗨吃嗨购新品" font:font textAlignment:NSTextAlignmentLeft];
     _titleLable.textColor=ColorHexString(@"#fc4747");
     [self addSubview:_titleLable];
     
@@ -93,10 +93,10 @@
     _type=type;
     if (_type==EMHomeReusableViewTypeGreat) {
        _imageView.image=[UIImage imageNamed:@"home_greatgood"];
-        self.titleLable.text=@"嗨吃新品";
+        self.titleLable.text=@"嗨吃嗨购新品";
     }else if (_type==EMHomeReusableViewTypeHot){
         _imageView.image=[UIImage imageNamed:@"home_hotgood"];
-        self.titleLable.text=@"嗨吃特卖";
+        self.titleLable.text=@"嗨吃嗨购特卖";
     }
 }
 
