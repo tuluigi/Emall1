@@ -22,13 +22,22 @@
 #import "EMGoodsListViewController.h"
 #import "EMWebViewController.h"
 #import "EMGoodsListCell.h"
+#import "EMHomeImageCell.h"
+
+static CGFloat kOffPadding = 10;
+typedef NS_ENUM(NSInteger , EMHomeColllecionSection) {
+    EMHomeColllecionSectionShop             =0,//店铺介绍
+    EMHomeColllecionSectionBanner           =1,//店铺介绍
+    EMHomeColllecionSectionAnnouncement     =2,//公告
+    EMHomeColllecionSectionCat              =3,//分类
+    EMHomeColllecionSectionHotAndGreat      =4,//精品&特卖
+};
 
 @interface EMHomeViewController ()<EMInfiniteViewDelegate,
 UICollectionViewDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout,
-EMHomeCatCellDelegate,
-EMHomeHeadReusableViewDelegate>
+EMHomeCatCellDelegate>
 @property (nonatomic,strong)EMInfiniteView *infiniteView;
 @property (nonatomic,strong)__block NSMutableArray *adArray;
 @property (nonatomic,strong)__block EMHomeModel *homeModel;
@@ -51,13 +60,14 @@ EMHomeHeadReusableViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title=@"嗨吃GO";
+    self.navigationItem.title=@"嗨吃嗨购";
+    self.view.backgroundColor = RGB(238,247,244);
+    
     [self.view addSubview:self.myCollectionView];
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero );
     }];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_right_avatar"] style:UIBarButtonItemStylePlain target:self action:@selector(didHomeRighBarButtonPressed)];
-//    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"home_icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftBarButtonPressed)];
     self.adArray=[EMCache em_objectForKey:EMCache_HomeADDataSourceKey];
     self.homeModel=[EMCache em_objectForKey:EMCache_HomeDataSourceKey];
     [self.myCollectionView reloadData];
@@ -123,134 +133,107 @@ EMHomeHeadReusableViewDelegate>
 }
 #pragma mark - UICollectionView Delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return EMHomeColllecionSectionHotAndGreat+1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSInteger count=0;
-    if (section==0) {
+    NSInteger count=1;
+    if (section==EMHomeColllecionSectionCat) {
         if (self.homeModel.catArray.count) {
-            count=1;
+            count=self.homeModel.catArray.count;
+        }else{
+            count =0;
         }
-    }else if (section==1){
-        count=self.homeModel.greatGoodsArray.count;
-    }else if (section==2){
-        count=self.homeModel.hotGoodsArray.count;
+    }else if (section == EMHomeColllecionSectionHotAndGreat){
+        count = 2;
     }
     return count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *aCell;
-    if (indexPath.section==0) {
+    if (indexPath.section==EMHomeColllecionSectionCat) {
         EMHomeCatCell *cell=(EMHomeCatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class]) forIndexPath:indexPath];
-        cell.catModelArray=self.homeModel.catArray;
-        cell.delegate=self;
+        cell.catModel=self.homeModel.catArray[indexPath.row];
         aCell=cell;
-    }else if(indexPath.section==1){
-        /*
-        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.greatGoodsArray];
-        */
-        
-        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row]];
-        aCell=cell;
-    }else if (indexPath.section==2){
-        /*
-        EMHomeGoodsCell *cell=(EMHomeGoodsCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row] dataSource:self.homeModel.hotGoodsArray];
-         */
-        
-        EMGoodsListCell *cell=(EMGoodsListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class]) forIndexPath:indexPath];
-        [cell setGoodsModel:[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row]];
-        aCell=cell;
+    }else if (indexPath.section == EMHomeColllecionSectionBanner){
+       EMInfiniteView* reusableView =[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMInfiniteView class]) forIndexPath:indexPath];
+        [(EMInfiniteView *)reusableView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
+        [(EMInfiniteView *)reusableView setTotalNumber:self.adArray.count];
+        [(EMInfiniteView *)reusableView setDelegate:self];
+        EMInfiniteView *infiniteView = (EMInfiniteView *)reusableView;
+        infiniteView.layer.borderWidth=2;
+        infiniteView.layer.borderColor=[UIColor whiteColor].CGColor;
+        aCell= reusableView;
     }else{
-        aCell=[[UICollectionViewCell alloc]  init];
+        EMHomeImageCell *cell=(EMHomeImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([EMHomeImageCell class]) forIndexPath:indexPath];
+        if (indexPath.section == EMHomeColllecionSectionShop) {
+             [cell setImageUrl:self.homeModel.signageImgUrl];
+        }else if (indexPath.section == EMHomeColllecionSectionAnnouncement){
+            [cell setImageUrl:self.homeModel.announcementImgUrl];
+        }else if (indexPath.section == EMHomeColllecionSectionHotAndGreat){
+            if (indexPath.row==0) {
+                [cell setImage:[UIImage imageNamed:@"home_hotsale"]];
+            }else{
+                [cell setImage:[UIImage imageNamed:@"home_discountsale"]];
+            }
+        }
+        aCell=cell;
     }
     return aCell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
-        return [EMHomeCatCell homeCatCellSize];
-    }else{
-        return [EMGoodsListCell goodsListCellEstmitSize];
+    CGSize size = CGSizeZero;
+    if (indexPath.section==EMHomeColllecionSectionShop) {
+        size = CGSizeMake(OCWidth- kOffPadding*2.0, 70);
+    }else if (indexPath.section == EMHomeColllecionSectionBanner){
+        size = CGSizeMake(OCWidth- kOffPadding*2.0, 180);
+    }if (indexPath.section==EMHomeColllecionSectionAnnouncement) {
+        size = CGSizeMake(OCWidth- kOffPadding*2.0, 200);
+    }else if(indexPath.section == EMHomeColllecionSectionCat){
+        size = CGSizeMake((OCWidth-kOffPadding*3.0)/2.0, 100);
+    }else if(indexPath.section == EMHomeColllecionSectionHotAndGreat){
+        if (indexPath.row==0) {//热卖
+            size = CGSizeMake((OCWidth-kOffPadding*2.0), 70);
+        }else if (indexPath.row==1){//精品
+           size = CGSizeMake((OCWidth-kOffPadding*2.0), 100);
+        }
     }
-    /*
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
-    
-    CGSize size = flowLayout.itemSize;
     return size;
-     */
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     CGSize size=CGSizeZero;
-    if (section==1||section==2) {
-        size=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);
-    }else if (section==0){
-        size=CGSizeMake(OCWidth, OCUISCALE(170));
-    }
     return size;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    UICollectionReusableView *reusableView;
-    if (indexPath.section==0) {
-        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMInfiniteView class]) forIndexPath:indexPath];
-        [(EMInfiniteView *)reusableView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
-        [(EMInfiniteView *)reusableView setTotalNumber:self.adArray.count];
-        [(EMInfiniteView *)reusableView setDelegate:self];
-    }else if (indexPath.section==1||indexPath.section==2){
-        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class]) forIndexPath:indexPath];
-      
-        if (indexPath.section==1) {
-            [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeGreat];
-        }else if(indexPath.section==2){
-            [(EMHomeHeadReusableView *)reusableView setType:EMHomeHeadReusableViewTypeHot];
-        }
-          ((EMHomeHeadReusableView *)reusableView).delegate=self;
-    }
-    return reusableView;
+    return nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
-        
-    }else{
-        EMGoodsModel *goodsModel;
-        if (indexPath.section==1) {
-            goodsModel=[self.homeModel.greatGoodsArray objectAtIndex:indexPath.row];
-        }else if(indexPath.section==2){
-            goodsModel=[self.homeModel.hotGoodsArray objectAtIndex:indexPath.row];
+    if (indexPath.section==EMHomeColllecionSectionHotAndGreat) {
+        EMHomeReusableViewType type = EMHomeReusableViewTypeHot;
+        NSString *catString = @"";
+        if (indexPath.row==0) {
+            type = EMHomeReusableViewTypeHot;
+            catString = @"店铺热卖";
+        }else if (indexPath.row==1){
+            type = EMHomeReusableViewTypeGreat;
+            catString = @"折扣特卖";
         }
-        EMGoodsDetailViewController *detailController=[[EMGoodsDetailViewController alloc]  initWithGoodsID:goodsModel.goodsID];
-        detailController.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:detailController animated:YES];
+        EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithHomeType:type typeName:catString];
+        listController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:listController animated:YES];
+    }else if (indexPath.section == EMHomeColllecionSectionCat){
+        EMCatModel *catModel = self.homeModel.catArray[indexPath.row];
+        EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID catName:catModel.catName];
+        listController.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:listController animated:YES];
     }
 }
 #pragma mark - EMHomeCatCell Delegate
 - (void)homeCatCell:(EMHomeCatCell *)cell didSelectItem:(EMCatModel *)catModel{
     
     EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithCatID:catModel.catID catName:catModel.catName];
-    listController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:listController animated:YES];
-    
-    /*
-    EMCatViewController *catController=[[EMCatViewController alloc]  init];
-    catController.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:catController animated:YES];
-     */
-}
-/**
- *  分类点击更多
- */
-- (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type{
-    NSString *catName;
-    if (type==EMHomeHeadReusableViewTypeGreat) {
-        catName=@"嗨吃新品";
-    }else if (type==EMHomeHeadReusableViewTypeHot){
-        catName=@"嗨吃特卖";
-    }
-    EMGoodsListViewController *listController=[[EMGoodsListViewController alloc]  initWithHomeType:type typeName:catName];
     listController.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:listController animated:YES];
 }
@@ -281,22 +264,27 @@ EMHomeHeadReusableViewDelegate>
 #pragma mark - getter
 -(EMInfiniteView *)infiniteView{
     if (nil==_infiniteView) {
-        _infiniteView=[EMInfiniteView InfiniteViewWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(170))];
+        _infiniteView=[EMInfiniteView InfiniteViewWithFrame:CGRectMake(0, 0, OCWidth-2*kOffPadding, 180)];
         _infiniteView.delegate=self;
+//        _infiniteView.collectionView.layer.borderWidth=2.0;
+//        _infiniteView.collectionView.clipsToBounds= YES;
+//        _infiniteView.collectionView.layer.borderColor=[UIColor whiteColor].CGColor;
     }
     return _infiniteView;
 }
 - (UICollectionView *)myCollectionView{
     if (nil==_myCollectionView) {
+        
         UICollectionViewLeftAlignedLayout *flowLayout = [[UICollectionViewLeftAlignedLayout alloc] init];
-        flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing=0;
+        flowLayout.minimumLineSpacing = kOffPadding;
+        flowLayout.minimumInteritemSpacing=kOffPadding;
+        flowLayout.sectionInset = UIEdgeInsetsMake(kOffPadding, kOffPadding, kOffPadding, kOffPadding);
 //        flowLayout.estimatedItemSize=[EMGoodsListCell goodsListCellEstmitSize];////添加之后iOS8 会crash
 //        flowLayout.itemSize=[EMGoodsListCell goodsListCellEstmitSize];
 //        flowLayout.headerReferenceSize=CGSizeMake(OCWidth, [EMHomeHeadReusableView homeHeadReusableViewHeight]);//添加之后iOS8 会crash
         UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
 
-        mainView.backgroundColor = [UIColor clearColor];
+        mainView.backgroundColor = RGB(238, 237, 246);
         mainView.pagingEnabled = NO;
         mainView.showsHorizontalScrollIndicator = NO;
         mainView.showsVerticalScrollIndicator = NO;
@@ -304,11 +292,9 @@ EMHomeHeadReusableViewDelegate>
         mainView.delegate = self;
         _myCollectionView=mainView;
         [_myCollectionView registerClass:[EMHomeCatCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeCatCell class])];
-        [_myCollectionView registerClass:[EMHomeGoodsCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeGoodsCell class])];
-        [_myCollectionView registerClass:[EMGoodsListCell class] forCellWithReuseIdentifier:NSStringFromClass([EMGoodsListCell class])];
-        [_myCollectionView registerClass:[EMHomeHeadReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMHomeHeadReusableView class])];
-        [_myCollectionView registerClass:[EMInfiniteView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
-        
+        [_myCollectionView registerClass:[EMInfiniteView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
+        [_myCollectionView registerClass:[EMHomeImageCell class] forCellWithReuseIdentifier:NSStringFromClass([EMHomeImageCell class])];
+         [_myCollectionView registerClass:[EMInfiniteView class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteView class])];
     }
     return _myCollectionView;
 }

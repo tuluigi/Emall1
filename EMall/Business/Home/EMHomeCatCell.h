@@ -16,7 +16,6 @@
 @end
 
 @interface EMHomeCatCell : UICollectionViewCell
-@property (nonatomic,strong)NSArray *catModelArray;
-@property (nonatomic,weak) id <EMHomeCatCellDelegate>delegate;
+@property (nonatomic, strong) EMCatModel *catModel;
 + (CGSize)homeCatCellSize;
 @end

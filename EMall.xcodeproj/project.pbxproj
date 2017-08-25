@@ -184,12 +184,12 @@
 		68E972D31DAF317800BC1009 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E972D21DAF317800BC1009 /* JavaScriptCore.framework */; };
 		68E972D51DAF318400BC1009 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E972D41DAF318400BC1009 /* ImageIO.framework */; };
 		68E972D71DAF319000BC1009 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E972D61DAF319000BC1009 /* libsqlite3.tbd */; };
-		68E972D91DAF578C00BC1009 /* icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = 68E972D81DAF578C00BC1009 /* icon512.png */; };
 		68F2F1261DB5C5D700397A3A /* EMGoodsJasonBrotherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2F1251DB5C5D700397A3A /* EMGoodsJasonBrotherTableViewCell.m */; };
 		8C0D062E3F521222CCF7F434 /* libPods-EMall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEF11C3FE1E52718FEB959 /* libPods-EMall.a */; };
 		E609729D1D791A9D0052928D /* EMallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E609729C1D791A9D0052928D /* EMallUITests.m */; };
 		E60972A61D791AAF0052928D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60972A51D791AAF0052928D /* SnapshotHelper.swift */; };
 		E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */; };
+		E6D269B61F4182A100E8922C /* EMHomeImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D269B51F4182A100E8922C /* EMHomeImageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -568,7 +568,6 @@
 		68E972D21DAF317800BC1009 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		68E972D41DAF318400BC1009 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		68E972D61DAF319000BC1009 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		68E972D81DAF578C00BC1009 /* icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon512.png; sourceTree = "<group>"; };
 		68F2F1241DB5C5D700397A3A /* EMGoodsJasonBrotherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGoodsJasonBrotherTableViewCell.h; sourceTree = "<group>"; };
 		68F2F1251DB5C5D700397A3A /* EMGoodsJasonBrotherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGoodsJasonBrotherTableViewCell.m; sourceTree = "<group>"; };
 		E60972851D7917750052928D /* EMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMall-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -580,6 +579,8 @@
 		E65EAE0E1D816BA6002DB59D /* EMCommonInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCommonInfo.h; sourceTree = "<group>"; };
 		E65EAE0F1D816BA6002DB59D /* EMCommonInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCommonInfo.m; sourceTree = "<group>"; };
 		E69A18E11D9A54C000019AB7 /* EMall.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EMall.entitlements; sourceTree = "<group>"; };
+		E6D269B41F4182A100E8922C /* EMHomeImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHomeImageCell.h; sourceTree = "<group>"; };
+		E6D269B51F4182A100E8922C /* EMHomeImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHomeImageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -676,6 +677,8 @@
 				2A0940271D2A8515005BB84D /* EMHomeHeadReusableView.m */,
 				2AB965C31D61D7F80049BE2A /* EMWebViewController.h */,
 				2AB965C41D61D7F80049BE2A /* EMWebViewController.m */,
+				E6D269B41F4182A100E8922C /* EMHomeImageCell.h */,
+				E6D269B51F4182A100E8922C /* EMHomeImageCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -769,7 +772,6 @@
 		2A2426F21D12C4670078240C /* EMall */ = {
 			isa = PBXGroup;
 			children = (
-				68E972D81DAF578C00BC1009 /* icon512.png */,
 				E69A18E11D9A54C000019AB7 /* EMall.entitlements */,
 				2ADF60641D27D95600DF757B /* View */,
 				2ADF60571D27C68700DF757B /* Global */,
@@ -1669,7 +1671,6 @@
 				68328F4E1DAE34E4007D0E23 /* ShareSDKUI.bundle in Resources */,
 				68328F581DAE34E4007D0E23 /* ShareSDK.bundle in Resources */,
 				68C7AFCB1DC899E800EA4DCE /* line.png in Resources */,
-				68E972D91DAF578C00BC1009 /* icon512.png in Resources */,
 				68328F551DAE34E4007D0E23 /* read_me.txt in Resources */,
 				68328F561DAE34E4007D0E23 /* README.txt in Resources */,
 				2A2426FE1D12C4670078240C /* Main.storyboard in Resources */,
@@ -1759,6 +1760,7 @@
 				2A31E82D1D60BC9900FC73A9 /* UIResponder+Router.m in Sources */,
 				2A87D56B1D3CDD2900D7DBEA /* OCMutableSelectionCell.m in Sources */,
 				2A0352141D1A4464002BE7B7 /* EMMEHeadView.m in Sources */,
+				E6D269B61F4182A100E8922C /* EMHomeImageCell.m in Sources */,
 				2A0352021D1A3E2B002BE7B7 /* OCBaseViewController.m in Sources */,
 				2A99EB661D3B1D8E0024E924 /* ZJSegmentStyle.m in Sources */,
 				E65EAE101D816BA6002DB59D /* EMCommonInfo.m in Sources */,

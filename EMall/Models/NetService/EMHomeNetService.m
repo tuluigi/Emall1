@@ -34,7 +34,8 @@
  *  @return
  */
 + (NSURLSessionTask *)getHomeDataOnCompletionBlock:(OCResponseResultBlock)completionBlock{
-    NSString *apiPath=[self urlWithSuffixPath:@"list"];
+//    NSString *apiPath=[self urlWithSuffixPath:@"list"];
+    NSString *apiPath=[self urlWithSuffixPath:@"newIndex"];
     NSURLSessionTask *task=[[OCNetSessionManager sharedSessionManager] requestWithUrl:apiPath parmars:nil method:NETGET onCompletionHander:^(id responseData, NSError *error) {
         [OCBaseNetService parseOCResponseObject:responseData modelClass:[EMHomeModel class] error:nil onCompletionBlock:^(OCResponseResult *responseResult) {
             if (completionBlock) {

@@ -37,8 +37,8 @@
 @implementation EMHomeModel
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"catArray":@"category",
-             @"hotGoodsArray":@"hots",
-             @"greatGoodsArray":@"prime",};
+             @"signageImgUrl":@"signageImg",
+             @"announcementImgUrl":@"announcementImg"};
 }
 +(NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
     if ([key isEqualToString:@"catArray"]){
@@ -66,6 +66,21 @@
                 }
                 return sessions;
             }];
+    }else if ([key isEqualToString:@"signageImgUrl"]||[key isEqualToString:@"announcementImgUrl"]){
+        return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+            if ([value isKindOfClass:[NSDictionary class]]) {
+                return [(NSDictionary *)value objectForKey:@"image"];
+            }else if ([value isKindOfClass:[NSString class]]){
+                NSDictionary *reslut =[NSJSONSerialization JSONObjectWithData:[value dataUsingEncoding:4] options:NSJSONReadingMutableContainers error:nil];
+                if (reslut && [reslut isKindOfClass:[NSDictionary class]]) {
+                    return  [(NSDictionary *)reslut objectForKey:@"image"];
+                }else{
+                    return nil;
+                }
+            }else{
+                return nil;
+            }
+        }];
     }
     else{
         return nil;

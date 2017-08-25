@@ -8,20 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger,EMHomeHeadReusableViewType) {//商品接口对应的value
-    EMHomeHeadReusableViewTypeGreat     =1,//精品
-    EMHomeHeadReusableViewTypeHot       =2,//热品
+typedef NS_ENUM(NSInteger,EMHomeReusableViewType) {//商品接口对应的value
+    EMHomeReusableViewTypeGreat     =1,//精品
+    EMHomeReusableViewTypeHot       =2,//热品
 };
 
 @protocol EMHomeHeadReusableViewDelegate <NSObject>
 
-- (void)homeHeadReusableViewDidSelect:(EMHomeHeadReusableViewType)type;
+- (void)homeHeadReusableViewDidSelect:(EMHomeReusableViewType)type;
 
 @end
 
 
 @interface EMHomeHeadReusableView : UICollectionReusableView
-@property (nonatomic,assign)EMHomeHeadReusableViewType type;
+@property (nonatomic,assign)EMHomeReusableViewType type;
 + (CGFloat)homeHeadReusableViewHeight;
 @property (nonatomic,weak)id <EMHomeHeadReusableViewDelegate> delegate;
 @end

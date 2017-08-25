@@ -31,7 +31,7 @@
     _imageView.image=[UIImage imageNamed:@"loginheader"];
     [self addSubview:_imageView];
     
-    _label=[UILabel labelWithText:@"登录后即可开始享受嗨吃生活呦" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
+    _label=[UILabel labelWithText:@"登录后即可开始享受嗨吃嗨购生活呦" font:[UIFont oc_systemFontOfSize:13] textAlignment:NSTextAlignmentLeft];
     _label.textColor=ColorHexString(@"#5d5c5c");
     [self addSubview:_label];
     
@@ -94,12 +94,12 @@ typedef NS_ENUM(NSInteger,EMLoginViewControllerType) {
     EMLoginHeadView *headView;
     if (self.loginType==EMLoginViewControllerTypeLogin) {
         self.navigationItem.title=@"登录";
-        headView=[EMLoginHeadView loginHeadViewWithTitle:@"登录后即可开始享受嗨吃生活呦"];
+        headView=[EMLoginHeadView loginHeadViewWithTitle:@"登录后即可开始享受嗨吃嗨购生活呦"];
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(gotoRegisterController)];
         self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backToPreviousController)];
     }else if (self.loginType==EMLoginViewControllerTypeRegister){
         self.navigationItem.title=@"注册";
-        headView=[EMLoginHeadView loginHeadViewWithTitle:@"注册后即可开始享受嗨吃生活呦"];
+        headView=[EMLoginHeadView loginHeadViewWithTitle:@"注册后即可开始享受嗨吃嗨购生活呦"];
     }
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 

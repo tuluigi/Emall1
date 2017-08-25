@@ -194,7 +194,7 @@
      }] ;
 
     
-    //sleep(4);//客户觉得启动页太快了，所以就等了2秒
+    sleep(2);//客户觉得启动页太快了，所以就等了2秒
     OCRootTabbarController *rootTarbarController=[[OCRootTabbarController alloc]  init];
     self.window.rootViewController=rootTarbarController;
     [self.window makeKeyAndVisible];

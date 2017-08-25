@@ -18,13 +18,12 @@ static NSInteger const kMaxRowCount     =3;
 
 @property (nonatomic,strong)NSIndexPath *currentIndexPath;
 @property (nonatomic,assign)CGFloat offx;
-
 @end
 
 @implementation EMInfiniteView
 @synthesize totalNumber=_totalNumber;
 + (EMInfiniteView *)InfiniteViewWithFrame:(CGRect)frame{
-   EMInfiniteView *infiniteView=[[EMInfiniteView alloc]  initWithFrame:frame];
+    EMInfiniteView *infiniteView=[[EMInfiniteView alloc]  initWithFrame:frame];
     return infiniteView;
 }
 - (instancetype)init{
@@ -42,6 +41,8 @@ static NSInteger const kMaxRowCount     =3;
       [self addSubview:self.collectionView];
     [self addSubview:self.pageControl];
     [self bringSubviewToFront:self.pageControl];
+    
+    
     WEAKSELF
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
@@ -95,6 +96,11 @@ static NSInteger const kMaxRowCount     =3;
     return preIndex;
 }
 - (void)autoLoadNextPage{
+    NSInteger totalRows = [self.collectionView numberOfItemsInSection:0];
+    if ((self.totalNumber+2)!=totalRows) {
+        [self.collectionView reloadData];
+    }
+
     NSInteger offsetX = self.collectionView.contentOffset.x;
     self.offx=offsetX;
      [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];

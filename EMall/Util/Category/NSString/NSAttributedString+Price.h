@@ -16,5 +16,5 @@
 
 + (NSAttributedString *)goodsPriceAttrbuteStringWithPrice:(CGFloat)price promotePrice:(CGFloat)promotePrice;
 
--(NSAttributedString *)horizontalLineAttrStringWithText:(NSString *)text textColor:(UIColor *)color font:(UIFont *)font;
++ (NSAttributedString *)horizontalLineAttrStringWithText:(NSString *)text textColor:(UIColor *)color font:(UIFont *)font;
 @end
