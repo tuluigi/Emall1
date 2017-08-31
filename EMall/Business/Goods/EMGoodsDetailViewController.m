@@ -271,7 +271,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         else{
             row = 2 ;
         }
-    }else if (section==2){
+    }else if (section==3){
         if (self.detailModel.goodsModel.commentCount>0) {
             row=2;
         }else{
@@ -283,7 +283,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         }else{
             row=1;
         }
-    }else if (section==3)
+    }else if (section==2)
     {
         row=1 ;
     }
@@ -338,7 +338,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
                 [aCell.contentView addSubview:image] ;
                 
             }
-        }else if (indexPath.section==2)
+        }else if (indexPath.section==3)
         {
             aCell.textLabel.textColor=[UIColor colorWithHexString:@"#272727"];
             if (indexPath.row==0)
@@ -364,7 +364,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
                 }
                 aCell.textLabel.text=[NSString stringWithFormat:@"评价:%@         %@\n%@",@"",stringNotNil(userName),stringNotNil(self.detailModel.goodsModel.commentContent)];
             }
-        }else if (indexPath.section==3)
+        }else if (indexPath.section==2)
         {
             aCell.textLabel.text=@"商品详情";
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -451,11 +451,11 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
             [self playGoodsDetailVideoWithUrl:self.detailModel.goodsModel.videoUrl];
         }
         
-    }else if (indexPath.section==2) {
+    }else if (indexPath.section==3) {
         EMGoodsCommentListController *commentListController=[[EMGoodsCommentListController alloc]  initWithGoodsID:self.detailModel.goodsModel.goodsID star:0];
         commentListController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:commentListController animated:YES];
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==2){
         EMGoodsWebViewController *goodsWebController=[[EMGoodsWebViewController alloc]  initWithHtmlString:self.detailModel.goodsModel.goodsDetails];
         goodsWebController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goodsWebController animated:YES];
