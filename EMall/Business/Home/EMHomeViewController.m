@@ -250,7 +250,10 @@ EMHomeCatCellDelegate>
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{
     EMAdModel *adModel=[self.adArray objectAtIndex:index];
+    adModel.adUrl = @"http://nos.netease.com/open-movie/nos/mp4/2016/08/10/SBT6C9GJR_sd.mp4";
     if (![NSString isNilOrEmptyForString:adModel.adUrl]) {
+        //http://nos.netease.com/open-movie/nos/mp4/2016/08/10/SBT6C9GJR_sd.mp4
+        
         EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
         webController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:webController animated:YES];

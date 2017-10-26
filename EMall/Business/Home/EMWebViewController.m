@@ -51,6 +51,7 @@
 -(UIWebView *)webView{
     if (nil==_webView) {
         _webView=[[UIWebView alloc]  init];
+        _webView.allowsInlineMediaPlayback = YES;
         _webView.delegate=self;
     }
     return _webView;
@@ -59,7 +60,7 @@
     [self loadData];
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [self.webView showPageLoadingView];
+//    [self.webView showPageLoadingView];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [self.webView dismissPageLoadView];
@@ -69,7 +70,7 @@
     
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:( NSError *)error{
-    [self.webView showPageLoadedMessage:@"加载失败,点击重试" delegate:self];
+//    [self.webView showPageLoadedMessage:@"加载失败,点击重试" delegate:self];
     if (nil==self.navigationItem.title) {
         self.navigationItem.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
