@@ -52,6 +52,7 @@
     if (nil==_webView) {
         _webView=[[UIWebView alloc]  init];
         _webView.allowsInlineMediaPlayback = YES;
+        _webView.mediaPlaybackRequiresUserAction =NO;
         _webView.delegate=self;
     }
     return _webView;
