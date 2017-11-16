@@ -12,6 +12,7 @@
 +(NSDictionary *)JSONKeyPathsByPropertyKey{
     return @{@"adID":@"id",
              @"adImageUrl":@"image",
+             @"contentType":@"url_type",
              @"adUrl":@"url",
              @"type":@"type"};
 }

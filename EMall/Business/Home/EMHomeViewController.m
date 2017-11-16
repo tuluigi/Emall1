@@ -23,7 +23,8 @@
 #import "EMWebViewController.h"
 #import "EMGoodsListCell.h"
 #import "EMHomeImageCell.h"
-
+#import "EMHtmlFile.h"
+#import <AVKit/AVPlayerViewController.h>
 static CGFloat kOffPadding = 10;
 typedef NS_ENUM(NSInteger , EMHomeColllecionSection) {
     EMHomeColllecionSectionShop             =0,//店铺介绍
@@ -250,14 +251,32 @@ EMHomeCatCellDelegate>
 }
 - (void)infiniteView:(EMInfiniteView *)infiniteView didSelectRowAtIndex:(NSInteger)index{
     EMAdModel *adModel=[self.adArray objectAtIndex:index];
-    adModel.adUrl = @"http://nos.netease.com/open-movie/nos/mp4/2016/08/10/SBT6C9GJR_sd.mp4";
-    if (![NSString isNilOrEmptyForString:adModel.adUrl]) {
-        //http://nos.netease.com/open-movie/nos/mp4/2016/08/10/SBT6C9GJR_sd.mp4
-        
-        EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
+    if (adModel.contentType == EMADContenTypeVideo) {
+        if (adModel.adUrl == nil) {
+            return;
+        }
+        NSURL *url=[NSURL URLWithString:adModel.adUrl];
+        AVPlayerViewController *playerController=[[AVPlayerViewController alloc]  init];
+        AVPlayer *avplayer=[AVPlayer playerWithURL:url];
+        [avplayer play];
+        playerController.player=avplayer;
+        [self presentViewController:playerController animated:YES completion:^{
+            
+        }];
+        /*
+         NSString *filePath =[EMHtmlFile htmlStringWithVideoSrc:adModel.adUrl poster:nil];
+        EMWebViewController *webController=[[EMWebViewController alloc]  initWithHtmlString:filePath title:nil];
         webController.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:webController animated:YES];
+         */
+    }else{
+        if (![NSString isNilOrEmptyForString:adModel.adUrl]) {
+            EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
+            webController.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:webController animated:YES];
+        }
     }
+   
 }
 
 
