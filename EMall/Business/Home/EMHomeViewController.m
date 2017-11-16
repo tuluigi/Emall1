@@ -263,20 +263,13 @@ EMHomeCatCellDelegate>
         [self presentViewController:playerController animated:YES completion:^{
             
         }];
-        /*
-         NSString *filePath =[EMHtmlFile htmlStringWithVideoSrc:adModel.adUrl poster:nil];
-        EMWebViewController *webController=[[EMWebViewController alloc]  initWithHtmlString:filePath title:nil];
-        webController.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:webController animated:YES];
-         */
-    }else{
+    }else if(adModel.contentType == EMADContenTypeH5){
         if (![NSString isNilOrEmptyForString:adModel.adUrl]) {
             EMWebViewController *webController=[[EMWebViewController alloc]  initWithUrl:adModel.adUrl title:nil];
             webController.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:webController animated:YES];
         }
     }
-   
 }
 
 
