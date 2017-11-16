@@ -82,13 +82,13 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
     WEAKSELF
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32));
+        make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(EM_IPhoneXTopAdapt(32)));
         make.left.mas_equalTo(weakSelf.view.mas_left).offset(OCUISCALE(kEMOffX));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(37), OCUISCALE(37)));
     }];
     //分享按钮
     [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(32)) ;
+        make.top.mas_equalTo(weakSelf.view.mas_top).offset(OCUISCALE(EM_IPhoneXTopAdapt(32))) ;
         make.right.mas_equalTo(weakSelf.view.mas_right).offset(OCUISCALE(-kEMOffX)) ;
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(37), OCUISCALE(37)));
     }] ;
@@ -110,7 +110,11 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppIntoForground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self getGoodsDetailWithGoodsID:self.goodsID];
 }
 - (void)setDetailModel:(EMGoodsDetailModel *)detailModel{
@@ -556,7 +560,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
 }
 -(EMInfiniteView *)infiniteView{
     if (nil==_infiniteView) {
-        _infiniteView=[[EMInfiniteView alloc]  initWithFrame:CGRectMake(0, 0, OCWidth, OCUISCALE(333))];
+        _infiniteView=[[EMInfiniteView alloc]  initWithFrame:CGRectMake(0, EM_IPhoneXTopAdapt(0), OCWidth, OCUISCALE(333))];
         [_infiniteView registerClass:[EMInfiniteViewCell class] forCellWithReuseIdentifier:NSStringFromClass([EMInfiniteViewCell class])];
         _infiniteView.delegate=self;
     }
