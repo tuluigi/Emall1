@@ -41,7 +41,7 @@ static CGFloat const EMMeHeaderViewIconBottom   =  10;
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf.mas_left).offset(OCUISCALE(12));
         make.bottom.mas_equalTo(weakSelf.mas_bottom).offset(OCUISCALE(-EMMeHeaderViewIconBottom));
-        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(EMMeHeaderViewIconTop));
+        make.top.mas_equalTo(weakSelf.mas_top).offset(OCUISCALE(EM_IPhoneXTopAdapt(EMMeHeaderViewIconTop)));
         make.size.mas_equalTo(CGSizeMake(OCUISCALE(EMMeHeaderViewIconWidth), OCUISCALE(EMMeHeaderViewIconWidth)));
     }];
     _headImageView.layer.cornerRadius=OCUISCALE(EMMeHeaderViewIconWidth/2.0);

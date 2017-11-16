@@ -62,5 +62,50 @@ static CGFloat OCUISCALE =1;
     return 0;
     return kerning;
 }
+
+
+
+
++ (BOOL)isIPhoneX{
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    CGFloat height = CGRectGetHeight([[UIScreen mainScreen]  bounds]);
+    if (height == 812.f) {
+        return YES;
+    }
+    return NO;
+}
+/**
+ iPhoneX的刘海底部留了20像素的适配padding
+ 非iPhoneX上的返回0
+ @return padding
+ */
++ (CGFloat)iPhoneXOffStatusBarPadding{
+    CGFloat padding =0 ;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if ([self isIPhoneX]) {
+            padding = 24;
+        }
+    }
+    return padding;
+}
+
++ (CGFloat)iPhoneXOffBottomPadding{
+    CGFloat padding =0 ;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if ([self isIPhoneX]) {
+            padding = 34;
+        }
+    }
+    return padding;
+}
++ (CGFloat)iPhoneXTopAdapter:(CGFloat)topPadding{
+    return topPadding + [self iPhoneXOffStatusBarPadding];
+}
+
++ (CGFloat)iPhoneXBottomAdapter:(CGFloat)bottomPadding{
+    return bottomPadding + [self iPhoneXOffBottomPadding];
+}
 @end
 

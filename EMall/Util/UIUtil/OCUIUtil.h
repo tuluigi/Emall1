@@ -26,6 +26,12 @@
  */
 #define OCUIScaleFontSize(a) ([OCUIUtil scaleFontSize:a])
 
+
+//适配iPhone 顶部的刘海高度的宏
+#define EM_IPhoneXTopAdapt(padding) ([OCUIUtil iPhoneXTopAdapter:padding])
+//适配iPhoneX 底部HomeIndicator高度
+#define EM_IPhoneXBottomAdapt(padding) ([OCUIUtil iPhoneXBottomAdapter:padding])
+
 @interface OCUIUtil : NSObject
 /**
  *  适配各个大小屏幕后的字体大小
@@ -53,6 +59,32 @@
  *  @return 实际的字间距
  */
 + (long)kerningWithFontSize:(CGFloat)fontSize fontRatio:(CGFloat)fontRatio;
+
+
+
+#pragma mark - iPhoneX 相关
+/**
+ 是否是IPHONX的UI
+ 
+ @return
+ */
++ (BOOL)isIPhoneX;
+
+/**
+ 对iPhoneX 的UI进行适配
+ 
+ @param topPadding
+ @return
+ */
++ (CGFloat)iPhoneXTopAdapter:(CGFloat)topPadding;
+
+/**
+ 对iPhoneX 的UI进行适配
+ 
+ @param bottomPadding
+ @return
+ */
++ (CGFloat)iPhoneXBottomAdapter:(CGFloat)bottomPadding;
 
 @end
 

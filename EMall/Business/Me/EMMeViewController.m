@@ -103,7 +103,11 @@ typedef NS_ENUM(NSInteger,EMUserTableCellModelType) {
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     [self.tableView reloadData];
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
 }
 - (void)handleUserLogStateChanged{
