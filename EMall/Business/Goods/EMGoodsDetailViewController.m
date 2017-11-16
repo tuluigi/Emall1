@@ -211,7 +211,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         NSString *imageStr = self.detailModel.goodsModel.goodsImageUrl ;
         NSString *nameStr = self.detailModel.goodsModel.goodsName ;
 
-        NSString *shareStr = [NSString stringWithFormat:@"http://www.hichigo.com.au:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+        NSString *shareStr = [NSString stringWithFormat:@"http://hichigo.bornson.cn:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
 //        NSString *shareStr = [NSString stringWithFormat:@"http://www.ukelaila.com:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
         shareStr = [shareStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
         NSLog(@"分享的url：%@",shareStr) ;
