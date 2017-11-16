@@ -211,7 +211,7 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         NSString *imageStr = self.detailModel.goodsModel.goodsImageUrl ;
         NSString *nameStr = self.detailModel.goodsModel.goodsName ;
 
-        NSString *shareStr = [NSString stringWithFormat:@"http://hichigo.bornson.cn:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
+        NSString *shareStr = [NSString stringWithFormat:@"http://hichigo.bornson.cn :8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
 //        NSString *shareStr = [NSString stringWithFormat:@"http://www.ukelaila.com:8081/share.html?imageurl=%@&goodsname=%@",imageStr,nameStr] ;
         shareStr = [shareStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
         NSLog(@"分享的url：%@",shareStr) ;
@@ -323,6 +323,12 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
         aCell.textLabel.textAlignment=NSTextAlignmentLeft;
         aCell.accessoryType=UITableViewCellAccessoryNone;
         aCell.textLabel.numberOfLines=0;
+        NSInteger tag = 5000;
+        UIImageView *imageView = (UIImageView *)[aCell.contentView viewWithTag:tag];
+        if (imageView) {
+            imageView.image = nil;
+            imageView.hidden = YES;
+        }
         if (indexPath.section==1)
         {
             aCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -332,14 +338,20 @@ static NSString *const kGoodsJasonCellIdnfier = @"kGoodsJasonCellIdnfier";
                 aCell.textLabel.text=@"请选择规格、数量";
             }else
             {
+                if (nil == imageView) {
+                    NSDictionary *attrs = @{NSFontAttributeName:aCell.textLabel.font} ;
+                    CGSize size1 = [aCell.textLabel.text sizeWithAttributes:attrs] ;
+                    CGSize size2 = [@"好" sizeWithAttributes:attrs] ;
+                    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(aCell.textLabel.frame.origin.x + size1.width + size2.width, 8, aCell.contentView.frame.size.height - 16, aCell.contentView.frame.size.height - 16)] ;
+                    [image setImage:[UIImage imageNamed:@"text_03"]] ;
+                    image.tag = tag;
+                    imageView = image;
+                    [aCell.contentView addSubview:image] ;
+                }
+                imageView.hidden = NO;
+                 [imageView setImage:[UIImage imageNamed:@"text_03"]] ;
                 aCell.textLabel.text=@"商品视频";
-                NSDictionary *attrs = @{NSFontAttributeName:aCell.textLabel.font} ;
-                CGSize size1 = [aCell.textLabel.text sizeWithAttributes:attrs] ;
-                CGSize size2 = [@"好" sizeWithAttributes:attrs] ;
-                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(aCell.textLabel.frame.origin.x + size1.width + size2.width, 8, aCell.contentView.frame.size.height - 16, aCell.contentView.frame.size.height - 16)] ;
-                [image setImage:[UIImage imageNamed:@"text_03"]] ;
-                
-                [aCell.contentView addSubview:image] ;
+
                 
             }
         }else if (indexPath.section==3)
